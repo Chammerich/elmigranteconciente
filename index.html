@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>El Migrante Consciente v12.10</title>
+<title>El Migrante Consciente v12.11</title>
   <meta name="version" content="12.9-731kb">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 
@@ -2266,6 +2266,7 @@
 
 
 
+
 let expMode = 'simple';
 let expProgress = {};
 
@@ -2486,13 +2487,16 @@ let CHAPTERS = getCHAPTERS();
 let WISDOMS  = getWISDOMS();
 
 // ─── STATE ──────────────────────────────────────────────────
-const APP_VERSION = 12;
+const APP_VERSION = 13;
 let state = JSON.parse(localStorage.getItem('mc_state') || '{}');
 if (state.appVersion !== APP_VERSION) {
   state.appVersion = APP_VERSION;
   state.welcomeSeen = true;
   state.onboardingDone = true;
   delete state.activeScreen;
+  // v13: reset manifiestoState — new 15-punto structure replaces old 10-punto
+  state.manifiestoState = {};
+  state.manifiestoNotas = {};
   localStorage.setItem('mc_state', JSON.stringify(state));
 }
 if (state.prologoRead === undefined) state.prologoRead = false;
@@ -7347,6 +7351,7 @@ function switchExpProfTab(tab) {
   });
   if (tab === 'glosario') renderExpGlosario();
 }
+
 
 
 
