@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<!-- saved from url=(0045)file:///C:/Users/chamm/Downloads/index_4.html -->
+<!-- saved from url=(0045)file:///C:/Users/chamm/Downloads/index_5.html -->
 <html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>El Migrante Consciente v12.9</title>
+<title>El Migrante Consciente v12.10</title>
   <meta name="version" content="12.9-731kb">
 <link href="./index_files/css2" rel="stylesheet">
 
@@ -1733,7 +1733,7 @@
 #screen-finanzas     .item-amount { width: 75px; }
   }
 </style>
-<link rel="manifest" href="blob:null/078ced49-a7a4-4c35-a265-6594238aee1b"></head>
+<link rel="manifest" href="blob:null/e06fe95f-e752-40f1-bbbb-840b76764b6f"></head>
 <body>
 
 <!-- SPLASH -->
@@ -3027,6 +3027,7 @@
 
 
 <script>
+
 
 
 
@@ -6465,6 +6466,20 @@ const MANIFIESTO_PUNTOS_EN = [
 // ─── MANIFIESTO LOGIC ─────────────────────────────────────────────────────────
 function mKey(pi, fi) { return pi + '_' + fi; }
 
+
+function resetManifiesto() {
+  if (!confirm('¿Quieres revisar tu Manifiesto? Podrás cambiar tus respuestas.')) return;
+  // Don't delete — just open all puntos so user can re-evaluate
+  const container = document.getElementById('manifiesto-container');
+  if (!container) return;
+  // Remove all-confirmed classes
+  container.querySelectorAll('.manifiesto-punto.all-confirmed').forEach(el => {
+    el.classList.remove('all-confirmed');
+    el.classList.add('open');
+  });
+  showToast('✏️ Manifiesto abierto para revisión');
+}
+
 function initManifiesto() {
   renderManifiesto();
   renderDiarioOpenPuntos();
@@ -6494,6 +6509,20 @@ function renderManifiesto() {
       </div>
     </div>`;
   }).join('');
+
+  // Check if ALL 15 puntos fully confirmed
+  const allDone = maniPuntos.every((punto, pi) =>
+    punto.frases.every((_, fi) => state.manifiestoState[mKey(pi, fi)] === 'confirmado')
+  );
+  if (allDone) {
+    const banner = document.createElement('div');
+    banner.style.cssText = 'margin:16px;padding:16px;background:rgba(200,146,42,0.1);border:1px solid var(--gold);border-radius:14px;text-align:center;';
+    banner.innerHTML = '<div style="font-size:20px;margin-bottom:8px;">⚖︎</div>' +
+      '<div style="font-size:14px;font-weight:700;color:var(--gold);margin-bottom:6px;">Manifiesto completado</div>' +
+      '<div style="font-size:12px;color:var(--fog);margin-bottom:14px;line-height:1.5;">Has confirmado los 15 principios del Migrante Consciente.</div>' +
+      '<button onclick="resetManifiesto()" style="background:none;border:1px solid var(--border);border-radius:8px;padding:8px 16px;font-size:12px;color:var(--fog);cursor:pointer;">✏️ Revisar o cambiar mi Manifiesto</button>';
+    container.appendChild(banner);
+  }
 }
 
 function renderManifiestoFrase(pi, fi, frase) {
@@ -8098,6 +8127,7 @@ function switchExpProfTab(tab) {
   });
   if (tab === 'glosario') renderExpGlosario();
 }
+
 
 
 
