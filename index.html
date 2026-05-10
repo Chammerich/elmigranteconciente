@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>El Migrante Consciente v12.13</title>
+<title>El Migrante Consciente v12.11</title>
   <meta name="version" content="12.9-731kb">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 
@@ -1944,7 +1944,7 @@
     <div class="manifiesto-hero">
       <div class="manifiesto-hero-seal">📜</div>
       <h2>Mi Manifiesto</h2>
-      <p>15 principios · Tu voz · Tu identidad</p>
+      <p>10 principios · Tu voz · Tu identidad</p>
     </div>
     <div class="manifiesto-intro">
       Este es tu manifiesto. No es poesía. No es motivación vacía. Es estrategia. Es claridad. Es poder.<br><br>
@@ -2267,14 +2267,6 @@
 
 
 
-
-
-
-
-
-
-
-
 let expMode = 'simple';
 let expProgress = {};
 
@@ -2495,7 +2487,7 @@ let CHAPTERS = getCHAPTERS();
 let WISDOMS  = getWISDOMS();
 
 // ─── STATE ──────────────────────────────────────────────────
-const APP_VERSION = 15;
+const APP_VERSION = 13;
 let state = JSON.parse(localStorage.getItem('mc_state') || '{}');
 if (state.appVersion !== APP_VERSION) {
   state.appVersion = APP_VERSION;
@@ -2505,7 +2497,6 @@ if (state.appVersion !== APP_VERSION) {
   // v13: reset manifiestoState — new 15-punto structure replaces old 10-punto
   state.manifiestoState = {};
   state.manifiestoNotas = {};
-  state.activeScreen = 'home';
   localStorage.setItem('mc_state', JSON.stringify(state));
 }
 if (state.prologoRead === undefined) state.prologoRead = false;
@@ -3640,13 +3631,13 @@ const INICIO_SECTIONS = {
 <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Debo constatar que la concentración de algunas personas en temas que no son realmente divertidos es limitada. Por eso mi texto está escrito a veces en estilo novelístico, con una parte imperativa que es rápida y fácil de leer. Tú decides qué es lo mejor para ti. O lo lees dos veces, que posiblemente sea lo mejor.<\/p>
 <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">No existen manuales para la migración. Hay algunos libros sobre leyes, reglas, etc. Pero no he encontrado ningún documento en el que el ser humano, el migrante y el individuo estén en el centro. Como persona, como ser humano. En pocas horas en avión en un nuevo continente, tres meses de visado de turista, y España después no hace deporte. Bien, todo está bien, ¿verdad?<\/p>
 <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Mi observación: nada está bien. Hay leyes, trámites burocráticos, rumores, consejos improvisados… pero ninguna explicación. Nadie te dice por qué la gente actúa como actúa; por qué lo que tú consideras normal aquí se interpreta como falta de respeto o por qué un gesto inocente puede destruir una oportunidad profesional. Nadie te explica que una lengua común no significa una cultura común. Nadie te advierte de que la mayor parte del sufrimiento migrante surge de malentendidos, no de mala intención.<\/p>
-<p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">esta aplicación nace de esa ausencia. Lo escribo para quienes tuvieron que dejar su hogar, su familia, sus rituales, sus calles, sus sabores y sus certezas. Para quienes llegan a Europa con esperanza, miedo, ilusión y una mochila llena de historias que nadie conoce. Para quienes creen que "todo será más fácil porque hablamos el mismo idioma", y descubren demasiado tarde que las palabras a uno y otro lado del océano no significan lo mismo.<\/p>
+<p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Este libro nace de esa ausencia. Lo escribo para quienes tuvieron que dejar su hogar, su familia, sus rituales, sus calles, sus sabores y sus certezas. Para quienes llegan a Europa con esperanza, miedo, ilusión y una mochila llena de historias que nadie conoce. Para quienes creen que "todo será más fácil porque hablamos el mismo idioma", y descubren demasiado tarde que las palabras a uno y otro lado del océano no significan lo mismo.<\/p>
 <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Lo escribo también para quienes han sentido la contradicción de amar su cultura y al mismo tiempo chocar contra ella cuando intentan integrarse en otra. Para quienes se han preguntado por qué repiten comportamientos que no les benefician, por qué reaccionan sin querer, por qué se sienten juzgados o incomprendidos. Para quienes han experimentado la frustración de querer hacer las cosas bien y aun así equivocarse.<\/p>
 <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">La migración es un proceso de reinterpretación constante de la realidad. Es un duelo, una reinvención, una lucha y a veces una liberación. Pero también puede ser una trampa si no comprendemos las reglas invisibles del nuevo entorno.<\/p>
-<p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">esta aplicación no quiere dar lecciones. Quiere ofrecer explicaciones. Quiere tender un puente entre culturas que se parecen pero no son iguales. Quiere mostrar que integrarse no significa renunciar a lo que uno es, sino aprender a añadir algo. Quiere acompañar, orientar y sobre todo evitar sufrimiento evitable.<\/p>
+<p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Este libro no quiere dar lecciones. Quiere ofrecer explicaciones. Quiere tender un puente entre culturas que se parecen pero no son iguales. Quiere mostrar que integrarse no significa renunciar a lo que uno es, sino aprender a añadir algo. Quiere acompañar, orientar y sobre todo evitar sufrimiento evitable.<\/p>
 <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Lo que encontrarás aquí es ciencia, experiencia personal, observación cultural y sobre todo respeto. Respeto por quienes migran, por quienes acogen, por quienes intentan entenderse mutuamente y por quienes fracasan en ese intento. He visto historias de dolor, abuso, dependencia y soledad… pero también historias de resiliencia, éxito, amor y transformación profunda.<\/p>
 <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Está escrito para todos los migrantes del mundo, pero se basa en mi propia experiencia con foco en migrantes de Latinoamérica y Brasil. Y para españoles, catalanes y todos los que tengan interés en saber un poco más sobre cómo es ser migrante.<\/p>
-<p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Yo mismo he encontrado mi paz interior después de haberme equivocado muchas veces. Ese camino no lo cuento aquí. Eso es otro libro. Este es para ti. Si estás migrando ahora, si estás pensando en migrar o si amas a alguien que lo hace, esta aplicación es una mano tendida. No puedo ahorrarte el dolor, pero puedo ayudarte a entenderlo.<\/p>
+<p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Yo mismo he encontrado mi paz interior después de haberme equivocado muchas veces. Ese camino no lo cuento aquí. Eso es otro libro. Este es para ti. Si estás migrando ahora, si estás pensando en migrar o si amas a alguien que lo hace, este libro es una mano tendida. No puedo ahorrarte el dolor, pero puedo ayudarte a entenderlo.<\/p>
 <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Y cuando uno entiende, deja de caminar a ciegas.<\/p>
 <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Bienvenido. Comencemos este viaje juntos.<\/p>
     `,
@@ -3684,10 +3675,10 @@ const INICIO_SECTIONS = {
       <div class="sec-sub" style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--fog);margin-bottom:8px;">Epílogo<\/div>
       <h5 style="font-size:14px;font-weight:600;color:var(--ink);margin:16px 0 6px;">Cuando todo se calma<\/h5>
 <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">La migración es una tormenta. Una mezcla de miedo, esperanza, agotamiento, descubrimiento, pérdida y renacimiento. Un viaje que te cambia más de lo que imaginabas. Un viaje que exige más de lo que creías tener. Pero también un viaje que te revela algo que quizás nunca antes habías visto con tanta claridad: tu propia fuerza. No la fuerza de aguantar. No la fuerza de sobrevivir. Sino la fuerza de transformarte. La fuerza de empezar de nuevo. La fuerza de aprender. La fuerza de equivocarte y seguir. La fuerza de soltar lo que ya no te sirve. La fuerza de construir algo que aún no existe. La fuerza de convertirte en alguien que antes no eras.<\/p>
-<p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">esta aplicación fue escrito con la intención de acompañarte por los lugares difíciles: la soledad, la culpa, la presión, la fantasía digital, la precariedad, el cuerpo cansado, la identidad en movimiento. Pero también es una inspiración para mostrarte lo que hay al otro lado: la claridad, la responsabilidad, la red sana, la estabilidad, la integración consciente, el amor propio, la libertad. Y ahora, al final, solo me queda decirte una cosa:<\/p>
+<p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Este libro fue escrito con la intención de acompañarte por los lugares difíciles: la soledad, la culpa, la presión, la fantasía digital, la precariedad, el cuerpo cansado, la identidad en movimiento. Pero también es una inspiración para mostrarte lo que hay al otro lado: la claridad, la responsabilidad, la red sana, la estabilidad, la integración consciente, el amor propio, la libertad. Y ahora, al final, solo me queda decirte una cosa:<\/p>
 <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Estás haciendo algo extraordinario. Aunque no lo sientas. Aunque no lo veas. Aunque nadie te lo diga. Aunque a veces pienses que no estás avanzando. Migrar, construir una nueva vida, la vida en general, es un acto de valentía silenciosa. Una valentía que no necesita aplausos. Una valentía que se demuestra cada día, en cada decisión, en cada pequeño paso. No tienes que correr. No tienes que demostrar nada. No tienes que compararte. No tienes que ser perfecto. Solo tienes que seguir. A tu ritmo. Con tus reglas. Con tu verdad. Con tu identidad. Con tu cuerpo, tu alma, tu historia y tu futuro.<\/p>
 <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">La migración y todo lo que viene después no es una carrera. Es un camino. Y ya lo estás recorriendo. Yo mismo, con todos los privilegios de mi vida, educación, seguridad y posibilidades, tardé décadas en entenderlo de verdad. Casi en piloto automático, por suerte y algunas partes de mi carácter y mi naturaleza, fui recibiendo la posibilidad de liberarme de obligaciones y límites como pocas personas. Y ahora entiendo que mis partes débiles, mi inseguridad y la manera en que me sentía estúpido, inútil y solo no eran partes débiles, sino mi subconsciente diciéndome: Christian, idiota: decide lo que quieres, deja de llorar y empieza a controlar tu viaje. Esa es una historia para otro libro, pero mi mensaje es: la migración de un país a otro, o la migración en tu interior en la vida real — los mecanismos son similares, y los caminos para mejorar poco a poco con atención, observación y aprendizaje diario son similares.<\/p>
-<p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Exactamente ese es el punto: similares, pero no iguales. Yo y tú y todos los demás, cada individuo debe buscar sus propias técnicas y formas de actuar. Ojalá esta aplicación te acompañe cuando te sientas perdido. Ojalá te recuerde lo que ya sabes. Ojalá te dé palabras cuando no las encuentres. Ojalá te sostenga cuando el mundo se sienta demasiado grande. Ojalá te devuelva a ti mismo cuando olvides quién eres.<\/p>
+<p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Exactamente ese es el punto: similares, pero no iguales. Yo y tú y todos los demás, cada individuo debe buscar sus propias técnicas y formas de actuar. Ojalá este libro te acompañe cuando te sientas perdido. Ojalá te recuerde lo que ya sabes. Ojalá te dé palabras cuando no las encuentres. Ojalá te sostenga cuando el mundo se sienta demasiado grande. Ojalá te devuelva a ti mismo cuando olvides quién eres.<\/p>
 <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Y ojalá te recuerde sobre todo esto: no estás solo. Nunca lo estuviste. Nunca lo estarás. Estás contigo. Eres único, maravilloso, exactamente como eres. No necesitas a nadie para encontrar tu centro, tu felicidad, tu sentido. Y el milagro es: en el momento en que encontraste estos mensajes en estos textos, los analizaste y los transformaste para ti mismo, tu carácter y tus circunstancias. En el momento en que aceptaste la importancia del amor propio, de tus valores y de tus responsabilidades, esa energía se conecta con otras energías de personas similares, y así 1 más 1 es más que dos.<\/p>
 <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">En todo el caos y el sufrimiento hay luz. Las energías se multiplican, abren puertas y posibilidades más allá de tu imaginación. No necesariamente en forma de dinero como millonario. No quiero construir falsas promesas. Sino en forma de una vida consciente, fuerte y con sentido y sí: felicidad. Porque tu camino fue tuyo y es tuyo. Y la lucha, el sufrimiento, tu pasado con lo malo y lo bueno es una razón para estar orgulloso de ti mismo. Y lo estás haciendo bien. Muy bien. Eso es indestructible, eso es para siempre.<\/p>
 <h4 style="font-family:'Playfair Display',serif;font-size:16px;color:var(--ink);margin:20px 0 8px;">── ANEXOS ──<\/h4>
@@ -3718,11 +3709,11 @@ const INICIO_SECTIONS = {
       <div style="padding:16px 16px 100px;">
         <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Para ti como lector este anexo es una invitación: no a copiar mi camino, sino a reconocerte en mi historia o dejarte inspirar. La pregunta ¿Quién soy y cuántos? no es académica. Es la pregunta más urgente que una persona en transición puede hacerse. Y siempre empieza con el encuentro honesto consigo mismo.<\/p>
 <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">El texto que sigue es el más personal que he escrito. No lo escribí como lección — sino como reflexión honesta. Muestra que incluso quien llega con décadas de experiencia directiva, conocimiento psicoterapeútico y perspectiva global, afronta el inicio de un nuevo viaje desnudo y sin mapa. Eso no lo hace más débil. Lo hace creíble.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Hace cuatro años dejé de trabajar. Vendí casi todo, cancelé todos mis compromisos y me fui a Barcelona con una maleta de mano — sin plan, sin red, con tres palabras de español. Exactamente lo que describo en esta aplicación. No lo viví como experto. Lo viví como persona. Con la euforia, el agotamiento, la soledad, el descubrimiento, la reorientación. Con el momento en que mi batería llegó al 3 % y mi propio móvil me avisó: el dispositivo se apagará en breve.<\/p>
+<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Hace cuatro años dejé de trabajar. Vendí casi todo, cancelé todos mis compromisos y me fui a Barcelona con una maleta de mano — sin plan, sin red, con tres palabras de español. Exactamente lo que describo en este libro. No lo viví como experto. Lo viví como persona. Con la euforia, el agotamiento, la soledad, el descubrimiento, la reorientación. Con el momento en que mi batería llegó al 3 % y mi propio móvil me avisó: el dispositivo se apagará en breve.<\/p>
 <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Esta diversidad no es señal de inconstancia. Es la expresión de una convicción que recorre mi vida como un hilo rojo: que observar, aprender y mejorar no son una fase de la vida — son la vida misma. Y que la mayor transformación no ocurre en el lugar de trabajo, sino en el interior.<\/p>
 <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Mi nombre es Christian Hammerich. Nací en 1966 en Husum, junto al Mar del Norte, cerca de la frontera danesa, y he atravesado en mi vida tantas profesiones, roles y mundos que una biografía lineal difícilmente haría justicia a lo que he vivido.<\/p>
 <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Programador de sistemas. Director de ópera. Director residente de grandes musicales. CMO de un parque de experiencias. COO de un circuito automovilístico. Directivo en el Grupo Volkswagen. Propietario de un bar y un restaurante en Berlín. Director de entretenimiento de huéspedes en una flota de cruceros. Responsable de instalaciones deportivas del gobierno de Berlín. Psicoterapeuta.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">No he escrito esta aplicación desde fuera. Lo he escrito desde dentro — como alguien que ha vivido el proceso migratorio en primera persona, con todas las fases que describo en cada capítulo. Y que descubrió en ese camino que había acumulado durante décadas una colección de herramientas, aprendizajes y experiencias que estaban destinadas exactamente a este momento. El texto que sigue no es un complemento biográfico. Es el fundamento sobre el que se sostiene todo el libro.<\/p>
+<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">No he escrito este libro desde fuera. Lo he escrito desde dentro — como alguien que ha vivido el proceso migratorio en primera persona, con todas las fases que describo en cada capítulo. Y que descubrió en ese camino que había acumulado durante décadas una colección de herramientas, aprendizajes y experiencias que estaban destinadas exactamente a este momento. El texto que sigue no es un complemento biográfico. Es el fundamento sobre el que se sostiene todo el libro.<\/p>
 <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">ANEXO A<\/p>
 <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">¿Quién soy y cuántos?<\/p>
 <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Un texto algo filosófico sobre mí mismo — una reflexión sobre mi pasado.<\/p>
@@ -3788,7 +3779,7 @@ const INICIO_SECTIONS = {
       <div style="padding:16px 16px 100px;">
         <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">El autoconocimiento como primer paso de la integración<\/p>
 <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Quien migra se hace tarde o temprano una pregunta que quizás nunca se había planteado con tanta claridad: ¿Quién soy — sin mi idioma, sin mi barrio, sin mi familia, sin mi rutina cotidiana? La migración despoja al ser humano de sus puntos de referencia externos. Lo que queda es el interior. Y el interior muy pocos lo conocen realmente bien.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">El capítulo 10 de esta aplicación mostró que integrarse significa no perderse a uno mismo. Pero solo puedes no perderte si sabes quién eres. El autoconocimiento no es automejora. Es auto-orientación. Es la respuesta a la pregunta: ¿Qué traigo conmigo? ¿Qué es negociable — y qué no? ¿Dónde están mis fortalezas, y dónde mis puntos ciegos?<\/p>
+<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">El capítulo 10 de este libro mostró que integrarse significa no perderse a uno mismo. Pero solo puedes no perderte si sabes quién eres. El autoconocimiento no es automejora. Es auto-orientación. Es la respuesta a la pregunta: ¿Qué traigo conmigo? ¿Qué es negociable — y qué no? ¿Dónde están mis fortalezas, y dónde mis puntos ciegos?<\/p>
 <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">El anexo que sigue presenta un proceso concreto de siete etapas que ayuda exactamente con eso. No es un programa terapéutico ni un modelo académico. Es una herramienta práctica — desarrollada a partir de décadas de experiencia con personas en situaciones de transición. Funciona con lápiz y papel, en tu propio idioma, a tu propio ritmo.<\/p>
 <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Para el migrante este proceso es especialmente valioso, porque la migración misma es un interrogatorio forzoso. El nuevo entorno plantea preguntas que el antiguo nunca hubiera planteado. Este proceso le da al migrante la posibilidad de hacerse esas preguntas él mismo — antes de que lo haga el entorno. Esa es la diferencia entre reaccionar y construir.<\/p>
 <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Quien recorre estas siete etapas no sale del proceso con respuestas a todas las preguntas — pero sí con claridad sobre cuáles son las suyas propias. Y eso, en el contexto de la migración, ya es una ganancia extraordinaria.<\/p>
@@ -3869,7 +3860,7 @@ const INICIO_SECTIONS = {
       <\/div>
       <div style="padding:16px 16px 100px;">
         <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">La resiliencia como brújula interior de la migración<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">A lo largo de esta aplicación la resiliencia ha aparecido una y otra vez como la condición silenciosa de fondo de todo proceso migratorio — como esa fuerza que permite aguantar la soledad, sobrevivir las contradicciones culturales, no interpretar la precariedad como derrota y mantener la propia identidad en movimiento. La resiliencia no es un talento que se tiene o no se tiene. Es una habilidad — y se puede entrenar.<\/p>
+<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">A lo largo de este libro la resiliencia ha aparecido una y otra vez como la condición silenciosa de fondo de todo proceso migratorio — como esa fuerza que permite aguantar la soledad, sobrevivir las contradicciones culturales, no interpretar la precariedad como derrota y mantener la propia identidad en movimiento. La resiliencia no es un talento que se tiene o no se tiene. Es una habilidad — y se puede entrenar.<\/p>
 <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">El anexo que sigue profundiza en este tema de una manera que el libro principal ha dejado deliberadamente abierta: con base científica, pero personal y directa. Explica cómo funciona el inconsciente, por qué nos habla — y cómo podemos aprender a responderle. Para el migrante este conocimiento es especialmente valioso: el cuerpo y la psique registran el estrés del cambio cultural, la pérdida de rutinas y la ausencia de redes familiares mucho antes de que la mente pueda ponerles nombre.<\/p>
 <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Cuando un migrante sufre de repente insomnio, irritabilidad inexplicable o agotamiento físico, no es señal de debilidad. Es el lenguaje del inconsciente — ese lenguaje que este anexo describe y descifra.<\/p>
 <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">*Este texto fue escrito originalmente en un contexto profesional. Se reproduce aquí sin modificaciones, porque su mensaje es universal: la resiliencia no conoce fronteras ni pasaportes.*<\/p>
@@ -4095,7 +4086,7 @@ const UI = {
     tileGuia: 'El Guide',
     tileSubGuia: '15 capítulos del manual de migración consciente',
     tileManifiesto: 'Mi Manifiesto',
-    tileSubManifiesto: '15 principios · Define quién eres · Tu voz',
+    tileSubManifiesto: '10 principios · Define quién eres · Tu voz',
     tileContrato: 'Mi Contrato',
     tileSubContrato: '14 compromisos · Acciones concretas · Tu firma',
     tileEpilogo: 'Epílogo',
@@ -4612,7 +4603,7 @@ const CHAPTER_FULL_TEXTS_MAP = {
 <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">En este primer capítulo quiero que entiendas algo fundamental: no estás fallando. Estás migrando. Lo que sientes — la confusión, la frustración, la nostalgia, la euforia, el miedo, la esperanza — no es un error. Es parte del proceso. Es normal. Es humano. Es inevitable.<\/p>
 <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Migrar no significa solo cambiar de país — significa cambiar de significado. Significa aprender a interpretar el mundo desde otro ángulo. Significa descubrir que lo que siempre diste por sentado ya no funciona. Significa reconstruirte desde cero sin perderte en el camino.<\/p>
 <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Y aunque nadie te lo haya dicho: este viaje invisible es el más importante de todos. Porque si no lo reconoces, te golpeará sin aviso. Pero si lo comprendes, si lo aceptas, si le pones nombre, podrás atravesarlo con más claridad, más fuerza y más compasión hacia ti mismo.<\/p>
-<p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">esta aplicación comienza aquí: en ese espacio íntimo donde nace la decisión de migrar. En ese territorio emocional que nadie ve. En ese viaje que empieza mucho antes de hacer el embarque en un avión. De ahora en adelante vamos juntos.<\/p>`,
+<p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Este libro comienza aquí: en ese espacio íntimo donde nace la decisión de migrar. En ese territorio emocional que nadie ve. En ese viaje que empieza mucho antes de hacer el embarque en un avión. De ahora en adelante vamos juntos.<\/p>`,
   ch2: `<h5 style="font-size:14px;font-weight:600;color:var(--ink);margin:16px 0 6px;">Expectativas, ilusiones y realidades<\/h5>
 <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Migrar es, en gran parte, un acto de imaginación. Antes de pisar el nuevo país, ya has construido una versión idealizada de lo que encontrarás allí. Esa imagen no surge de la nada: se nutre de historias de amigos, de fotos en redes sociales, de rumores, de películas, de la profunda necesidad de creer que existe un lugar donde la vida será más justa, más segura, más libre.<\/p>
 <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Las expectativas son un refugio y metas iniciales importantes que generan motivación y energía. Y también son una trampa. Una trampa peligrosa.<\/p>
@@ -5450,30 +5441,28 @@ function renderTramites(key) {
   const sec = TRAMITES_SECTIONS[key];
   if (!sec) return;
   const container = document.getElementById('tramites-content');
-  if (!container) return;
   const fullData = TRAMITES_FULL_TEXTS[key];
   const fullTextBtn = fullData
-    ? '<button data-tramkey="' + key + '" onclick="openTramitesReader(this.dataset.tramkey)" style="display:flex;align-items:center;gap:8px;width:100%;padding:13px 16px;background:var(--ink);border:none;border-radius:12px;color:var(--gold);font-size:13px;font-weight:500;cursor:pointer;margin-bottom:12px;">📄 Leer texto completo &mdash; ' + (fullData.title || sec.title) + '</button>'
+    ? '<button data-tramkey="' + key + '" onclick="openTramitesReader(this.dataset.tramkey)" style="display:flex;align-items:center;gap:8px;width:100%;padding:13px 16px;background:var(--ink);border:none;border-radius:12px;color:var(--gold);font-size:13px;font-weight:500;cursor:pointer;margin-bottom:12px;">📄 Leer texto completo &mdash; ' + (fullData.title || sec.title || '') + '</button>'
     : '';
-
-  var cardsHtml = '';
-  sec.cards.forEach(function(c, i) {
-    var cardId = 'tc-' + key + '-' + i;
-    cardsHtml += '<div class="tramites-card" id="' + cardId + '">';
-    cardsHtml += '<div class="tramites-card-head" onclick="toggleTramiteCard(\'' + cardId + '\')">';
-    cardsHtml += '<div class="tramites-card-icon">' + (c.icon||'') + '</div>';
-    cardsHtml += '<div class="tramites-card-info"><h4>' + (c.title||'') + '</h4>';
-    if (c.sub) cardsHtml += '<p>' + c.sub + '</p>';
-    cardsHtml += '</div>';
-    cardsHtml += '<div class="tramites-card-badge ' + (c.badge||'') + '">' + (c.badgeText||'') + '</div>';
-    cardsHtml += '</div>';
-    cardsHtml += '<div class="tramites-card-body">' + (c.body||'') + '</div>';
-    cardsHtml += '</div>';
-  });
-
-  container.innerHTML = '<div class="tramites-section"><div class="tramites-section-title">' +
-    '<span class="tramites-section-icon">' + (sec.icon||'') + '</span>' + sec.title +
-    '</div>' + fullTextBtn + cardsHtml + '</div>';
+  container.innerHTML = `
+    <div class="tramites-section">
+      <div class="tramites-section-title">${sec.title}<\/div>
+      <div class="tramites-section-sub">${sec.sub}<\/div>
+      ${fullTextBtn}
+      ${sec.cards.map((c, i) => `
+        <div class="tramites-card" id="tc-${key}-${i}">
+          <div class="tramites-card-head" onclick="toggleTramiteCard('tc-${key}-${i}')">
+            <div class="tramites-card-icon">${c.icon}<\/div>
+            <div class="tramites-card-info">
+              <h4>${c.title}<\/h4>
+            <\/div>
+            <div class="tramites-card-badge ${c.badge}">${c.badgeText}<\/div>
+          <\/div>
+          <div class="tramites-card-body">${c.body}<\/div>
+        <\/div>
+      `).join('')}
+    <\/div>`;
 }
 
 function toggleTramiteCard(id) {
@@ -5720,36 +5709,30 @@ function initManifiesto() {
   renderDiarioOpenPuntos();
 }
 
-
-function getMANIFIESTO() {
-  if (typeof currentLang !== 'undefined' && currentLang === 'en') return MANIFIESTO_PUNTOS_EN;
-  return MANIFIESTO_PUNTOS;
-}
-
 function renderManifiesto() {
   const container = document.getElementById('manifiesto-container');
   if (!container) return;
 
   const maniPuntos = getMANIFIESTO();
-  var mHtml = '';
-  maniPuntos.forEach(function(punto, pi) {
-    var statuses = punto.frases.map(function(_, fi) { return state.manifiestoState[mKey(pi, fi)] || null; });
-    var allConfirmed = statuses.every(function(s) { return s === 'confirmado'; });
-    var hasDudas = statuses.some(function(s) { return s === 'dudas'; });
-    var statusIcon = allConfirmed ? '✅' : hasDudas ? '🤔' : statuses.some(function(s){return s;}) ? '🔄' : '○';
-    var extraClass = allConfirmed ? 'all-confirmed' : hasDudas ? 'has-dudas' : '';
-    var frasesHtml = punto.frases.map(function(frase, fi) { return renderManifiestoFrase(pi, fi, frase); }).join('');
+  container.innerHTML = maniPuntos.map((punto, pi) => {
+    const statuses = punto.frases.map((_, fi) => state.manifiestoState[mKey(pi, fi)] || null);
+    const allConfirmed = statuses.every(s => s === 'confirmado');
+    const hasDudas = statuses.some(s => s === 'dudas');
+    const statusIcon = allConfirmed ? '✅' : hasDudas ? '🤔' : statuses.some(s => s) ? '🔄' : '○';
+    const extraClass = allConfirmed ? 'all-confirmed' : hasDudas ? 'has-dudas' : '';
 
-    mHtml += '<div class="manifiesto-punto ' + extraClass + '" id="mp-' + pi + '">';
-    mHtml += '<div class="manifiesto-punto-head" onclick="toggleManifiestoPunto(' + pi + ')">';
-    mHtml += '<div class="manifiesto-punto-num">' + (pi + 1) + '</div>';
-    mHtml += '<div class="manifiesto-punto-title">' + punto.title + '</div>';
-    mHtml += '<div class="manifiesto-punto-status">' + statusIcon + '</div>';
-    mHtml += '</div>';
-    mHtml += '<div class="manifiesto-punto-body">' + frasesHtml + '</div>';
-    mHtml += '</div>';
-  });
-  container.innerHTML = mHtml;
+    return `
+    <div class="manifiesto-punto ${extraClass}" id="mp-${pi}">
+      <div class="manifiesto-punto-head" onclick="toggleManifiestoPunto(${pi})">
+        <div class="manifiesto-punto-num">${pi + 1}</div>
+        <div class="manifiesto-punto-title">${punto.title}</div>
+        <div class="manifiesto-punto-status">${statusIcon}</div>
+      </div>
+      <div class="manifiesto-punto-body">
+        ${punto.frases.map((frase, fi) => renderManifiestoFrase(pi, fi, frase)).join('')}
+      </div>
+    </div>`;
+  }).join('');
 
   // Check if ALL 15 puntos fully confirmed
   const allDone = maniPuntos.every((punto, pi) =>
@@ -5772,22 +5755,23 @@ function renderManifiestoFrase(pi, fi, frase) {
   const nota = state.manifiestoNotas[key] || '';
   const showDudas = status === 'dudas';
 
-  var h = '';
-  h += '<div class="manifiesto-frase" id="mf-' + pi + '-' + fi + '">';
-  h += '<div class="manifiesto-frase-text">\"' + frase + '\"</div>';
-  h += '<div class="manifiesto-btns">';
-  h += '<button class="m-btn ' + (status === 'confirmado' ? 'active-confirm' : '') + '" onclick="setManifiestoStatus(' + pi + ',' + fi + ',\'confirmado\')">✅ Confirmado</button>';
-  h += '<button class="m-btn ' + (status === 'denegado' ? 'active-denegado' : '') + '" onclick="setManifiestoStatus(' + pi + ',' + fi + ',\'denegado\')">❌ Denegado</button>';
-  h += '<button class="m-btn ' + (status === 'dudas' ? 'active-dudas' : '') + '" onclick="setManifiestoStatus(' + pi + ',' + fi + ',\'dudas\')">🤔 Dudas</button>';
-  h += '</div>';
-  h += '<div class="manifiesto-dudas-field ' + (showDudas ? 'visible' : '') + '" id="mdf-' + pi + '-' + fi + '">';
-  h += '<textarea id="mdt-' + pi + '-' + fi + '" placeholder="¿Qué te genera dudas? Escríbelo aquí…">' + nota + '</textarea>';
-  h += '<button class="manifiesto-dudas-save" onclick="saveManifiestoNota(' + pi + ',' + fi + ')">Guardar en mi diario →</button>';
-  h += '</div>';
-  h += '</div>';
-  return h;
+  return `
+  <div class="manifiesto-frase" id="mf-${pi}-${fi}">
+    <div class="manifiesto-frase-text">"${frase}"</div>
+    <div class="manifiesto-btns">
+      <button class="m-btn ${status === 'confirmado' ? 'active-confirm' : ''}"
+        onclick="setManifiestoStatus(${pi},${fi},'confirmado')">✅ Confirmado</button>
+      <button class="m-btn ${status === 'denegado' ? 'active-denegado' : ''}"
+        onclick="setManifiestoStatus(${pi},${fi},'denegado')">❌ Denegado</button>
+      <button class="m-btn ${status === 'dudas' ? 'active-dudas' : ''}"
+        onclick="setManifiestoStatus(${pi},${fi},'dudas')">🤔 Dudas</button>
+    </div>
+    <div class="manifiesto-dudas-field ${showDudas ? 'visible' : ''}" id="mdf-${pi}-${fi}">
+      <textarea id="mdt-${pi}-${fi}" placeholder="¿Qué te genera dudas? Escríbelo aquí…">${nota}</textarea>
+      <button class="manifiesto-dudas-save" onclick="saveManifiestoNota(${pi},${fi})">Guardar en mi diario →</button>
+    </div>
+  </div>`;
 }
-
 
 function toggleManifiestoPunto(pi) {
   const el = document.getElementById('mp-' + pi);
@@ -5944,27 +5928,55 @@ function renderContratoManifiesto() {
   if (!block) return;
 
   const confirmed = [];
-  MANIFIESTO_PUNTOS.forEach(function(punto, pi) {
-    punto.frases.forEach(function(frase, fi) {
+  MANIFIESTO_PUNTOS.forEach((punto, pi) => {
+    punto.frases.forEach((frase, fi) => {
       if (state.manifiestoState[mKey(pi, fi)] === 'confirmado') {
-        confirmed.push({ puntoTitle: punto.title, frase: frase, pi: pi, fi: fi });
+        confirmed.push({ puntoTitle: punto.title, frase, pi, fi });
       }
     });
   });
 
-  if (!confirmed.length) { block.innerHTML = ''; return; }
+  if (!confirmed.length) {
+    block.innerHTML = `
+    <div class="contrato-manifiesto-section">
+      <div class="contrato-manifiesto-head">📜 Mi Manifiesto — Afirmaciones confirmadas</div>
+      <div class="contrato-manifiesto-empty">
+        Aún no has confirmado ningún punto del Manifiesto.<br>
+        <button onclick="navTo('manifiesto')" style="margin-top:10px;background:var(--gold);color:white;border:none;border-radius:8px;padding:9px 16px;font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif;">→ Ir a Mi Manifiesto</button>
+      </div>
+    </div>`;
+    return;
+  }
 
-  var html = '<div class="contrato-manifiesto-section">';
-  html += '<div class="contrato-manifiesto-title">✅ Tus principios confirmados</div>';
-  confirmed.forEach(function(item) {
-    html += '<div class="contrato-manifiesto-item">';
-    html += '<strong>' + item.puntoTitle + '</strong>';
-    html += '<p>' + item.frase + '</p>';
-    html += '</div>';
+  // Group by punto
+  const byPunto = {};
+  confirmed.forEach(c => {
+    if (!byPunto[c.pi]) byPunto[c.pi] = { title: c.puntoTitle, frases: [] };
+    byPunto[c.pi].frases.push(c.frase);
   });
-  html += '</div>';
-  block.innerHTML = html;
+
+  block.innerHTML = `
+  <div class="contrato-manifiesto-section">
+    <div class="contrato-manifiesto-head">📜 Mi Manifiesto — ${confirmed.length} afirmaciones confirmadas</div>
+    ${Object.values(byPunto).map(p => `
+      <div class="contrato-manifiesto-item">
+        <strong>${p.title}</strong><br>
+        ${p.frases.map(f => `<span style="color:var(--fog);font-style:italic;">"${f}"</span>`).join('<br>')}
+      </div>
+    `).join('')}
+  </div>`;
 }
+
+// ── NOTIFICATION DOTS ────────────────────────────────────────────────────────
+// Update CONTENT_TIMESTAMPS when you deploy new content to a section.
+const CONTENT_TIMESTAMPS = {
+  midia:      'daily',          // special: show dot if not visited today
+  guia:       '2025-05-05',
+  manifiesto: '2025-05-05',
+  contrato:   '2025-05-05',
+  tramites:   '2025-05-05',
+  expertos:   '2025-05-05',
+};
 
 function updateNotifDots() {
   const visited = state.lastVisited || {};
@@ -6668,7 +6680,6 @@ function frenoDecision(dec) {
 function renderDeseos() {
   const deseos = JSON.parse(localStorage.getItem('deseos')||'[]');
   const list = document.getElementById('deseos-list');
-  if (!list) return;
   if(!deseos.length) {
     list.innerHTML = '<span style="color:var(--muted);font-size:13px">Nada por ahora. Cuando frenes un impulso, aparece aquí.</span>';
     return;
@@ -7340,14 +7351,6 @@ function switchExpProfTab(tab) {
   });
   if (tab === 'glosario') renderExpGlosario();
 }
-
-
-
-
-
-
-
-
 
 
 
