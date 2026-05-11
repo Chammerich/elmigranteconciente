@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>El Migrante Consciente v12.14</title>
-  <meta name="version" content="v12.13-737kb">
+<title>El Migrante Consciente v12.34</title>
+  <meta name="version" content="v12.34">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 
 <!-- PWA Meta Tags -->
@@ -1275,7 +1275,7 @@
     border-radius: 20px;
     border: 1px solid rgba(255,255,255,0.2);
     background: transparent;
-    color: rgba(255,255,255,0.5);
+    color: rgba(255,255,255,0.75);
     font-family: 'DM Sans', sans-serif;
     font-size: 12px;
     cursor: pointer;
@@ -1747,7 +1747,7 @@
 <!-- TOP BAR -->
 <div class="top-bar" id="top-bar">
   <div class="top-bar-main">
-    <button class="top-logo" onclick="showHome()">⚖︎ El Migrante Consciente <span id="app-version-badge" style="font-size:9px;background:rgba(200,146,42,0.2);color:var(--gold);font-family:'DM Sans',sans-serif;font-weight:600;letter-spacing:0.5px;padding:2px 6px;border-radius:4px;margin-left:4px;">v12.13</span></button>
+    <button class="top-logo" onclick="showHome()">⚖︎ El Migrante Consciente <span id="app-version-badge" style="font-size:9px;background:rgba(200,146,42,0.2);color:var(--gold);font-family:'DM Sans',sans-serif;font-weight:600;letter-spacing:0.5px;padding:2px 6px;border-radius:4px;margin-left:4px;">v12.34</span></button>
     <div style="display:flex;align-items:center;gap:10px;">
       <div class="lang-switcher">
         <button class="lang-btn active" onclick="setLang('es',this)">ES</button>
@@ -1806,7 +1806,7 @@
     <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(200,146,42,0.6);margin-bottom:10px;">🔒 Privacidad</div>
     <p style="font-size:11px;color:rgba(255,255,255,0.45);line-height:1.6;margin-bottom:6px;">Todos tus datos — finanzas, diario, reflexiones, compromisos — se guardan <strong style="color:rgba(255,255,255,0.65);">exclusivamente en este dispositivo</strong>. Nada se envía a ningún servidor.</p>
     <p style="font-size:11px;color:rgba(255,255,255,0.35);line-height:1.6;">El Migrante Consciente no recopila, no vende y no tiene acceso a tu información personal.</p>
-    <div style="font-size:10px;color:rgba(255,255,255,0.2);margin-top:10px;text-align:center;">v12.13</div>
+    <div style="font-size:10px;color:rgba(255,255,255,0.2);margin-top:10px;text-align:center;">v12.34</div>
   </div>
 </div>
 
@@ -1957,11 +1957,7 @@
 <!-- SCREEN: MANIFIESTO -->
 <div class="screen" id="screen-manifiesto">
   <button class="back-btn" onclick="showHome()">← <span class="back-label">Atrás</span></button>
-  <div style="display:flex;background:var(--ink);padding:0 16px 12px;gap:8px;border-bottom:1px solid rgba(200,146,42,0.2);">
-    <button id="mani-tab-btn-manifiesto" onclick="switchManiTab('manifiesto')" style="flex:1;padding:8px 0;border-radius:20px;border:1px solid rgba(200,146,42,0.5);background:var(--gold);color:var(--ink);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;">📜 Manifiesto</button>
-    <button id="mani-tab-btn-contrato" onclick="switchManiTab('contrato')" style="flex:1;padding:8px 0;border-radius:20px;border:1px solid rgba(200,146,42,0.3);background:transparent;color:rgba(255,255,255,0.6);font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer;">⚖︎ Contrato</button>
-  </div>
-  <div id="mani-section-manifiesto" style="display:block;">
+  <div id="mani-section-manifiesto">
     <div class="manifiesto-hero">
       <div class="manifiesto-hero-seal">📜</div>
       <h2>Mi Manifiesto</h2>
@@ -1972,16 +1968,30 @@
       Confirma cada afirmación, recházala, o marca tus dudas — las dudas quedan abiertas en tu diario hasta que decides.
     </div>
     <div id="manifiesto-container"></div>
-  </div>
-  <div id="mani-section-contrato" style="display:none;padding-bottom:80px;">
-    <div class="contrato-hero" style="text-align:center;padding:24px 20px 16px;">
-      <div style="font-size:32px;color:var(--gold);">⚖︎</div>
-      <h2 style="font-family:'Playfair Display',serif;color:var(--ink);margin:8px 0 4px;">El Contrato del Migrante</h2>
-      <p style="font-size:13px;color:var(--fog);">14 compromisos · Tu firma más importante</p>
+    <div style="margin:8px 16px 0;padding:16px;background:var(--card-bg);border:1px solid var(--border);border-radius:14px;">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:4px;">✍️ Mis compromisos personales</div>
+      <div style="font-size:12px;color:var(--fog);margin-bottom:12px;line-height:1.5;">Añade hasta 3 compromisos propios.</div>
+      <div id="custom-puntos-list"></div>
+      <div id="custom-puntos-add"></div>
     </div>
-    <div id="puntos-container-2"></div>
+    <div style="margin:12px 16px 24px;padding:18px;background:rgba(200,146,42,0.06);border:1px solid rgba(200,146,42,0.25);border-radius:14px;">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;">⚖︎ Generar mi Contrato Oficial</div>
+      <div style="display:flex;gap:8px;margin-bottom:8px;">
+        <select id="contrato-titulo" onchange="saveContratoProfile()" style="width:90px;border:1px solid var(--border);border-radius:8px;padding:8px 10px;font-size:13px;background:var(--cream);color:var(--ink);outline:none;">
+          <option value="Don">Don</option>
+          <option value="Doña">Doña</option>
+        </select>
+        <input id="contrato-nombre" type="text" placeholder="Tu nombre completo" style="flex:1;border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:13px;background:var(--cream);color:var(--ink);outline:none;" oninput="saveContratoProfile()">
+      </div>
+      <div style="display:flex;gap:8px;margin-bottom:14px;">
+        <input id="contrato-origen" type="text" placeholder="País de origen" style="flex:1;border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:13px;background:var(--cream);color:var(--ink);outline:none;" oninput="saveContratoProfile()">
+        <input id="contrato-ciudad" type="text" placeholder="Ciudad actual" style="flex:1;border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:13px;background:var(--cream);color:var(--ink);outline:none;" oninput="saveContratoProfile()">
+      </div>
+      <button onclick="generarContratoPDF()" style="width:100%;background:var(--gold);color:var(--ink);border:none;border-radius:10px;padding:13px;font-size:14px;font-weight:700;cursor:pointer;letter-spacing:0.5px;">⚖︎ Generar mi Contrato Oficial</button>
+    </div>
   </div>
-</div>
+
+
 
 <!-- SCREEN: CONTRATO -->
 <div class="screen" id="screen-contrato">
@@ -2520,7 +2530,7 @@ let CHAPTERS = getCHAPTERS();
 let WISDOMS  = getWISDOMS();
 
 // ─── STATE ──────────────────────────────────────────────────
-const APP_VERSION = 16;
+const APP_VERSION = 36;
 let state = JSON.parse(localStorage.getItem('mc_state') || '{}');
 if (state.appVersion !== APP_VERSION) {
   state.appVersion = APP_VERSION;
@@ -2542,6 +2552,7 @@ if (!state.diario) state.diario = [];
 if (!state.manifiestoState) state.manifiestoState = {};
 if (!state.lastVisited) state.lastVisited = {}; // {puntoIdx_fraseIdx: "confirmado"|"denegado"|"dudas"}
 if (!state.manifiestoNotas) state.manifiestoNotas = {}; // {puntoIdx_fraseIdx: "texto nota"}
+if (!state.manifiestoCustom) state.manifiestoCustom = ['','','']; // up to 3 custom puntos
 if (!state.hoyRefl) state.hoyRefl = {};
 if (!state.profile) state.profile = {};
 if (!state.voces) state.voces = [];
@@ -2573,7 +2584,7 @@ function navTo(key) {
     'midia':            () => { showScreen('midia'); initMiDia(); markVisited('midia'); },
     'guia':             () => { showScreen('guia'); initGuia(); markVisited('guia'); },
     'manifiesto':       () => { showScreen('manifiesto'); initManifiesto(); markVisited('manifiesto'); },
-    'contrato':         () => { showScreen('manifiesto'); initManifiesto(); markVisited('manifiesto'); setTimeout(()=>switchManiTab('contrato'),50); },
+    'contrato':         () => { showScreen('manifiesto'); initManifiesto(); markVisited('manifiesto'); },
     'tramites':         () => { showScreen('tramites'); initTramites(); markVisited('tramites'); },
     'finanzas':         () => { showScreen('finanzas'); initFinanzas(); markVisited('finanzas'); },
     'prologo':          () => { showScreen('prologo'); renderInicioSection('prologo', 'prologo-content'); renderReadBtn('prologo'); },
@@ -2680,6 +2691,7 @@ function switchManiTab(tab) {
     }
   });
   if (tab === 'contrato') {
+    setTimeout(loadContratoProfile, 50);
     const pContainer = document.getElementById('puntos-container-2');
     if (pContainer && !pContainer.dataset.rendered) {
       initContrato();
@@ -2708,7 +2720,7 @@ function renderReadBtn(key) {
   const isRead = state[key + 'Read'];
   const btn = document.createElement('button');
   btn.className = 'proepil-read-btn';
-  btn.style.cssText = 'display:block;margin:0 20px 60px;width:calc(100% - 40px);padding:14px;border-radius:12px;border:none;font-family:\'DM Sans\',sans-serif;font-size:14px;font-weight:600;cursor:pointer;' + (isRead ? 'background:var(--sage);color:white;' : 'background:var(--gold);color:var(--ink);');
+  btn.style.cssText = 'display:block;margin:0 20px 60px;width:calc(100% - 40px);padding:14px;border-radius:12px;border:none;font-size:14px;font-weight:600;cursor:pointer;' + (isRead ? 'background:var(--sage);color:white;' : 'background:var(--gold);color:var(--ink);');
   btn.textContent = isRead ? '✓ Leído — visible en Tu mejor Versión' : 'Marcar como leído →';
   btn.onclick = () => markPrologoEpilogo(key, btn);
   screenEl.appendChild(btn);
@@ -5801,6 +5813,23 @@ function renderManifiesto() {
   const allDone = maniPuntos.every((punto, pi) =>
     punto.frases.every((_, fi) => state.manifiestoState[mKey(pi, fi)] === 'confirmado')
   );
+  // ── Custom puntos section ──────────────────────────────────────────────────
+  const customSection = document.createElement('div');
+  customSection.style.cssText = 'margin:16px 16px 8px;';
+  let customHtml = '<div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;padding-top:8px;border-top:1px solid var(--border);">Mis compromisos personales</div>';
+  customHtml += '<div style="font-size:12px;color:var(--fog);margin-bottom:12px;line-height:1.5;">Añade hasta 3 compromisos propios. Formarán parte de tu Contrato.</div>';
+  for (let ci = 0; ci < 3; ci++) {
+    const val = (state.manifiestoCustom && state.manifiestoCustom[ci]) || '';
+    customHtml += '<div style="margin-bottom:10px;">';
+    customHtml += '<div style="font-size:11px;color:var(--fog);margin-bottom:4px;">Compromiso propio ' + (ci+1) + '</div>';
+    customHtml += '<textarea id="custom-punto-' + ci + '" onchange="saveCustomPunto(' + ci + ',this.value)" onblur="saveCustomPunto(' + ci + ',this.value)" placeholder="Yo me comprometo a…" style="width:100%;box-sizing:border-box;min-height:64px;background:var(--cream);border:1px solid var(--border);border-radius:10px;padding:10px 12px;font-size:13px;color:var(--ink);resize:none;outline:none;">' + val.replace(/</g,'&lt;') + '</textarea>';
+    customHtml += '</div>';
+  }
+  customSection.innerHTML = customHtml;
+  container.appendChild(customSection);
+
+  // ── Download button ─────────────────────────────────────────────────────────
+
   if (allDone) {
     const banner = document.createElement('div');
     banner.style.cssText = 'margin:16px;padding:16px;background:rgba(200,146,42,0.1);border:1px solid var(--gold);border-radius:14px;text-align:center;';
@@ -5811,6 +5840,15 @@ function renderManifiesto() {
     container.appendChild(banner);
   }
 }
+
+
+function saveCustomPunto(idx, val) {
+  if (!state.manifiestoCustom) state.manifiestoCustom = ['','',''];
+  state.manifiestoCustom[idx] = val.trim();
+  saveState();
+}
+
+function downloadContratoPDF() { generarContratoPDF(); }
 
 function renderManifiestoFrase(pi, fi, frase) {
   const key = mKey(pi, fi);
@@ -6015,6 +6053,7 @@ function renderContratoManifiesto() {
 function updateNotifDots() {
   const visited = state.lastVisited || {};
   const today = new Date().toDateString();
+  const CONTENT_TIMESTAMPS = {};
   Object.keys(CONTENT_TIMESTAMPS).forEach(key => {
     let show = false;
     if (key === 'midia') {
@@ -6101,7 +6140,7 @@ function renderMiDiaDiario() {
   h += '<button onclick="selectMiDiaTipo(this,\'pensamiento\')" data-tipo="pensamiento" style="flex:1;border:1px solid var(--border);background:none;border-radius:8px;padding:7px 4px;font-size:10px;cursor:pointer;color:var(--fog);">💡 Pensamiento</button>';
   h += '<button onclick="selectMiDiaTipo(this,\'tarea\')" data-tipo="tarea" style="flex:1;border:1px solid var(--border);background:none;border-radius:8px;padding:7px 4px;font-size:10px;cursor:pointer;color:var(--fog);">✅ Tarea</button>';
   h += '</div>';
-  h += '<textarea id="midia-diario-input" placeholder="¿Qué reflexionaste hoy?" style="width:100%;box-sizing:border-box;min-height:80px;background:var(--cream);border:1px solid var(--border);border-radius:10px;padding:12px;font-size:13px;font-family:\'DM Sans\',sans-serif;color:var(--ink);resize:none;outline:none;"></textarea>';
+  h += '<textarea id="midia-diario-input" placeholder="¿Qué reflexionaste hoy?" style="width:100%;box-sizing:border-box;min-height:80px;background:var(--cream);border:1px solid var(--border);border-radius:10px;padding:12px;font-size:13px;color:var(--ink);resize:none;outline:none;"></textarea>';
   h += '<div id="midia-deadline-row" style="display:none;margin-top:8px;background:rgba(200,146,42,0.07);border-radius:10px;padding:10px 12px;">';
   h += '<label style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--ink);cursor:pointer;margin-bottom:6px;">';
   h += '<input type="checkbox" id="midia-has-deadline" onchange="toggleDeadlineInput(this)" style="width:16px;height:16px;accent-color:var(--gold);cursor:pointer;">';
@@ -6271,6 +6310,266 @@ function exportTareasIcs() {
   showToast('✓ Tareas exportadas — abre el archivo para importar');
 }
 
+
+// ── CUSTOM MANIFIESTO PUNTOS ──
+function renderCustomPuntos() {
+  const list = document.getElementById('custom-puntos-list');
+  const addBtn = document.getElementById('custom-puntos-add');
+  if (!list || !addBtn) return;
+  const customs = state.customPuntos || [];
+  list.innerHTML = '';
+  customs.forEach(function(txt, i) {
+    const div = document.createElement('div');
+    div.style.cssText = 'display:flex;align-items:flex-start;gap:8px;margin-bottom:8px;';
+    div.innerHTML = '<div style="flex:1;background:var(--cream);border:1px solid var(--border);border-radius:10px;padding:10px 12px;font-size:13px;color:var(--ink);line-height:1.5;">' + txt + '</div>' +
+      '<button onclick="deleteCustomPunto(' + i + ')" style="flex-shrink:0;background:none;border:1px solid var(--border);border-radius:8px;padding:6px 10px;font-size:12px;color:var(--fog);cursor:pointer;margin-top:1px;">✕</button>';
+    list.appendChild(div);
+  });
+  if (customs.length < 3) {
+    addBtn.innerHTML = '<textarea id="custom-punto-input" placeholder="Escribe tu compromiso personal…" style="width:100%;box-sizing:border-box;min-height:70px;background:var(--cream);border:1px solid var(--border);border-radius:10px;padding:10px 12px;font-size:13px;color:var(--ink);resize:none;outline:none;margin-bottom:8px;"></textarea>' +
+      '<button onclick="addCustomPunto()" style="width:100%;background:none;border:1px dashed rgba(200,146,42,0.5);border-radius:10px;padding:10px;font-size:13px;color:var(--gold);cursor:pointer;">+ Añadir compromiso</button>';
+  } else {
+    addBtn.innerHTML = '<div style="font-size:12px;color:var(--fog);text-align:center;padding:8px 0;">Máximo 3 compromisos personales</div>';
+  }
+}
+
+function addCustomPunto() {
+  const ta = document.getElementById('custom-punto-input');
+  if (!ta || !ta.value.trim()) { showToast('Escribe tu compromiso primero'); return; }
+  if (!state.customPuntos) state.customPuntos = [];
+  if (state.customPuntos.length >= 3) return;
+  state.customPuntos.push(ta.value.trim());
+  saveState();
+  renderCustomPuntos();
+  showToast('Compromiso añadido ✓');
+}
+
+function deleteCustomPunto(i) {
+  if (!state.customPuntos) return;
+  state.customPuntos.splice(i, 1);
+  saveState();
+  renderCustomPuntos();
+}
+
+// ── CONTRATO PROFILE ──
+function saveContratoProfile() {
+  const titulo = (document.getElementById('contrato-titulo') || {}).value || 'Don';
+  const nombre = (document.getElementById('contrato-nombre') || {}).value || '';
+  const origen = (document.getElementById('contrato-origen') || {}).value || '';
+  const ciudad = (document.getElementById('contrato-ciudad') || {}).value || '';
+  if (!state.profile) state.profile = {};
+  state.profile.titulo = titulo;
+  state.profile.nombre = nombre;
+  state.profile.origen = origen;
+  state.profile.ciudad = ciudad;
+  saveState();
+}
+
+function loadContratoProfile() {
+  const p = state.profile || {};
+  const tEl = document.getElementById('contrato-titulo');
+  const nEl = document.getElementById('contrato-nombre');
+  const oEl = document.getElementById('contrato-origen');
+  const cEl = document.getElementById('contrato-ciudad');
+  if (tEl && p.titulo) tEl.value = p.titulo;
+  if (nEl && p.nombre) nEl.value = p.nombre;
+  if (oEl && p.origen) oEl.value = p.origen;
+  if (cEl && p.ciudad) cEl.value = p.ciudad;
+}
+
+// ── GENERAR CONTRATO PDF ──
+function generarContratoPDF() {
+  const p = state.profile || {};
+  const titulo = p.titulo || 'Don';
+  const nombre = p.nombre || 'Migrante Presente';
+  const origen = p.origen || '___________';
+  const ciudad = p.ciudad || '___________';
+  const fecha = new Date().toLocaleDateString('es-ES', {day:'numeric', month:'long', year:'numeric'});
+
+  const puntosTitulos = [
+    ['PRIMERA', 'IDENTIDAD', 'No soy mi pasado, ni mis errores, ni mis miedos, ni las expectativas de los demás. Soy una identidad en constante transformación.'],
+    ['SEGUNDA', 'CULTURA', 'No niego mis orígenes ni me disuelvo en la nueva cultura. Abrazo la integración consciente como principio rector.'],
+    ['TERCERO', 'ADAPTACIÓN MENTAL', 'Reconozco la maleabilidad de mi mente y me comprometo al aprendizaje continuo.'],
+    ['CUARTO', 'SUPERVIVENCIA', 'Acepto las fases difíciles como temporales y no sacrificaré mi identidad, salud ni futuro por emergencias puntuales.'],
+    ['QUINTO', 'RESPONSABILIDAD', 'Asumo la plena responsabilidad de mis decisiones y renuncio al derecho de culpar a terceros, al entorno o al azar.'],
+    ['SEXTO', 'LÍMITES FAMILIARES', 'La asistencia a terceros es un valor libremente elegido, no una obligación. Estableceré límites firmes y claros, comunicados con dignidad.'],
+    ['SÉPTIMO', 'INTEGRIDAD DIGITAL', 'No compararé mi proceso con representaciones digitales ajenas. Mi ritmo de adaptación es legítimo y no requiere validación externa.'],
+    ['OCTAVO', 'GESTIÓN DE LA SOLEDAD', 'Acepto la soledad como etapa intrínseca del proceso migratorio y la transformaré en instrumento de autoconocimiento.'],
+    ['NOVENO', 'RED DE VÍNCULOS', 'Construiré mi red de relaciones con criterio selectivo: reducida en cantidad y sólida en calidad.'],
+    ['DÉCIMO', 'INTEGRIDAD CORPORAL', 'Reconozco mi cuerpo como vehículo insustituible de mi proyecto migratorio y lo preservaré con descanso, rutina y atención.'],
+    ['UNDÉCIMO', 'EXPECTATIVAS Y REALIDAD', 'Renuncio al derecho de exigir que el nuevo entorno se adapte a mí. Soy yo quien se adapta, con conciencia y dignidad.'],
+    ['DUODÉCIMO', 'EL SISTEMA Y SUS REGLAS', 'Respetaré el sistema administrativo del país de acogida en su totalidad. Navegar la burocracia con paciencia es un acto de inteligencia, no de sumisión.'],
+    ['DECIMOTERCERO', 'LA TERCERA MIGRACIÓN', 'Confirmo el compromiso con el aprendizaje del inglés como herramienta estratégica, no opcional.'],
+    ['DECIMOCUARTO', 'DIGNIDAD EN LA PRECARIEDAD', 'Ninguna urgencia económica justifica la entrega del futuro por dinero inmediato. La precariedad es un puente — y los puentes se cruzan, no se habitan.']
+  ];
+
+  const customs = state.customPuntos || [];
+  const numeros = ['DECIMOQUINTO', 'DECIMOSEXTO', 'DECIMOSÉPTIMO'];
+
+  let puntosHTML = '';
+  puntosTitulos.forEach(function(pt) {
+    puntosHTML += '<div class="cl"><div class="cll"><div class="clo">' + pt[0] + '</div><div class="clt">' + pt[1] + '</div></div>' +
+      '<div class="clr"><span class="cln">' + titulo + ' ' + nombre + ' declara:</span><span class="clx">' + pt[2] + '</span></div></div>';
+  });
+  customs.forEach(function(txt, i) {
+    puntosHTML += '<div class="cl cc"><div class="cll"><div class="clo">' + numeros[i] + '</div><div class="clt">Compromiso Personal</div></div>' +
+      '<div class="clr"><span class="cln">' + titulo + ' ' + nombre + ' declara:</span><span class="clx">' + txt + '</span></div></div>';
+  });
+  const html = '<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8">' +
+    '<title>Contrato — ' + nombre + '</title>' +
+    '<style>' +
+    '* { box-sizing: border-box; margin: 0; padding: 0; }' +
+    'body { font-family: "Book Antiqua","Palatino Linotype",Palatino,Georgia,serif; background: #f0ebe0; color: #1a1208; }' +
+    '.page { max-width: 760px; margin: 0 auto; background: #faf7f0; padding: 64px 72px 80px; position: relative; overflow: hidden; box-shadow: 0 0 40px rgba(0,0,0,0.12); }' +
+    '.wm { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%) rotate(-30deg); font-size: 240px; color: rgba(200,146,42,0.05); pointer-events: none; user-select: none; line-height: 1; z-index: 0; }' +
+    '.c { position: relative; z-index: 1; }' +
+    '.hdr { text-align: center; margin-bottom: 40px; }' +
+    '.hdr-line { height: 3px; background: linear-gradient(to right,transparent,#c8922a 20%,#c8922a 80%,transparent); margin-bottom: 32px; }' +
+    '.hdr-line2 { height: 1px; background: linear-gradient(to right,transparent,#c8922a 20%,#c8922a 80%,transparent); margin-top: 24px; }' +
+    '.seal { font-size: 52px; display: block; margin-bottom: 18px; }' +
+    '.dp { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: #a09080; margin-bottom: 10px; }' +
+    '.dt { font-size: 24px; font-weight: bold; color: #1a1208; margin-bottom: 8px; }' +
+    '.ds { font-size: 14px; font-style: italic; color: #7a7060; margin-bottom: 20px; }' +
+    '.nb { display: inline-block; border: 1px solid #d4c4a0; border-radius: 4px; padding: 10px 20px; font-size: 12px; font-style: italic; color: #6a6050; background: rgba(200,146,42,0.04); }' +
+    '.sdiv { display: flex; align-items: center; gap: 16px; margin: 36px 0 20px; }' +
+    '.sdiv::before,.sdiv::after { content: ""; flex: 1; height: 1px; background: #d4c4a0; }' +
+    '.sl { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: #c8922a; white-space: nowrap; }' +
+    '.pg { display: grid; grid-template-columns: 1fr auto 1fr; gap: 0; align-items: start; margin-bottom: 16px; }' +
+    '.pb { border: 1px solid #ddd4bc; border-radius: 6px; padding: 18px 20px; background: rgba(200,146,42,0.025); }' +
+    '.pl { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: #c8922a; margin-bottom: 10px; }' +
+    '.pn { font-size: 17px; font-weight: bold; color: #1a1208; margin-bottom: 12px; border-bottom: 1px solid #e8dfc8; padding-bottom: 8px; }' +
+    '.pr { font-size: 11px; line-height: 2.1; color: #5a5040; }' +
+    '.pr b { font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: #a09080; display: block; font-weight: normal; }' +
+    '.pnota { font-size: 11px; font-style: italic; color: #8a8070; line-height: 1.7; margin-top: 12px; }' +
+    '.yc { display: flex; align-items: center; justify-content: center; padding: 0 16px; font-size: 22px; color: #c8922a; font-style: italic; }' +
+    '.di { font-size: 12px; line-height: 1.9; color: #3a3028; margin-bottom: 10px; padding-left: 28px; position: relative; }' +
+    '.di .dn { position: absolute; left: 0; color: #c8922a; font-weight: bold; font-size: 11px; }' +
+    '.cl { margin-bottom: 14px; display: grid; grid-template-columns: 150px 1fr; border: 1px solid #e4dac8; border-radius: 4px; overflow: hidden; }' +
+    '.cll { background: rgba(200,146,42,0.07); padding: 14px 16px; border-right: 2px solid #c8922a; }' +
+    '.clo { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: #c8922a; margin-bottom: 5px; }' +
+    '.clt { font-size: 12px; font-weight: bold; color: #1a1208; line-height: 1.3; }' +
+    '.clr { padding: 14px 18px; background: #faf7f0; }' +
+    '.cln { font-size: 11px; color: #c8922a; font-weight: bold; display: block; margin-bottom: 4px; }' +
+    '.clx { font-size: 12px; line-height: 1.85; color: #3a3028; font-style: italic; }' +
+    '.cc .cll { background: rgba(138,130,120,0.06); border-right-color: #a09080; }' +
+    '.cc .clo { color: #a09080; }' +
+    '.cc .cln { color: #a09080; }' +
+    '.fi { font-size: 12px; font-style: italic; color: #6a6050; text-align: center; line-height: 1.8; margin-bottom: 36px; }' +
+    '.fg { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }' +
+    '.fb { text-align: center; }' +
+    '.fe { height: 48px; border-bottom: 1px solid #1a1208; margin-bottom: 12px; }' +
+    '.fn { font-size: 13px; font-weight: bold; color: #1a1208; margin-bottom: 4px; }' +
+    '.fr { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: #a09080; }' +
+    '.ft { text-align: center; margin-top: 48px; padding-top: 28px; }' +
+    '.ftl { height: 1px; background: linear-gradient(to right,transparent,#d4c4a0 30%,#d4c4a0 70%,transparent); margin-bottom: 20px; }' +
+    '.fs { font-size: 28px; color: #c8922a; margin-bottom: 8px; }' +
+    '.fl { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #a09080; }' +
+    '@media print { body{background:#fff;} .page{box-shadow:none;padding:32px 48px;} .np{display:none!important;} }' +
+    '</style></head><body>' +
+    '<div class="page"><div class="wm">⚖</div><div class="c">' +
+    '<div class="hdr"><div class="hdr-line"></div><span class="seal">⚖︎</span>' +
+    '<div class="dp">Escritura Privada de Compromiso Personal</div>' +
+    '<div class="dt">El Migrante Consciente</div>' +
+    '<div class="ds">Otorgada ante el Notario del Consciente</div>' +
+    '<div class="nb">Yo, el abajo firmante, notario público en el universo, en una galaxia cercana, certifico lo siguiente</div>' +
+    '<div class="hdr-line2"></div></div>' +
+    '<div class="sdiv"><span class="sl">Las Partes</span></div>' +
+    '<div class="pg">' +
+    '<div class="pb"><div class="pl">Comparece</div><div class="pn">' + titulo + ' ' + nombre + '</div>' +
+    '<div class="pr"><b>En calidad de</b>Migrante Presente</div>' +
+    '<div class="pr"><b>País de origen</b>' + origen + '</div>' +
+    '<div class="pr"><b>Ciudad actual</b>' + ciudad + '</div>' +
+    '<div class="pr"><b>Fecha</b>' + fecha + '</div></div>' +
+    '<div class="yc">Y</div>' +
+    '<div class="pb"><div class="pl">En representación de</div><div class="pn">' + titulo + ' ' + nombre + '</div>' +
+    '<div class="pr"><b>En calidad de</b>Migrante Futuro</div>' +
+    '<div class="pnota">' + titulo + ' ' + nombre + ' (presente) actúa como representante moral de su yo futuro, el cual queda protegido mediante este documento.</div></div>' +
+    '</div>' +
+    '<div class="sdiv"><span class="sl">Declaración Fundamental</span></div>' +
+    '<div class="di"><span class="dn">I.</span>Se encuentra conscientemente inmerso en un proceso de migración y reorientación personal.</div>' +
+    '<div class="di"><span class="dn">II.</span>Reconoce la necesidad de establecer normas claras, firmes y autoimpuestas.</div>' +
+    '<div class="di"><span class="dn">III.</span>Desea afirmar solemnemente su compromiso consigo mismo.</div>' +
+    '<div class="sdiv"><span class="sl">Declaración</span></div>' +
+    puntosHTML +
+    '<div class="sdiv"><span class="sl">Firma</span></div>' +
+    '<div class="fi">Para darle de ello, emite este certificado, plenamente consciente de su significado simbólico, moral y vital.</div>' +
+    '<div class="fg">' +
+    '<div class="fb"><div class="fe"></div><div class="fn">' + titulo + ' ' + nombre + '</div><div class="fr">Migrante Presente</div></div>' +
+    '<div class="fb"><div class="fe"></div><div class="fn">El Notario del Consciente</div><div class="fr">Notario Público de la Conciencia</div></div>' +
+    '</div>' +
+    '<div class="ft"><div class="ftl"></div><div class="fs">⚖︎</div><div class="fl">Observaré · Recordaré · Cumpliré</div></div>' +
+    '</div></div>' +
+    '<div class="np" style="text-align:center;padding:24px;background:#f0ebe0;">' +
+    '<button onclick="window.print()" style="background:#c8922a;color:#1a1208;border:none;border-radius:10px;padding:13px 36px;font-size:14px;font-weight:700;cursor:pointer;letter-spacing:0.5px;">🖨 Guardar como PDF</button>' +
+    '</div></body></html>';
+
+    // Show in-app overlay — no popup blocker issues
+    // Remove existing overlay
+  const oldOv = document.getElementById('contrato-pdf-overlay');
+  if (oldOv) oldOv.remove();
+
+  // Create overlay with iframe srcdoc so CSS applies correctly
+  const overlay = document.createElement('div');
+  overlay.id = 'contrato-pdf-overlay';
+  overlay.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.88);z-index:9999;display:flex;flex-direction:column;';
+
+  // Top bar
+  const bar = document.createElement('div');
+  bar.style.cssText = 'flex-shrink:0;display:flex;justify-content:space-between;align-items:center;padding:12px 20px;background:#1a1208;';
+  bar.innerHTML = '<span style="font-size:13px;font-weight:600;color:#c8922a;letter-spacing:1px;">⚖︎ Mi Contrato Oficial</span>' +
+    '<div style="display:flex;gap:8px;">' +
+    '<button id="btn-print-contrato" style="background:#c8922a;color:#1a1208;border:none;border-radius:8px;padding:8px 18px;font-size:13px;font-weight:700;cursor:pointer;">🖨 PDF</button>' +
+    '<button id="btn-close-contrato" style="background:none;border:1px solid rgba(255,255,255,0.3);border-radius:8px;padding:8px 14px;font-size:13px;color:rgba(255,255,255,0.8);cursor:pointer;">✕ Cerrar</button>' +
+    '</div>';
+  overlay.appendChild(bar);
+
+  // iframe with srcdoc
+  const iframe = document.createElement('iframe');
+  iframe.style.cssText = 'flex:1;border:none;background:#f0ebe0;';
+  iframe.setAttribute('sandbox', 'allow-scripts allow-modals allow-same-origin');
+  iframe.setAttribute('srcdoc', html);
+  overlay.appendChild(iframe);
+
+  document.body.appendChild(overlay);
+
+  // Wire up buttons after DOM insertion
+  document.getElementById('btn-close-contrato').onclick = function() { overlay.remove(); };
+  document.getElementById('btn-print-contrato').onclick = function() {
+    const b = new Blob([html], {type:'text/html;charset=utf-8'});
+    const u = URL.createObjectURL(b);
+    const a = document.createElement('a');
+    a.href = u; a.target = '_blank'; a.rel = 'noopener noreferrer';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(function(){ URL.revokeObjectURL(u); }, 5000);
+  };
+
+}
+
+
+function selectVivienda(btn, tipo) {
+  document.querySelectorAll('.vivienda-btn').forEach(function(b) {
+    b.style.background = 'none';
+    b.style.borderColor = 'var(--border)';
+    b.style.color = 'var(--muted)';
+    b.style.fontWeight = '400';
+  });
+  btn.style.background = 'rgba(200,146,42,0.12)';
+  btn.style.borderColor = 'var(--gold)';
+  btn.style.color = 'var(--gold)';
+  btn.style.fontWeight = '700';
+  if (!window._finState) window._finState = {};
+  window._finState.vivienda = tipo;
+  saveFinanzasState();
+  const notas = {
+    habitacion: 'Habitación en piso compartido — solución común al llegar. Flexible pero sin privacidad total.',
+    piso: 'Piso propio o alquilado — mayor estabilidad y privacidad.',
+    compartido: 'Piso compartido — buen equilibrio entre coste y espacio personal.',
+    propio: 'Vivienda propia — máxima estabilidad. ¿Hipoteca o libre de cargas?'
+  };
+  const nota = document.getElementById('vivienda-nota');
+  if (nota) { nota.textContent = notas[tipo] || ''; nota.style.display = 'block'; }
+}
+
 function saveMiDiaDiario() {
   setTimeout(updateTareaBadge, 100);
   const ta = document.getElementById('midia-diario-input');
@@ -6328,7 +6627,42 @@ function loadFinanzasState() {
   } catch(e){console.warn('Finanzas load:',e);}
 }
 
+
+function saveVidaTipo() {
+  const tipo = (document.getElementById('vida-tipo') || {}).value || '';
+  const coste = (document.getElementById('vida-coste') || {}).value || '';
+  if (!state.profile) state.profile = {};
+  state.profile.vidaTipo = tipo;
+  state.profile.vidaCoste = coste;
+  saveState();
+  // Show/hide coste row
+  const row = document.getElementById('vida-coste-row');
+  if (row) row.style.display = tipo ? 'block' : 'none';
+  // Show nota
+  const nota = document.getElementById('vida-nota');
+  const notas = {
+    'habitacion': 'La habitación compartida es la opción más flexible. Ideal para los primeros meses — minimiza el riesgo financiero mientras construyes tu red.',
+    'piso-compartido': 'El piso compartido combina independencia y coste razonable. Asegúrate de que el contrato esté a tu nombre o que puedas empadronarte.',
+    'piso-propio': 'Alquiler completo: máxima estabilidad, máximo compromiso. Asegúrate de que el coste no supere el 30% de tus ingresos.',
+    'con-familia': 'Vivir con familia o amigos puede ser un buen punto de partida. Define desde el principio las condiciones y los tiempos.',
+    'otro': 'Cualquier situación de vivienda es válida mientras sea segura y te permita avanzar.'
+  };
+  if (nota) {
+    nota.style.display = tipo && notas[tipo] ? 'block' : 'none';
+    nota.textContent = notas[tipo] || '';
+  }
+}
+
+function loadVidaTipo() {
+  const p = state.profile || {};
+  const tipoEl = document.getElementById('vida-tipo');
+  const costeEl = document.getElementById('vida-coste');
+  if (tipoEl && p.vidaTipo) { tipoEl.value = p.vidaTipo; saveVidaTipo(); }
+  if (costeEl && p.vidaCoste) costeEl.value = p.vidaCoste;
+}
+
 function initFinanzas() {
+  setTimeout(loadVidaTipo, 150);
   if(typeof loadRates==='function') loadRates();
   if(typeof renderSubs==='function') renderSubs();
   if(typeof renderDeseos==='function') renderDeseos();
@@ -6560,11 +6894,15 @@ function updateAmpel(liquid, ingresos, pasiva) {
   const finMes = _liquid + (_ingresos * fracMonth) - (_pasiva * fracMonth);
   const finSig = finMes + _ingresos - _pasiva;
 
-  document.getElementById('amp-hoy').textContent = '€'+fmt(hoy);
-  document.getElementById('amp-mes').textContent = '€'+fmt(finMes);
-  document.getElementById('amp-sig').textContent = '€'+fmt(finSig);
-  document.getElementById('amp-mes-sub').textContent = `${daysLeft} días restantes`;
-  document.getElementById('amp-sig-sub').textContent = 'Próximo mes completo';
+  const ampHoy = document.getElementById('amp-hoy'); if(ampHoy) ampHoy.textContent = '€'+fmt(hoy);
+  const ampMes = document.getElementById('amp-mes'); if(ampMes) ampMes.textContent = '€'+fmt(finMes);
+  const ampSig = document.getElementById('amp-sig'); if(ampSig) ampSig.textContent = '€'+fmt(finSig);
+  const finSig2 = finSig + _ingresos - _pasiva;
+  const ampSig2 = document.getElementById('amp-sig2'); if(ampSig2) ampSig2.textContent = '€'+fmt(finSig2);
+  const ampMesSub = document.getElementById('amp-mes-sub'); if(ampMesSub) ampMesSub.textContent = `${daysLeft} días restantes`;
+  const ampSigSub = document.getElementById('amp-sig-sub'); if(ampSigSub) ampSigSub.textContent = 'Mes siguiente';
+  const ampSig2Sub = document.getElementById('amp-sig2-sub'); if(ampSig2Sub) ampSig2Sub.textContent = 'En 2 meses';
+  setDot('dot-sig2', finSig2);
 
   setDot('dot-hoy', hoy);
   setDot('dot-mes', finMes);
@@ -6573,7 +6911,11 @@ function updateAmpel(liquid, ingresos, pasiva) {
 
 function setDot(id, val) {
   const el = document.getElementById(id);
-  const amtEl = el.closest('.ampel-cell').querySelector('.amount');
+  if (!el) return;
+  const cell = el.closest('.ampel-cell');
+  if (!cell) return;
+  const amtEl = cell.querySelector('.amount');
+  if (!amtEl) return;
   if(val > 500) {
     el.className = 'ampel-dot dot-green';
     amtEl.className = 'amount color-green';
@@ -6859,10 +7201,11 @@ function enviarHistoria() {
 // UI HELPERS
 // ============================================================
 function showTab(tab) {
-  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-  document.getElementById('tab-'+tab).classList.add('active');
-  event.target.classList.add('active');
+  document.querySelectorAll('#screen-finanzas .section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('#screen-finanzas .tab-btn').forEach(b=>b.classList.remove('active'));
+  const el = document.getElementById('tab-'+tab);
+  if (el) el.classList.add('active');
+  if (event && event.target) event.target.classList.add('active');
 }
 
 function toggleCard(header) {
@@ -7259,10 +7602,11 @@ function getTanzReadEN() {
 function openExpDownloadPrint() {
   const lang = typeof currentLang !== 'undefined' ? currentLang : 'es';
   const content = lang === 'en' ? getDownloadContentEN() : getDownloadContentES();
-  const win = window.open('', '_blank');
-  win.document.write(content);
-  win.document.close();
-  setTimeout(() => win.print(), 500);
+  const blob = new Blob([content], {type:'text/html;charset=utf-8'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.target = '_blank'; a.rel = 'noopener'; a.click();
+  setTimeout(() => URL.revokeObjectURL(url), 5000);
 }
 
 function getDownloadContentES() {
@@ -7511,7 +7855,7 @@ function switchExpProfTab(tab) {
 <!-- AMPEL — always on top -->
 <div class="ampel-bar">
   <h2>Mi situación hoy</h2>
-  <div class="ampel-grid">
+  <div class="ampel-grid" style="grid-template-columns:repeat(4,1fr);">
     <div class="ampel-cell">
       <div class="label"><span class="ampel-dot" id="dot-hoy"></span>Hoy</div>
       <div class="amount" id="amp-hoy">€0</div>
@@ -7523,9 +7867,14 @@ function switchExpProfTab(tab) {
       <div class="sub" id="amp-mes-sub">–</div>
     </div>
     <div class="ampel-cell">
-      <div class="label"><span class="ampel-dot" id="dot-sig"></span>Fin mes+1</div>
+      <div class="label"><span class="ampel-dot" id="dot-sig"></span>Mes+1</div>
       <div class="amount" id="amp-sig">€0</div>
       <div class="sub" id="amp-sig-sub">–</div>
+    </div>
+    <div class="ampel-cell">
+      <div class="label"><span class="ampel-dot" id="dot-sig2"></span>Mes+2</div>
+      <div class="amount" id="amp-sig2">€0</div>
+      <div class="sub" id="amp-sig2-sub">–</div>
     </div>
   </div>
 </div>
@@ -7535,14 +7884,44 @@ function switchExpProfTab(tab) {
   <button class="tab-btn active" onclick="showTab('activa')">💰 Activos</button>
   <button class="tab-btn" onclick="showTab('pasiva')">📋 Compromisos</button>
   <button class="tab-btn" onclick="showTab('subs')">📱 Suscripciones</button>
-  <button class="tab-btn" onclick="showTab('freno')">🛑 El Freno</button>
-  <button class="tab-btn" onclick="showTab('historia')">✍️ Mi Historia</button>
+  <button class="tab-btn" onclick="showTab('colchon')">🛡️ Colchón</button>
+  <button class="tab-btn" onclick="showTab('freno')">⚖︎ Análisis</button>
+  <button class="tab-btn" onclick="showTab('historia')">✍️ Historia</button>
 </div>
 
 <!-- ===== TAB: ACTIVOS ===== -->
 <div class="section active" id="tab-activa">
   <h2 class="section-title">Lo que tengo</h2>
   <p class="section-subtitle">Dinero, cuentas y bienes — aquí y en casa</p>
+
+  <!-- SITUACIÓN DE VIDA -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="card-header-left">
+        <span class="card-icon">🏠</span>
+        <div>
+          <div class="card-title">Situación de vida</div>
+          <div class="card-subtitle">Tu vivienda actual</div>
+        </div>
+      </div>
+      <span class="card-toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="item-row" style="flex-direction:column;align-items:flex-start;gap:8px;">
+        <div style="display:flex;gap:8px;flex-wrap:wrap;width:100%;">
+          <button onclick="selectVivienda(this,'habitacion')" data-tipo="habitacion" class="vivienda-btn" style="flex:1;min-width:80px;border:1px solid var(--border);border-radius:8px;padding:8px 6px;font-size:11px;cursor:pointer;background:none;color:var(--muted);">🛏 Habitación</button>
+          <button onclick="selectVivienda(this,'piso')" data-tipo="piso" class="vivienda-btn" style="flex:1;min-width:80px;border:1px solid var(--border);border-radius:8px;padding:8px 6px;font-size:11px;cursor:pointer;background:none;color:var(--muted);">🏠 Piso</button>
+          <button onclick="selectVivienda(this,'compartido')" data-tipo="compartido" class="vivienda-btn" style="flex:1;min-width:80px;border:1px solid var(--border);border-radius:8px;padding:8px 6px;font-size:11px;cursor:pointer;background:none;color:var(--muted);">👥 Compartido</button>
+          <button onclick="selectVivienda(this,'propio')" data-tipo="propio" class="vivienda-btn" style="flex:1;min-width:80px;border:1px solid var(--border);border-radius:8px;padding:8px 6px;font-size:11px;cursor:pointer;background:none;color:var(--muted);">🔑 Propio</button>
+        </div>
+        <div style="display:flex;gap:8px;width:100%;margin-top:4px;">
+          <input type="number" id="vivienda-coste" placeholder="Coste mensual €" data-cat="vivienda" style="flex:1;border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:13px;background:var(--cream);color:var(--ink);outline:none;" oninput="saveFinanzasState();recalc();">
+          <input type="text" id="vivienda-zona" placeholder="Barrio / zona" style="flex:1;border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:13px;background:var(--cream);color:var(--ink);outline:none;" oninput="saveFinanzasState();">
+        </div>
+        <div id="vivienda-nota" style="font-size:11px;color:var(--muted);line-height:1.5;display:none;"></div>
+      </div>
+    </div>
+  </div>
 
   <div class="rate-info" id="rate-info">
     🔄 Cargando tipos de cambio…
@@ -7991,19 +8370,20 @@ function switchExpProfTab(tab) {
 
 <!-- ===== TAB: EL FRENO ===== -->
 <div class="section" id="tab-freno">
-  <h2 class="section-title">El Freno Consciente</h2>
-  <p class="section-subtitle">Antes de comprar algo que no está en tu plan</p>
+  <h2 class="section-title">Análisis de Compra</h2>
+  <p class="section-subtitle">Antes de gastar lo que no está en tu plan</p>
 
-  <div class="card" style="background:linear-gradient(135deg,#8B3A1E,#6b2c15);color:white;border:none;">
+  <div class="card" style="background:linear-gradient(135deg,#1a1208,#2a1f10);color:white;border:none;">
     <div style="padding:20px">
-      <div style="font-size:36px;margin-bottom:8px">🛑</div>
-      <div style="font-family:'Playfair Display',serif;font-size:18px;margin-bottom:8px;font-style:italic">"El migrante consciente no renuncia a los placeres. Aprende a elegir cuándo."</div>
-      <div style="font-size:12px;opacity:0.7">Capítulo 9 — Manual del Migrante Consciente</div>
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(200,146,42,0.8);margin-bottom:12px;">El principio</div>
+      <div style="font-family:'Playfair Display',serif;font-size:17px;margin-bottom:10px;font-style:italic;line-height:1.5;">"El migrante consciente no renuncia a los placeres. Aprende a elegir cuándo."</div>
+      <div style="font-size:12px;color:rgba(255,255,255,0.5);margin-bottom:14px;">Capítulo 9 — Manual del Migrante Consciente</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.75);line-height:1.7;">Cada compra impulsiva es una decisión tomada por tu yo del presente a costa de tu yo del futuro. Este análisis tarda 60 segundos. Tu futuro te lo agradece.</div>
     </div>
   </div>
 
-  <button class="freno-btn" onclick="openFreno()">
-    🛑 Quiero comprar algo — necesito el freno
+  <button class="freno-btn" onclick="openFreno()" style="background:var(--gold);color:var(--ink);border:none;border-radius:14px;padding:16px 20px;width:100%;font-size:15px;font-weight:700;cursor:pointer;margin:12px 0;display:flex;align-items:center;justify-content:center;gap:10px;">
+    ⚖︎ Iniciar análisis de compra
   </button>
 
   <div class="card">
@@ -8017,10 +8397,21 @@ function switchExpProfTab(tab) {
     </div>
   </div>
 
-  <!-- Mi Colchón -->
-  <div class="colchon-box">
-    <h3>🛡️ Mi Colchón</h3>
-    <p>Tu colchón es tu libertad. Un mes de alquiler como mínimo. Sin eso, cualquier imprevisto te controla.</p>
+</div>
+
+<!-- ===== TAB: COLCHÓN ===== -->
+<div class="section" id="tab-colchon">
+  <h2 class="section-title">Mi Colchón</h2>
+  <p class="section-subtitle">Tu seguridad financiera básica</p>
+  <div class="card" style="background:linear-gradient(135deg,#1a1208,#2a1f10);color:white;border:none;">
+    <div style="padding:18px;">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(200,146,42,0.8);margin-bottom:8px;">Por qué importa</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.8);line-height:1.7;">Tu colchón es tu libertad. Sin al menos un mes de gastos cubiertos, cualquier imprevisto te pone en modo supervivencia. El colchón no es lujo — es la base desde la que puedes tomar decisiones con calma.</div>
+    </div>
+  </div>
+  <div class="colchon-box" style="margin-top:0;">
+    <h3>🛡️ Mi Colchón de Seguridad</h3>
+    <p>Mínimo recomendado: 1 mes de gastos fijos. Objetivo ideal: 3 meses.</p>
     <div class="colchon-progress-wrap">
       <div class="colchon-progress-bar" id="colchon-bar" style="width:0%"></div>
     </div>
@@ -8095,8 +8486,8 @@ function switchExpProfTab(tab) {
 <!-- FRENO OVERLAY -->
 <div class="freno-overlay" id="freno-overlay">
   <div class="freno-card">
-    <h2>🛑 El Freno</h2>
-    <p>Antes de gastar, tres preguntas honestas.</p>
+    <h2>🛑 Análisis de Compra</h2>
+    <p>Antes de comprar algo que no está en tu presupuesto, responde estas preguntas. No es un juicio — es un freno consciente. A veces el impulso necesita 30 segundos de claridad.</p>
     <input type="text" class="freno-item-name" id="freno-item" placeholder="¿Qué quieres comprar? (ej: iPhone 16…)">
 
     <div class="freno-q">
@@ -8135,10 +8526,6 @@ function switchExpProfTab(tab) {
     <div id="freno-close-row" style="margin-top:16px">
       <button class="btn-close" style="width:100%;padding:12px;border-radius:10px;border:none;font-family:'DM Sans',sans-serif;cursor:pointer" onclick="closeFreno()">Cancelar</button>
     </div>
-  </div>
-</div>
-
-
   </div>
 </div>
 
