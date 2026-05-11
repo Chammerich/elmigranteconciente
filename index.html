@@ -1731,7 +1731,11 @@
 <body>
 
 <!-- SPLASH -->
-
+<div id="splash">
+  <div class="splash-seal">⚖︎</div>
+  <div class="splash-title">El Migrante Consciente</div>
+  <div class="splash-sub">Tu guía · Tu contrato · Tu diario</div>
+</div>
 
 <!-- NAV -->
 <!-- TOP BAR -->
@@ -3269,7 +3273,7 @@ let CHAPTERS = getCHAPTERS();
 let WISDOMS  = getWISDOMS();
 
 // ─── STATE ──────────────────────────────────────────────────
-const APP_VERSION = 46;
+const APP_VERSION = 47;
 let state = JSON.parse(localStorage.getItem('mc_state') || '{}');
 if (state.appVersion !== APP_VERSION) {
   state.appVersion = APP_VERSION;
