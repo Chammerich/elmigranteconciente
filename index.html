@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>El Migrante Consciente v12.41</title>
-  <meta name="version" content="v12.41">
+<title>El Migrante Consciente v12.42</title>
+  <meta name="version" content="v12.42">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 
 <!-- PWA Meta Tags -->
@@ -1747,7 +1747,7 @@
 <!-- TOP BAR -->
 <div class="top-bar" id="top-bar">
   <div class="top-bar-main">
-    <button class="top-logo" onclick="showHome()">⚖︎ El Migrante Consciente <span id="app-version-badge" style="font-size:9px;background:rgba(200,146,42,0.2);color:var(--gold);font-family:'DM Sans',sans-serif;font-weight:600;letter-spacing:0.5px;padding:2px 6px;border-radius:4px;margin-left:4px;">v12.41</span></button>
+    <button class="top-logo" onclick="showHome()">⚖︎ El Migrante Consciente <span id="app-version-badge" style="font-size:9px;background:rgba(200,146,42,0.2);color:var(--gold);font-family:'DM Sans',sans-serif;font-weight:600;letter-spacing:0.5px;padding:2px 6px;border-radius:4px;margin-left:4px;">v12.42</span></button>
     <div style="display:flex;align-items:center;gap:10px;">
       <div class="lang-switcher">
         <button class="lang-btn active" onclick="setLang('es',this)">ES</button>
@@ -1806,7 +1806,7 @@
     <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(200,146,42,0.6);margin-bottom:10px;">🔒 Privacidad</div>
     <p style="font-size:11px;color:rgba(255,255,255,0.45);line-height:1.6;margin-bottom:6px;">Todos tus datos — finanzas, diario, reflexiones, compromisos — se guardan <strong style="color:rgba(255,255,255,0.65);">exclusivamente en este dispositivo</strong>. Nada se envía a ningún servidor.</p>
     <p style="font-size:11px;color:rgba(255,255,255,0.35);line-height:1.6;">El Migrante Consciente no recopila, no vende y no tiene acceso a tu información personal.</p>
-    <div style="font-size:10px;color:rgba(255,255,255,0.2);margin-top:10px;text-align:center;">v12.41</div>
+    <div style="font-size:10px;color:rgba(255,255,255,0.2);margin-top:10px;text-align:center;">v12.42</div>
   </div>
 </div>
 
@@ -2530,7 +2530,7 @@ let CHAPTERS = getCHAPTERS();
 let WISDOMS  = getWISDOMS();
 
 // ─── STATE ──────────────────────────────────────────────────
-const APP_VERSION = 43;
+const APP_VERSION = 44;
 let state = JSON.parse(localStorage.getItem('mc_state') || '{}');
 if (state.appVersion !== APP_VERSION) {
   state.appVersion = APP_VERSION;
@@ -4093,6 +4093,7 @@ function closeWelcome() {
   if (overlay) overlay.classList.remove('open');
   state.welcomeSeen = true;
   saveState();
+  showScreen('home');
 }
 
 function renderWelcomeNota() {
