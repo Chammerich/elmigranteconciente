@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>El Migrante Consciente v12.42</title>
-  <meta name="version" content="v12.42">
+<title>El Migrante Consciente v12.43</title>
+  <meta name="version" content="v12.43">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 
 <!-- PWA Meta Tags -->
@@ -1301,7 +1301,7 @@
   /* AMPEL — always visible at top */
 #screen-finanzas   .ampel-bar {
     background: var(--ink);
-    padding: 16px 20px;
+    padding: 10px 14px;
     color: var(--cream);
   }
 #screen-finanzas   .ampel-bar h2 {
@@ -1319,12 +1319,12 @@
   }
 #screen-finanzas   .ampel-cell {
     background: rgba(255,255,255,0.06);
-    border-radius: 10px;
-    padding: 12px 10px;
+    border-radius: 8px;
+    padding: 8px 4px;
     text-align: center;
   }
 #screen-finanzas   .ampel-cell .label { font-size: 10px; opacity: 0.5; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
-#screen-finanzas   .ampel-cell .amount { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; }
+#screen-finanzas   .ampel-cell .amount { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 700; }
 #screen-finanzas   .ampel-cell .sub { font-size: 10px; opacity: 0.4; margin-top: 2px; }
 #screen-finanzas   .ampel-dot {
     width: 8px; height: 8px; border-radius: 50%;
@@ -1747,7 +1747,7 @@
 <!-- TOP BAR -->
 <div class="top-bar" id="top-bar">
   <div class="top-bar-main">
-    <button class="top-logo" onclick="showHome()">⚖︎ El Migrante Consciente <span id="app-version-badge" style="font-size:9px;background:rgba(200,146,42,0.2);color:var(--gold);font-family:'DM Sans',sans-serif;font-weight:600;letter-spacing:0.5px;padding:2px 6px;border-radius:4px;margin-left:4px;">v12.42</span></button>
+    <button class="top-logo" onclick="showHome()">⚖︎ El Migrante Consciente <span id="app-version-badge" style="font-size:9px;background:rgba(200,146,42,0.2);color:var(--gold);font-family:'DM Sans',sans-serif;font-weight:600;letter-spacing:0.5px;padding:2px 6px;border-radius:4px;margin-left:4px;">v12.43</span></button>
     <div style="display:flex;align-items:center;gap:10px;">
       <div class="lang-switcher">
         <button class="lang-btn active" onclick="setLang('es',this)">ES</button>
@@ -1806,7 +1806,7 @@
     <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(200,146,42,0.6);margin-bottom:10px;">🔒 Privacidad</div>
     <p style="font-size:11px;color:rgba(255,255,255,0.45);line-height:1.6;margin-bottom:6px;">Todos tus datos — finanzas, diario, reflexiones, compromisos — se guardan <strong style="color:rgba(255,255,255,0.65);">exclusivamente en este dispositivo</strong>. Nada se envía a ningún servidor.</p>
     <p style="font-size:11px;color:rgba(255,255,255,0.35);line-height:1.6;">El Migrante Consciente no recopila, no vende y no tiene acceso a tu información personal.</p>
-    <div style="font-size:10px;color:rgba(255,255,255,0.2);margin-top:10px;text-align:center;">v12.42</div>
+    <div style="font-size:10px;color:rgba(255,255,255,0.2);margin-top:10px;text-align:center;">v12.43</div>
   </div>
 </div>
 
@@ -2530,7 +2530,7 @@ let CHAPTERS = getCHAPTERS();
 let WISDOMS  = getWISDOMS();
 
 // ─── STATE ──────────────────────────────────────────────────
-const APP_VERSION = 44;
+const APP_VERSION = 45;
 let state = JSON.parse(localStorage.getItem('mc_state') || '{}');
 if (state.appVersion !== APP_VERSION) {
   state.appVersion = APP_VERSION;
@@ -7841,15 +7841,6 @@ function switchExpProfTab(tab) {
 <div class="screen" id="screen-finanzas">
   <button class="back-btn" onclick="showHome()">← <span class="back-label">Atrás</span></button>
   <div style="padding:0 0 100px;">
-<!-- HEADER -->
-<div class="header">
-  <div class="header-seal">⚖︎</div>
-  <div>
-    <h1>Finanzas Conscientes</h1>
-    <p>El Migrante Consciente · Tu realidad económica</p>
-  </div>
-</div>
-
 <!-- AMPEL — always on top -->
 <div class="ampel-bar">
   <h2>Mi situación hoy</h2>
