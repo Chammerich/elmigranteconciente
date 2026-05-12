@@ -67,6 +67,53 @@
         .catch(err => console.warn('SW registration failed:', err));
     });
   }
+
+  // PWA install prompt — capture deferred prompt for our custom button
+  let deferredInstallPrompt = null;
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredInstallPrompt = e;
+  });
+  window.addEventListener('appinstalled', () => {
+    deferredInstallPrompt = null;
+    const btn = document.getElementById('install-app-btn');
+    if (btn) btn.style.display = 'none';
+  });
+
+  // Hide install button if app is already running in standalone mode
+  function hideInstallButtonIfStandalone() {
+    const standalone = window.matchMedia('(display-mode: standalone)').matches ||
+                       window.navigator.standalone === true;
+    if (standalone) {
+      const btn = document.getElementById('install-app-btn');
+      if (btn) btn.style.display = 'none';
+    }
+  }
+  document.addEventListener('DOMContentLoaded', hideInstallButtonIfStandalone);
+
+  window.installApp = async function() {
+    // If browser supports auto-install — use it
+    if (deferredInstallPrompt) {
+      deferredInstallPrompt.prompt();
+      try {
+        const { outcome } = await deferredInstallPrompt.userChoice;
+        if (outcome === 'accepted') {
+          const btn = document.getElementById('install-app-btn');
+          if (btn) btn.style.display = 'none';
+        }
+      } catch(err) { /* user dismissed */ }
+      deferredInstallPrompt = null;
+      return;
+    }
+    // Otherwise: show manual instructions modal
+    const ua = navigator.userAgent;
+    const isIOS = /iPad|iPhone|iPod/.test(ua);
+    const isAndroid = /Android/.test(ua);
+    document.getElementById('install-tip-ios').style.display = isIOS ? 'block' : 'none';
+    document.getElementById('install-tip-android').style.display = (isAndroid && !isIOS) ? 'block' : 'none';
+    document.getElementById('install-tip-desktop').style.display = (!isIOS && !isAndroid) ? 'block' : 'none';
+    document.getElementById('modal-install').classList.add('open');
+  };
 </script>
 <style>
   :root {
@@ -1843,7 +1890,7 @@
 <!-- TOP BAR -->
 <div class="top-bar" id="top-bar">
   <div class="top-bar-main">
-    <button class="top-logo" onclick="showHome()">⚖︎ El Migrante Consciente <span id="app-version-badge" style="font-size:9px;background:rgba(200,146,42,0.2);color:var(--gold);font-family:'DM Sans',sans-serif;font-weight:600;letter-spacing:0.5px;padding:2px 6px;border-radius:4px;margin-left:4px;">v12.73</span></button>
+    <button class="top-logo" onclick="showHome()">⚖︎ El Migrante Consciente <span id="app-version-badge" style="font-size:9px;background:rgba(200,146,42,0.2);color:var(--gold);font-family:'DM Sans',sans-serif;font-weight:600;letter-spacing:0.5px;padding:2px 6px;border-radius:4px;margin-left:4px;">v12.75</span></button>
     <div style="display:flex;align-items:center;gap:10px;">
       <div class="lang-switcher">
         <button class="lang-btn active" onclick="setLang('es',this)">ES</button>
@@ -1885,6 +1932,9 @@
     <a href="mailto:chammerich@outlook.es" style="display:flex;align-items:center;justify-content:center;gap:6px;color:var(--gold);text-decoration:none;font-size:12px;font-family:'DM Sans',sans-serif;border:1px solid rgba(200,146,42,0.35);border-radius:20px;padding:8px 16px;">
       ✉️ Contactar al autor
     </a>
+    <button id="install-app-btn" onclick="installApp()" style="display:flex;align-items:center;justify-content:center;gap:6px;width:100%;margin-top:8px;background:transparent;color:var(--gold);font-size:12px;font-family:'DM Sans',sans-serif;border:1px solid rgba(200,146,42,0.35);border-radius:20px;padding:8px 16px;cursor:pointer;">
+      📲 Instalar como app
+    </button>
   </div>
   <div style="padding:14px 16px 18px;border-top:1px solid rgba(200,146,42,0.15);">
     <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(200,146,42,0.6);margin-bottom:8px;">🔒 Privacidad</div>
@@ -2381,6 +2431,43 @@
   </div>
 </div>
 
+<div class="modal-overlay" id="modal-install" onclick="if(event.target===this)closeModal('modal-install')">
+  <div class="modal-box">
+    <div class="modal-handle"></div>
+    <div class="modal-title">📲 Instalar como app</div>
+    <div class="modal-body">
+      <div id="install-tip-ios" style="display:none;">
+        <p style="font-size:14px;line-height:1.7;margin-bottom:12px;">En iPhone o iPad, abre esta página en <strong>Safari</strong> (no funciona en Chrome u otros navegadores).</p>
+        <ol style="font-size:13px;line-height:1.7;padding-left:18px;margin:0;">
+          <li>Pulsa el icono <strong>Compartir</strong> <span style="display:inline-block;border:1px solid var(--border);border-radius:4px;padding:1px 5px;font-family:monospace;">⎙</span> en la barra inferior.</li>
+          <li>Desplázate hacia abajo y elige <strong>"Añadir a pantalla de inicio"</strong>.</li>
+          <li>Confirma con <strong>"Añadir"</strong>. La app aparecerá como un icono en tu pantalla.</li>
+        </ol>
+        <p style="font-size:11px;color:var(--fog);margin-top:14px;line-height:1.5;">Apple no permite la instalación automática — siempre es manual a través de Safari.</p>
+      </div>
+      <div id="install-tip-android" style="display:none;">
+        <p style="font-size:14px;line-height:1.7;margin-bottom:12px;">Tu navegador no ha ofrecido la instalación automática en este momento. Posibles motivos: la app ya está instalada, o Chrome aún no la considera "suficientemente usada".</p>
+        <p style="font-size:13px;line-height:1.7;margin-bottom:8px;"><strong>Instalación manual:</strong></p>
+        <ol style="font-size:13px;line-height:1.7;padding-left:18px;margin:0;">
+          <li>Abre el menú <strong>⋮</strong> (tres puntos arriba a la derecha en Chrome).</li>
+          <li>Elige <strong>"Instalar app"</strong> o <strong>"Añadir a pantalla de inicio"</strong>.</li>
+          <li>Confirma. La app aparecerá como un icono nativo en tu pantalla de inicio.</li>
+        </ol>
+        <p style="font-size:11px;color:var(--fog);margin-top:14px;line-height:1.5;">Si ya está instalada: revisa tus apps — probablemente está como "Migrante" o "El Migrante Consciente".</p>
+      </div>
+      <div id="install-tip-desktop" style="display:none;">
+        <p style="font-size:14px;line-height:1.7;margin-bottom:12px;">En ordenador, abre el menú <strong>⋮</strong> de tu navegador (Chrome o Edge):</p>
+        <ol style="font-size:13px;line-height:1.7;padding-left:18px;margin:0;">
+          <li>Busca la opción <strong>"Instalar El Migrante Consciente..."</strong> o <strong>"Apps → Instalar esta página como app"</strong>.</li>
+          <li>Confirma. La app se abrirá en su propia ventana, sin barra del navegador.</li>
+        </ol>
+        <p style="font-size:11px;color:var(--fog);margin-top:14px;line-height:1.5;">Firefox y Safari no admiten instalación de apps web en ordenador.</p>
+      </div>
+    </div>
+    <button class="modal-close" onclick="closeModal('modal-install')">Cerrar</button>
+  </div>
+</div>
+
 <div class="modal-overlay" id="modal-wisdom" onclick="if(event.target===this)closeModal('modal-wisdom')">
   <div class="modal-box">
     <div class="modal-handle"></div>
@@ -2636,7 +2723,7 @@ let CHAPTERS = getCHAPTERS();
 let WISDOMS  = getWISDOMS();
 
 // ─── STATE ──────────────────────────────────────────────────
-const APP_VERSION = 73;
+const APP_VERSION = 75;
 let state = JSON.parse(localStorage.getItem('mc_state') || '{}');
 if (state.appVersion !== APP_VERSION) {
   state.appVersion = APP_VERSION;
