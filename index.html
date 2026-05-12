@@ -275,10 +275,10 @@
   /* ── GUÍA (chapters) ── */
   .guia-hero {
     background: linear-gradient(160deg, var(--sage) 0%, #2d4028 100%);
-    padding: 24px 20px 20px;
+    padding: 14px 20px 12px;
   }
-  .guia-hero h2 { font-family: 'Playfair Display', serif; color: white; font-size: 20px; }
-  .guia-hero p { color: rgba(255,255,255,0.65); font-size: 12px; margin-top: 4px; }
+  .guia-hero h2 { font-family: 'Playfair Display', serif; color: white; font-size: 17px; margin: 0; line-height: 1.2; }
+  .guia-hero p { color: rgba(255,255,255,0.65); font-size: 11px; margin: 3px 0 0; line-height: 1.4; }
 
   .chapter-card {
     margin: 0 16px 10px;
@@ -322,10 +322,10 @@
 
   /* ── DIARIO ── */
   .diario-hero {
-    background: var(--ink); padding: 24px 20px 20px;
+    background: var(--ink); padding: 14px 20px 12px;
   }
-  .diario-hero h2 { font-family: 'Playfair Display', serif; color: var(--gold); font-size: 20px; }
-  .diario-hero p { color: var(--fog); font-size: 12px; margin-top: 4px; }
+  .diario-hero h2 { font-family: 'Playfair Display', serif; color: var(--gold); font-size: 17px; margin: 0; line-height: 1.2; }
+  .diario-hero p { color: var(--fog); font-size: 11px; margin: 3px 0 0; line-height: 1.4; }
 
   .diario-input-card {
     margin: 16px 16px 0;
@@ -387,7 +387,7 @@
   /* ── TRÁMITES ── */
   .tramites-hero {
     background: linear-gradient(150deg, #1a2a4a 0%, #0d1a2e 100%);
-    padding: 24px 20px 20px;
+    padding: 14px 20px 12px;
     position: relative; overflow: hidden;
   }
   .tramites-hero::before {
@@ -399,8 +399,8 @@
     font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
     color: var(--gold); margin-bottom: 8px; font-weight: 500;
   }
-  .tramites-hero h2 { font-family: 'Playfair Display', serif; color: white; font-size: 20px; margin-bottom: 4px; }
-  .tramites-hero p { color: rgba(255,255,255,0.55); font-size: 12px; margin-bottom: 12px; }
+  .tramites-hero h2 { font-family: 'Playfair Display', serif; color: white; font-size: 17px; margin: 0; line-height: 1.2; }
+  .tramites-hero p { color: rgba(255,255,255,0.55); font-size: 11px; margin: 3px 0 8px; line-height: 1.4; }
   .tramites-aviso {
     background: rgba(200,146,42,0.12); border: 1px solid rgba(200,146,42,0.3);
     border-radius: 10px; padding: 10px 12px; font-size: 11px;
@@ -916,6 +916,58 @@
   .chap-read-btn:hover { background: var(--sage); color: white; border-color: var(--sage); }
 
   /* ── TOP BAR ── */
+
+  /* ── ACTION-BAR + SCREEN-HERO (Paket Design) ── */
+  .screen-actionbar {
+    display: flex; gap: 8px; padding: 8px 12px;
+    border-bottom: 1px solid var(--border);
+    background: var(--cream);
+  }
+  .action-back {
+    flex: 1 1 25%; min-width: 0;
+    padding: 10px 12px;
+    background: none; border: 1px solid var(--border); border-radius: 8px;
+    font-family: 'DM Sans', sans-serif; font-size: 13px;
+    color: var(--fog); cursor: pointer;
+    display: flex; align-items: center; justify-content: center; gap: 4px;
+    white-space: nowrap;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .action-back:hover { color: var(--gold); border-color: var(--gold); }
+  .action-emerg {
+    flex: 3 1 75%; min-width: 0;
+    padding: 10px 12px;
+    background: var(--sage); border: none; border-radius: 8px;
+    font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500;
+    color: white; cursor: pointer;
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+    letter-spacing: 0.3px;
+    transition: background 0.2s;
+  }
+  .action-emerg:hover { background: #3a5233; }
+
+  .screen-hero {
+    background: var(--ink);
+    padding: 14px 20px 12px;
+  }
+  .screen-hero-tag {
+    display: inline-block;
+    font-size: 10px; letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(200,146,42,0.85);
+    margin-bottom: 3px; font-weight: 600;
+  }
+  .screen-hero h2 {
+    font-family: 'Playfair Display', serif;
+    color: var(--gold);
+    font-size: 17px; margin: 0; line-height: 1.2;
+  }
+  .screen-hero p {
+    color: rgba(255,255,255,0.55);
+    font-size: 11px; margin: 3px 0 0;
+    line-height: 1.4;
+  }
+
   .top-bar { position:fixed; top:0; left:0; right:0; z-index:200; display:flex; flex-direction:column; }
   .top-bar-main { height:52px; background:var(--ink); display:flex; align-items:center; justify-content:space-between; padding:0 16px; border-bottom:1px solid rgba(200,146,42,0.25); }
   .top-logo { font-family:'Playfair Display',serif; font-size:15px; color:var(--gold); cursor:pointer; border:none; background:none; padding:0; }
@@ -1072,15 +1124,15 @@
   /* ── MANIFIESTO ─────────────────────────────────────────── */
   .manifiesto-hero {
     background: linear-gradient(135deg, var(--ink) 0%, #2d1f0a 100%);
-    padding: 28px 20px 20px; text-align: center; position: relative; overflow: hidden;
+    padding: 14px 20px 12px; position: relative; overflow: hidden;
   }
   .manifiesto-hero::before {
     content: ''; position: absolute; inset: 0;
     background: radial-gradient(ellipse at 50% 0%, rgba(200,146,42,0.15) 0%, transparent 70%);
   }
-  .manifiesto-hero-seal { font-size: 28px; margin-bottom: 8px; position: relative; }
-  .manifiesto-hero h2 { font-family: 'Playfair Display', serif; color: white; font-size: 20px; margin-bottom: 4px; position: relative; }
-  .manifiesto-hero p { color: rgba(255,255,255,0.55); font-size: 12px; position: relative; }
+  .manifiesto-hero-seal { display: none; }
+  .manifiesto-hero h2 { font-family: 'Playfair Display', serif; color: white; font-size: 17px; margin: 0; position: relative; line-height: 1.2; }
+  .manifiesto-hero p { color: rgba(255,255,255,0.55); font-size: 11px; position: relative; margin: 3px 0 0; line-height: 1.4; }
 
   .manifiesto-intro {
     margin: 16px 16px 0; background: var(--card-bg);
@@ -1767,7 +1819,7 @@
 <!-- TOP BAR -->
 <div class="top-bar" id="top-bar">
   <div class="top-bar-main">
-    <button class="top-logo" onclick="showHome()">⚖︎ El Migrante Consciente <span id="app-version-badge" style="font-size:9px;background:rgba(200,146,42,0.2);color:var(--gold);font-family:'DM Sans',sans-serif;font-weight:600;letter-spacing:0.5px;padding:2px 6px;border-radius:4px;margin-left:4px;">v12.68</span></button>
+    <button class="top-logo" onclick="showHome()">⚖︎ El Migrante Consciente <span id="app-version-badge" style="font-size:9px;background:rgba(200,146,42,0.2);color:var(--gold);font-family:'DM Sans',sans-serif;font-weight:600;letter-spacing:0.5px;padding:2px 6px;border-radius:4px;margin-left:4px;">v12.71</span></button>
     <div style="display:flex;align-items:center;gap:10px;">
       <div class="lang-switcher">
         <button class="lang-btn active" onclick="setLang('es',this)">ES</button>
@@ -1840,12 +1892,14 @@
 <!-- HOME SCREEN -->
 <div class="screen active" id="screen-home">
   <div class="home-screen">
+    <button class="home-tile" onclick="navTo('prologo')"><div class="home-tile-icon">📜</div><div class="home-tile-body"><div class="home-tile-title" id="tile-title-prologo">Prólogo</div><div class="home-tile-sub" id="tile-sub-prologo">El inicio del viaje. Por dónde empieza todo.</div></div><div class="home-tile-arrow">›</div></button>
     <button class="home-tile gold-tile" onclick="navTo('midia')" style="position:relative;"><span class="notif-dot" id="dot-home-midia"></span><span id="tarea-badge-home" onclick="event.stopPropagation();toggleTareaOverlay();" style="display:none;position:absolute;top:10px;right:38px;width:22px;height:22px;border-radius:50%;color:#fff;font-size:11px;font-weight:700;align-items:center;justify-content:center;cursor:pointer;z-index:2;box-shadow:0 2px 6px rgba(0,0,0,0.2);">!</span><div class="home-tile-icon">☀️</div><div class="home-tile-body"><div class="home-tile-title" id="tile-title-midia">Mi Día</div><div class="home-tile-sub" id="tile-sub-midia">Impulso diario · Reflexión · Diario privado</div></div><div class="home-tile-arrow">›</div></button>
     <button class="home-tile" onclick="navTo('manifiesto')"><span class="notif-dot" id="dot-home-manifiesto"></span><div class="home-tile-icon" style="color:var(--gold);">⚖︎</div><div class="home-tile-body"><div class="home-tile-title" id="tile-title-manifiesto">Manifiesto & Contrato</div><div class="home-tile-sub" id="tile-sub-manifiesto">Mi nueva realidad · 14 compromisos · Tu firma</div></div><div class="home-tile-arrow">›</div></button>
     <button class="home-tile" onclick="navTo('guia')"><span class="notif-dot" id="dot-home-guia"></span><div class="home-tile-icon">📖</div><div class="home-tile-body"><div class="home-tile-title" id="tile-title-guia">La Guía</div><div class="home-tile-sub" id="tile-sub-guia">15 capítulos del manual de migración consciente</div></div><div class="home-tile-arrow">›</div></button>
     <button class="home-tile" onclick="navTo('finanzas')"><span class="notif-dot" id="dot-home-finanzas"></span><div class="home-tile-icon">💰</div><div class="home-tile-body"><div class="home-tile-title" id="tile-title-finanzas">Mis Finanzas</div><div class="home-tile-sub" id="tile-sub-finanzas">Activos · Compromisos · Ampel · El Freno</div></div><div class="home-tile-arrow">›</div></button>
     <button class="home-tile" onclick="navTo('tramites')"><span class="notif-dot" id="dot-home-tramites"></span><div class="home-tile-icon">🗂️</div><div class="home-tile-body"><div class="home-tile-title" id="tile-title-tramites">Migración & Trámites</div><div class="home-tile-sub" id="tile-sub-tramites">Guía legal 2026 · Visados · Arraigo · LGBTIQ+</div></div><div class="home-tile-arrow">›</div></button>
     <button class="home-tile" onclick="navTo('expertos')"><span class="notif-dot" id="dot-home-expertos"></span><div class="home-tile-icon">🔬</div><div class="home-tile-body"><div class="home-tile-title" id="tile-title-expertos">Tu mejor Versión</div><div class="home-tile-sub" id="tile-sub-expertos">Sobre el autor · Inconsciente y Trauma · Autoanálisis · Liderazgo</div></div><div class="home-tile-arrow">›</div></button>
+    <button class="home-tile" onclick="navTo('epilogo')"><div class="home-tile-icon">🌅</div><div class="home-tile-body"><div class="home-tile-title" id="tile-title-epilogo">Epílogo</div><div class="home-tile-sub" id="tile-sub-epilogo">Cuando todo se calma. La llegada consciente.</div></div><div class="home-tile-arrow">›</div></button>
   </div>
   <div style="padding:0 16px 16px;">
     <button onclick="navTo('contacto')" style="width:100%;background:none;border:1px solid var(--border);border-radius:12px;padding:12px 16px;display:flex;align-items:center;gap:12px;cursor:pointer;text-align:left;">
@@ -1860,7 +1914,8 @@
 
 <!-- SCREEN: MI DÍA (HOY + DIARIO) -->
 <div class="screen" id="screen-midia">
-  <button class="back-btn" onclick="showHome()">← Atrás</button>
+  <div class="screen-actionbar"><button class="action-back" onclick="showHome()">← <span class="back-label">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()">🌿 No me siento bien</button></div>
+  <div class="screen-hero"><div class="screen-hero-tag">Hoy</div><h2>Mi Día</h2></div>
   <div style="display:flex;border-bottom:1px solid var(--border);margin:0 16px 0;">
     
   </div>
@@ -1870,19 +1925,21 @@
 
 <!-- SCREEN: PROLOG -->
 <div class="screen" id="screen-prologo">
-  <button class="back-btn" onclick="navTo('expertos')">← Atrás</button>
+  <div class="screen-actionbar"><button class="action-back" onclick="navTo('expertos')">← <span class="back-label">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()">🌿 No me siento bien</button></div>
+  <div class="screen-hero"><div class="screen-hero-tag">Anexo · Texto del libro</div><h2>Prólogo</h2><p>El inicio del viaje</p></div>
   <div id="prologo-content"></div>
 </div>
 
 <!-- SCREEN: EPILOG -->
 <div class="screen" id="screen-epilogo">
-  <button class="back-btn" onclick="navTo('expertos')">← Atrás</button>
+  <div class="screen-actionbar"><button class="action-back" onclick="navTo('expertos')">← <span class="back-label">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()">🌿 No me siento bien</button></div>
+  <div class="screen-hero"><div class="screen-hero-tag">Anexo · Texto del libro</div><h2>Epílogo</h2><p>La llegada consciente</p></div>
   <div id="epilogo-content"></div>
 </div>
 
 <!-- SCREEN: TU MEJOR VERSIÓN HUB -->
 <div class="screen" id="screen-expertos">
-  <button class="back-btn" onclick="showHome()">← Atrás</button>
+  <div class="screen-actionbar"><button class="action-back" onclick="showHome()">← <span class="back-label">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()">🌿 No me siento bien</button></div>
   <div class="home-screen">
     <div style="padding:4px 4px 0;"><div style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--fog);" id="expertos-section-label">Tu mejor Versión</div></div>
     <button class="home-tile" onclick="navTo('exp-autor')"><div class="home-tile-icon">👤</div><div class="home-tile-body"><div class="home-tile-title">Sobre el autor</div><div class="home-tile-sub">Reflexiones personales y filosóficas del autor</div></div><div class="home-tile-arrow">›</div></button>
@@ -1896,10 +1953,10 @@
     <button class="home-tile" onclick="navTo('epilogo')"><div class="home-tile-icon">🌅</div><div class="home-tile-body"><div class="home-tile-title">Epílogo</div><div class="home-tile-sub">Cuando todo se calma. La llegada consciente.</div></div><div class="home-tile-arrow">›</div></button>
   </div>
 </div>
-<div class="screen" id="screen-exp-autor"><button class="back-btn" onclick="navTo('expertos')">← Atrás</button><div id="exp-autor-content"></div></div>
-<div class="screen" id="screen-exp-analisis"><button class="back-btn" onclick="navTo('expertos')">← Atrás</button><div id="exp-analisis-content"></div></div>
+<div class="screen" id="screen-exp-autor"><div class="screen-actionbar"><button class="action-back" onclick="navTo('expertos')">← <span class="back-label">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()">🌿 No me siento bien</button></div><div class="screen-hero"><div class="screen-hero-tag">Tu mejor Versión</div><h2>Sobre el autor</h2></div><div id="exp-autor-content"></div></div>
+<div class="screen" id="screen-exp-analisis"><div class="screen-actionbar"><button class="action-back" onclick="navTo('expertos')">← <span class="back-label">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()">🌿 No me siento bien</button></div><div class="screen-hero"><div class="screen-hero-tag">Tu mejor Versión</div><h2>Analizarte a ti mismo</h2></div><div id="exp-analisis-content"></div></div>
 
-<div class="screen" id="screen-exp-comunicacion"><button class="back-btn" onclick="navTo('expertos')">← Atrás</button><div id="exp-comunicacion-content"></div></div>
+<div class="screen" id="screen-exp-comunicacion"><div class="screen-actionbar"><button class="action-back" onclick="navTo('expertos')">← <span class="back-label">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()">🌿 No me siento bien</button></div><div class="screen-hero"><div class="screen-hero-tag">Tu mejor Versión</div><h2>Comunicación y liderazgo</h2></div><div id="exp-comunicacion-content"></div></div>
 
 <!-- SCREEN: HOY -->
 <div class="screen" id="screen-hoy">
@@ -1960,7 +2017,7 @@
 
 <!-- SCREEN: MANIFIESTO -->
 <div class="screen" id="screen-manifiesto">
-  <button class="back-btn" onclick="showHome()">← Atrás</button>
+  <div class="screen-actionbar"><button class="action-back" onclick="showHome()">← <span class="back-label">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()">🌿 No me siento bien</button></div>
   <div id="mani-section-manifiesto">
     <div class="manifiesto-hero">
       <div class="manifiesto-hero-seal">📜</div>
@@ -1998,7 +2055,7 @@
 
 <!-- SCREEN: GUÍA -->
 <div class="screen" id="screen-guia">
-  <button class="back-btn" onclick="showHome()">← Atrás</button>
+  <div class="screen-actionbar"><button class="action-back" onclick="showHome()">← <span class="back-label">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()">🌿 No me siento bien</button></div>
   <div class="guia-hero">
     <h2>Manual del Migrante Consciente</h2>
     <p>15 capítulos · De la experiencia y la ciencia</p>
@@ -2037,7 +2094,7 @@
 
 <!-- SCREEN: TRÁMITES -->
 <div class="screen" id="screen-tramites">
-  <button class="back-btn" onclick="showHome()">← Atrás</button>
+  <div class="screen-actionbar"><button class="action-back" onclick="showHome()">← <span class="back-label">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()">🌿 No me siento bien</button></div>
   <div class="tramites-hero">
     <div class="tramites-hero-tag">España 2026</div>
     <h2>Guía Legal para Migrantes</h2>
@@ -2559,7 +2616,7 @@ let CHAPTERS = getCHAPTERS();
 let WISDOMS  = getWISDOMS();
 
 // ─── STATE ──────────────────────────────────────────────────
-const APP_VERSION = 70;
+const APP_VERSION = 71;
 let state = JSON.parse(localStorage.getItem('mc_state') || '{}');
 if (state.appVersion !== APP_VERSION) {
   state.appVersion = APP_VERSION;
@@ -2595,6 +2652,9 @@ function showScreen(id) {
     document.documentElement.scrollTop = 0;
     document.body.scrollTop = 0;
   }
+  // Emergency banner visible only on home; action-bar takes over on other screens
+  const eb = document.querySelector('.emerg-banner');
+  if (eb) eb.style.display = (id === 'home') ? '' : 'none';
 }
 
 function showHome() {
@@ -4499,6 +4559,8 @@ function applyUI() {
   
   // Update home tile labels
   const tileMap = {
+    'tile-title-prologo':    u('tilePrologo')    || 'Prólogo',
+    'tile-sub-prologo':      u('tileSubPrologo')  || 'El inicio del viaje. Por dónde empieza todo.',
     'tile-title-midia':      u('tileMidia')       || 'Mi Día',
     'tile-sub-midia':        u('tileSubMidia')    || 'Impulso diario · Reflexión · Diario privado',
     'tile-title-manifiesto': u('tileManifiesto')  || 'Manifiesto & Contrato',
@@ -4512,6 +4574,8 @@ function applyUI() {
     'tile-title-expertos':   u('tileExpertos')    || 'Tu mejor Versión',
     'tile-sub-expertos':     u('tileSubExpertos') || 'Sobre el autor · Inconsciente y Trauma · Autoanálisis · Liderazgo',
     'sidebar-expertos-label': u('tileExpertos')   || 'Tu mejor Versión',
+    'tile-title-epilogo':    u('tileEpilogo')     || 'Epílogo',
+    'tile-sub-epilogo':      u('tileSubEpilogo')  || 'Cuando todo se calma. La llegada consciente.',
   };
   Object.entries(tileMap).forEach(([id, text]) => {
     const el = document.getElementById(id);
@@ -6556,7 +6620,7 @@ function updateAmpel(liquid, ingresos, pasiva) {
   }
   // Colchón
   const colchonEl = document.getElementById('amp-colchon');
-  if (colchonEl) colchonEl.textContent = fmtEur(_colchon || 0);
+  if (colchonEl) colchonEl.textContent = fmtEur(colchon.actual || 0);
 }
 
 function setDot(id, val) {
@@ -7863,6 +7927,14 @@ function generarContratoPDF() {
     doc.setFontSize(7); doc.setFont('helvetica', 'normal');
     doc.text('Observaré · Recordaré · Cumpliré', W/2, y, {align:'center'});
 
+    // Add page numbers to every page
+    const totalPages = doc.internal.getNumberOfPages();
+    for (let p = 1; p <= totalPages; p++) {
+      doc.setPage(p);
+      doc.setFontSize(8); doc.setFont('helvetica', 'normal');
+      doc.setTextColor(...fog);
+      doc.text('Página ' + p + ' / ' + totalPages, W/2, H - 8, {align:'center'});
+    }
     doc.save('Contrato_' + nombre.replace(/\s+/g,'_') + '.pdf');
   }
 
@@ -7996,7 +8068,7 @@ function analizarCompra() {
 
 
 <div class="screen" id="screen-finanzas">
-  <button class="back-btn" onclick="showHome()">← Atrás</button>
+  <div class="screen-actionbar"><button class="action-back" onclick="showHome()">← <span class="back-label">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()">🌿 No me siento bien</button></div>
   <div style="padding:0 0 100px;">
 <!-- HEADER -->
 <div class="header">
@@ -8735,7 +8807,7 @@ function analizarCompra() {
 
 <!-- SCREEN: EXP-NUEVO -->
 <div class="screen" id="screen-exp-nuevo">
-  <button class="back-btn" onclick="navTo('expertos')">← Atrás</button>
+  <div class="screen-actionbar"><button class="action-back" onclick="navTo('expertos')">← <span class="back-label">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()">🌿 No me siento bien</button></div>
 
   <!-- Haupt-Buttons: Resiliencia / Trauma -->
   <div style="display:flex;gap:8px;margin:0 16px 16px;flex-wrap:wrap;">
