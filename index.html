@@ -71,7 +71,10 @@
     margin: 0 auto;
     position: relative;
     overflow-x: hidden;
+    padding-top: 52px;
+    transition: padding-top 0.2s ease;
   }
+  body.is-home { padding-top: 88px; }
 
   /* ── SPLASH ── */
   #splash {
@@ -1022,7 +1025,7 @@
   .welcome-btn:hover { background:var(--gold-light); }
   .back-btn { display:flex; align-items:center; gap:8px; padding:14px 16px 14px; border:none; background:none; color:var(--fog); font-size:13px; font-family:'DM Sans',sans-serif; cursor:pointer; border-bottom:1px solid var(--border); margin-bottom:4px; }
   .back-btn:hover { color:var(--gold); }
-  .screen { display:none; padding:106px 0 60px; animation:screenIn 0.3s ease; }
+  .screen { display:none; padding:0 0 60px; animation:screenIn 0.3s ease; }
   .screen.active { display:block; }
   @keyframes screenIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; } }
 
@@ -1819,7 +1822,7 @@
 <!-- TOP BAR -->
 <div class="top-bar" id="top-bar">
   <div class="top-bar-main">
-    <button class="top-logo" onclick="showHome()">⚖︎ El Migrante Consciente <span id="app-version-badge" style="font-size:9px;background:rgba(200,146,42,0.2);color:var(--gold);font-family:'DM Sans',sans-serif;font-weight:600;letter-spacing:0.5px;padding:2px 6px;border-radius:4px;margin-left:4px;">v12.71</span></button>
+    <button class="top-logo" onclick="showHome()">⚖︎ El Migrante Consciente <span id="app-version-badge" style="font-size:9px;background:rgba(200,146,42,0.2);color:var(--gold);font-family:'DM Sans',sans-serif;font-weight:600;letter-spacing:0.5px;padding:2px 6px;border-radius:4px;margin-left:4px;">v12.72</span></button>
     <div style="display:flex;align-items:center;gap:10px;">
       <div class="lang-switcher">
         <button class="lang-btn active" onclick="setLang('es',this)">ES</button>
@@ -1854,23 +1857,19 @@
   <button class="sidebar-item" onclick="navTo('contrato');closeSidebar()"><span class="notif-dot" id="dot-sidebar-contrato"></span><span class="sidebar-item-icon" style="color:var(--gold);">⚖︎</span><span class="sidebar-item-label">Mi Contrato</span></button>
   <button class="sidebar-item" onclick="navTo('finanzas');closeSidebar()"><span class="sidebar-item-icon">💰</span><span class="sidebar-item-label">Mis Finanzas</span></button>
   <button class="sidebar-item" onclick="navTo('tramites');closeSidebar()"><span class="notif-dot" id="dot-sidebar-tramites"></span><span class="sidebar-item-icon">🗂️</span><span class="sidebar-item-label" id="sidebar-tramites-label">Migración & Trámites</span></button>
-  <div style="margin-top:auto;padding:20px 16px 12px;border-top:1px solid rgba(200,146,42,0.15);">
-    <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(200,146,42,0.6);margin-bottom:10px;">🔒 Privacidad</div>
-    <p style="font-size:11px;color:rgba(255,255,255,0.45);line-height:1.6;margin-bottom:6px;">Todos tus datos — finanzas, diario, reflexiones, compromisos — se guardan <strong style="color:rgba(255,255,255,0.65);">exclusivamente en este dispositivo</strong>. Nada se envía a ningún servidor.</p>
-    <p style="font-size:11px;color:rgba(255,255,255,0.35);line-height:1.6;">El Migrante Consciente no recopila, no vende y no tiene acceso a tu información personal.</p>
-  </div>
   <div class="sidebar-divider"></div>
   <button class="sidebar-item" onclick="navTo('expertos');closeSidebar()"><span class="notif-dot" id="dot-sidebar-expertos"></span><span class="sidebar-item-icon">🔬</span><span class="sidebar-item-label" id="sidebar-expertos-label">Tu mejor Versión</span></button>
-  <button class="sidebar-sub-item" onclick="navTo('exp-autor');closeSidebar()"><span class="sidebar-item-icon" style="font-size:13px;opacity:0.5;">›</span><span class="sidebar-sub-item-label">Sobre el autor</span></button>
-  <button class="sidebar-sub-item" onclick="navTo('exp-analisis');closeSidebar()"><span class="sidebar-item-icon" style="font-size:13px;opacity:0.5;">›</span><span class="sidebar-sub-item-label">Analizarte a ti mismo</span></button>
-  
-  <button class="sidebar-sub-item" onclick="navTo('exp-comunicacion');closeSidebar()"><span class="sidebar-item-icon" style="font-size:13px;opacity:0.5;">›</span><span class="sidebar-sub-item-label">Comunicación y liderazgo</span></button>
   <div class="sidebar-divider"></div>
   <div style="padding:14px 16px;border-top:1px solid rgba(255,255,255,0.08);">
     <a href="mailto:chammerich@outlook.es" style="display:flex;align-items:center;justify-content:center;gap:6px;color:var(--gold);text-decoration:none;font-size:12px;font-family:'DM Sans',sans-serif;border:1px solid rgba(200,146,42,0.35);border-radius:20px;padding:8px 16px;">
       ✉️ Contactar al autor
     </a>
-    <div style="padding:10px 0 2px;text-align:center;font-size:11px;color:var(--fog);">© Christian Hammerich · Barcelona 2026</div>
+  </div>
+  <div style="padding:14px 16px 18px;border-top:1px solid rgba(200,146,42,0.15);">
+    <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(200,146,42,0.6);margin-bottom:8px;">🔒 Privacidad</div>
+    <p style="font-size:11px;color:rgba(255,255,255,0.45);line-height:1.6;margin-bottom:6px;">Todos tus datos — finanzas, diario, reflexiones, compromisos — se guardan <strong style="color:rgba(255,255,255,0.65);">exclusivamente en este dispositivo</strong>. Nada se envía a ningún servidor.</p>
+    <p style="font-size:11px;color:rgba(255,255,255,0.35);line-height:1.6;margin-bottom:10px;">El Migrante Consciente no recopila, no vende y no tiene acceso a tu información personal.</p>
+    <div style="text-align:center;font-size:11px;color:var(--fog);">© Christian Hammerich · Barcelona 2026</div>
   </div>
 </div>
 
@@ -1914,7 +1913,7 @@
 
 <!-- SCREEN: MI DÍA (HOY + DIARIO) -->
 <div class="screen" id="screen-midia">
-  <div class="screen-actionbar"><button class="action-back" onclick="showHome()">← <span class="back-label">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()">🌿 No me siento bien</button></div>
+  <div class="screen-actionbar"><button class="action-back" onclick="goBack()">← <span class="back-label">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()">🌿 No me siento bien</button></div>
   <div class="screen-hero"><div class="screen-hero-tag">Hoy</div><h2>Mi Día</h2></div>
   <div style="display:flex;border-bottom:1px solid var(--border);margin:0 16px 0;">
     
@@ -1925,23 +1924,23 @@
 
 <!-- SCREEN: PROLOG -->
 <div class="screen" id="screen-prologo">
-  <div class="screen-actionbar"><button class="action-back" onclick="navTo('expertos')">← <span class="back-label">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()">🌿 No me siento bien</button></div>
+  <div class="screen-actionbar"><button class="action-back" onclick="goBack()">← <span class="back-label">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()">🌿 No me siento bien</button></div>
   <div class="screen-hero"><div class="screen-hero-tag">Anexo · Texto del libro</div><h2>Prólogo</h2><p>El inicio del viaje</p></div>
   <div id="prologo-content"></div>
 </div>
 
 <!-- SCREEN: EPILOG -->
 <div class="screen" id="screen-epilogo">
-  <div class="screen-actionbar"><button class="action-back" onclick="navTo('expertos')">← <span class="back-label">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()">🌿 No me siento bien</button></div>
+  <div class="screen-actionbar"><button class="action-back" onclick="goBack()">← <span class="back-label">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()">🌿 No me siento bien</button></div>
   <div class="screen-hero"><div class="screen-hero-tag">Anexo · Texto del libro</div><h2>Epílogo</h2><p>La llegada consciente</p></div>
   <div id="epilogo-content"></div>
 </div>
 
 <!-- SCREEN: TU MEJOR VERSIÓN HUB -->
 <div class="screen" id="screen-expertos">
-  <div class="screen-actionbar"><button class="action-back" onclick="showHome()">← <span class="back-label">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()">🌿 No me siento bien</button></div>
+  <div class="screen-actionbar"><button class="action-back" onclick="goBack()">← <span class="back-label">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()">🌿 No me siento bien</button></div>
+  <div class="screen-hero"><h2>Tu mejor Versión</h2><p>Aquí se vuelve más complejo, pero vale la pena. Convertirte en tu mejor versión no es magia — es trabajo duro. Avanza en pasos pequeños — pero avanza.</p></div>
   <div class="home-screen">
-    <div style="padding:4px 4px 0;"><div style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--fog);" id="expertos-section-label">Tu mejor Versión</div></div>
     <button class="home-tile" onclick="navTo('exp-autor')"><div class="home-tile-icon">👤</div><div class="home-tile-body"><div class="home-tile-title">Sobre el autor</div><div class="home-tile-sub">Reflexiones personales y filosóficas del autor</div></div><div class="home-tile-arrow">›</div></button>
     <button class="home-tile gold-tile" onclick="navTo('exp-nuevo')" style="border:2px solid var(--gold);"><div class="home-tile-icon">🧠</div><div class="home-tile-body"><div class="home-tile-title">Resiliencia & Trauma</div><div class="home-tile-sub">Textos completos · Bloques · Glosario · Descarga</div></div><div class="home-tile-arrow">›</div></button>
     <button class="home-tile" onclick="navTo('exp-analisis')"><div class="home-tile-icon">🪞</div><div class="home-tile-body"><div class="home-tile-title">Analizarte a ti mismo</div><div class="home-tile-sub">El autoanálisis como fundamento del desarrollo individual.</div></div><div class="home-tile-arrow">›</div></button>
@@ -1953,10 +1952,10 @@
     <button class="home-tile" onclick="navTo('epilogo')"><div class="home-tile-icon">🌅</div><div class="home-tile-body"><div class="home-tile-title">Epílogo</div><div class="home-tile-sub">Cuando todo se calma. La llegada consciente.</div></div><div class="home-tile-arrow">›</div></button>
   </div>
 </div>
-<div class="screen" id="screen-exp-autor"><div class="screen-actionbar"><button class="action-back" onclick="navTo('expertos')">← <span class="back-label">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()">🌿 No me siento bien</button></div><div class="screen-hero"><div class="screen-hero-tag">Tu mejor Versión</div><h2>Sobre el autor</h2></div><div id="exp-autor-content"></div></div>
-<div class="screen" id="screen-exp-analisis"><div class="screen-actionbar"><button class="action-back" onclick="navTo('expertos')">← <span class="back-label">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()">🌿 No me siento bien</button></div><div class="screen-hero"><div class="screen-hero-tag">Tu mejor Versión</div><h2>Analizarte a ti mismo</h2></div><div id="exp-analisis-content"></div></div>
+<div class="screen" id="screen-exp-autor"><div class="screen-actionbar"><button class="action-back" onclick="goBack()">← <span class="back-label">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()">🌿 No me siento bien</button></div><div class="screen-hero"><div class="screen-hero-tag">Tu mejor Versión</div><h2>Sobre el autor</h2></div><div id="exp-autor-content"></div></div>
+<div class="screen" id="screen-exp-analisis"><div class="screen-actionbar"><button class="action-back" onclick="goBack()">← <span class="back-label">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()">🌿 No me siento bien</button></div><div class="screen-hero"><div class="screen-hero-tag">Tu mejor Versión</div><h2>Analizarte a ti mismo</h2></div><div id="exp-analisis-content"></div></div>
 
-<div class="screen" id="screen-exp-comunicacion"><div class="screen-actionbar"><button class="action-back" onclick="navTo('expertos')">← <span class="back-label">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()">🌿 No me siento bien</button></div><div class="screen-hero"><div class="screen-hero-tag">Tu mejor Versión</div><h2>Comunicación y liderazgo</h2></div><div id="exp-comunicacion-content"></div></div>
+<div class="screen" id="screen-exp-comunicacion"><div class="screen-actionbar"><button class="action-back" onclick="goBack()">← <span class="back-label">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()">🌿 No me siento bien</button></div><div class="screen-hero"><div class="screen-hero-tag">Tu mejor Versión</div><h2>Comunicación y liderazgo</h2></div><div id="exp-comunicacion-content"></div></div>
 
 <!-- SCREEN: HOY -->
 <div class="screen" id="screen-hoy">
@@ -2017,7 +2016,7 @@
 
 <!-- SCREEN: MANIFIESTO -->
 <div class="screen" id="screen-manifiesto">
-  <div class="screen-actionbar"><button class="action-back" onclick="showHome()">← <span class="back-label">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()">🌿 No me siento bien</button></div>
+  <div class="screen-actionbar"><button class="action-back" onclick="goBack()">← <span class="back-label">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()">🌿 No me siento bien</button></div>
   <div id="mani-section-manifiesto">
     <div class="manifiesto-hero">
       <div class="manifiesto-hero-seal">📜</div>
@@ -2055,7 +2054,7 @@
 
 <!-- SCREEN: GUÍA -->
 <div class="screen" id="screen-guia">
-  <div class="screen-actionbar"><button class="action-back" onclick="showHome()">← <span class="back-label">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()">🌿 No me siento bien</button></div>
+  <div class="screen-actionbar"><button class="action-back" onclick="goBack()">← <span class="back-label">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()">🌿 No me siento bien</button></div>
   <div class="guia-hero">
     <h2>Manual del Migrante Consciente</h2>
     <p>15 capítulos · De la experiencia y la ciencia</p>
@@ -2094,7 +2093,7 @@
 
 <!-- SCREEN: TRÁMITES -->
 <div class="screen" id="screen-tramites">
-  <div class="screen-actionbar"><button class="action-back" onclick="showHome()">← <span class="back-label">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()">🌿 No me siento bien</button></div>
+  <div class="screen-actionbar"><button class="action-back" onclick="goBack()">← <span class="back-label">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()">🌿 No me siento bien</button></div>
   <div class="tramites-hero">
     <div class="tramites-hero-tag">España 2026</div>
     <h2>Guía Legal para Migrantes</h2>
@@ -2616,7 +2615,7 @@ let CHAPTERS = getCHAPTERS();
 let WISDOMS  = getWISDOMS();
 
 // ─── STATE ──────────────────────────────────────────────────
-const APP_VERSION = 71;
+const APP_VERSION = 72;
 let state = JSON.parse(localStorage.getItem('mc_state') || '{}');
 if (state.appVersion !== APP_VERSION) {
   state.appVersion = APP_VERSION;
@@ -2644,17 +2643,40 @@ function saveState() { localStorage.setItem('mc_state', JSON.stringify(state)); 
 
 // ─── INIT ────────────────────────────────────────────────────
 // ── Navigation ──────────────────────────────────────────────────────────────
+// Screen history for goBack()
+let screenHistory = [];
+
 function showScreen(id) {
   document.querySelectorAll('.screen').forEach(sc => sc.classList.remove('active'));
   const el = document.getElementById('screen-' + id);
   if (el) {
     el.classList.add('active');
+    // Push to history (skip if same as last)
+    if (screenHistory.length === 0 || screenHistory[screenHistory.length - 1] !== id) {
+      screenHistory.push(id);
+    }
     document.documentElement.scrollTop = 0;
     document.body.scrollTop = 0;
   }
+  // Body class for padding (home has emerg-banner = taller)
+  document.body.classList.toggle('is-home', id === 'home');
   // Emergency banner visible only on home; action-bar takes over on other screens
   const eb = document.querySelector('.emerg-banner');
   if (eb) eb.style.display = (id === 'home') ? '' : 'none';
+}
+
+function goBack() {
+  if (screenHistory.length < 2) {
+    showHome();
+    return;
+  }
+  screenHistory.pop();              // remove current
+  const target = screenHistory.pop(); // get previous (showScreen will re-push)
+  if (target === 'home') {
+    showHome();
+  } else {
+    navTo(target);
+  }
 }
 
 function showHome() {
@@ -3386,6 +3408,7 @@ function updateRing() {
 function initContrato() {
   renderContratoManifiesto();
   const container = document.getElementById('puntos-container');
+  if (!container) return;
   container.innerHTML = PUNTOS.map(p => {
     const isDone = state.puntosDone[p.num];
     const accionesHtml = p.acciones.map((a, i) => {
@@ -4574,6 +4597,7 @@ function applyUI() {
     'tile-title-expertos':   u('tileExpertos')    || 'Tu mejor Versión',
     'tile-sub-expertos':     u('tileSubExpertos') || 'Sobre el autor · Inconsciente y Trauma · Autoanálisis · Liderazgo',
     'sidebar-expertos-label': u('tileExpertos')   || 'Tu mejor Versión',
+    // expertos-section-label removed; hero is now hardcoded
     'tile-title-epilogo':    u('tileEpilogo')     || 'Epílogo',
     'tile-sub-epilogo':      u('tileSubEpilogo')  || 'Cuando todo se calma. La llegada consciente.',
   };
@@ -6849,6 +6873,7 @@ function frenoDecision(dec) {
 function renderDeseos() {
   const deseos = JSON.parse(localStorage.getItem('deseos')||'[]');
   const list = document.getElementById('deseos-list');
+  if (!list) return;
   if(!deseos.length) {
     list.innerHTML = '<span style="color:var(--muted);font-size:13px">Nada por ahora. Cuando frenes un impulso, aparece aquí.</span>';
     return;
@@ -8068,7 +8093,7 @@ function analizarCompra() {
 
 
 <div class="screen" id="screen-finanzas">
-  <div class="screen-actionbar"><button class="action-back" onclick="showHome()">← <span class="back-label">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()">🌿 No me siento bien</button></div>
+  <div class="screen-actionbar"><button class="action-back" onclick="goBack()">← <span class="back-label">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()">🌿 No me siento bien</button></div>
   <div style="padding:0 0 100px;">
 <!-- HEADER -->
 <div class="header">
@@ -8807,7 +8832,7 @@ function analizarCompra() {
 
 <!-- SCREEN: EXP-NUEVO -->
 <div class="screen" id="screen-exp-nuevo">
-  <div class="screen-actionbar"><button class="action-back" onclick="navTo('expertos')">← <span class="back-label">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()">🌿 No me siento bien</button></div>
+  <div class="screen-actionbar"><button class="action-back" onclick="goBack()">← <span class="back-label">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()">🌿 No me siento bien</button></div>
 
   <!-- Haupt-Buttons: Resiliencia / Trauma -->
   <div style="display:flex;gap:8px;margin:0 16px 16px;flex-wrap:wrap;">
