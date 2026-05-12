@@ -25,7 +25,8 @@
     name: "El Migrante Consciente",
     short_name: "Migrante",
     description: "Tu guía · Tu contrato · Tu diario",
-    start_url: "/",
+    start_url: window.location.origin + window.location.pathname,
+    scope: window.location.origin + window.location.pathname,
     display: "standalone",
     background_color: "#f5f0e8",
     theme_color: "#c8922a",
@@ -405,6 +406,27 @@
     border-radius: 10px; padding: 10px 12px; font-size: 11px;
     color: rgba(255,255,255,0.75); line-height: 1.5;
   }
+  .tramites-legal-btn {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    width: 100%; margin-top: 10px;
+    background: var(--gold); color: var(--ink);
+    border: none; border-radius: 10px;
+    padding: 12px 14px;
+    font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600;
+    cursor: pointer; letter-spacing: 0.3px;
+    transition: background 0.2s ease;
+  }
+  .tramites-legal-btn:hover { background: var(--gold-light); }
+  .tramites-legal-btn:active { transform: translateY(1px); }
+  .legal-aid-item {
+    display: block; padding: 12px 14px; margin-bottom: 8px;
+    background: white; border: 1px solid var(--border); border-radius: 10px;
+    text-decoration: none; color: var(--ink);
+  }
+  .legal-aid-item strong { display: block; font-size: 14px; margin-bottom: 3px; color: var(--ink); }
+  .legal-aid-item .lai-desc { display: block; font-size: 12px; color: #555; line-height: 1.5; margin-bottom: 4px; }
+  .legal-aid-item .lai-scope { display: inline-block; font-size: 10px; padding: 2px 7px; border-radius: 10px; background: rgba(200,146,42,0.15); color: #6b4400; font-weight: 600; letter-spacing: 0.3px; }
+  .legal-aid-section-title { font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--fog); margin: 12px 0 8px; font-weight: 600; }
 
   .tramites-pills {
     display: flex; flex-wrap: wrap; gap: 6px; padding: 14px 16px 8px;
@@ -1745,7 +1767,7 @@
 <!-- TOP BAR -->
 <div class="top-bar" id="top-bar">
   <div class="top-bar-main">
-    <button class="top-logo" onclick="showHome()">⚖︎ El Migrante Consciente <span id="app-version-badge" style="font-size:9px;background:rgba(200,146,42,0.2);color:var(--gold);font-family:'DM Sans',sans-serif;font-weight:600;letter-spacing:0.5px;padding:2px 6px;border-radius:4px;margin-left:4px;">v12.65</span></button>
+    <button class="top-logo" onclick="showHome()">⚖︎ El Migrante Consciente <span id="app-version-badge" style="font-size:9px;background:rgba(200,146,42,0.2);color:var(--gold);font-family:'DM Sans',sans-serif;font-weight:600;letter-spacing:0.5px;padding:2px 6px;border-radius:4px;margin-left:4px;">v12.68</span></button>
     <div style="display:flex;align-items:center;gap:10px;">
       <div class="lang-switcher">
         <button class="lang-btn active" onclick="setLang('es',this)">ES</button>
@@ -1774,21 +1796,19 @@
   <button class="sidebar-home-btn" onclick="showHome();closeSidebar()">🏠 Menú principal</button>
   <div style="height:8px;"></div>
   <div class="sidebar-divider"></div>
-  <button class="sidebar-item" onclick="navTo('prologo');closeSidebar()"><span class="sidebar-item-icon">📜</span><span class="sidebar-item-label">Prólogo</span></button>
   <button class="sidebar-item" onclick="navTo('midia');closeSidebar()"><span class="notif-dot" id="dot-sidebar-midia"></span><span class="sidebar-item-icon">☀️</span><span class="sidebar-item-label">Mi Día</span></button>
   <button class="sidebar-item" onclick="navTo('guia');closeSidebar()"><span class="notif-dot" id="dot-sidebar-guia"></span><span class="sidebar-item-icon">📖</span><span class="sidebar-item-label">El Guide</span></button>
   <button class="sidebar-item" onclick="navTo('manifiesto');closeSidebar()"><span class="notif-dot" id="dot-sidebar-manifiesto"></span><span class="sidebar-item-icon">📜</span><span class="sidebar-item-label">Manifiesto &amp; Contrato</span></button>
   <button class="sidebar-item" onclick="navTo('contrato');closeSidebar()"><span class="notif-dot" id="dot-sidebar-contrato"></span><span class="sidebar-item-icon" style="color:var(--gold);">⚖︎</span><span class="sidebar-item-label">Mi Contrato</span></button>
   <button class="sidebar-item" onclick="navTo('finanzas');closeSidebar()"><span class="sidebar-item-icon">💰</span><span class="sidebar-item-label">Mis Finanzas</span></button>
   <button class="sidebar-item" onclick="navTo('tramites');closeSidebar()"><span class="notif-dot" id="dot-sidebar-tramites"></span><span class="sidebar-item-icon">🗂️</span><span class="sidebar-item-label" id="sidebar-tramites-label">Migración & Trámites</span></button>
-  <button class="sidebar-item" onclick="navTo('epilogo');closeSidebar()"><span class="sidebar-item-icon">🌅</span><span class="sidebar-item-label">Epílogo</span></button>
   <div style="margin-top:auto;padding:20px 16px 12px;border-top:1px solid rgba(200,146,42,0.15);">
     <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(200,146,42,0.6);margin-bottom:10px;">🔒 Privacidad</div>
     <p style="font-size:11px;color:rgba(255,255,255,0.45);line-height:1.6;margin-bottom:6px;">Todos tus datos — finanzas, diario, reflexiones, compromisos — se guardan <strong style="color:rgba(255,255,255,0.65);">exclusivamente en este dispositivo</strong>. Nada se envía a ningún servidor.</p>
     <p style="font-size:11px;color:rgba(255,255,255,0.35);line-height:1.6;">El Migrante Consciente no recopila, no vende y no tiene acceso a tu información personal.</p>
   </div>
   <div class="sidebar-divider"></div>
-  <button class="sidebar-item" onclick="navTo('expertos');closeSidebar()"><span class="notif-dot" id="dot-sidebar-expertos"></span><span class="sidebar-item-icon">🔬</span><span class="sidebar-item-label">Para Expertos</span></button>
+  <button class="sidebar-item" onclick="navTo('expertos');closeSidebar()"><span class="notif-dot" id="dot-sidebar-expertos"></span><span class="sidebar-item-icon">🔬</span><span class="sidebar-item-label" id="sidebar-expertos-label">Tu mejor Versión</span></button>
   <button class="sidebar-sub-item" onclick="navTo('exp-autor');closeSidebar()"><span class="sidebar-item-icon" style="font-size:13px;opacity:0.5;">›</span><span class="sidebar-sub-item-label">Sobre el autor</span></button>
   <button class="sidebar-sub-item" onclick="navTo('exp-analisis');closeSidebar()"><span class="sidebar-item-icon" style="font-size:13px;opacity:0.5;">›</span><span class="sidebar-sub-item-label">Analizarte a ti mismo</span></button>
   
@@ -1820,14 +1840,12 @@
 <!-- HOME SCREEN -->
 <div class="screen active" id="screen-home">
   <div class="home-screen">
-    <button class="home-tile" onclick="navTo('prologo')"><div class="home-tile-icon">📜</div><div class="home-tile-body"><div class="home-tile-title" id="tile-title-prologo">Prólogo</div><div class="home-tile-sub" id="tile-sub-prologo">El inicio del viaje. Por dónde empieza todo.</div></div><div class="home-tile-arrow">›</div></button>
     <button class="home-tile gold-tile" onclick="navTo('midia')" style="position:relative;"><span class="notif-dot" id="dot-home-midia"></span><span id="tarea-badge-home" onclick="event.stopPropagation();toggleTareaOverlay();" style="display:none;position:absolute;top:10px;right:38px;width:22px;height:22px;border-radius:50%;color:#fff;font-size:11px;font-weight:700;align-items:center;justify-content:center;cursor:pointer;z-index:2;box-shadow:0 2px 6px rgba(0,0,0,0.2);">!</span><div class="home-tile-icon">☀️</div><div class="home-tile-body"><div class="home-tile-title" id="tile-title-midia">Mi Día</div><div class="home-tile-sub" id="tile-sub-midia">Impulso diario · Reflexión · Diario privado</div></div><div class="home-tile-arrow">›</div></button>
     <button class="home-tile" onclick="navTo('manifiesto')"><span class="notif-dot" id="dot-home-manifiesto"></span><div class="home-tile-icon" style="color:var(--gold);">⚖︎</div><div class="home-tile-body"><div class="home-tile-title" id="tile-title-manifiesto">Manifiesto & Contrato</div><div class="home-tile-sub" id="tile-sub-manifiesto">Mi nueva realidad · 14 compromisos · Tu firma</div></div><div class="home-tile-arrow">›</div></button>
     <button class="home-tile" onclick="navTo('guia')"><span class="notif-dot" id="dot-home-guia"></span><div class="home-tile-icon">📖</div><div class="home-tile-body"><div class="home-tile-title" id="tile-title-guia">La Guía</div><div class="home-tile-sub" id="tile-sub-guia">15 capítulos del manual de migración consciente</div></div><div class="home-tile-arrow">›</div></button>
     <button class="home-tile" onclick="navTo('finanzas')"><span class="notif-dot" id="dot-home-finanzas"></span><div class="home-tile-icon">💰</div><div class="home-tile-body"><div class="home-tile-title" id="tile-title-finanzas">Mis Finanzas</div><div class="home-tile-sub" id="tile-sub-finanzas">Activos · Compromisos · Ampel · El Freno</div></div><div class="home-tile-arrow">›</div></button>
     <button class="home-tile" onclick="navTo('tramites')"><span class="notif-dot" id="dot-home-tramites"></span><div class="home-tile-icon">🗂️</div><div class="home-tile-body"><div class="home-tile-title" id="tile-title-tramites">Migración & Trámites</div><div class="home-tile-sub" id="tile-sub-tramites">Guía legal 2026 · Visados · Arraigo · LGBTIQ+</div></div><div class="home-tile-arrow">›</div></button>
-    <button class="home-tile" onclick="navTo('expertos')"><span class="notif-dot" id="dot-home-expertos"></span><div class="home-tile-icon">🔬</div><div class="home-tile-body"><div class="home-tile-title" id="tile-title-expertos">Para Expertos</div><div class="home-tile-sub" id="tile-sub-expertos">Más sobre el autor · Inconsciente · Liderazgo</div></div><div class="home-tile-arrow">›</div></button>
-    <button class="home-tile" onclick="navTo('epilogo')"><div class="home-tile-icon">🌅</div><div class="home-tile-body"><div class="home-tile-title" id="tile-title-epilogo">Epílogo</div><div class="home-tile-sub" id="tile-sub-epilogo">Cuando todo se calma. La llegada consciente.</div></div><div class="home-tile-arrow">›</div></button>
+    <button class="home-tile" onclick="navTo('expertos')"><span class="notif-dot" id="dot-home-expertos"></span><div class="home-tile-icon">🔬</div><div class="home-tile-body"><div class="home-tile-title" id="tile-title-expertos">Tu mejor Versión</div><div class="home-tile-sub" id="tile-sub-expertos">Sobre el autor · Inconsciente y Trauma · Autoanálisis · Liderazgo</div></div><div class="home-tile-arrow">›</div></button>
   </div>
   <div style="padding:0 16px 16px;">
     <button onclick="navTo('contacto')" style="width:100%;background:none;border:1px solid var(--border);border-radius:12px;padding:12px 16px;display:flex;align-items:center;gap:12px;cursor:pointer;text-align:left;">
@@ -1852,26 +1870,30 @@
 
 <!-- SCREEN: PROLOG -->
 <div class="screen" id="screen-prologo">
-  <button class="back-btn" onclick="showHome()">← Atrás</button>
+  <button class="back-btn" onclick="navTo('expertos')">← Atrás</button>
   <div id="prologo-content"></div>
 </div>
 
 <!-- SCREEN: EPILOG -->
 <div class="screen" id="screen-epilogo">
-  <button class="back-btn" onclick="showHome()">← Atrás</button>
+  <button class="back-btn" onclick="navTo('expertos')">← Atrás</button>
   <div id="epilogo-content"></div>
 </div>
 
-<!-- SCREEN: EXPERTOS HUB -->
+<!-- SCREEN: TU MEJOR VERSIÓN HUB -->
 <div class="screen" id="screen-expertos">
   <button class="back-btn" onclick="showHome()">← Atrás</button>
   <div class="home-screen">
-    <div style="padding:4px 4px 0;"><div style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--fog);">Para Expertos</div></div>
-    <button class="home-tile gold-tile" onclick="navTo('exp-nuevo')" style="border:2px solid var(--gold);"><div class="home-tile-icon">🧠</div><div class="home-tile-body"><div class="home-tile-title">Resiliencia & Trauma</div><div class="home-tile-sub">Textos completos · Bloques · Glosario · Descarga</div></div><div class="home-tile-arrow">›</div></button>
+    <div style="padding:4px 4px 0;"><div style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--fog);" id="expertos-section-label">Tu mejor Versión</div></div>
     <button class="home-tile" onclick="navTo('exp-autor')"><div class="home-tile-icon">👤</div><div class="home-tile-body"><div class="home-tile-title">Sobre el autor</div><div class="home-tile-sub">Reflexiones personales y filosóficas del autor</div></div><div class="home-tile-arrow">›</div></button>
+    <button class="home-tile gold-tile" onclick="navTo('exp-nuevo')" style="border:2px solid var(--gold);"><div class="home-tile-icon">🧠</div><div class="home-tile-body"><div class="home-tile-title">Resiliencia & Trauma</div><div class="home-tile-sub">Textos completos · Bloques · Glosario · Descarga</div></div><div class="home-tile-arrow">›</div></button>
     <button class="home-tile" onclick="navTo('exp-analisis')"><div class="home-tile-icon">🪞</div><div class="home-tile-body"><div class="home-tile-title">Analizarte a ti mismo</div><div class="home-tile-sub">El autoanálisis como fundamento del desarrollo individual.</div></div><div class="home-tile-arrow">›</div></button>
-
     <button class="home-tile" onclick="navTo('exp-comunicacion')"><div class="home-tile-icon">💬</div><div class="home-tile-body"><div class="home-tile-title">Comunicación y liderazgo</div><div class="home-tile-sub">Como jefe de tu propia vida o en el trabajo</div></div><div class="home-tile-arrow">›</div></button>
+
+    <!-- ANEXO: Prólogo & Epílogo — always available -->
+    <div style="padding:14px 4px 0;"><div style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--fog);">Anexo · Textos del libro</div></div>
+    <button class="home-tile" onclick="navTo('prologo')"><div class="home-tile-icon">📜</div><div class="home-tile-body"><div class="home-tile-title">Prólogo</div><div class="home-tile-sub">El inicio del viaje. Por dónde empieza todo.</div></div><div class="home-tile-arrow">›</div></button>
+    <button class="home-tile" onclick="navTo('epilogo')"><div class="home-tile-icon">🌅</div><div class="home-tile-body"><div class="home-tile-title">Epílogo</div><div class="home-tile-sub">Cuando todo se calma. La llegada consciente.</div></div><div class="home-tile-arrow">›</div></button>
   </div>
 </div>
 <div class="screen" id="screen-exp-autor"><button class="back-btn" onclick="navTo('expertos')">← Atrás</button><div id="exp-autor-content"></div></div>
@@ -2023,6 +2045,7 @@
     <div class="tramites-aviso">
       ⚖︎ Esta guía describe las vías legales disponibles. Las leyes cambian — consulta siempre a un abogado de extranjería.
     </div>
+    <button class="tramites-legal-btn" onclick="openModal('modal-legal-aid')">🛡️ Buscar consulta jurídica gratuita</button>
   </div>
 
   <!-- Quick Nav Pills -->
@@ -2215,6 +2238,72 @@
 <!-- tab-bar removed v7 -->
 
 <!-- MODAL -->
+<div class="modal-overlay" id="modal-legal-aid" onclick="if(event.target===this)closeModal('modal-legal-aid')">
+  <div class="modal-box">
+    <div class="modal-handle"></div>
+    <div class="modal-title">Consulta jurídica gratuita</div>
+    <div class="modal-body">
+      <p style="margin-bottom:14px;font-size:13px;line-height:1.6;">Servicios de asistencia legal gratuita o de bajo coste para migrantes en España. Antes de pagar a un gestor o abogado, agota estas vías oficiales.</p>
+
+      <div class="legal-aid-section-title">Servicios oficiales</div>
+      <a class="legal-aid-item" href="https://www.abogacia.es/servicios/ciudadanos/servicios-de-orientacion-juridica/" target="_blank" rel="noopener">
+        <strong>Servicio de Orientación Jurídica (SOJ)</strong>
+        <span class="lai-desc">Asesoramiento legal gratuito en cada Colegio de Abogados. Cualquier persona, sin requisito de renta. Cita previa.</span>
+        <span class="lai-scope">Toda España</span>
+      </a>
+      <a class="legal-aid-item" href="https://www.justiciagratuita.es/" target="_blank" rel="noopener">
+        <strong>Justicia Gratuita — Turno de Oficio</strong>
+        <span class="lai-desc">Abogado y procurador gratuitos para personas con ingresos por debajo del umbral legal. Tramita en tu Colegio de Abogados local.</span>
+        <span class="lai-scope">Toda España</span>
+      </a>
+
+      <div class="legal-aid-section-title">ONG especializadas en migración</div>
+      <a class="legal-aid-item" href="https://www.cear.es/" target="_blank" rel="noopener">
+        <strong>CEAR — Comisión Española de Ayuda al Refugiado</strong>
+        <span class="lai-desc">Asistencia jurídica gratuita para solicitantes de asilo y protección internacional.</span>
+        <span class="lai-scope">Toda España</span>
+      </a>
+      <a class="legal-aid-item" href="https://www.accem.es/" target="_blank" rel="noopener">
+        <strong>ACCEM</strong>
+        <span class="lai-desc">Orientación jurídica para migrantes en general, no solo asilo. Acompañamiento en trámites.</span>
+        <span class="lai-scope">Toda España</span>
+      </a>
+      <a class="legal-aid-item" href="https://www.cruzroja.es/" target="_blank" rel="noopener">
+        <strong>Cruz Roja</strong>
+        <span class="lai-desc">Acogida e integración de migrantes, orientación legal básica.</span>
+        <span class="lai-scope">Toda España</span>
+      </a>
+      <a class="legal-aid-item" href="https://www.caritas.es/" target="_blank" rel="noopener">
+        <strong>Cáritas</strong>
+        <span class="lai-desc">Apoyo social y orientación jurídica básica a través de Cáritas Diocesana local.</span>
+        <span class="lai-scope">Toda España</span>
+      </a>
+
+      <div class="legal-aid-section-title">Barcelona / Cataluña</div>
+      <a class="legal-aid-item" href="https://ajuntament.barcelona.cat/novaciutadania/saier/" target="_blank" rel="noopener">
+        <strong>SAIER Barcelona</strong>
+        <span class="lai-desc">Servei d'Atenció a Immigrants, Emigrants i Refugiats. Servicio integral del Ayuntamiento de Barcelona: legal, social, idiomas. Gratuito.</span>
+        <span class="lai-scope">Barcelona</span>
+      </a>
+
+      <div class="legal-aid-section-title">LGBTIQ+</div>
+      <a class="legal-aid-item" href="https://kifkif.info/" target="_blank" rel="noopener">
+        <strong>Kifkif</strong>
+        <span class="lai-desc">Asistencia legal y social especializada para personas LGBTIQ+ migrantes y solicitantes de asilo.</span>
+        <span class="lai-scope">Madrid / España</span>
+      </a>
+      <a class="legal-aid-item" href="https://acathi.org/" target="_blank" rel="noopener">
+        <strong>ACATHI</strong>
+        <span class="lai-desc">Asociación catalana para personas LGBTIQ+ migrantes y refugiadas.</span>
+        <span class="lai-scope">Cataluña</span>
+      </a>
+
+      <p style="margin-top:14px;font-size:11px;color:var(--fog);line-height:1.5;">⚠️ Esta app no presta asesoramiento legal. Esta lista es informativa; verifica disponibilidad y requisitos directamente con cada servicio.</p>
+    </div>
+    <button class="modal-close" onclick="closeModal('modal-legal-aid')">Cerrar</button>
+  </div>
+</div>
+
 <div class="modal-overlay" id="modal-wisdom" onclick="if(event.target===this)closeModal('modal-wisdom')">
   <div class="modal-box">
     <div class="modal-handle"></div>
@@ -2470,7 +2559,7 @@ let CHAPTERS = getCHAPTERS();
 let WISDOMS  = getWISDOMS();
 
 // ─── STATE ──────────────────────────────────────────────────
-const APP_VERSION = 67;
+const APP_VERSION = 70;
 let state = JSON.parse(localStorage.getItem('mc_state') || '{}');
 if (state.appVersion !== APP_VERSION) {
   state.appVersion = APP_VERSION;
@@ -2637,7 +2726,7 @@ function renderReadBtn(key) {
   const btn = document.createElement('button');
   btn.className = 'proepil-read-btn';
   btn.style.cssText = 'display:block;margin:0 20px 60px;width:calc(100% - 40px);padding:14px;border-radius:12px;border:none;font-family:\'DM Sans\',sans-serif;font-size:14px;font-weight:600;cursor:pointer;' + (isRead ? 'background:var(--sage);color:white;' : 'background:var(--gold);color:var(--ink);');
-  btn.textContent = isRead ? '✓ Leído — visible en Para Expertos' : 'Marcar como leído →';
+  btn.textContent = isRead ? '✓ Leído — sigue disponible en Tu mejor Versión' : 'Marcar como leído →';
   btn.onclick = () => markPrologoEpilogo(key, btn);
   screenEl.appendChild(btn);
 }
@@ -2647,9 +2736,9 @@ function markPrologoEpilogo(key, btn) {
   saveState();
   btn.style.background = 'var(--sage)';
   btn.style.color = 'white';
-  btn.textContent = '✓ Leído — visible en Para Expertos';
+  btn.textContent = '✓ Leído — sigue disponible en Tu mejor Versión';
   updateHomeTilesVisibility();
-  showToast('Guardado. Lo encuentras en Para Expertos →');
+  showToast('Guardado. Sigue disponible en Tu mejor Versión →');
 }
 
 
@@ -4098,8 +4187,8 @@ const UI = {
     tileSubContrato: '14 compromisos · Acciones concretas · Tu firma',
     tileEpilogo: 'Epílogo',
     tileSubEpilogo: 'Cuando todo se calma. La llegada consciente.',
-    tileExpertos: 'Para Expertos',
-    tileSubExpertos: 'Más sobre el autor · Inconsciente · Liderazgo',
+    tileExpertos: 'Tu mejor Versión',
+    tileSubExpertos: 'Sobre el autor · Inconsciente y Trauma · Autoanálisis · Liderazgo',
     tramitesTileTitle: 'Migración & Trámites',
     tramitesTileSub: 'Guía legal 2026 · Visados · Arraigo · LGBTIQ+',
     contratoHeroSub: '14 compromisos · Tu firma más importante',
@@ -4179,8 +4268,8 @@ const UI = {
     tileSubContrato: '14 compromissos · Ações concretas · Sua assinatura',
     tileEpilogo: 'Epílogo',
     tileSubEpilogo: 'Quando tudo se acalma. A chegada consciente.',
-    tileExpertos: 'Para Especialistas',
-    tileSubExpertos: 'Sobre o autor · Inconsciente · Liderança',
+    tileExpertos: 'Tua melhor Versão',
+    tileSubExpertos: 'Sobre o autor · Inconsciente e Trauma · Autoanálise · Liderança',
     tramitesTileTitle: 'Migração & Trâmites',
     tramitesTileSub: 'Guia legal 2026 · Vistos · Arraigo · LGBTIQ+',
     contratoHeroSub: '14 compromissos · Sua assinatura mais importante',
@@ -4260,8 +4349,8 @@ const UI = {
     tileSubContrato: '14 commitments · Concrete actions · Your signature',
     tileEpilogo: 'Epilogue',
     tileSubEpilogo: 'When everything settles. The conscious arrival.',
-    tileExpertos: 'For Experts',
-    tileSubExpertos: 'About the author · Unconscious · Leadership',
+    tileExpertos: 'Your Best Version',
+    tileSubExpertos: 'About the author · Unconscious & Trauma · Self-analysis · Leadership',
     tileFinanzas: 'My Finances',
     tileSubFinanzas: 'Assets · Commitments · Traffic light · The Brake',
     tileTramites: 'Migration & Procedures',
@@ -4410,8 +4499,6 @@ function applyUI() {
   
   // Update home tile labels
   const tileMap = {
-    'tile-title-prologo':    u('tilePrologo')    || 'Prólogo',
-    'tile-sub-prologo':      u('tileSubPrologo')  || 'El inicio del viaje. Por dónde empieza todo.',
     'tile-title-midia':      u('tileMidia')       || 'Mi Día',
     'tile-sub-midia':        u('tileSubMidia')    || 'Impulso diario · Reflexión · Diario privado',
     'tile-title-manifiesto': u('tileManifiesto')  || 'Manifiesto & Contrato',
@@ -4422,10 +4509,9 @@ function applyUI() {
     'tile-sub-finanzas':     u('tileSubFinanzas') || 'Activos · Compromisos · Ampel · El Freno',
     'tile-title-tramites':   u('tileTramites')    || 'Migración & Trámites',
     'tile-sub-tramites':     u('tileSubTramites') || 'Guía legal 2026 · Visados · Arraigo · LGBTIQ+',
-    'tile-title-expertos':   u('tileExpertos')    || 'Para Expertos',
-    'tile-sub-expertos':     u('tileSubExpertos') || 'Más sobre el autor · Inconsciente · Liderazgo',
-    'tile-title-epilogo':    u('tileEpilogo')     || 'Epílogo',
-    'tile-sub-epilogo':      u('tileSubEpilogo')  || 'Cuando todo se calma. La llegada consciente.',
+    'tile-title-expertos':   u('tileExpertos')    || 'Tu mejor Versión',
+    'tile-sub-expertos':     u('tileSubExpertos') || 'Sobre el autor · Inconsciente y Trauma · Autoanálisis · Liderazgo',
+    'sidebar-expertos-label': u('tileExpertos')   || 'Tu mejor Versión',
   };
   Object.entries(tileMap).forEach(([id, text]) => {
     const el = document.getElementById(id);
@@ -4875,7 +4961,7 @@ const CHAPTER_FULL_TEXTS = [CHAPTER_FULL_TEXTS_MAP.ch1, CHAPTER_FULL_TEXTS_MAP.c
 // ─── TRÁMITES ────────────────────────────────────────────────
 const TRAMITES_FULL_TEXTS = {
   entrada: { title: `Entrada Temporal: La Vía Turística (hasta 90 días)`, html: `<p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">La mayoría de los ciudadanos de países hispanohablantes de América Latina no necesitan visado para entrar a España y al espacio Schengen por un máximo de 90 días dentro de cualquier período de 180 días. Los ciudadanos de Cuba y República Dominicana SÍ necesitan visado.<\/p>
-<p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">| ¿Quién NO necesita visado? | México, Colombia, Venezuela, Argentina, Chile, Perú, Ecuador, Uruguay, Paraguay, Bolivia, Costa Rica, El Salvador, Guatemala, Honduras, Nicaragua, Panamá | | --- | --- | | ¿Quién SÍ necesita visado? | Cuba, República Dominicana, Haití (aunque no es hispano) | | Duración máxima legal | 90 días en cualquier período de 180 días (regla Schengen) | | ¿Se puede trabajar? | No. La entrada turística no otorga derecho a trabajar. |<\/p>
+<table class="tramites-table"><tr><td>¿Quién NO necesita visado?<\/td><td>México, Colombia, Venezuela, Argentina, Chile, Perú, Ecuador, Uruguay, Paraguay, Bolivia, Costa Rica, El Salvador, Guatemala, Honduras, Nicaragua, Panamá<\/td><\/tr><tr><td>¿Quién SÍ necesita visado?<\/td><td>Cuba, República Dominicana, Haití (aunque no es hispano)<\/td><\/tr><tr><td>Duración máxima legal<\/td><td>90 días en cualquier período de 180 días (regla Schengen)<\/td><\/tr><tr><td>¿Se puede trabajar?<\/td><td>No. La entrada turística no otorga derecho a trabajar.<\/td><\/tr><\/table>
 <h5 style="font-size:14px;font-weight:600;color:var(--ink);margin:16px 0 6px;">Paso a Paso: Entrada como Turista<\/h5>
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">- Pasaporte válido: Debe tener validez mínima de 3 meses después de la fecha prevista de salida.<\/p>
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">- Prueba de medios económicos: Aproximadamente €113 por persona por día, con un mínimo de €1.020 por estancia. Se puede demostrar con extracto bancario, tarjeta de crédito o efectivo.<\/p>
@@ -4883,7 +4969,7 @@ const TRAMITES_FULL_TEXTS = {
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">- Billete de regreso: Comprobante de vuelo de salida del espacio Schengen dentro de los 90 días.<\/p>
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">- Seguro de viaje: Con cobertura mínima de €30.000 para emergencias médicas, válido en todo el espacio Schengen.<\/p>
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">- Sin antecedentes penales: Las personas con antecedentes penales graves pueden ser denegadas en frontera.<\/p>
-<p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">| ⚠️  RIESGOS DE LA OVERSTAY (quedarse más de 90 días sin permiso) • Quedarse más de 90 días sin una solicitud en trámite (ej: asilo) es una infracción administrativa GRAVE. • Consecuencia: expediente de expulsión, multa de hasta €10.000, y prohibición de reentrada al espacio Schengen de 1 a 5 años. • El sistema de control de salida de Schengen (EES, operativo en 2025) registra entradas y salidas biométricamente. • La situación irregular cierra la mayoría de las vías legales de regularización rápidas. | | --- |<\/p>` },
+<div class="tramites-warn"><strong>⚠️  RIESGOS DE LA OVERSTAY (quedarse más de 90 días sin permiso)<\/strong><ul style="margin:8px 0 0 18px;padding:0;"><li style="margin-bottom:6px;line-height:1.55;">Quedarse más de 90 días sin una solicitud en trámite (ej: asilo) es una infracción administrativa GRAVE.<\/li><li style="margin-bottom:6px;line-height:1.55;">Consecuencia: expediente de expulsión, multa de hasta €10.000, y prohibición de reentrada al espacio Schengen de 1 a 5 años.<\/li><li style="margin-bottom:6px;line-height:1.55;">El sistema de control de salida de Schengen (EES, operativo en 2025) registra entradas y salidas biométricamente.<\/li><li style="margin-bottom:6px;line-height:1.55;">La situación irregular cierra la mayoría de las vías legales de regularización rápidas.<\/li><\/ul><\/div>` },
   visados: { title: `Visados de Larga Duración (más de 90 días)`, html: `<p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">Si el objetivo es quedarse más de 90 días desde el principio, se debe solicitar el visado correcto ANTES de viajar, en el Consulado o Embajada de España en el país de origen.<\/p>
 <h5 style="font-size:14px;font-weight:600;color:var(--ink);margin:16px 0 6px;">2A. Visado de Residencia No Lucrativa<\/h5>
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">Para personas que disponen de ingresos o ahorros suficientes y no necesitan trabajar en España (jubilados, rentistas, personas con ingresos pasivos).<\/p>
@@ -4893,7 +4979,7 @@ const TRAMITES_FULL_TEXTS = {
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">- Presente la solicitud con el formulario EX-01 y todos los documentos.<\/p>
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">- Espera: 1 a 3 meses. Si es aprobado, recoge el visado y viaja en el plazo indicado.<\/p>
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">- En España, en los 30 días siguientes a la llegada, solicite la TIE (Tarjeta de Identidad de Extranjero) en la Oficina de Extranjería.<\/p>
-<p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">| Duración inicial | 1 año, renovable por 2 años | | --- | --- | | ¿Permite trabajar? | No (sin autorización adicional) | | Coste aproximado | ~€80 de tasa consular + tasas en España | | Link oficial | exteriores.gob.es (visados de larga duración) |<\/p>
+<table class="tramites-table"><tr><td>Duración inicial<\/td><td>1 año, renovable por 2 años<\/td><\/tr><tr><td>¿Permite trabajar?<\/td><td>No (sin autorización adicional)<\/td><\/tr><tr><td>Coste aproximado<\/td><td>~€80 de tasa consular + tasas en España<\/td><\/tr><tr><td>Link oficial<\/td><td>exteriores.gob.es (visados de larga duración)<\/td><\/tr><\/table>
 <h5 style="font-size:14px;font-weight:600;color:var(--ink);margin:16px 0 6px;">2B. Visado de Trabajo y Residencia (Cuenta Ajena)<\/h5>
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">Para quienes ya tienen una oferta de trabajo concreta de una empresa española. La empresa debe iniciar el trámite en España.<\/p>
 <h5 style="font-size:14px;font-weight:600;color:var(--ink);margin:16px 0 6px;">Paso a Paso:<\/h5>
@@ -4903,7 +4989,7 @@ const TRAMITES_FULL_TEXTS = {
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">- Viaje a España en el plazo del visado (3 meses).<\/p>
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">- Alta en la Seguridad Social el primer día de trabajo.<\/p>
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">- Solicite la TIE en los 30 días siguientes a la llegada.<\/p>
-<p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">| Duración inicial | 1 año (prorrogable) | | --- | --- | | ¿Permite trabajar? | Sí, solo para la empresa/sector autorizado | | Excepción importante | Algunos sectores con escasez de mano de obra están en el 'Catálogo de Ocupaciones de Difícil Cobertura' — trámite más rápido | | Link oficial | extranjeros.inclusion.gob.es |<\/p>
+<table class="tramites-table"><tr><td>Duración inicial<\/td><td>1 año (prorrogable)<\/td><\/tr><tr><td>¿Permite trabajar?<\/td><td>Sí, solo para la empresa/sector autorizado<\/td><\/tr><tr><td>Excepción importante<\/td><td>Algunos sectores con escasez de mano de obra están en el 'Catálogo de Ocupaciones de Difícil Cobertura' — trámite más rápido<\/td><\/tr><tr><td>Link oficial<\/td><td>extranjeros.inclusion.gob.es<\/td><\/tr><\/table>
 <h5 style="font-size:14px;font-weight:600;color:var(--ink);margin:16px 0 6px;">2C. Visado de Emprendedores / Startup<\/h5>
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">La Ley de Startups (Ley 28/2022) y el visado de emprendedor permiten a no comunitarios establecer un negocio innovador en España.<\/p>
 <h5 style="font-size:14px;font-weight:600;color:var(--ink);margin:16px 0 6px;">Paso a Paso:<\/h5>
@@ -4911,7 +4997,7 @@ const TRAMITES_FULL_TEXTS = {
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">- Solicite informe favorable del Ministerio de Economía (DGPYME) o entidad acreditada.<\/p>
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">- Solicite el visado de emprendedor en el Consulado español.<\/p>
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">- Una vez en España, solicite la autorización definitiva de residencia para emprendedores.<\/p>
-<p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">| Ventaja clave | No necesita oferta de empleo previa | | --- | --- | | Duración visado | 1 año. Luego autorización de 3 años renovable. | | Startup: beneficio fiscal | Régimen especial 'Beckham': tributar solo por rentas españolas al 24% (plano) por 6 años |<\/p>
+<table class="tramites-table"><tr><td>Ventaja clave<\/td><td>No necesita oferta de empleo previa<\/td><\/tr><tr><td>Duración visado<\/td><td>1 año. Luego autorización de 3 años renovable.<\/td><\/tr><tr><td>Startup: beneficio fiscal<\/td><td>Régimen especial 'Beckham': tributar solo por rentas españolas al 24% (plano) por 6 años<\/td><\/tr><\/table>
 <h5 style="font-size:14px;font-weight:600;color:var(--ink);margin:16px 0 6px;">2D. Visado Nómada Digital<\/h5>
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">Regulado también por la Ley de Startups. Para trabajadores remotos que trabajan para empresas fuera de España y desean residir en España.<\/p>
 <h5 style="font-size:14px;font-weight:600;color:var(--ink);margin:16px 0 6px;">Paso a Paso:<\/h5>
@@ -4920,7 +5006,7 @@ const TRAMITES_FULL_TEXTS = {
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">- Seguro médico privado con cobertura completa en España.<\/p>
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">- Solicite el visado en el Consulado. Espera aprox. 20 días hábiles.<\/p>
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">- En España, solicite la TIE en 30 días. Puede también optar por la 'Tarjeta de Nómada Digital'.<\/p>
-<p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">| Duración | Visado inicial 1 año. Luego autorización por 3 años renovable. | | --- | --- | | ¿Permite traer familia? | Sí, en reagrupación familiar. | | Tributación | Opción de acogerse al régimen Beckham (24% flat rate). | | Porcentaje máximo de ingresos de España | Solo hasta el 20% puede provenir de clientes/empleadores españoles. |<\/p>
+<table class="tramites-table"><tr><td>Duración<\/td><td>Visado inicial 1 año. Luego autorización por 3 años renovable.<\/td><\/tr><tr><td>¿Permite traer familia?<\/td><td>Sí, en reagrupación familiar.<\/td><\/tr><tr><td>Tributación<\/td><td>Opción de acogerse al régimen Beckham (24% flat rate).<\/td><\/tr><tr><td>Porcentaje máximo de ingresos de España<\/td><td>Solo hasta el 20% puede provenir de clientes/empleadores españoles.<\/td><\/tr><\/table>
 <h5 style="font-size:14px;font-weight:600;color:var(--ink);margin:16px 0 6px;">2E. Visa de Oro (Golden Visa)<\/h5>
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">Para inversores con capacidad económica importante. ATENCIÓN: En 2024, el Gobierno anunció su intención de suprimir la Golden Visa para compra de inmuebles. Consulte el estado actual.<\/p>
 <h5 style="font-size:14px;font-weight:600;color:var(--ink);margin:16px 0 6px;">Vías de inversión (si vigente):<\/h5>
@@ -4931,7 +5017,7 @@ const TRAMITES_FULL_TEXTS = {
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">- Presente la solicitud de visado inversión en el Consulado.<\/p>
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">- Aprobación en ~20 días hábiles.<\/p>
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">- En España, solicite la Tarjeta de Residencia para Inversores.<\/p>
-<p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">| Duración | Visado 1 año → Autorización 2 años → renovable indefinidamente | | --- | --- | | ¿Permite trabajar? | Sí | | Estado 2026 | VERIFICAR: posible supresión para inmuebles. Consulte fuente oficial. |<\/p>` },
+<table class="tramites-table"><tr><td>Duración<\/td><td>Visado 1 año → Autorización 2 años → renovable indefinidamente<\/td><\/tr><tr><td>¿Permite trabajar?<\/td><td>Sí<\/td><\/tr><tr><td>Estado 2026<\/td><td>VERIFICAR: posible supresión para inmuebles. Consulte fuente oficial.<\/td><\/tr><\/table>` },
   familia: { title: `Residencia por Vínculos Familiares`, html: `<h5 style="font-size:14px;font-weight:600;color:var(--ink);margin:16px 0 6px;">3A. Matrimonio con Ciudadano Español o de la UE<\/h5>
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">El matrimonio con un ciudadano español o de otro estado miembro de la UE otorga derecho a una Tarjeta de Residencia de Familiar de Ciudadano de la Unión.<\/p>
 <h5 style="font-size:14px;font-weight:600;color:var(--ink);margin:16px 0 6px;">Paso a Paso:<\/h5>
@@ -4940,7 +5026,7 @@ const TRAMITES_FULL_TEXTS = {
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">- Inscribir el matrimonio en el Registro Civil Consular o en España.<\/p>
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">- Solicitar la Tarjeta de Residencia de Familiar de Ciudadano de la UE en la Oficina de Extranjería (formulario EX-19 o solicitud electrónica).<\/p>
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">- La tarjeta inicial tiene validez de 5 años, permite trabajar y acceder al sistema público de salud.<\/p>
-<p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">| ⚠️  RIESGO: Matrimonio de conveniencia • Las autoridades pueden realizar visitas domiciliarias sorpresa para verificar la convivencia real. • Consecuencias: multa de hasta €10.000, nulidad del permiso, expulsión y prohibición de entrada en el Schengen. • Delito penal en España (art. 318 bis Código Penal): hasta 8 años de prisión para organizadores de redes de matrimonios fraudulentos. | | --- |<\/p>
+<div class="tramites-warn"><strong>⚠️  RIESGO: Matrimonio de conveniencia<\/strong><ul style="margin:8px 0 0 18px;padding:0;"><li style="margin-bottom:6px;line-height:1.55;">Las autoridades pueden realizar visitas domiciliarias sorpresa para verificar la convivencia real.<\/li><li style="margin-bottom:6px;line-height:1.55;">Consecuencias: multa de hasta €10.000, nulidad del permiso, expulsión y prohibición de entrada en el Schengen.<\/li><li style="margin-bottom:6px;line-height:1.55;">Delito penal en España (art. 318 bis Código Penal): hasta 8 años de prisión para organizadores de redes de matrimonios fraudulentos.<\/li><\/ul><\/div>
 <h5 style="font-size:14px;font-weight:600;color:var(--ink);margin:16px 0 6px;">3B. Pareja de Hecho (Unión de Hecho)<\/h5>
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">El registro como pareja de hecho con un residente español o de la UE otorga derechos similares al matrimonio, pero los requisitos varían por Comunidad Autónoma.<\/p>
 <h5 style="font-size:14px;font-weight:600;color:var(--ink);margin:16px 0 6px;">Paso a Paso:<\/h5>
@@ -4948,8 +5034,8 @@ const TRAMITES_FULL_TEXTS = {
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">- Reunir documentación: DNI/pasaporte de ambos, empadronamiento, declaración de soltería (o certificado de no pareja previa registrada), en algunos casos escritura pública.<\/p>
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">- Registrar la pareja en el Registro de Parejas de Hecho de la CCAA correspondiente.<\/p>
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">- Solicitar la Tarjeta de Residencia de Familiar de Ciudadano de la UE.<\/p>
-<p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">| ⚠️  RIESGO: Pareja de hecho ficticia — Denuncia, consecuencias penales y dependencia • Simular una pareja de hecho constituye una infracción MUY GRAVE de la Ley de Extranjería. Las Unidades contra las Redes de Inmigración y Falsedades Documentales (UCRIF) de la Policía Nacional investigan activamente estas situaciones, con operativos que han desmantelado redes que cobraban hasta 4.000 € por pareja ficticia (Alicante, mayo 2025). • Cualquier persona que tenga conocimiento del fraude puede denunciarlo ante la Oficina de Extranjería o directamente ante la Policía Nacional. La investigación puede iniciarse también de oficio, por ejemplo si los dos miembros de la pareja están empadronados en domicilios diferentes. • Consecuencias para la persona extranjera: multa de hasta 10.000 €, revocación inmediata del permiso obtenido, expulsión del territorio Schengen, prohibición de entrada de 1 a 5 años, y cierre definitivo de la vía a la nacionalidad española (el Ministerio de Justicia audita el historial completo durante el trámite de nacionalidad). • Consecuencias penales: los delitos imputados son falsedad de documento oficial y favorecimiento de la inmigración ilegal (art. 318 bis Código Penal). Tanto la persona extranjera como el ciudadano español o comunitario que participa pueden ser detenidos y puestos a disposición judicial. • RIESGO DE DEPENDENCIA Y EXTORSIÓN: Quien paga por una pareja de hecho ficticia queda en una posición de total vulnerabilidad frente a la otra parte. Al haber cometido un acto ilegal, la persona extranjera no puede acudir a las autoridades si la otra parte le exige más dinero, le amenaza con denunciarla o le impone condiciones abusivas. Esta dependencia puede perpetuarse durante años. Se han documentado casos de extorsión continuada después de obtenerse el permiso. • Extranjерía realiza visitas domiciliarias sorpresa para verificar la convivencia real. En 2026, el nivel de control se ha intensificado, con tarjetas comunitarias que en muchos casos se conceden por menos años cuando existe sospecha de fraude. | | --- |<\/p>
-<p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">| ℹ️  NOVEDAD 2026: Regularización Extraordinaria — Una alternativa legal urgente El Gobierno español aprobó mediante Real Decreto 316/2026, de 14 de abril, una Regularización Extraordinaria para personas en situación irregular. El proceso está abierto del 16 de abril al 30 de junio de 2026 (plazo improrrogable). Quienes reúnan los requisitos pueden obtener una autorización de residencia de 1 año, con derecho a trabajar desde la admisión a trámite (máximo 15 días), sin necesidad de recurrir a vías fraudulentas. Requisitos principales: Encontrarse en España antes del 1 de enero de 2026 • Permanencia ininterrumpida de al menos 5 meses (sin salidas del territorio) • Carecer de antecedentes penales • No suponer amenaza para el orden público • Acreditar vínculo laboral (trabajo realizado, oferta de empleo o declaración responsable de autoempleo), convivencia con menores o personas dependientes, o situación de especial fragilidad social. Solicitantes de protección internacional: Pueden acogerse quienes presentaron su solicitud de asilo antes del 1 de enero de 2026, incluso si está pendiente o ha sido denegada, acreditando 5 meses de permanencia ininterrumpida. Presentación: Telemtáticamente (24h/7d) o presencialmente con cita previa, a través de la plataforma Mercurio. Información oficial actualizada en: inclusion.gob.es/regularización • Quién NO puede acogerse: titulares de autorización de estancia o residencia en vigor, personas con solicitudes ordinarias de arraigo ya en trámite (éstas continúan automáticamente), personas incursas en procedimiento de expulsión (el procedimiento queda paralizado si solicitan la regularización). | | --- |<\/p>
+<div class="tramites-warn"><strong>⚠️  RIESGO: Pareja de hecho ficticia — Denuncia, consecuencias penales y dependencia<\/strong><ul style="margin:8px 0 0 18px;padding:0;"><li style="margin-bottom:6px;line-height:1.55;">Simular una pareja de hecho constituye una infracción MUY GRAVE de la Ley de Extranjería. Las Unidades contra las Redes de Inmigración y Falsedades Documentales (UCRIF) de la Policía Nacional investigan activamente estas situaciones, con operativos que han desmantelado redes que cobraban hasta 4.000 € por pareja ficticia (Alicante, mayo 2025).<\/li><li style="margin-bottom:6px;line-height:1.55;">Cualquier persona que tenga conocimiento del fraude puede denunciarlo ante la Oficina de Extranjería o directamente ante la Policía Nacional. La investigación puede iniciarse también de oficio, por ejemplo si los dos miembros de la pareja están empadronados en domicilios diferentes.<\/li><li style="margin-bottom:6px;line-height:1.55;">Consecuencias para la persona extranjera: multa de hasta 10.000 €, revocación inmediata del permiso obtenido, expulsión del territorio Schengen, prohibición de entrada de 1 a 5 años, y cierre definitivo de la vía a la nacionalidad española (el Ministerio de Justicia audita el historial completo durante el trámite de nacionalidad).<\/li><li style="margin-bottom:6px;line-height:1.55;">Consecuencias penales: los delitos imputados son falsedad de documento oficial y favorecimiento de la inmigración ilegal (art. 318 bis Código Penal). Tanto la persona extranjera como el ciudadano español o comunitario que participa pueden ser detenidos y puestos a disposición judicial.<\/li><li style="margin-bottom:6px;line-height:1.55;">RIESGO DE DEPENDENCIA Y EXTORSIÓN: Quien paga por una pareja de hecho ficticia queda en una posición de total vulnerabilidad frente a la otra parte. Al haber cometido un acto ilegal, la persona extranjera no puede acudir a las autoridades si la otra parte le exige más dinero, le amenaza con denunciarla o le impone condiciones abusivas. Esta dependencia puede perpetuarse durante años. Se han documentado casos de extorsión continuada después de obtenerse el permiso.<\/li><li style="margin-bottom:6px;line-height:1.55;">Extranjерía realiza visitas domiciliarias sorpresa para verificar la convivencia real. En 2026, el nivel de control se ha intensificado, con tarjetas comunitarias que en muchos casos se conceden por menos años cuando existe sospecha de fraude.<\/li><\/ul><\/div>
+<div class="tramites-info"><strong>ℹ️  NOVEDAD 2026: Regularización Extraordinaria — Una alternativa legal urgente El Gobierno español aprobó mediante Real Decreto 316/2026, de 14 de abril, una Regularización Extraordinaria para personas en situación irregular. El proceso está abierto del 16 de abril al 30 de junio de 2026 (plazo improrrogable). Quienes reúnan los requisitos pueden obtener una autorización de residencia de 1 año, con derecho a trabajar desde la admisión a trámite (máximo 15 días), sin necesidad de recurrir a vías fraudulentas. Requisitos principales: Encontrarse en España antes del 1 de enero de 2026<\/strong><ul style="margin:8px 0 0 18px;padding:0;"><li style="margin-bottom:6px;line-height:1.55;">Permanencia ininterrumpida de al menos 5 meses (sin salidas del territorio)<\/li><li style="margin-bottom:6px;line-height:1.55;">Carecer de antecedentes penales<\/li><li style="margin-bottom:6px;line-height:1.55;">No suponer amenaza para el orden público<\/li><li style="margin-bottom:6px;line-height:1.55;">Acreditar vínculo laboral (trabajo realizado, oferta de empleo o declaración responsable de autoempleo), convivencia con menores o personas dependientes, o situación de especial fragilidad social. Solicitantes de protección internacional: Pueden acogerse quienes presentaron su solicitud de asilo antes del 1 de enero de 2026, incluso si está pendiente o ha sido denegada, acreditando 5 meses de permanencia ininterrumpida. Presentación: Telemtáticamente (24h/7d) o presencialmente con cita previa, a través de la plataforma Mercurio. Información oficial actualizada en: inclusion.gob.es/regularización<\/li><li style="margin-bottom:6px;line-height:1.55;">Quién NO puede acogerse: titulares de autorización de estancia o residencia en vigor, personas con solicitudes ordinarias de arraigo ya en trámite (éstas continúan automáticamente), personas incursas en procedimiento de expulsión (el procedimiento queda paralizado si solicitan la regularización).<\/li><\/ul><\/div>
 <h5 style="font-size:14px;font-weight:600;color:var(--ink);margin:16px 0 6px;">3C. Reagrupación Familiar<\/h5>
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">Un residente legal en España puede reagrupar a ciertos familiares directos una vez que cumple requisitos de tiempo de residencia y económicos.<\/p>
 <h5 style="font-size:14px;font-weight:600;color:var(--ink);margin:16px 0 6px;">¿Quiénes pueden reagruparse?<\/h5>
@@ -4965,7 +5051,7 @@ const TRAMITES_FULL_TEXTS = {
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">- El familiar viaja y solicita la TIE en 30 días.<\/p>` },
   asilo: { title: `Protección Internacional: Asilo y Protección Subsidiaria`, html: `<p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">España es uno de los principales países receptores de solicitudes de asilo de hispanoamericanos, especialmente de Venezuela, Colombia, Nicaragua, Cuba y El Salvador.<\/p>
 <h5 style="font-size:14px;font-weight:600;color:var(--ink);margin:16px 0 6px;">Tipos de Protección<\/h5>
-<p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">| Estatuto de Refugiado | Para personas perseguidas por raza, religión, nacionalidad, opinión política o pertenencia a grupo social específico. | | --- | --- | | Protección Subsidiaria | Para quienes no califican como refugiados pero enfrentan riesgo real de daño grave (tortura, pena de muerte, violencia indiscriminada) al regresar. | | Razones Humanitarias | Especialmente aplicable a venezolanos por la crisis del país. Otorga residencia de 1 año renovable sin necesidad de probar persecución individual. | | Colectivos LGBTIQ+ | La persecución por orientación sexual o identidad de género es motivo válido de asilo. Especialmente relevante para personas de países donde las relaciones homosexuales son ilegales. |<\/p>
+<table class="tramites-table"><tr><td>Estatuto de Refugiado<\/td><td>Para personas perseguidas por raza, religión, nacionalidad, opinión política o pertenencia a grupo social específico.<\/td><\/tr><tr><td>Protección Subsidiaria<\/td><td>Para quienes no califican como refugiados pero enfrentan riesgo real de daño grave (tortura, pena de muerte, violencia indiscriminada) al regresar.<\/td><\/tr><tr><td>Razones Humanitarias<\/td><td>Especialmente aplicable a venezolanos por la crisis del país. Otorga residencia de 1 año renovable sin necesidad de probar persecución individual.<\/td><\/tr><tr><td>Colectivos LGBTIQ+<\/td><td>La persecución por orientación sexual o identidad de género es motivo válido de asilo. Especialmente relevante para personas de países donde las relaciones homosexuales son ilegales.<\/td><\/tr><\/table>
 <h5 style="font-size:14px;font-weight:600;color:var(--ink);margin:16px 0 6px;">Paso a Paso: Proceso de Asilo<\/h5>
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">- Manifestación de intención: Debe declarar su intención de solicitar asilo en el aeropuerto/frontera al llegar, en una comisaría de policía, o en la Oficina de Asilo y Refugio (OAR) si ya está en territorio español.<\/p>
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">- Cita formal: Se asigna cita para la entrevista. Los tiempos de espera varían: en 2026 pueden ser de semanas a varios meses en ciudades con más demanda (Madrid, Barcelona).<\/p>
@@ -4973,11 +5059,11 @@ const TRAMITES_FULL_TEXTS = {
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">- Tarjeta Blanca (Tarjeta Roja): Documento provisional que acredita la condición de solicitante. Tras 6 meses de solicitud, permite trabajar legalmente.<\/p>
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">- Resolución: La OAR tiene 6 meses para resolver, prorrogables. En la práctica, los expedientes pueden durar 1-3 años.<\/p>
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">- Apelación: Si se deniega, se puede recurrir ante el juzgado contencioso-administrativo. El proceso judicial puede durar años adicionales.<\/p>
-<p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">| ℹ️  Consejos para la solicitud de asilo • Documente todo antes de abandonar su país: fotos, pantallazos de amenazas, informes médicos, noticias sobre su persecución. • Acuda a organizaciones como CEAR o ACNUR desde el primer momento para asistencia jurídica gratuita. • La coherencia entre la entrevista inicial y entrevistas posteriores es fundamental. Cualquier inconsistencia puede utilizarse para denegar la solicitud. • Para solicitantes LGBTIQ+: la organización Kifkif ofrece apoyo legal especializado. | | --- |<\/p>
-<p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">| ⚠️  RIESGOS de una solicitud de asilo infundada • Presentar una solicitud de asilo sin fundamento real con el único objetivo de regularizarse temporalmente es legal pero arriesgado. • Si se deniega y no se recurre o no prospera, el expediente puede derivar en una orden de expulsión. • El rechazo de una solicitud de asilo NO cierra todas las vías, pero dificulta futuras solicitudes y genera antecedente negativo en el sistema. | | --- |<\/p>` },
+<div class="tramites-info"><strong>ℹ️  Consejos para la solicitud de asilo<\/strong><ul style="margin:8px 0 0 18px;padding:0;"><li style="margin-bottom:6px;line-height:1.55;">Documente todo antes de abandonar su país: fotos, pantallazos de amenazas, informes médicos, noticias sobre su persecución.<\/li><li style="margin-bottom:6px;line-height:1.55;">Acuda a organizaciones como CEAR o ACNUR desde el primer momento para asistencia jurídica gratuita.<\/li><li style="margin-bottom:6px;line-height:1.55;">La coherencia entre la entrevista inicial y entrevistas posteriores es fundamental. Cualquier inconsistencia puede utilizarse para denegar la solicitud.<\/li><li style="margin-bottom:6px;line-height:1.55;">Para solicitantes LGBTIQ+: la organización Kifkif ofrece apoyo legal especializado.<\/li><\/ul><\/div>
+<div class="tramites-warn"><strong>⚠️  RIESGOS de una solicitud de asilo infundada<\/strong><ul style="margin:8px 0 0 18px;padding:0;"><li style="margin-bottom:6px;line-height:1.55;">Presentar una solicitud de asilo sin fundamento real con el único objetivo de regularizarse temporalmente es legal pero arriesgado.<\/li><li style="margin-bottom:6px;line-height:1.55;">Si se deniega y no se recurre o no prospera, el expediente puede derivar en una orden de expulsión.<\/li><li style="margin-bottom:6px;line-height:1.55;">El rechazo de una solicitud de asilo NO cierra todas las vías, pero dificulta futuras solicitudes y genera antecedente negativo en el sistema.<\/li><\/ul><\/div>` },
   arraigo: { title: `Arraigo: Regularización de Situación Irregular`, html: `<p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">El Arraigo es la vía más común para personas que llevan tiempo en situación irregular en España. Existen varios tipos, cada uno con requisitos distintos.<\/p>
 <h5 style="font-size:14px;font-weight:600;color:var(--ink);margin:16px 0 6px;">5A. Arraigo Social (la vía más frecuente)<\/h5>
-<p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">| Tiempo mínimo en España | 3 años de permanencia continuada (probada con empadronamiento histórico, contratos, facturas, etc.) | | --- | --- | | Antecedentes penales | Sin antecedentes penales en España ni en países de residencia anteriores durante los últimos 5 años | | Contrato de trabajo | Contrato de trabajo firmado por al menos 30 horas semanales durante mínimo 1 año. Puede ser de un familiar. | | Arraigo con formación | Variante (desde 2022): Tras 2 años en España, si se completa un curso de formación laboral de 200 horas, también se puede obtener. |<\/p>
+<table class="tramites-table"><tr><td>Tiempo mínimo en España<\/td><td>3 años de permanencia continuada (probada con empadronamiento histórico, contratos, facturas, etc.)<\/td><\/tr><tr><td>Antecedentes penales<\/td><td>Sin antecedentes penales en España ni en países de residencia anteriores durante los últimos 5 años<\/td><\/tr><tr><td>Contrato de trabajo<\/td><td>Contrato de trabajo firmado por al menos 30 horas semanales durante mínimo 1 año. Puede ser de un familiar.<\/td><\/tr><tr><td>Arraigo con formación<\/td><td>Variante (desde 2022): Tras 2 años en España, si se completa un curso de formación laboral de 200 horas, también se puede obtener.<\/td><\/tr><\/table>
 <h5 style="font-size:14px;font-weight:600;color:var(--ink);margin:16px 0 6px;">Paso a Paso: Arraigo Social<\/h5>
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">- Empadronarse en el municipio de residencia lo antes posible (incluso sin contrato ni papeles). El empadronamiento NO implica ningún riesgo de expulsión.<\/p>
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">- Reunir pruebas de permanencia continuada durante 3 años: cartas certificadas, recibos bancarios, informes de vecinos, contratos, etc.<\/p>
@@ -4986,14 +5072,14 @@ const TRAMITES_FULL_TEXTS = {
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">- Si se aprueba, se otorga un permiso inicial de 1 año que permite trabajar. Se renueva por 2 años y luego por otros 2.<\/p>
 <h5 style="font-size:14px;font-weight:600;color:var(--ink);margin:16px 0 6px;">5B. Arraigo Laboral<\/h5>
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">Para personas en situación irregular que llevan al menos 2 años en España y pueden demostrar una relación laboral con un empleador durante al menos 6 meses.<\/p>
-<p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">| Tiempo en España | Mínimo 2 años | | --- | --- | | Relación laboral | Resolución de acta de infracción de la empresa o sentencia judicial que acredite al menos 6 meses de relación laboral | | Antecedentes | Sin antecedentes penales |<\/p>
+<table class="tramites-table"><tr><td>Tiempo en España<\/td><td>Mínimo 2 años<\/td><\/tr><tr><td>Relación laboral<\/td><td>Resolución de acta de infracción de la empresa o sentencia judicial que acredite al menos 6 meses de relación laboral<\/td><\/tr><tr><td>Antecedentes<\/td><td>Sin antecedentes penales<\/td><\/tr><\/table>
 <h5 style="font-size:14px;font-weight:600;color:var(--ink);margin:16px 0 6px;">5C. Arraigo Familiar<\/h5>
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">Para personas en situación irregular que son padres o madres de un ciudadano español o tienen un familiar español de primer grado (padre, madre, hijo).<\/p>
 <h5 style="font-size:14px;font-weight:600;color:var(--ink);margin:16px 0 6px;">Paso a Paso:<\/h5>
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">- Acreditar el parentesco con documentación oficial (partida de nacimiento, libro de familia).<\/p>
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">- Si el hijo es español menor de edad, no se requiere tiempo mínimo de estancia.<\/p>
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">- Si el familiar es ascendiente español, se requiere demostrar dependencia económica.<\/p>
-<p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">| ⚠️  Peligros del período de espera en situación irregular • Trabajar sin permiso es una infracción tanto para el trabajador como para el empleador (multa de €10.000 a €100.000 para empresas en caso de empleo de extranjeros irregulares). • Sin permiso de trabajo, no se puede acceder al sistema público de salud ordinario, aunque sí a urgencias y atención materno-infantil. • La situación irregular no impide empadronarse, y el empadronamiento es fundamental para futuras regularizaciones. • Ser detenido en situación irregular puede desencadenar un Centro de Internamiento de Extranjeros (CIE) de hasta 60 días previo a la expulsión. | | --- |<\/p>` },
+<div class="tramites-warn"><strong>⚠️  Peligros del período de espera en situación irregular<\/strong><ul style="margin:8px 0 0 18px;padding:0;"><li style="margin-bottom:6px;line-height:1.55;">Trabajar sin permiso es una infracción tanto para el trabajador como para el empleador (multa de €10.000 a €100.000 para empresas en caso de empleo de extranjeros irregulares).<\/li><li style="margin-bottom:6px;line-height:1.55;">Sin permiso de trabajo, no se puede acceder al sistema público de salud ordinario, aunque sí a urgencias y atención materno-infantil.<\/li><li style="margin-bottom:6px;line-height:1.55;">La situación irregular no impide empadronarse, y el empadronamiento es fundamental para futuras regularizaciones.<\/li><li style="margin-bottom:6px;line-height:1.55;">Ser detenido en situación irregular puede desencadenar un Centro de Internamiento de Extranjeros (CIE) de hasta 60 días previo a la expulsión.<\/li><\/ul><\/div>` },
   padron: { title: `El Empadronamiento: Su Derecho Más Importante`, html: `<p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">El empadronamiento es el registro municipal de habitantes de un municipio español. Independientemente de la situación administrativa — regular o irregular —, toda persona que resida en un municipio español tiene el DERECHO y la OBLIGACIóN legal de empadronarse. Es la herramienta más importante para cualquier persona que viva en España, y su utilidad es fundamental tanto en el presente como para el futuro.<\/p>
 <h5 style="font-size:14px;font-weight:600;color:var(--ink);margin:16px 0 6px;">6A. Por qué el Empadronamiento es Decisivo<\/h5>
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">El padrón municipal acredita oficialmente el tiempo de residencia en España. Sin esta acreditación, resulta prácticamente imposible demostrar los años de permanencia exigidos por el arraigo social (3 años), el arraigo laboral (2 años) o la regularización extraordinaria (5 meses). Además, el empadronamiento es requisito imprescindible o muy útil para:<\/p>
@@ -5002,7 +5088,7 @@ const TRAMITES_FULL_TEXTS = {
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">- Tramitar el NIE, solicitar prestaciones sociales, abrir cuentas bancarias y acceder a servicios públicos municipales.<\/p>
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">- Solicitar el arraigo social, laboral o familiar (el padrón histórico es la prueba de permanencia por excelencia).<\/p>
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">- Acceder a la regularización extraordinaria 2026 y a futuras regularizaciones que el legislador pueda aprobar.<\/p>
-<p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">| ℹ️  CLAVE: El empadronamiento NO transmite información a la policía ni a extranjería El padrón municipal es gestionado exclusivamente por el Ayuntamiento. Conforme a la Ley de Bases de Régimen Local y la Ley Orgánica de Protección de Datos (LOPDGDD), los datos del padrón son confidenciales y el Ayuntamiento NO está autorizado a cederlos a la Policía Nacional, a la Guardia Civil ni a la Oficina de Extranjería con el fin de detectar situaciones irregulares. • Empadronarse NO genera ningún riesgo de expulsión ni de inicio de expediente sancionador por motivo de situación irregular. Es un acto administrativo de carácter civil, no policial. • El Tribunal Supremo y el Defensor del Pueblo han confirmado reiteradamente que los Ayuntamientos no pueden negar el empadronamiento a personas en situación irregular ni condicionarél al estatus migratorio. • La única excepción es una orden judicial expresa, que requiere una resolución de un juez y no puede ser iniciada de oficio por el Ayuntamiento. | | --- |<\/p>
+<div class="tramites-info"><strong>ℹ️  CLAVE: El empadronamiento NO transmite información a la policía ni a extranjería El padrón municipal es gestionado exclusivamente por el Ayuntamiento. Conforme a la Ley de Bases de Régimen Local y la Ley Orgánica de Protección de Datos (LOPDGDD), los datos del padrón son confidenciales y el Ayuntamiento NO está autorizado a cederlos a la Policía Nacional, a la Guardia Civil ni a la Oficina de Extranjería con el fin de detectar situaciones irregulares.<\/strong><ul style="margin:8px 0 0 18px;padding:0;"><li style="margin-bottom:6px;line-height:1.55;">Empadronarse NO genera ningún riesgo de expulsión ni de inicio de expediente sancionador por motivo de situación irregular. Es un acto administrativo de carácter civil, no policial.<\/li><li style="margin-bottom:6px;line-height:1.55;">El Tribunal Supremo y el Defensor del Pueblo han confirmado reiteradamente que los Ayuntamientos no pueden negar el empadronamiento a personas en situación irregular ni condicionarél al estatus migratorio.<\/li><li style="margin-bottom:6px;line-height:1.55;">La única excepción es una orden judicial expresa, que requiere una resolución de un juez y no puede ser iniciada de oficio por el Ayuntamiento.<\/li><\/ul><\/div>
 <h5 style="font-size:14px;font-weight:600;color:var(--ink);margin:16px 0 6px;">6B. Empadronamiento sin Domicilio Fijo<\/h5>
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">Una de las dudas más frecuentes es si se puede empadronar una persona que no tiene contrato de alquiler ni domicilio propio. La respuesta es SÍ. La ley prevé mecanismos específicos para garantizar el acceso al padrón a quienes carecen de vivienda estable, precisamente porque el empadronamiento es un derecho y no puede depender de la situación habitacional.<\/p>
 <h5 style="font-size:14px;font-weight:600;color:var(--ink);margin:16px 0 6px;">Opciones para empadronarse sin domicilio propio:<\/h5>
@@ -5015,7 +5101,7 @@ const TRAMITES_FULL_TEXTS = {
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">- Presente su pasaporte o documento de identidad. Si se empadrona en el domicilio de otra persona, traiga también la autorización firmada del titular y una copia de su DNI/NIE.<\/p>
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">- Rellene el formulario de alta en el padrón (Hoja de Inscripción Padronal). El Ayuntamiento le entregará un volante de empadronamiento de forma inmediata o en pocos días.<\/p>
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">- Solicite periódicamente el “certificado de empadronamiento histórico” (no solo el volante). Este certificado acredita desde qué fecha está registrado y es la prueba más sólida de permanencia continuada en España para cualquier trámite de extranjерía.<\/p>
-<p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">| ✅  CONSEJOS PRÁCTICOS • Empadrónese el mismo día que llegue a un domicilio estable. Cada día sin padrón es un día de permanencia que no queda acreditado oficialmente. • Si cambia de domicilio o de municipio, actualice el empadronamiento de inmediato. Si no lo hace, el Ayuntamiento puede darle de baja del padrón por caducidad, lo que podría interrumpir su cómputo de permanencia. • Solicite el certificado histórico de empadronamiento cada vez que cambie de domicilio, para conservar el registro de cada período. Guárdelos todos: son su historial oficial de permanencia en España. • Si el Ayuntamiento le niega el empadronamiento o pone trabas injustificadas, puede acudir al Defensor del Pueblo del Pueblo o a organizaciones como Cruz Roja o Cáritas, que pueden interceder y acompañarle en el proceso. | | --- |<\/p>` },
+<div class="tramites-info"><strong>✅  CONSEJOS PRÁCTICOS<\/strong><ul style="margin:8px 0 0 18px;padding:0;"><li style="margin-bottom:6px;line-height:1.55;">Empadrónese el mismo día que llegue a un domicilio estable. Cada día sin padrón es un día de permanencia que no queda acreditado oficialmente.<\/li><li style="margin-bottom:6px;line-height:1.55;">Si cambia de domicilio o de municipio, actualice el empadronamiento de inmediato. Si no lo hace, el Ayuntamiento puede darle de baja del padrón por caducidad, lo que podría interrumpir su cómputo de permanencia.<\/li><li style="margin-bottom:6px;line-height:1.55;">Solicite el certificado histórico de empadronamiento cada vez que cambie de domicilio, para conservar el registro de cada período. Guárdelos todos: son su historial oficial de permanencia en España.<\/li><li style="margin-bottom:6px;line-height:1.55;">Si el Ayuntamiento le niega el empadronamiento o pone trabas injustificadas, puede acudir al Defensor del Pueblo del Pueblo o a organizaciones como Cruz Roja o Cáritas, que pueden interceder y acompañarle en el proceso.<\/li><\/ul><\/div>` },
   nacionalidad: { title: `Residencia de Larga Duración y Nacionalidad Española`, html: `<h5 style="font-size:14px;font-weight:600;color:var(--ink);margin:16px 0 6px;">7A. Residencia de Larga Duración (Permanente)<\/h5>
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">Tras 5 años de residencia legal y continuada en España, se puede obtener la residencia de larga duración (equivalente a la permanente), que no tiene límite de vigencia.<\/p>
 <h5 style="font-size:14px;font-weight:600;color:var(--ink);margin:16px 0 6px;">Paso a Paso:<\/h5>
@@ -5025,7 +5111,7 @@ const TRAMITES_FULL_TEXTS = {
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">- Solicitar en la Oficina de Extranjería con formulario EX-11.<\/p>
 <h5 style="font-size:14px;font-weight:600;color:var(--ink);margin:16px 0 6px;">7B. Nacionalidad Española por Residencia<\/h5>
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">Para los hispanoamericanos, el plazo de residencia legal para obtener la nacionalidad española es de solo 2 años (frente a los 10 años de residentes de otros países), gracias a tratados de doble nacionalidad.<\/p>
-<p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">| Plazo para hispanoamericanos | 2 años de residencia legal continuada | | --- | --- | | Países con convenio | Argentina, Bolivia, Chile, Colombia, Costa Rica, Cuba, Ecuador, Guatemala, Honduras, México, Nicaragua, Panamá, Paraguay, Perú, Rep. Dominicana, El Salvador, Uruguay, Venezuela, Filipinas, Andorra, Portugal, Guinea Ecuatorial | | Requisitos adicionales | Sin antecedentes penales, integración cultural (examen CCSE y DELE A2 si no se acredita idioma), medios económicos suficientes | | Doble nacionalidad | España permite conservar la nacionalidad de origen para la mayoría de los hispanoamericanos tras convenio. |<\/p>
+<table class="tramites-table"><tr><td>Plazo para hispanoamericanos<\/td><td>2 años de residencia legal continuada<\/td><\/tr><tr><td>Países con convenio<\/td><td>Argentina, Bolivia, Chile, Colombia, Costa Rica, Cuba, Ecuador, Guatemala, Honduras, México, Nicaragua, Panamá, Paraguay, Perú, Rep. Dominicana, El Salvador, Uruguay, Venezuela, Filipinas, Andorra, Portugal, Guinea Ecuatorial<\/td><\/tr><tr><td>Requisitos adicionales<\/td><td>Sin antecedentes penales, integración cultural (examen CCSE y DELE A2 si no se acredita idioma), medios económicos suficientes<\/td><\/tr><tr><td>Doble nacionalidad<\/td><td>España permite conservar la nacionalidad de origen para la mayoría de los hispanoamericanos tras convenio.<\/td><\/tr><\/table>
 <h5 style="font-size:14px;font-weight:600;color:var(--ink);margin:16px 0 6px;">Paso a Paso: Solicitud de Nacionalidad<\/h5>
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">- Residir legalmente en España durante el tiempo requerido (2 años para hispanoamericanos).<\/p>
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">- Superar el examen CCSE (Constitución y Sociedad Española) y el examen DELE A2 si procede.<\/p>
@@ -5053,7 +5139,7 @@ const TRAMITES_FULL_TEXTS = {
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">→  Extranjería.info — Portal informativo independiente: [https://www.extranjeriainfo.es](https://www.extranjeriainfo.es)<\/p>
 <h5 style="font-size:14px;font-weight:600;color:var(--ink);margin:16px 0 6px;">→  Infomigra — OIM España: [https://infomigra.es](https://infomigra.es)<\/h5>
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">→  Guía de la OIM para migrantes en España: [https://www.iom.int/es/espana](https://www.iom.int/es/espana)<\/p>
-<p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">| ℹ️  Nota sobre los links • Todos los links han sido verificados a la fecha de edición (2026). Las normativas cambian: siempre confirme en las fuentes oficiales. • Desconfíe de gestorías que cobran grandes honorarios por trámites básicos que usted puede realizar gratuitamente. • Las ONG listadas ofrecen asesoría jurídica gratuita o de bajo coste. | | --- |<\/p>` }
+<div class="tramites-info"><strong>ℹ️  Nota sobre los links<\/strong><ul style="margin:8px 0 0 18px;padding:0;"><li style="margin-bottom:6px;line-height:1.55;">Todos los links han sido verificados a la fecha de edición (2026). Las normativas cambian: siempre confirme en las fuentes oficiales.<\/li><li style="margin-bottom:6px;line-height:1.55;">Desconfíe de gestorías que cobran grandes honorarios por trámites básicos que usted puede realizar gratuitamente.<\/li><li style="margin-bottom:6px;line-height:1.55;">Las ONG listadas ofrecen asesoría jurídica gratuita o de bajo coste.<\/li><\/ul><\/div>` }
 };
 
 const TRAMITES_SECTIONS = {
@@ -7147,7 +7233,7 @@ function renderExpNuevo(type) {
 
   // Header
   h += '<div style="padding:16px 16px 0;">';
-  h += '<div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--fog);margin-bottom:4px;">Para Expertos</div>';
+  h += '<div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--fog);margin-bottom:4px;">Tu mejor Versión</div>';
   h += '<div style="font-size:18px;font-weight:700;color:var(--ink);font-family:\'Playfair Display\',serif;margin-bottom:12px;">' + title + '</div>';
 
   // Progress bar
