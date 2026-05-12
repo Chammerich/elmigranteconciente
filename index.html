@@ -1746,7 +1746,7 @@
 <!-- TOP BAR -->
 <div class="top-bar" id="top-bar">
   <div class="top-bar-main">
-    <button class="top-logo" onclick="showHome()">⚖︎ El Migrante Consciente <span id="app-version-badge" style="font-size:9px;background:rgba(200,146,42,0.2);color:var(--gold);font-family:'DM Sans',sans-serif;font-weight:600;letter-spacing:0.5px;padding:2px 6px;border-radius:4px;margin-left:4px;">v12.46</span></button>
+    <button class="top-logo" onclick="showHome()">⚖︎ El Migrante Consciente <span id="app-version-badge" style="font-size:9px;background:rgba(200,146,42,0.2);color:var(--gold);font-family:'DM Sans',sans-serif;font-weight:600;letter-spacing:0.5px;padding:2px 6px;border-radius:4px;margin-left:4px;">v12.51</span></button>
     <div style="display:flex;align-items:center;gap:10px;">
       <div class="lang-switcher">
         <button class="lang-btn active" onclick="setLang('es',this)">ES</button>
@@ -1778,7 +1778,7 @@
   <button class="sidebar-item" onclick="navTo('prologo');closeSidebar()"><span class="sidebar-item-icon">📜</span><span class="sidebar-item-label">Prólogo</span></button>
   <button class="sidebar-item" onclick="navTo('midia');closeSidebar()"><span class="notif-dot" id="dot-sidebar-midia"></span><span class="sidebar-item-icon">☀️</span><span class="sidebar-item-label">Mi Día</span></button>
   <button class="sidebar-item" onclick="navTo('guia');closeSidebar()"><span class="notif-dot" id="dot-sidebar-guia"></span><span class="sidebar-item-icon">📖</span><span class="sidebar-item-label">El Guide</span></button>
-  <button class="sidebar-item" onclick="navTo('manifiesto');closeSidebar()"><span class="notif-dot" id="dot-sidebar-manifiesto"></span><span class="sidebar-item-icon">📜</span><span class="sidebar-item-label">Mi Manifiesto</span></button>
+  <button class="sidebar-item" onclick="navTo('manifiesto');closeSidebar()"><span class="notif-dot" id="dot-sidebar-manifiesto"></span><span class="sidebar-item-icon">📜</span><span class="sidebar-item-label">Manifiesto &amp; Contrato</span></button>
   <button class="sidebar-item" onclick="navTo('contrato');closeSidebar()"><span class="notif-dot" id="dot-sidebar-contrato"></span><span class="sidebar-item-icon" style="color:var(--gold);">⚖︎</span><span class="sidebar-item-label">Mi Contrato</span></button>
   <button class="sidebar-item" onclick="navTo('finanzas');closeSidebar()"><span class="sidebar-item-icon">💰</span><span class="sidebar-item-label">Mis Finanzas</span></button>
   <button class="sidebar-item" onclick="navTo('tramites');closeSidebar()"><span class="notif-dot" id="dot-sidebar-tramites"></span><span class="sidebar-item-icon">🗂️</span><span class="sidebar-item-label" id="sidebar-tramites-label">Migración & Trámites</span></button>
@@ -1940,42 +1940,39 @@
 <!-- SCREEN: MANIFIESTO -->
 <div class="screen" id="screen-manifiesto">
   <button class="back-btn" onclick="showHome()">← Inicio</button>
-  <div style="display:flex;background:var(--ink);padding:0 16px 12px;gap:8px;border-bottom:1px solid rgba(200,146,42,0.2);">
-    <button id="mani-tab-btn-manifiesto" onclick="switchManiTab('manifiesto')" style="flex:1;padding:8px 0;border-radius:20px;border:1px solid rgba(200,146,42,0.5);background:var(--gold);color:var(--ink);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;">📜 Manifiesto</button>
-    <button id="mani-tab-btn-contrato" onclick="switchManiTab('contrato')" style="flex:1;padding:8px 0;border-radius:20px;border:1px solid rgba(200,146,42,0.3);background:transparent;color:rgba(255,255,255,0.6);font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer;">⚖︎ Contrato</button>
-  </div>
-  <div id="mani-section-manifiesto" style="display:block;">
+  <div id="mani-section-manifiesto">
     <div class="manifiesto-hero">
       <div class="manifiesto-hero-seal">📜</div>
       <h2>Mi Manifiesto</h2>
-      <p>10 principios · Tu voz · Tu identidad</p>
+      <p>15 principios · Tu voz · Tu identidad</p>
     </div>
     <div class="manifiesto-intro">
       Este es tu manifiesto. No es poesía. No es motivación vacía. Es estrategia. Es claridad. Es poder.<br><br>
       Confirma cada afirmación, recházala, o marca tus dudas — las dudas quedan abiertas en tu diario hasta que decides.
     </div>
     <div id="manifiesto-container"></div>
-  </div>
-  <div id="mani-section-contrato" style="display:none;padding-bottom:80px;">
-    <div class="contrato-hero" style="text-align:center;padding:24px 20px 16px;">
-      <div style="font-size:32px;color:var(--gold);">⚖︎</div>
-      <h2 style="font-family:'Playfair Display',serif;color:var(--ink);margin:8px 0 4px;">El Contrato del Migrante</h2>
-      <p style="font-size:13px;color:var(--fog);">14 compromisos · Tu firma más importante</p>
+    <div style="margin:8px 16px 0;padding:16px;background:var(--card-bg);border:1px solid var(--border);border-radius:14px;">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:4px;">✍️ Mis compromisos personales</div>
+      <div style="font-size:12px;color:var(--fog);margin-bottom:12px;line-height:1.5;">Añade hasta 3 compromisos propios.</div>
+      <div id="custom-puntos-list"></div>
+      <div id="custom-puntos-add"></div>
     </div>
-    <div id="puntos-container-2"></div>
+    <div style="margin:12px 16px 24px;padding:18px;background:rgba(200,146,42,0.06);border:1px solid rgba(200,146,42,0.25);border-radius:14px;">
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;">⚖︎ Generar mi Contrato Oficial</div>
+      <div style="display:flex;gap:8px;margin-bottom:8px;">
+        <select id="contrato-titulo" onchange="saveContratoProfile()" style="width:90px;border:1px solid var(--border);border-radius:8px;padding:8px 10px;font-size:13px;background:var(--cream);color:var(--ink);outline:none;">
+          <option value="Don">Don</option>
+          <option value="Doña">Doña</option>
+        </select>
+        <input id="contrato-nombre" type="text" placeholder="Tu nombre completo" style="flex:1;border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:13px;background:var(--cream);color:var(--ink);outline:none;" oninput="saveContratoProfile()">
+      </div>
+      <div style="display:flex;gap:8px;margin-bottom:14px;">
+        <input id="contrato-origen" type="text" placeholder="País de origen" style="flex:1;border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:13px;background:var(--cream);color:var(--ink);outline:none;" oninput="saveContratoProfile()">
+        <input id="contrato-ciudad" type="text" placeholder="Ciudad actual" style="flex:1;border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:13px;background:var(--cream);color:var(--ink);outline:none;" oninput="saveContratoProfile()">
+      </div>
+      <button onclick="generarContratoPDF()" style="width:100%;background:var(--gold);color:var(--ink);border:none;border-radius:10px;padding:13px;font-size:14px;font-weight:700;cursor:pointer;letter-spacing:0.5px;">⚖︎ Generar mi Contrato Oficial</button>
+    </div>
   </div>
-</div>
-
-<!-- SCREEN: CONTRATO -->
-<div class="screen" id="screen-contrato">
-  <button class="back-btn" onclick="showHome()">← Inicio</button>
-  <div class="contrato-hero">
-    <div class="seal">⚖︎</div>
-    <h2>El Contrato del Migrante</h2>
-    <p>14 compromisos · Tu firma más importante</p>
-  </div>
-  <div id="contrato-manifiesto-block" style="margin-top:14px;"></div>
-  <div style="padding-top:8px;" id="puntos-container"></div>
 </div>
 
 <!-- SCREEN: GUÍA -->
@@ -2474,7 +2471,7 @@ let CHAPTERS = getCHAPTERS();
 let WISDOMS  = getWISDOMS();
 
 // ─── STATE ──────────────────────────────────────────────────
-const APP_VERSION = 48;
+const APP_VERSION = 53;
 let state = JSON.parse(localStorage.getItem('mc_state') || '{}');
 if (state.appVersion !== APP_VERSION) {
   state.appVersion = APP_VERSION;
@@ -2523,7 +2520,7 @@ function navTo(key) {
     'midia':            () => { showScreen('midia'); initMiDia(); markVisited('midia'); },
     'guia':             () => { showScreen('guia'); initGuia(); markVisited('guia'); },
     'manifiesto':       () => { showScreen('manifiesto'); initManifiesto(); markVisited('manifiesto'); },
-    'contrato':         () => { showScreen('manifiesto'); initManifiesto(); markVisited('manifiesto'); setTimeout(()=>switchManiTab('contrato'),50); },
+    'contrato':         () => { showScreen('manifiesto'); initManifiesto(); markVisited('manifiesto'); },
     'tramites':         () => { showScreen('tramites'); initTramites(); markVisited('tramites'); },
     'finanzas':         () => { showScreen('finanzas'); initFinanzas(); markVisited('finanzas'); },
     'prologo':          () => { showScreen('prologo'); renderInicioSection('prologo', 'prologo-content'); renderReadBtn('prologo'); },
@@ -2624,30 +2621,7 @@ function initMiDia() {
 function switchMiDia(tab) { /* tabs merged in v9 — no-op */ }
 
 
-function switchManiTab(tab) {
-  ['manifiesto','contrato'].forEach(t => {
-    const sec = document.getElementById('mani-section-' + t);
-    if (sec) sec.style.display = t === tab ? 'block' : 'none';
-    const btn = document.getElementById('mani-tab-btn-' + t);
-    if (btn) {
-      btn.style.background = t === tab ? 'var(--gold)' : 'transparent';
-      btn.style.color = t === tab ? 'var(--ink)' : 'rgba(255,255,255,0.6)';
-      btn.style.fontWeight = t === tab ? '600' : '400';
-    }
-  });
-  if (tab === 'contrato') {
-    const pContainer = document.getElementById('puntos-container-2');
-    if (pContainer && !pContainer.dataset.rendered) {
-      initContrato();
-      setTimeout(() => {
-        const orig = document.getElementById('puntos-container');
-        if (orig && pContainer) pContainer.innerHTML = orig.innerHTML;
-        pContainer.dataset.rendered = '1';
-      }, 100);
-    }
-  }
-  window.scrollTo(0,0);
-}
+
 
 function updateHomeTilesVisibility() {
   const prologoTile = document.querySelector('#screen-home button[onclick*=\'prologo\']');
@@ -5607,7 +5581,14 @@ const MANIFIESTO_PUNTOS = [
       "La responsabilidad es libertad."
     ]
   }
-];
+]
+function getMANIFIESTO() {
+  const lang = typeof currentLang !== 'undefined' ? currentLang : 'es';
+  if (lang === 'en' && typeof MANIFIESTO_PUNTOS_EN !== 'undefined') return MANIFIESTO_PUNTOS_EN;
+  if (lang === 'pt' && typeof MANIFIESTO_PUNTOS_PT !== 'undefined') return MANIFIESTO_PUNTOS_PT;
+  return MANIFIESTO_PUNTOS;
+}
+;
 
 const MANIFIESTO_PUNTOS_EN = [
   { title: "I decide who I am", frases: ["I am not my past. I am not my mistakes. I am not my fears.", "I am not my family's expectations nor the fantasy others project onto me.", "I am an identity under construction. I am someone who changes, learns, and adapts."] },
@@ -5625,9 +5606,51 @@ const MANIFIESTO_PUNTOS_EN = [
 // ─── MANIFIESTO LOGIC ─────────────────────────────────────────────────────────
 function mKey(pi, fi) { return pi + '_' + fi; }
 
+
+function renderCustomPuntos() {
+  const list = document.getElementById('custom-puntos-list');
+  const add = document.getElementById('custom-puntos-add');
+  if (!list || !add) return;
+  const customs = state.customPuntos || [];
+  list.innerHTML = customs.map((c, i) => `
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+      <div style="flex:1;font-size:13px;color:var(--ink);padding:8px 12px;background:var(--cream);border:1px solid var(--border);border-radius:8px;">${c}</div>
+      <button onclick="removeCustomPunto(${i})" style="border:none;background:none;color:var(--fog);font-size:18px;cursor:pointer;padding:4px;">×</button>
+    </div>`).join('');
+  if (customs.length < 3) {
+    add.innerHTML = `<button onclick="addCustomPunto()" style="width:100%;border:1px dashed rgba(200,146,42,0.4);background:none;border-radius:8px;padding:10px;font-size:13px;color:var(--gold);cursor:pointer;">+ Añadir compromiso</button>`;
+  } else {
+    add.innerHTML = '';
+  }
+}
+function addCustomPunto() {
+  const text = prompt('Tu compromiso personal:');
+  if (!text || !text.trim()) return;
+  if (!state.customPuntos) state.customPuntos = [];
+  if (state.customPuntos.length >= 3) return;
+  state.customPuntos.push(text.trim());
+  saveState();
+  renderCustomPuntos();
+}
+function removeCustomPunto(i) {
+  if (!state.customPuntos) return;
+  state.customPuntos.splice(i, 1);
+  saveState();
+  renderCustomPuntos();
+}
 function initManifiesto() {
   renderManifiesto();
+  renderCustomPuntos();
   renderDiarioOpenPuntos();
+  const p = state.profile || {};
+  const t = document.getElementById('contrato-titulo');
+  const n = document.getElementById('contrato-nombre');
+  const o = document.getElementById('contrato-origen');
+  const c = document.getElementById('contrato-ciudad');
+  if (t) t.value = p.titulo || 'Don';
+  if (n) n.value = p.nombre || '';
+  if (o) o.value = p.origen || '';
+  if (c) c.value = p.ciudad || '';
 }
 
 function renderManifiesto() {
@@ -7317,6 +7340,19 @@ function switchExpProfTab(tab) {
 
 
 
+
+function saveContratoProfile() {
+  if (!state.profile) state.profile = {};
+  const t = document.getElementById('contrato-titulo');
+  const n = document.getElementById('contrato-nombre');
+  const o = document.getElementById('contrato-origen');
+  const c = document.getElementById('contrato-ciudad');
+  if (t) state.profile.titulo = t.value;
+  if (n) state.profile.nombre = n.value;
+  if (o) state.profile.origen = o.value;
+  if (c) state.profile.ciudad = c.value;
+  saveState();
+}
 function generarContratoPDF() {
   const p = state.profile || {};
   const titulo = p.titulo || 'Don';
@@ -7324,6 +7360,8 @@ function generarContratoPDF() {
   const origen = p.origen || '___________';
   const ciudad = p.ciudad || '___________';
   const fecha = new Date().toLocaleDateString('es-ES', {day:'numeric', month:'long', year:'numeric'});
+  const customs = state.customPuntos || [];
+  const numeros = ['DECIMOQUINTO', 'DECIMOSEXTO', 'DECIMOSÉPTIMO'];
 
   const puntosTitulos = [
     ['PRIMERA', 'IDENTIDAD', 'No soy mi pasado, ni mis errores, ni mis miedos, ni las expectativas de los demás. Soy una identidad en constante transformación.'],
@@ -7342,147 +7380,207 @@ function generarContratoPDF() {
     ['DECIMOCUARTO', 'DIGNIDAD EN LA PRECARIEDAD', 'Ninguna urgencia económica justifica la entrega del futuro por dinero inmediato. La precariedad es un puente — y los puentes se cruzan, no se habitan.']
   ];
 
-  const customs = state.customPuntos || [];
-  const numeros = ['DECIMOQUINTO', 'DECIMOSEXTO', 'DECIMOSÉPTIMO'];
+  // Load jsPDF dynamically then generate
+  function doGenerate() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+    const W = 210, H = 297;
+    const ml = 20, mr = 20, mt = 20;
+    const cw = W - ml - mr;
+    let y = mt;
+    const gold = [200, 146, 42];
+    const ink = [26, 18, 8];
+    const fog = [120, 112, 96];
+    const cream = [250, 247, 240];
 
-  let puntosHTML = '';
-  puntosTitulos.forEach(function(pt) {
-    puntosHTML += '<div class="cl"><div class="cll"><div class="clo">' + pt[0] + '</div><div class="clt">' + pt[1] + '</div></div>' +
-      '<div class="clr"><span class="cln">' + titulo + ' ' + nombre + ' declara:</span><span class="clx">' + pt[2] + '</span></div></div>';
-  });
-  customs.forEach(function(txt, i) {
-    puntosHTML += '<div class="cl cc"><div class="cll"><div class="clo">' + numeros[i] + '</div><div class="clt">Compromiso Personal</div></div>' +
-      '<div class="clr"><span class="cln">' + titulo + ' ' + nombre + ' declara:</span><span class="clx">' + txt + '</span></div></div>';
-  });
-  const html = '<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8">' +
-    '<title>Contrato — ' + nombre + '</title>' +
-    '<style>' +
-    '* { box-sizing: border-box; margin: 0; padding: 0; }' +
-    'body { font-family: "Book Antiqua","Palatino Linotype",Palatino,Georgia,serif; background: #f0ebe0; color: #1a1208; }' +
-    '.page { max-width: 760px; margin: 0 auto; background: #faf7f0; padding: 64px 72px 80px; position: relative; overflow: hidden; box-shadow: 0 0 40px rgba(0,0,0,0.12); }' +
-    '.wm { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%) rotate(-30deg); font-size: 240px; color: rgba(200,146,42,0.05); pointer-events: none; user-select: none; line-height: 1; z-index: 0; }' +
-    '.c { position: relative; z-index: 1; }' +
-    '.hdr { text-align: center; margin-bottom: 40px; }' +
-    '.hdr-line { height: 3px; background: linear-gradient(to right,transparent,#c8922a 20%,#c8922a 80%,transparent); margin-bottom: 32px; }' +
-    '.hdr-line2 { height: 1px; background: linear-gradient(to right,transparent,#c8922a 20%,#c8922a 80%,transparent); margin-top: 24px; }' +
-    '.seal { font-size: 52px; display: block; margin-bottom: 18px; }' +
-    '.dp { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: #a09080; margin-bottom: 10px; }' +
-    '.dt { font-size: 24px; font-weight: bold; color: #1a1208; margin-bottom: 8px; }' +
-    '.ds { font-size: 14px; font-style: italic; color: #7a7060; margin-bottom: 20px; }' +
-    '.nb { display: inline-block; border: 1px solid #d4c4a0; border-radius: 4px; padding: 10px 20px; font-size: 12px; font-style: italic; color: #6a6050; background: rgba(200,146,42,0.04); }' +
-    '.sdiv { display: flex; align-items: center; gap: 16px; margin: 36px 0 20px; }' +
-    '.sdiv::before,.sdiv::after { content: ""; flex: 1; height: 1px; background: #d4c4a0; }' +
-    '.sl { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: #c8922a; white-space: nowrap; }' +
-    '.pg { display: grid; grid-template-columns: 1fr auto 1fr; gap: 0; align-items: start; margin-bottom: 16px; }' +
-    '.pb { border: 1px solid #ddd4bc; border-radius: 6px; padding: 18px 20px; background: rgba(200,146,42,0.025); }' +
-    '.pl { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: #c8922a; margin-bottom: 10px; }' +
-    '.pn { font-size: 17px; font-weight: bold; color: #1a1208; margin-bottom: 12px; border-bottom: 1px solid #e8dfc8; padding-bottom: 8px; }' +
-    '.pr { font-size: 11px; line-height: 2.1; color: #5a5040; }' +
-    '.pr b { font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: #a09080; display: block; font-weight: normal; }' +
-    '.pnota { font-size: 11px; font-style: italic; color: #8a8070; line-height: 1.7; margin-top: 12px; }' +
-    '.yc { display: flex; align-items: center; justify-content: center; padding: 0 16px; font-size: 22px; color: #c8922a; font-style: italic; }' +
-    '.di { font-size: 12px; line-height: 1.9; color: #3a3028; margin-bottom: 10px; padding-left: 28px; position: relative; }' +
-    '.di .dn { position: absolute; left: 0; color: #c8922a; font-weight: bold; font-size: 11px; }' +
-    '.cl { margin-bottom: 14px; display: grid; grid-template-columns: 150px 1fr; border: 1px solid #e4dac8; border-radius: 4px; overflow: hidden; }' +
-    '.cll { background: rgba(200,146,42,0.07); padding: 14px 16px; border-right: 2px solid #c8922a; }' +
-    '.clo { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: #c8922a; margin-bottom: 5px; }' +
-    '.clt { font-size: 12px; font-weight: bold; color: #1a1208; line-height: 1.3; }' +
-    '.clr { padding: 14px 18px; background: #faf7f0; }' +
-    '.cln { font-size: 11px; color: #c8922a; font-weight: bold; display: block; margin-bottom: 4px; }' +
-    '.clx { font-size: 12px; line-height: 1.85; color: #3a3028; font-style: italic; }' +
-    '.cc .cll { background: rgba(138,130,120,0.06); border-right-color: #a09080; }' +
-    '.cc .clo { color: #a09080; }' +
-    '.cc .cln { color: #a09080; }' +
-    '.fi { font-size: 12px; font-style: italic; color: #6a6050; text-align: center; line-height: 1.8; margin-bottom: 36px; }' +
-    '.fg { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }' +
-    '.fb { text-align: center; }' +
-    '.fe { height: 48px; border-bottom: 1px solid #1a1208; margin-bottom: 12px; }' +
-    '.fn { font-size: 13px; font-weight: bold; color: #1a1208; margin-bottom: 4px; }' +
-    '.fr { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: #a09080; }' +
-    '.ft { text-align: center; margin-top: 48px; padding-top: 28px; }' +
-    '.ftl { height: 1px; background: linear-gradient(to right,transparent,#d4c4a0 30%,#d4c4a0 70%,transparent); margin-bottom: 20px; }' +
-    '.fs { font-size: 28px; color: #c8922a; margin-bottom: 8px; }' +
-    '.fl { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #a09080; }' +
-    '@media print { body{background:#fff;} .page{box-shadow:none;padding:32px 48px;} .np{display:none!important;} }' +
-    '</style></head><body>' +
-    '<div class="page"><div class="wm">⚖</div><div class="c">' +
-    '<div class="hdr"><div class="hdr-line"></div><span class="seal">⚖︎</span>' +
-    '<div class="dp">Escritura Privada de Compromiso Personal</div>' +
-    '<div class="dt">El Migrante Consciente</div>' +
-    '<div class="ds">Otorgada ante el Notario del Consciente</div>' +
-    '<div class="nb">Yo, el abajo firmante, notario público en el universo, en una galaxia cercana, certifico lo siguiente</div>' +
-    '<div class="hdr-line2"></div></div>' +
-    '<div class="sdiv"><span class="sl">Las Partes</span></div>' +
-    '<div class="pg">' +
-    '<div class="pb"><div class="pl">Comparece</div><div class="pn">' + titulo + ' ' + nombre + '</div>' +
-    '<div class="pr"><b>En calidad de</b>Migrante Presente</div>' +
-    '<div class="pr"><b>País de origen</b>' + origen + '</div>' +
-    '<div class="pr"><b>Ciudad actual</b>' + ciudad + '</div>' +
-    '<div class="pr"><b>Fecha</b>' + fecha + '</div></div>' +
-    '<div class="yc">Y</div>' +
-    '<div class="pb"><div class="pl">En representación de</div><div class="pn">' + titulo + ' ' + nombre + '</div>' +
-    '<div class="pr"><b>En calidad de</b>Migrante Futuro</div>' +
-    '<div class="pnota">' + titulo + ' ' + nombre + ' (presente) actúa como representante moral de su yo futuro, el cual queda protegido mediante este documento.</div></div>' +
-    '</div>' +
-    '<div class="sdiv"><span class="sl">Declaración Fundamental</span></div>' +
-    '<div class="di"><span class="dn">I.</span>Se encuentra conscientemente inmerso en un proceso de migración y reorientación personal.</div>' +
-    '<div class="di"><span class="dn">II.</span>Reconoce la necesidad de establecer normas claras, firmes y autoimpuestas.</div>' +
-    '<div class="di"><span class="dn">III.</span>Desea afirmar solemnemente su compromiso consigo mismo.</div>' +
-    '<div class="sdiv"><span class="sl">Declaración</span></div>' +
-    puntosHTML +
-    '<div class="sdiv"><span class="sl">Firma</span></div>' +
-    '<div class="fi">Para darle de ello, emite este certificado, plenamente consciente de su significado simbólico, moral y vital.</div>' +
-    '<div class="fg">' +
-    '<div class="fb"><div class="fe"></div><div class="fn">' + titulo + ' ' + nombre + '</div><div class="fr">Migrante Presente</div></div>' +
-    '<div class="fb"><div class="fe"></div><div class="fn">El Notario del Consciente</div><div class="fr">Notario Público de la Conciencia</div></div>' +
-    '</div>' +
-    '<div class="ft"><div class="ftl"></div><div class="fs">⚖︎</div><div class="fl">Observaré · Recordaré · Cumpliré</div></div>' +
-    '</div></div>' +
-    '<div class="np" style="text-align:center;padding:24px;background:#f0ebe0;">' +
-    '<button onclick="window.print()" style="background:#c8922a;color:#1a1208;border:none;border-radius:10px;padding:13px 36px;font-size:14px;font-weight:700;cursor:pointer;letter-spacing:0.5px;">🖨 Guardar como PDF</button>' +
-    '</div></body></html>';
+    function checkY(needed) {
+      if (y + needed > H - 20) { doc.addPage(); y = mt; }
+    }
 
-    // Show in-app overlay — no popup blocker issues
-    // Remove existing overlay
-  const oldOv = document.getElementById('contrato-pdf-overlay');
-  if (oldOv) oldOv.remove();
+    // Header gold line
+    doc.setDrawColor(...gold); doc.setLineWidth(0.8);
+    doc.line(ml, y, W - mr, y); y += 1;
+    doc.setLineWidth(0.3); doc.line(ml, y, W - mr, y); y += 6;
 
-  // Create overlay with iframe srcdoc so CSS applies correctly
-  const overlay = document.createElement('div');
-  overlay.id = 'contrato-pdf-overlay';
-  overlay.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.88);z-index:9999;display:flex;flex-direction:column;';
+    // Seal
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(18);
+    doc.setTextColor(...gold);
+    doc.text('⚖', W/2, y, {align:'center'}); y += 7;
 
-  // Top bar
-  const bar = document.createElement('div');
-  bar.style.cssText = 'flex-shrink:0;display:flex;justify-content:space-between;align-items:center;padding:12px 20px;background:#1a1208;';
-  bar.innerHTML = '<span style="font-size:13px;font-weight:600;color:#c8922a;letter-spacing:1px;">⚖︎ Mi Contrato Oficial</span>' +
-    '<div style="display:flex;gap:8px;">' +
-    '<button id="btn-print-contrato" style="background:#c8922a;color:#1a1208;border:none;border-radius:8px;padding:8px 18px;font-size:13px;font-weight:700;cursor:pointer;">🖨 PDF</button>' +
-    '<button id="btn-close-contrato" style="background:none;border:1px solid rgba(255,255,255,0.3);border-radius:8px;padding:8px 14px;font-size:13px;color:rgba(255,255,255,0.8);cursor:pointer;">✕ Cerrar</button>' +
-    '</div>';
-  overlay.appendChild(bar);
+    // Title
+    doc.setFontSize(9); doc.setFont('helvetica', 'normal');
+    doc.setTextColor(...fog);
+    doc.text('ESCRITURA PRIVADA DE COMPROMISO PERSONAL', W/2, y, {align:'center'}); y += 5;
 
-  // iframe with srcdoc
-  const iframe = document.createElement('iframe');
-  iframe.style.cssText = 'flex:1;border:none;background:#f0ebe0;';
-  iframe.setAttribute('sandbox', 'allow-scripts allow-modals allow-same-origin');
-  iframe.setAttribute('srcdoc', html);
-  overlay.appendChild(iframe);
+    doc.setFontSize(14); doc.setFont('helvetica', 'bold');
+    doc.setTextColor(...ink);
+    doc.text('El Migrante Consciente', W/2, y, {align:'center'}); y += 5;
 
-  document.body.appendChild(overlay);
+    doc.setFontSize(8); doc.setFont('helvetica', 'italic');
+    doc.setTextColor(...fog);
+    doc.text('Otorgada ante el Notario del Consciente', W/2, y, {align:'center'}); y += 5;
 
-  // Wire up buttons after DOM insertion
-  document.getElementById('btn-close-contrato').onclick = function() { overlay.remove(); };
-  document.getElementById('btn-print-contrato').onclick = function() {
-    const b = new Blob([html], {type:'text/html;charset=utf-8'});
-    const u = URL.createObjectURL(b);
-    const a = document.createElement('a');
-    a.href = u; a.target = '_blank'; a.rel = 'noopener noreferrer';
-    document.body.appendChild(a); a.click(); document.body.removeChild(a);
-    setTimeout(function(){ URL.revokeObjectURL(u); }, 5000);
-  };
+    doc.setFontSize(7.5); doc.setFont('helvetica', 'normal');
+    doc.text('Yo, el abajo firmante, notario público en el universo, en una galaxia cercana, certifico lo siguiente', W/2, y, {align:'center'}); y += 5;
 
+    // Bottom gold line
+    doc.setDrawColor(...gold); doc.setLineWidth(0.3);
+    doc.line(ml, y, W - mr, y); y += 8;
+
+    // Section divider
+    function sectionDiv(label) {
+      checkY(10);
+      doc.setDrawColor(...[212, 196, 160]);
+      doc.setLineWidth(0.2);
+      const lw = (cw - 50) / 2;
+      doc.line(ml, y + 2, ml + lw, y + 2);
+      doc.line(ml + lw + 50, y + 2, W - mr, y + 2);
+      doc.setFontSize(7); doc.setFont('helvetica', 'bold');
+      doc.setTextColor(...gold);
+      doc.text(label.toUpperCase(), W/2, y + 3.5, {align:'center'});
+      y += 8;
+    }
+
+    // Las Partes
+    sectionDiv('Las Partes');
+
+    // Two party boxes
+    const bw = (cw - 8) / 2;
+    const bh = 36;
+    checkY(bh + 4);
+
+    // Box left
+    doc.setFillColor(...[250, 247, 240]); doc.setDrawColor(...[212, 196, 160]);
+    doc.setLineWidth(0.3);
+    doc.roundedRect(ml, y, bw, bh, 2, 2, 'FD');
+    doc.setFontSize(6.5); doc.setFont('helvetica', 'bold'); doc.setTextColor(...gold);
+    doc.text('COMPARECE', ml + 4, y + 5);
+    doc.setFontSize(9); doc.setTextColor(...ink);
+    doc.text(titulo + ' ' + nombre, ml + 4, y + 11);
+    doc.setDrawColor(...[212, 196, 160]); doc.setLineWidth(0.2);
+    doc.line(ml + 4, y + 13, ml + bw - 4, y + 13);
+    doc.setFontSize(6.5); doc.setFont('helvetica', 'normal'); doc.setTextColor(...fog);
+    doc.text('En calidad de', ml + 4, y + 18); doc.setTextColor(...ink); doc.text('Migrante Presente', ml + 4, y + 22);
+    doc.setTextColor(...fog); doc.text('País de origen', ml + 4, y + 26); doc.setTextColor(...ink); doc.text(origen, ml + 4, y + 30);
+    doc.setTextColor(...fog); doc.text('Ciudad actual', ml + 4, y + 33.5); doc.setTextColor(...ink); doc.text(ciudad, ml + 4 + 22, y + 33.5);
+
+    // Y connector
+    doc.setFontSize(11); doc.setFont('helvetica', 'italic'); doc.setTextColor(...gold);
+    doc.text('Y', W/2, y + bh/2 + 2, {align:'center'});
+
+    // Box right
+    const rx = ml + bw + 8;
+    doc.setFillColor(...[250, 247, 240]); doc.setDrawColor(...[212, 196, 160]);
+    doc.roundedRect(rx, y, bw, bh, 2, 2, 'FD');
+    doc.setFontSize(6.5); doc.setFont('helvetica', 'bold'); doc.setTextColor(...gold);
+    doc.text('EN REPRESENTACIÓN DE', rx + 4, y + 5);
+    doc.setFontSize(9); doc.setTextColor(...ink);
+    doc.text(titulo + ' ' + nombre, rx + 4, y + 11);
+    doc.setDrawColor(...[212, 196, 160]); doc.setLineWidth(0.2);
+    doc.line(rx + 4, y + 13, rx + bw - 4, y + 13);
+    doc.setFontSize(6.5); doc.setFont('helvetica', 'normal'); doc.setTextColor(...fog);
+    doc.text('En calidad de', rx + 4, y + 18); doc.setTextColor(...ink); doc.text('Migrante Futuro', rx + 4, y + 22);
+    doc.setFontSize(6); doc.setFont('helvetica', 'italic'); doc.setTextColor(...fog);
+    const nota = titulo + ' ' + nombre + ' (presente) actúa como representante moral de su yo futuro.';
+    const notaLines = doc.splitTextToSize(nota, bw - 8);
+    doc.text(notaLines, rx + 4, y + 28);
+    y += bh + 8;
+
+    // Declaración Fundamental
+    sectionDiv('Declaración Fundamental');
+    const fundLines = [
+      'I.   Se encuentra conscientemente inmerso en un proceso de migración y reorientación personal.',
+      'II.  Reconoce la necesidad de establecer normas claras, firmes y autoimpuestas.',
+      'III. Desea afirmar solemnemente su compromiso consigo mismo.'
+    ];
+    fundLines.forEach(line => {
+      checkY(6);
+      doc.setFontSize(7.5); doc.setFont('helvetica', 'normal'); doc.setTextColor(...ink);
+      doc.text(line, ml, y); y += 5;
+    });
+    y += 3;
+
+    // Declaración — clauses
+    sectionDiv('Declaración');
+
+    const allPuntos = puntosTitulos.concat(
+      customs.map((txt, i) => [numeros[i] || ('PUNTO '+(15+i)), 'COMPROMISO PERSONAL', txt])
+    );
+
+    allPuntos.forEach(function(pt) {
+      const textLines = doc.splitTextToSize(titulo + ' ' + nombre + ' declara: ' + pt[2], cw - 36);
+      const boxH = Math.max(14, textLines.length * 4 + 8);
+      checkY(boxH + 2);
+
+      // Left col (gold bg)
+      doc.setFillColor(200, 146, 42, 0.1);
+      doc.setDrawColor(...[228, 218, 200]);
+      doc.setLineWidth(0.2);
+      doc.rect(ml, y, 34, boxH, 'FD');
+      doc.setFillColor(...gold); doc.rect(ml, y, 2, boxH, 'F'); // gold left border
+      doc.setFontSize(5.5); doc.setFont('helvetica', 'bold'); doc.setTextColor(...gold);
+      doc.text(pt[0], ml + 4, y + 5);
+      doc.setFontSize(7); doc.setTextColor(...ink);
+      const titleLines = doc.splitTextToSize(pt[1], 26);
+      doc.text(titleLines, ml + 4, y + 9);
+
+      // Right col
+      doc.rect(ml + 34, y, cw - 34, boxH, 'D');
+      doc.setFontSize(6); doc.setFont('helvetica', 'bold'); doc.setTextColor(...gold);
+      doc.text(titulo + ' ' + nombre + ' declara:', ml + 37, y + 5);
+      doc.setFontSize(6.5); doc.setFont('helvetica', 'italic'); doc.setTextColor(...[58, 48, 40]);
+      doc.text(textLines, ml + 37, y + 10);
+
+      y += boxH + 2;
+    });
+
+    y += 4;
+
+    // Firma
+    sectionDiv('Firma');
+    checkY(10);
+    doc.setFontSize(7.5); doc.setFont('helvetica', 'italic'); doc.setTextColor(...fog);
+    doc.text('Para darle de ello, emite este certificado, plenamente consciente de su significado simbólico, moral y vital.', W/2, y, {align:'center'}); y += 8;
+
+    // Signature lines
+    checkY(24);
+    doc.setDrawColor(...ink); doc.setLineWidth(0.3);
+    doc.line(ml, y + 16, ml + bw, y + 16);
+    doc.line(rx, y + 16, rx + bw, y + 16);
+    doc.setFontSize(8); doc.setFont('helvetica', 'bold'); doc.setTextColor(...ink);
+    doc.text(titulo + ' ' + nombre, ml + bw/2, y + 20, {align:'center'});
+    doc.text('El Notario del Consciente', rx + bw/2, y + 20, {align:'center'});
+    doc.setFontSize(6.5); doc.setFont('helvetica', 'normal'); doc.setTextColor(...fog);
+    doc.text('Migrante Presente', ml + bw/2, y + 24, {align:'center'});
+    doc.text('Notario Público de la Conciencia', rx + bw/2, y + 24, {align:'center'});
+    doc.setFontSize(8); doc.setFont('helvetica', 'normal'); doc.setTextColor(...fog);
+    doc.text('Fecha: ' + fecha, W/2, y + 30, {align:'center'});
+    y += 36;
+
+    // Footer
+    checkY(12);
+    doc.setDrawColor(...gold); doc.setLineWidth(0.3);
+    doc.line(ml, y, W - mr, y); y += 6;
+    doc.setFontSize(10); doc.setFont('helvetica', 'bold'); doc.setTextColor(...gold);
+    doc.text('⚖', W/2, y, {align:'center'}); y += 5;
+    doc.setFontSize(7); doc.setFont('helvetica', 'normal');
+    doc.text('Observaré · Recordaré · Cumpliré', W/2, y, {align:'center'});
+
+    doc.save('Contrato_' + nombre.replace(/\s+/g,'_') + '.pdf');
+  }
+
+  // Load jsPDF if not loaded yet
+  if (window.jspdf && window.jspdf.jsPDF) {
+    doGenerate();
+  } else {
+    const script = document.createElement('script');
+    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
+    script.onload = doGenerate;
+    script.onerror = function() { alert('Error cargando jsPDF. Verifica tu conexión a internet.'); };
+    document.head.appendChild(script);
+  }
 }
+
 
 function exportDiarioTxt() {
   const entries = state.diario || [];
