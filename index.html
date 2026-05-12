@@ -1745,7 +1745,7 @@
 <!-- TOP BAR -->
 <div class="top-bar" id="top-bar">
   <div class="top-bar-main">
-    <button class="top-logo" onclick="showHome()">⚖︎ El Migrante Consciente <span id="app-version-badge" style="font-size:9px;background:rgba(200,146,42,0.2);color:var(--gold);font-family:'DM Sans',sans-serif;font-weight:600;letter-spacing:0.5px;padding:2px 6px;border-radius:4px;margin-left:4px;">v12.56</span></button>
+    <button class="top-logo" onclick="showHome()">⚖︎ El Migrante Consciente <span id="app-version-badge" style="font-size:9px;background:rgba(200,146,42,0.2);color:var(--gold);font-family:'DM Sans',sans-serif;font-weight:600;letter-spacing:0.5px;padding:2px 6px;border-radius:4px;margin-left:4px;">v12.57</span></button>
     <div style="display:flex;align-items:center;gap:10px;">
       <div class="lang-switcher">
         <button class="lang-btn active" onclick="setLang('es',this)">ES</button>
@@ -1791,7 +1791,7 @@
   <button class="sidebar-item" onclick="navTo('expertos');closeSidebar()"><span class="notif-dot" id="dot-sidebar-expertos"></span><span class="sidebar-item-icon">🔬</span><span class="sidebar-item-label">Para Expertos</span></button>
   <button class="sidebar-sub-item" onclick="navTo('exp-autor');closeSidebar()"><span class="sidebar-item-icon" style="font-size:13px;opacity:0.5;">›</span><span class="sidebar-sub-item-label">Sobre el autor</span></button>
   <button class="sidebar-sub-item" onclick="navTo('exp-analisis');closeSidebar()"><span class="sidebar-item-icon" style="font-size:13px;opacity:0.5;">›</span><span class="sidebar-sub-item-label">Analizarte a ti mismo</span></button>
-  <button class="sidebar-sub-item" onclick="navTo('exp-inconsciente');closeSidebar()"><span class="sidebar-item-icon" style="font-size:13px;opacity:0.5;">›</span><span class="sidebar-sub-item-label">El inconsciente y su lenguaje</span></button>
+  
   <button class="sidebar-sub-item" onclick="navTo('exp-comunicacion');closeSidebar()"><span class="sidebar-item-icon" style="font-size:13px;opacity:0.5;">›</span><span class="sidebar-sub-item-label">Comunicación y liderazgo</span></button>
   <div class="sidebar-divider"></div>
   <div style="padding:14px 16px;border-top:1px solid rgba(255,255,255,0.08);">
@@ -1870,13 +1870,13 @@
     <button class="home-tile gold-tile" onclick="navTo('exp-nuevo')" style="border:2px solid var(--gold);"><div class="home-tile-icon">🧠</div><div class="home-tile-body"><div class="home-tile-title">Resiliencia & Trauma</div><div class="home-tile-sub">Textos completos · Bloques · Glosario · Descarga</div></div><div class="home-tile-arrow">›</div></button>
     <button class="home-tile" onclick="navTo('exp-autor')"><div class="home-tile-icon">👤</div><div class="home-tile-body"><div class="home-tile-title">Sobre el autor</div><div class="home-tile-sub">Reflexiones personales y filosóficas del autor</div></div><div class="home-tile-arrow">›</div></button>
     <button class="home-tile" onclick="navTo('exp-analisis')"><div class="home-tile-icon">🪞</div><div class="home-tile-body"><div class="home-tile-title">Analizarte a ti mismo</div><div class="home-tile-sub">El autoanálisis como fundamento del desarrollo individual.</div></div><div class="home-tile-arrow">›</div></button>
-    <button class="home-tile" onclick="navTo('exp-inconsciente')"><div class="home-tile-icon">🌊</div><div class="home-tile-body"><div class="home-tile-title">El inconsciente y su lenguaje</div><div class="home-tile-sub">Sueños, símbolos y señales del mundo interior</div></div><div class="home-tile-arrow">›</div></button>
+
     <button class="home-tile" onclick="navTo('exp-comunicacion')"><div class="home-tile-icon">💬</div><div class="home-tile-body"><div class="home-tile-title">Comunicación y liderazgo</div><div class="home-tile-sub">Como jefe de tu propia vida o en el trabajo</div></div><div class="home-tile-arrow">›</div></button>
   </div>
 </div>
 <div class="screen" id="screen-exp-autor"><button class="back-btn" onclick="navTo('expertos')">← Atrás</button><div id="exp-autor-content"></div></div>
 <div class="screen" id="screen-exp-analisis"><button class="back-btn" onclick="navTo('expertos')">← Atrás</button><div id="exp-analisis-content"></div></div>
-<div class="screen" id="screen-exp-inconsciente"><button class="back-btn" onclick="navTo('expertos')">← Atrás</button><div id="exp-inconsciente-content"></div></div>
+
 <div class="screen" id="screen-exp-comunicacion"><button class="back-btn" onclick="navTo('expertos')">← Atrás</button><div id="exp-comunicacion-content"></div></div>
 
 <!-- SCREEN: HOY -->
@@ -2470,7 +2470,7 @@ let CHAPTERS = getCHAPTERS();
 let WISDOMS  = getWISDOMS();
 
 // ─── STATE ──────────────────────────────────────────────────
-const APP_VERSION = 58;
+const APP_VERSION = 59;
 let state = JSON.parse(localStorage.getItem('mc_state') || '{}');
 if (state.appVersion !== APP_VERSION) {
   state.appVersion = APP_VERSION;
@@ -2529,7 +2529,6 @@ function navTo(key) {
     'exp-nuevo':        () => { showScreen('exp-nuevo'); initExpNuevo('resiliencia'); },
     'exp-autor':        () => { showScreen('exp-autor'); renderInicioSection('anexoA', 'exp-autor-content'); },
     'exp-analisis':     () => { showScreen('exp-analisis'); renderInicioSection('anexoB', 'exp-analisis-content'); },
-    'exp-inconsciente': () => { showScreen('exp-inconsciente'); renderInicioSection('anexoC', 'exp-inconsciente-content'); },
     'exp-comunicacion': () => { showScreen('exp-comunicacion'); renderInicioSection('anexoD', 'exp-comunicacion-content'); },
   };
   if (map[key]) map[key]();
@@ -6915,9 +6914,77 @@ function renderExpNuevoInto(type, containerId) {
   container.id = origId;
 }
 
+
+function switchExpMain(section) {
+  // Hide all sections
+  ['resiliencia','resiliencia-full','trauma'].forEach(function(s) {
+    const el = document.getElementById('exp-sec-' + s);
+    if (el) el.style.display = 'none';
+  });
+  // Reset button styles
+  const btnRes = document.getElementById('exp-btn-resiliencia');
+  const btnTrauma = document.getElementById('exp-btn-trauma');
+  if (btnRes) {
+    btnRes.style.background = 'var(--card-bg)';
+    btnRes.style.color = 'var(--fog)';
+    btnRes.style.borderColor = 'var(--border)';
+    btnRes.style.fontWeight = '400';
+  }
+  if (btnTrauma) {
+    btnTrauma.style.background = 'var(--card-bg)';
+    btnTrauma.style.color = 'var(--fog)';
+    btnTrauma.style.borderColor = 'var(--border)';
+    btnTrauma.style.fontWeight = '400';
+  }
+  // Show selected
+  const target = document.getElementById('exp-sec-' + section);
+  if (target) target.style.display = 'block';
+  // Activate button
+  if (section === 'resiliencia' || section === 'resiliencia-full') {
+    if (btnRes) {
+      btnRes.style.background = 'rgba(200,146,42,0.15)';
+      btnRes.style.color = 'var(--gold)';
+      btnRes.style.borderColor = 'var(--gold)';
+      btnRes.style.fontWeight = '700';
+    }
+    if (section === 'resiliencia') {
+      expMode = 'simple';
+      initExpNuevo('resiliencia');
+    } else {
+      renderExpOriginal();
+    }
+  } else if (section === 'trauma') {
+    if (btnTrauma) {
+      btnTrauma.style.background = 'rgba(200,146,42,0.15)';
+      btnTrauma.style.color = 'var(--gold)';
+      btnTrauma.style.borderColor = 'var(--gold)';
+      btnTrauma.style.fontWeight = '700';
+    }
+    setTraumaMode('simple');
+  }
+}
+
+function setTraumaMode(mode) {
+  expMode = mode === 'expert' ? 'expert' : 'simple';
+  ['simple','expert','glosario'].forEach(function(m) {
+    const btn = document.getElementById('exp-trauma-btn-' + m);
+    if (!btn) return;
+    const active = m === mode;
+    btn.style.background = active ? 'rgba(200,146,42,0.15)' : 'var(--card-bg)';
+    btn.style.color = active ? 'var(--gold)' : 'var(--fog)';
+    btn.style.borderColor = active ? 'var(--gold)' : 'var(--border)';
+    btn.style.fontWeight = active ? '700' : '400';
+  });
+  initExpNuevoInto('trauma', 'exp-nuevo-content-trauma');
+  // For glosario mode render glosario
+  if (mode === 'glosario') renderExpGlosario();
+}
 function initExpNuevo(type) {
-  expProgress = JSON.parse(localStorage.getItem('mc_exp_progress') || '{}');
-  renderExpNuevo(type);
+  if (type === 'trauma') {
+    switchExpMain('trauma');
+  } else {
+    switchExpMain('resiliencia');
+  }
 }
 
 function saveExpProgress() {
@@ -8485,33 +8552,69 @@ function analizarCompra() {
 <div class="screen" id="screen-exp-nuevo">
   <button class="back-btn" onclick="navTo('expertos')">← Atrás</button>
 
-  <!-- Main Tabs -->
-  <div style="display:flex;gap:0;margin:0 16px 16px;border:1px solid var(--gold);border-radius:10px;overflow:hidden;background:var(--cream);">
-    <button id="exp-tab-texto" onclick="switchExpTab('texto')" style="flex:1;padding:10px 4px;font-size:12px;font-weight:600;cursor:pointer;border:none;background:var(--gold);color:var(--ink);">📖 El Texto</button>
-    <button id="exp-tab-profundizacion" onclick="switchExpTab('profundizacion')" style="flex:1;padding:10px 4px;font-size:12px;font-weight:400;cursor:pointer;border:none;background:transparent;color:rgba(255,255,255,0.6);">🔬 Profundización</button>
+  <!-- Haupt-Buttons: Resiliencia / Trauma -->
+  <div style="display:flex;gap:8px;margin:0 16px 16px;flex-wrap:wrap;">
+    <button id="exp-btn-resiliencia" onclick="switchExpMain('resiliencia')"
+      style="flex:1;min-width:120px;padding:12px 8px;font-size:13px;font-weight:700;cursor:pointer;
+             border:1px solid var(--gold);border-radius:10px;
+             background:rgba(200,146,42,0.15);color:var(--gold);">
+      🌱 Resiliencia &amp; el Inconsciente
+    </button>
+    <button id="exp-btn-trauma" onclick="switchExpMain('trauma')"
+      style="flex:1;min-width:120px;padding:12px 8px;font-size:13px;font-weight:700;cursor:pointer;
+             border:1px solid var(--border);border-radius:10px;
+             background:var(--card-bg);color:var(--fog);">
+      🧬 Trauma
+    </button>
   </div>
 
-  <!-- TAB: TEXTO -->
-  <div id="exp-sec-texto" style="display:block;">
-    <!-- Sub-tabs -->
-    <div style="display:flex;gap:4px;margin:0 16px 14px;flex-wrap:wrap;">
-      <button id="exp-texto-tab-resiliencia" onclick="switchExpTextoTab('resiliencia')" style="flex:1;min-width:80px;padding:8px 4px;font-size:11px;font-weight:600;cursor:pointer;border:1px solid var(--gold);border-radius:8px;background:rgba(200,146,42,0.15);color:var(--gold);">🌱 Resiliencia</button>
-      <button id="exp-texto-tab-trauma" onclick="switchExpTextoTab('trauma')" style="flex:1;min-width:80px;padding:8px 4px;font-size:11px;font-weight:400;cursor:pointer;border:1px solid var(--border);border-radius:8px;background:var(--cream);color:var(--fog);">🧬 Trauma</button>
-      <button id="exp-texto-tab-original" onclick="switchExpTextoTab('original')" style="flex:1;min-width:80px;padding:8px 4px;font-size:11px;font-weight:400;cursor:pointer;border:1px solid var(--border);border-radius:8px;background:var(--cream);color:var(--fog);">📜 Original</button>
+  <!-- SECTION: RESILIENCIA -->
+  <div id="exp-sec-resiliencia" style="display:block;">
+    <!-- Kurzfassung — Blöcke -->
+    <div id="exp-nuevo-content"></div>
+    <!-- Button: Gesamter Text -->
+    <div style="margin:8px 16px 24px;">
+      <button onclick="switchExpMain('resiliencia-full')"
+        style="width:100%;padding:13px;background:var(--ink);border:1px solid var(--gold);
+               border-radius:10px;color:var(--gold);font-size:13px;font-weight:600;cursor:pointer;">
+        📜 Gesamter Text — Essay completo
+      </button>
     </div>
-    <div id="exp-texto-sec-resiliencia" style="display:block;"><div id="exp-nuevo-content"></div></div>
-    <div id="exp-texto-sec-trauma" style="display:none;"><div id="exp-nuevo-content-trauma"></div></div>
-    <div id="exp-texto-sec-original" style="display:none;"><div id="exp-original-content"></div></div>
   </div>
 
-  <!-- TAB: PROFUNDIZACIÓN -->
-  <div id="exp-sec-profundizacion" style="display:none;">
-    <div style="display:flex;gap:6px;margin:0 16px 14px;">
-      <button id="exp-prof-tab-glosario" onclick="switchExpProfTab('glosario')" style="flex:1;padding:8px 4px;font-size:11px;font-weight:600;cursor:pointer;border:1px solid var(--gold);border-radius:8px;background:rgba(200,146,42,0.15);color:var(--gold);">📚 Glosario</button>
-      <button id="exp-prof-tab-download" onclick="switchExpProfTab('download')" style="flex:1;padding:8px 4px;font-size:11px;font-weight:400;cursor:pointer;border:1px solid var(--border);border-radius:8px;background:var(--cream);color:var(--fog);">⬇ Descarga</button>
+  <!-- SECTION: RESILIENCIA FULL -->
+  <div id="exp-sec-resiliencia-full" style="display:none;">
+    <button onclick="switchExpMain('resiliencia')"
+      style="margin:0 16px 12px;background:none;border:none;color:var(--gold);font-size:13px;cursor:pointer;">
+      ← Volver a la versión resumida
+    </button>
+    <div id="exp-original-content"></div>
+  </div>
+
+  <!-- SECTION: TRAUMA -->
+  <div id="exp-sec-trauma" style="display:none;">
+    <!-- Modus-Auswahl -->
+    <div style="display:flex;gap:6px;margin:0 16px 14px;flex-wrap:wrap;">
+      <button id="exp-trauma-btn-simple" onclick="setTraumaMode('simple')"
+        style="flex:1;min-width:80px;padding:8px 4px;font-size:11px;font-weight:700;cursor:pointer;
+               border:1px solid var(--gold);border-radius:8px;
+               background:rgba(200,146,42,0.15);color:var(--gold);">
+        💬 Lenguaje sencillo
+      </button>
+      <button id="exp-trauma-btn-expert" onclick="setTraumaMode('expert')"
+        style="flex:1;min-width:80px;padding:8px 4px;font-size:11px;font-weight:400;cursor:pointer;
+               border:1px solid var(--border);border-radius:8px;
+               background:var(--card-bg);color:var(--fog);">
+        🔬 Lenguaje científico
+      </button>
+      <button id="exp-trauma-btn-glosario" onclick="setTraumaMode('glosario')"
+        style="flex:1;min-width:80px;padding:8px 4px;font-size:11px;font-weight:400;cursor:pointer;
+               border:1px solid var(--border);border-radius:8px;
+               background:var(--card-bg);color:var(--fog);">
+        📚 Términos técnicos
+      </button>
     </div>
-    <div id="exp-prof-sec-glosario" style="display:block;"><div id="exp-glosario-content"></div></div>
-    <div id="exp-prof-sec-download" style="display:none;"><div id="exp-download-content"></div></div>
+    <div id="exp-nuevo-content-trauma"></div>
   </div>
 </div>
 
