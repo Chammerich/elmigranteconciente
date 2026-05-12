@@ -1745,7 +1745,7 @@
 <!-- TOP BAR -->
 <div class="top-bar" id="top-bar">
   <div class="top-bar-main">
-    <button class="top-logo" onclick="showHome()">⚖︎ El Migrante Consciente <span id="app-version-badge" style="font-size:9px;background:rgba(200,146,42,0.2);color:var(--gold);font-family:'DM Sans',sans-serif;font-weight:600;letter-spacing:0.5px;padding:2px 6px;border-radius:4px;margin-left:4px;">v12.64</span></button>
+    <button class="top-logo" onclick="showHome()">⚖︎ El Migrante Consciente <span id="app-version-badge" style="font-size:9px;background:rgba(200,146,42,0.2);color:var(--gold);font-family:'DM Sans',sans-serif;font-weight:600;letter-spacing:0.5px;padding:2px 6px;border-radius:4px;margin-left:4px;">v12.65</span></button>
     <div style="display:flex;align-items:center;gap:10px;">
       <div class="lang-switcher">
         <button class="lang-btn active" onclick="setLang('es',this)">ES</button>
@@ -2470,7 +2470,7 @@ let CHAPTERS = getCHAPTERS();
 let WISDOMS  = getWISDOMS();
 
 // ─── STATE ──────────────────────────────────────────────────
-const APP_VERSION = 66;
+const APP_VERSION = 67;
 let state = JSON.parse(localStorage.getItem('mc_state') || '{}');
 if (state.appVersion !== APP_VERSION) {
   state.appVersion = APP_VERSION;
@@ -2999,7 +2999,7 @@ const EXP_RESILIENCIA_ELAB = {
       id:'re12', title:'What your unconscious wants from you',
       simple:`Your unconscious is not your enemy. It is a part of you trying to protect you — with the only means it has.\n\nIf you listen to it early, it speaks quietly. If you ignore it too long, it shouts.\n\nAnswer it with respect. With tools. With honesty.\n\nAnd remember: every person is a perfect individual — with their history, their contradictions, their wounds and their strength. Reflection does not change you. It brings you back to yourself.`,
       expert:`Resilience is not the absence of vulnerability but the capacity for adaptive response to it. The unconscious, as an autonomous processing system, requires active attention — not control. Integration strategies (reflection, closure, reframing, visualization) constitute dialogue tools, not suppression tools. Their efficacy depends on prior training, self-perceptive honesty, and early intervention.`
-    }    {
+    },    {
       id:'re_kommentar', title:'Personal note: why this topic matters to me',
       simple:`This topic matters to me because in my past I have observed how exactly this destroyed the future of people close to me. People who suppressed everything to "function" — in the German sense of work as the supreme value.\n\nThen, at the theoretically most beautiful moment of their lives — after children, house, work, when external pressure decreases — those processes suddenly develop their full negative force.\n\nAnd not least: my own life has not been exclusively a quiet walk through paradise either. I am infinitely grateful to have learned much about these connections between body, mind, consciousness and unconscious.\n\nWhen we ignore the warnings — which at first arrive softly and gently — the unconscious becomes increasingly energetic. If we respond in time, with respect, it helps us with inspiration, strength and authentic positive energy.\n\nThere is no reason to doubt. Each person, just as they are, is a perfect individual.`,
       expert:`From a clinical perspective, the described empirical observation corresponds to the phenomenon known as deferred trauma response: symptomatology remains latent while the individual maintains external regulatory structures and emerges when these are withdrawn in the life transition phase.\n\nThe critique of psychopharmacology as first-line intervention reflects a growing consensus: serotonin reuptake inhibitors treat symptoms without addressing underlying mechanisms, generating iatrogenic dependence. Interventions based on somatic regulation and narrative therapy show superior results in longitudinal follow-up.`
