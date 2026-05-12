@@ -1745,7 +1745,7 @@
 <!-- TOP BAR -->
 <div class="top-bar" id="top-bar">
   <div class="top-bar-main">
-    <button class="top-logo" onclick="showHome()">⚖︎ El Migrante Consciente <span id="app-version-badge" style="font-size:9px;background:rgba(200,146,42,0.2);color:var(--gold);font-family:'DM Sans',sans-serif;font-weight:600;letter-spacing:0.5px;padding:2px 6px;border-radius:4px;margin-left:4px;">v12.63</span></button>
+    <button class="top-logo" onclick="showHome()">⚖︎ El Migrante Consciente <span id="app-version-badge" style="font-size:9px;background:rgba(200,146,42,0.2);color:var(--gold);font-family:'DM Sans',sans-serif;font-weight:600;letter-spacing:0.5px;padding:2px 6px;border-radius:4px;margin-left:4px;">v12.64</span></button>
     <div style="display:flex;align-items:center;gap:10px;">
       <div class="lang-switcher">
         <button class="lang-btn active" onclick="setLang('es',this)">ES</button>
@@ -2470,7 +2470,7 @@ let CHAPTERS = getCHAPTERS();
 let WISDOMS  = getWISDOMS();
 
 // ─── STATE ──────────────────────────────────────────────────
-const APP_VERSION = 65;
+const APP_VERSION = 66;
 let state = JSON.parse(localStorage.getItem('mc_state') || '{}');
 if (state.appVersion !== APP_VERSION) {
   state.appVersion = APP_VERSION;
@@ -2835,16 +2835,8 @@ const EXP_RESILIENCIA_ELAB = {
   es: [
     {
       id:'re_intro', title:'La resiliencia como brújula interior de la migración',
-      simple:`A lo largo de este texto, la resiliencia ha aparecido una y otra vez como condición silenciosa del proceso migratorio. Es la fuerza que permite soportar la soledad, sobrevivir las contradicciones culturales, no interpretar la precariedad como fracaso y mantener la propia identidad en movimiento.
-
-La resiliencia no es un talento que se tiene o no se tiene. Es una capacidad — y se puede entrenar.
-
-Este texto profundiza en el tema de forma científica, pero personal y directa. Explica cómo trabaja el inconsciente, por qué nos habla — y cómo podemos aprender a responderle.
-
-Para el migrante, este conocimiento tiene un valor especial: el cuerpo y la psique registran el estrés del cambio cultural mucho antes de que la mente pueda nombrarlo. Cuando un migrante sufre de repente insomnio, irritabilidad inexplicable o agotamiento físico, no es debilidad. Es el lenguaje del inconsciente.`,
-      expert:`La resiliencia — capacidad psíquica de resistencia y adaptación ante crisis y traumas — constituye una variable mediadora central en la investigación sobre aculturación y estrés migratorio. Los modelos de Berry (1997) identifican la resiliencia como factor protector frente a los efectos adversos del choque cultural, la pérdida de redes sociales y la ambigüedad identitaria.
-
-A diferencia de los modelos de déficit, la psicología positiva contemporánea conceptualiza la resiliencia como recurso dinámico y cultivable. El presente texto examina sus mecanismos desde una perspectiva neurobiológica y experiencial.`
+      simple:`A lo largo de este texto, la resiliencia ha aparecido una y otra vez como condición silenciosa del proceso migratorio. Es la fuerza que permite soportar la soledad, sobrevivir las contradicciones culturales, no interpretar la precariedad como fracaso y mantener la propia identidad en movimiento.\n\nLa resiliencia no es un talento que se tiene o no se tiene. Es una capacidad — y se puede entrenar.\n\nEste texto profundiza en el tema de forma científica, pero personal y directa. Explica cómo trabaja el inconsciente, por qué nos habla — y cómo podemos aprender a responderle.\n\nPara el migrante, este conocimiento tiene un valor especial: el cuerpo y la psique registran el estrés del cambio cultural mucho antes de que la mente pueda nombrarlo. Cuando un migrante sufre de repente insomnio, irritabilidad inexplicable o agotamiento físico, no es debilidad. Es el lenguaje del inconsciente.`,
+      expert:`La resiliencia — capacidad psíquica de resistencia y adaptación ante crisis y traumas — constituye una variable mediadora central en la investigación sobre aculturación y estrés migratorio. Los modelos de Berry (1997) identifican la resiliencia como factor protector frente a los efectos adversos del choque cultural, la pérdida de redes sociales y la ambigüedad identitaria.\n\nA diferencia de los modelos de déficit, la psicología positiva contemporánea conceptualiza la resiliencia como recurso dinámico y cultivable. El presente texto examina sus mecanismos desde una perspectiva neurobiológica y experiencial.`
     },
     {
       id:'re0', title:'Introducción: Por qué este texto existe',
@@ -2878,18 +2870,8 @@ A diferencia de los modelos de déficit, la psicología positiva contemporánea 
     },
     {
       id:'re_tina', title:'Otras voces: Tina Turner, Shakespeare y tú',
-      simple:`Lady Gaga y Liberace son solo dos ejemplos. Hay muchos más.
-
-Tina Turner sobrevivió años de abuso y construyó a partir de ello una carrera y una vida que definió completamente como suya. No borrando el pasado — integrándolo.
-
-Shakespeare escribió sobre la oscuridad humana con una honestidad que cuatro siglos después sigue siendo exacta. Cada tragedia suya es un manual de lo que ocurre cuando no miramos lo que hay dentro.
-
-La inspiración está en todas partes: en la música, en el arte, en la literatura. La clave no es copiar — es identificar qué resuena contigo específicamente.
-
-No estás solo en lo que sientes. En algún lugar, alguien ya lo vivió y encontró una forma de convertirlo en algo. Busca esa persona. Deja que sea tu inspiración.`,
-      expert:`La función terapéutica del testimonio artístico ha sido documentada en la investigación sobre narrative exposure therapy (NET) y en los estudios de Pennebaker sobre escritura expresiva. La exposición a narrativas de superación activa procesos de identificación vicaria que facilitan la elaboración emocional propia.
-
-Turner y Shakespeare representan polos distintos del mismo fenómeno: la transformación de la experiencia traumática en expresión culturalmente transmisible. Para el migrante en proceso de reconstrucción identitaria, estos referentes ofrecen no solo consuelo sino modelos cognitivos de integración.`
+      simple:`Lady Gaga y Liberace son solo dos ejemplos. Hay muchos más.\n\nTina Turner sobrevivió años de abuso y construyó a partir de ello una carrera y una vida que definió completamente como suya. No borrando el pasado — integrándolo.\n\nShakespeare escribió sobre la oscuridad humana con una honestidad que cuatro siglos después sigue siendo exacta. Cada tragedia suya es un manual de lo que ocurre cuando no miramos lo que hay dentro.\n\nLa inspiración está en todas partes: en la música, en el arte, en la literatura. La clave no es copiar — es identificar qué resuena contigo específicamente.\n\nNo estás solo en lo que sientes. En algún lugar, alguien ya lo vivió y encontró una forma de convertirlo en algo. Busca esa persona. Deja que sea tu inspiración.`,
+      expert:`La función terapéutica del testimonio artístico ha sido documentada en la investigación sobre narrative exposure therapy (NET) y en los estudios de Pennebaker sobre escritura expresiva. La exposición a narrativas de superación activa procesos de identificación vicaria que facilitan la elaboración emocional propia.\n\nTurner y Shakespeare representan polos distintos del mismo fenómeno: la transformación de la experiencia traumática en expresión culturalmente transmisible. Para el migrante en proceso de reconstrucción identitaria, estos referentes ofrecen no solo consuelo sino modelos cognitivos de integración.`
     },
     {
       id:'re6', title:'El lenguaje del inconsciente',
@@ -2923,92 +2905,30 @@ Turner y Shakespeare representan polos distintos del mismo fenómeno: la transfo
     },
     {
       id:'re_kommentar', title:'Comentario personal: por qué este tema me importa',
-      simple:`Este tema me importa porque en mi pasado he observado cómo exactamente esto destruyó el futuro de personas cercanas. Personas que reprimieron todo para "funcionar" — en el sentido alemán del trabajo como valor supremo.
-
-Luego, en el momento teóricamente más hermoso de su vida — tras los hijos, la casa, el trabajo, cuando la presión externa disminuye — esos procesos desarrollan de repente toda su fuerza negativa. Y entonces la medicina convencional está completamente desbordada.
-
-Y no menos importante: mi propia vida tampoco ha sido exclusivamente un paseo tranquilo por el paraíso. Estoy infinitamente agradecido de haber aprendido mucho sobre estas conexiones entre cuerpo, mente, consciencia e inconsciente.
-
-Cuando ignoramos las advertencias — que al principio llegan suaves y amables — el inconsciente se vuelve cada vez más enérgico. Si respondemos a tiempo, con respeto, nos ayuda con inspiración, fuerza y energía positiva auténtica.
-
-No hay razón para dudar. Cada persona, tal como es, es un individuo perfecto.`,
-      expert:`Desde una perspectiva clínica, la observación empírica descrita corresponde al fenómeno conocido como respuesta traumática diferida: la sintomatología permanece latente mientras el individuo mantiene estructuras externas de regulación y emerge cuando estas se retiran en la fase de transición vital.
-
-La crítica a la psicofarmacología como primera línea de intervención refleja un consenso creciente: los inhibidores de recaptación de serotonina tratan los síntomas sin abordar los mecanismos subyacentes, generando dependencia iatrogénica. Las intervenciones basadas en regulación somática y terapia narrativa muestran resultados superiores en seguimiento longitudinal.`
+      simple:`Este tema me importa porque en mi pasado he observado cómo exactamente esto destruyó el futuro de personas cercanas. Personas que reprimieron todo para "funcionar" — en el sentido alemán del trabajo como valor supremo.\n\nLuego, en el momento teóricamente más hermoso de su vida — tras los hijos, la casa, el trabajo, cuando la presión externa disminuye — esos procesos desarrollan de repente toda su fuerza negativa. Y entonces la medicina convencional está completamente desbordada.\n\nY no menos importante: mi propia vida tampoco ha sido exclusivamente un paseo tranquilo por el paraíso. Estoy infinitamente agradecido de haber aprendido mucho sobre estas conexiones entre cuerpo, mente, consciencia e inconsciente.\n\nCuando ignoramos las advertencias — que al principio llegan suaves y amables — el inconsciente se vuelve cada vez más enérgico. Si respondemos a tiempo, con respeto, nos ayuda con inspiración, fuerza y energía positiva auténtica.\n\nNo hay razón para dudar. Cada persona, tal como es, es un individuo perfecto.`,
+      expert:`Desde una perspectiva clínica, la observación empírica descrita corresponde al fenómeno conocido como respuesta traumática diferida: la sintomatología permanece latente mientras el individuo mantiene estructuras externas de regulación y emerge cuando estas se retiran en la fase de transición vital.\n\nLa crítica a la psicofarmacología como primera línea de intervención refleja un consenso creciente: los inhibidores de recaptación de serotonina tratan los síntomas sin abordar los mecanismos subyacentes, generando dependencia iatrogénica. Las intervenciones basadas en regulación somática y terapia narrativa muestran resultados superiores en seguimiento longitudinal.`
     },
     {
       id:'re12', title:'Lo que el inconsciente quiere de ti',
       simple:`Tu inconsciente no es tu enemigo. Es parte de ti que intenta protegerte — con los únicos medios que tiene.\n\nSi lo escuchas pronto, habla en voz baja. Si lo ignoras mucho tiempo, grita.\n\nResponde con respeto. Con herramientas. Con honestidad.\n\nY recuerda: cada persona es un individuo perfecto — con su historia, sus contradicciones, sus heridas y su fuerza. La reflexión no te cambia. Te devuelve a ti mismo.`,
       expert:`La resiliencia no es ausencia de vulnerabilidad sino capacidad de respuesta adaptativa ante ella. El inconsciente, como sistema de procesamiento autónomo, requiere atención activa — no control. Las estrategias de integración (reflexión, cierre, reencuadre, visualización) constituyen herramientas de diálogo, no de supresión. Su eficacia depende del entrenamiento previo, la honestidad autoperceptiva y la intervención temprana.`
-    }
+    },
     {
       id:'re_resumen', title:'Resumen: lo que este texto quiere que te lleves',
-      simple:`La resiliencia es resistencia psíquica y la capacidad de superar crisis y reveses saliendo fortalecido.
-
-Los factores más importantes: resistencia, adaptabilidad y autorregulación.
-
-El inconsciente almacena todas las experiencias e influye en nuestro comportamiento a menudo sin que lo percibamos.
-
-La prevención se logra mediante reflexión activa, análisis y cierre consciente de experiencias — no mediante la represión.
-
-Técnicas como la visualización y el reframing ayudan a comunicarse con el inconsciente y enviar señales de control y calma.
-
-La autorreflexión honesta y el intercambio con personas de confianza fomentan la comprensión del "lenguaje" del inconsciente.
-
-Ignorar las señales de advertencia del inconsciente puede llevar a graves problemas psíquicos y físicos.
-
-La respuesta consciente a las señales del inconsciente fortalece la resiliencia y previene efectos negativos posteriores.
-
-Cada persona es un individuo perfecto — la reflexión y la adaptación ayudan a resolver conflictos entre los propios comportamientos y la realidad.
-
-Las respuestas tempranas y respetuosas a las advertencias del inconsciente conducen a más inspiración, fuerza y energía positiva.`,
-      expert:`Síntesis integradora: La resiliencia opera a nivel neurobiológico (regulación del eje HPA, plasticidad prefrontal), psicológico (autorregulación emocional, locus de control interno) y social (capital social, narrativas de apoyo).
-
-La comunicación con el inconsciente requiere intervención bottom-up: somática, sensorial, experiencial. Las técnicas de visualización y reframing actúan sobre los sistemas de memoria implícita y permiten la recodificación de esquemas activadores de estrés.
-
-La intervención temprana, antes de la cronificación sintomática, es el predictor más robusto de recuperación completa.`
+      simple:`La resiliencia es resistencia psíquica y la capacidad de superar crisis y reveses saliendo fortalecido.\n\nLos factores más importantes: resistencia, adaptabilidad y autorregulación.\n\nEl inconsciente almacena todas las experiencias e influye en nuestro comportamiento a menudo sin que lo percibamos.\n\nLa prevención se logra mediante reflexión activa, análisis y cierre consciente de experiencias — no mediante la represión.\n\nTécnicas como la visualización y el reframing ayudan a comunicarse con el inconsciente y enviar señales de control y calma.\n\nLa autorreflexión honesta y el intercambio con personas de confianza fomentan la comprensión del "lenguaje" del inconsciente.\n\nIgnorar las señales de advertencia del inconsciente puede llevar a graves problemas psíquicos y físicos.\n\nLa respuesta consciente a las señales del inconsciente fortalece la resiliencia y previene efectos negativos posteriores.\n\nCada persona es un individuo perfecto — la reflexión y la adaptación ayudan a resolver conflictos entre los propios comportamientos y la realidad.\n\nLas respuestas tempranas y respetuosas a las advertencias del inconsciente conducen a más inspiración, fuerza y energía positiva.`,
+      expert:`Síntesis integradora: La resiliencia opera a nivel neurobiológico (regulación del eje HPA, plasticidad prefrontal), psicológico (autorregulación emocional, locus de control interno) y social (capital social, narrativas de apoyo).\n\nLa comunicación con el inconsciente requiere intervención bottom-up: somática, sensorial, experiencial. Las técnicas de visualización y reframing actúan sobre los sistemas de memoria implícita y permiten la recodificación de esquemas activadores de estrés.\n\nLa intervención temprana, antes de la cronificación sintomática, es el predictor más robusto de recuperación completa.`
     },
     {
       id:'re_literatura', title:'Referencias y lecturas recomendadas',
-      simple:`Para quienes quieran profundizar:
-
-Heller, J. — Resilienz: Das Geheimnis der psychischen Widerstandskraft. Junfermann. Una de las introducciones más accesibles, con ejercicios prácticos.
-
-Gruhl, M. — Die Kunst der Resilienz. Beltz. Enfoque en la resiliencia cotidiana, muy aplicable a situaciones de cambio vital.
-
-Reichhart, T. & Pusch, C. — Resilienz-Coaching. Kösel. Para quien quiera trabajar la resiliencia de forma sistemática.
-
-Brown, B. — Laufen lernt man nur durch Hinfallen. Kailash. Sobre la vulnerabilidad como fortaleza — un cambio de perspectiva fundamental.
-
-Y siempre: la observación honesta de tu propia experiencia es la fuente más valiosa. No copies — verifica la relevancia para ti mismo.`,
-      expert:`Heller, J. (2019). Resilienz: Das Geheimnis der psychischen Widerstandskraft. Junfermann. ISBN: 978-3873878132
-
-Gruhl, M. (2014). Die Kunst der Resilienz. Beltz. ISBN: 978-3407859732
-
-Reichhart, T. & Pusch, C. (2015). Resilienz-Coaching. Kösel. ISBN: 978-3466346877
-
-Brown, B. (2013). Laufen lernt man nur durch Hinfallen. Kailash. ISBN: 978-3424631076
-
-Berry, J.W. (1997). Immigration, acculturation, and adaptation. Applied Psychology, 46(1), 5-34.
-
-Pennebaker, J.W. & Smyth, J.M. (2016). Opening Up by Writing It Down. Guilford Press.
-
-Van der Kolk, B. (2014). The Body Keeps the Score. Viking Press.`
+      simple:`Para quienes quieran profundizar:\n\nHeller, J. — Resilienz: Das Geheimnis der psychischen Widerstandskraft. Junfermann. Una de las introducciones más accesibles, con ejercicios prácticos.\n\nGruhl, M. — Die Kunst der Resilienz. Beltz. Enfoque en la resiliencia cotidiana, muy aplicable a situaciones de cambio vital.\n\nReichhart, T. & Pusch, C. — Resilienz-Coaching. Kösel. Para quien quiera trabajar la resiliencia de forma sistemática.\n\nBrown, B. — Laufen lernt man nur durch Hinfallen. Kailash. Sobre la vulnerabilidad como fortaleza — un cambio de perspectiva fundamental.\n\nY siempre: la observación honesta de tu propia experiencia es la fuente más valiosa. No copies — verifica la relevancia para ti mismo.`,
+      expert:`Heller, J. (2019). Resilienz: Das Geheimnis der psychischen Widerstandskraft. Junfermann. ISBN: 978-3873878132\n\nGruhl, M. (2014). Die Kunst der Resilienz. Beltz. ISBN: 978-3407859732\n\nReichhart, T. & Pusch, C. (2015). Resilienz-Coaching. Kösel. ISBN: 978-3466346877\n\nBrown, B. (2013). Laufen lernt man nur durch Hinfallen. Kailash. ISBN: 978-3424631076\n\nBerry, J.W. (1997). Immigration, acculturation, and adaptation. Applied Psychology, 46(1), 5-34.\n\nPennebaker, J.W. & Smyth, J.M. (2016). Opening Up by Writing It Down. Guilford Press.\n\nVan der Kolk, B. (2014). The Body Keeps the Score. Viking Press.`
     },
   ],
   en: [
     {
       id:'re_intro', title:'Resilience as inner compass of migration',
-      simple:`Throughout this text, resilience has appeared again and again as the silent foundation of the migration process. It is the force that allows you to endure loneliness, survive cultural contradictions, not interpret precariousness as failure, and keep your own identity in motion.
-
-Resilience is not a talent you either have or don't have. It is a skill — and it can be trained.
-
-This text explores the topic in a scientific but personal and direct way. It explains how the unconscious works, why it speaks to us — and how we can learn to respond.
-
-For migrants, this knowledge has special value: body and psyche register the stress of cultural change long before the mind can name it. When a migrant suddenly suffers from insomnia, unexplained irritability or physical exhaustion, it is not weakness. It is the language of the unconscious.`,
-      expert:`Resilience — understood as psychological resistance and adaptation capacity in the face of crises and trauma — constitutes a central mediating variable in research on acculturation and migration stress. Berry's models (1997) identify resilience as a protective factor against the adverse effects of cultural shock, loss of social networks and identity ambiguity.
-
-Unlike deficit models, contemporary positive psychology conceptualizes resilience as a dynamic, cultivable resource. This text examines its mechanisms from a neurobiological and experiential perspective.`
+      simple:`Throughout this text, resilience has appeared again and again as the silent foundation of the migration process. It is the force that allows you to endure loneliness, survive cultural contradictions, not interpret precariousness as failure, and keep your own identity in motion.\n\nResilience is not a talent you either have or don't have. It is a skill — and it can be trained.\n\nThis text explores the topic in a scientific but personal and direct way. It explains how the unconscious works, why it speaks to us — and how we can learn to respond.\n\nFor migrants, this knowledge has special value: body and psyche register the stress of cultural change long before the mind can name it. When a migrant suddenly suffers from insomnia, unexplained irritability or physical exhaustion, it is not weakness. It is the language of the unconscious.`,
+      expert:`Resilience — understood as psychological resistance and adaptation capacity in the face of crises and trauma — constitutes a central mediating variable in research on acculturation and migration stress. Berry's models (1997) identify resilience as a protective factor against the adverse effects of cultural shock, loss of social networks and identity ambiguity.\n\nUnlike deficit models, contemporary positive psychology conceptualizes resilience as a dynamic, cultivable resource. This text examines its mechanisms from a neurobiological and experiential perspective.`
     },
     {
       id:'re0', title:'Introduction: Why this text exists',
@@ -3042,18 +2962,8 @@ Unlike deficit models, contemporary positive psychology conceptualizes resilienc
     },
     {
       id:'re_tina', title:'Other voices: Tina Turner, Shakespeare and you',
-      simple:`Lady Gaga and Liberace are just two examples. There are many more.
-
-Tina Turner survived years of abuse and built from it a career and a life she defined entirely on her own terms. Not by erasing the past — by integrating it.
-
-Shakespeare wrote about human darkness with a honesty that four centuries later is still exact. Each of his tragedies is a manual of what happens when we don't look at what is inside.
-
-Inspiration is everywhere: in music, in art, in literature. The key is not to copy — it is to identify what resonates with you specifically.
-
-You are not alone in what you feel. Somewhere, someone has already lived it and found a way to turn it into something. Find that person. Let them be your inspiration.`,
-      expert:`The therapeutic function of artistic testimony has been documented extensively in research on narrative exposure therapy (NET) and Pennebaker's studies on expressive writing. Exposure to narratives of overcoming activates vicarious identification processes that facilitate one's own emotional elaboration.
-
-Turner and Shakespeare represent different poles of the same phenomenon: the transformation of traumatic experience into culturally transmissible expression. For migrants in the process of identity reconstruction, these figures offer not only comfort but cognitive models of integration.`
+      simple:`Lady Gaga and Liberace are just two examples. There are many more.\n\nTina Turner survived years of abuse and built from it a career and a life she defined entirely on her own terms. Not by erasing the past — by integrating it.\n\nShakespeare wrote about human darkness with a honesty that four centuries later is still exact. Each of his tragedies is a manual of what happens when we don't look at what is inside.\n\nInspiration is everywhere: in music, in art, in literature. The key is not to copy — it is to identify what resonates with you specifically.\n\nYou are not alone in what you feel. Somewhere, someone has already lived it and found a way to turn it into something. Find that person. Let them be your inspiration.`,
+      expert:`The therapeutic function of artistic testimony has been documented extensively in research on narrative exposure therapy (NET) and Pennebaker's studies on expressive writing. Exposure to narratives of overcoming activates vicarious identification processes that facilitate one's own emotional elaboration.\n\nTurner and Shakespeare represent different poles of the same phenomenon: the transformation of traumatic experience into culturally transmissible expression. For migrants in the process of identity reconstruction, these figures offer not only comfort but cognitive models of integration.`
     },
     {
       id:'re6', title:'The language of the unconscious',
@@ -3091,72 +3001,18 @@ Turner and Shakespeare represent different poles of the same phenomenon: the tra
       expert:`Resilience is not the absence of vulnerability but the capacity for adaptive response to it. The unconscious, as an autonomous processing system, requires active attention — not control. Integration strategies (reflection, closure, reframing, visualization) constitute dialogue tools, not suppression tools. Their efficacy depends on prior training, self-perceptive honesty, and early intervention.`
     }    {
       id:'re_kommentar', title:'Personal note: why this topic matters to me',
-      simple:`This topic matters to me because in my past I have observed how exactly this destroyed the future of people close to me. People who suppressed everything to "function" — in the German sense of work as the supreme value.
-
-Then, at the theoretically most beautiful moment of their lives — after children, house, work, when external pressure decreases — those processes suddenly develop their full negative force.
-
-And not least: my own life has not been exclusively a quiet walk through paradise either. I am infinitely grateful to have learned much about these connections between body, mind, consciousness and unconscious.
-
-When we ignore the warnings — which at first arrive softly and gently — the unconscious becomes increasingly energetic. If we respond in time, with respect, it helps us with inspiration, strength and authentic positive energy.
-
-There is no reason to doubt. Each person, just as they are, is a perfect individual.`,
-      expert:`From a clinical perspective, the described empirical observation corresponds to the phenomenon known as deferred trauma response: symptomatology remains latent while the individual maintains external regulatory structures and emerges when these are withdrawn in the life transition phase.
-
-The critique of psychopharmacology as first-line intervention reflects a growing consensus: serotonin reuptake inhibitors treat symptoms without addressing underlying mechanisms, generating iatrogenic dependence. Interventions based on somatic regulation and narrative therapy show superior results in longitudinal follow-up.`
+      simple:`This topic matters to me because in my past I have observed how exactly this destroyed the future of people close to me. People who suppressed everything to "function" — in the German sense of work as the supreme value.\n\nThen, at the theoretically most beautiful moment of their lives — after children, house, work, when external pressure decreases — those processes suddenly develop their full negative force.\n\nAnd not least: my own life has not been exclusively a quiet walk through paradise either. I am infinitely grateful to have learned much about these connections between body, mind, consciousness and unconscious.\n\nWhen we ignore the warnings — which at first arrive softly and gently — the unconscious becomes increasingly energetic. If we respond in time, with respect, it helps us with inspiration, strength and authentic positive energy.\n\nThere is no reason to doubt. Each person, just as they are, is a perfect individual.`,
+      expert:`From a clinical perspective, the described empirical observation corresponds to the phenomenon known as deferred trauma response: symptomatology remains latent while the individual maintains external regulatory structures and emerges when these are withdrawn in the life transition phase.\n\nThe critique of psychopharmacology as first-line intervention reflects a growing consensus: serotonin reuptake inhibitors treat symptoms without addressing underlying mechanisms, generating iatrogenic dependence. Interventions based on somatic regulation and narrative therapy show superior results in longitudinal follow-up.`
     },
     {
       id:'re_resumen', title:'Summary: what this text wants you to take away',
-      simple:`Resilience is psychological resistance and the ability to overcome crises and setbacks and emerge stronger.
-
-The most important factors: resistance, adaptability and self-regulation.
-
-The unconscious stores all experiences and influences our behavior often without our awareness.
-
-Prevention is achieved through active reflection, analysis and conscious closure of experiences — not through repression.
-
-Techniques such as visualization and reframing help communicate with the unconscious and send signals of control and calm.
-
-Honest self-reflection and exchange with trusted people foster understanding of the unconscious's "language."
-
-Ignoring the warning signals of the unconscious can lead to serious psychological and physical problems.
-
-The conscious response to unconscious signals strengthens resilience and prevents negative subsequent effects.
-
-Each person is a perfect individual — reflection and adaptation help resolve conflicts between one's own behaviors and reality.
-
-Early and respectful responses to unconscious warnings lead to more inspiration, strength and positive energy.`,
-      expert:`Integrative synthesis: Resilience operates at neurobiological (HPA axis regulation, prefrontal plasticity), psychological (emotional self-regulation, internal locus of control) and social (social capital, support narratives) levels.
-
-Communication with the unconscious requires bottom-up intervention: somatic, sensory, experiential. Visualization and reframing techniques act on implicit memory systems and allow recoding of stress-activating schemas.
-
-Early intervention, before symptom chronification, is the most robust predictor of complete recovery.`
+      simple:`Resilience is psychological resistance and the ability to overcome crises and setbacks and emerge stronger.\n\nThe most important factors: resistance, adaptability and self-regulation.\n\nThe unconscious stores all experiences and influences our behavior often without our awareness.\n\nPrevention is achieved through active reflection, analysis and conscious closure of experiences — not through repression.\n\nTechniques such as visualization and reframing help communicate with the unconscious and send signals of control and calm.\n\nHonest self-reflection and exchange with trusted people foster understanding of the unconscious's "language."\n\nIgnoring the warning signals of the unconscious can lead to serious psychological and physical problems.\n\nThe conscious response to unconscious signals strengthens resilience and prevents negative subsequent effects.\n\nEach person is a perfect individual — reflection and adaptation help resolve conflicts between one's own behaviors and reality.\n\nEarly and respectful responses to unconscious warnings lead to more inspiration, strength and positive energy.`,
+      expert:`Integrative synthesis: Resilience operates at neurobiological (HPA axis regulation, prefrontal plasticity), psychological (emotional self-regulation, internal locus of control) and social (social capital, support narratives) levels.\n\nCommunication with the unconscious requires bottom-up intervention: somatic, sensory, experiential. Visualization and reframing techniques act on implicit memory systems and allow recoding of stress-activating schemas.\n\nEarly intervention, before symptom chronification, is the most robust predictor of complete recovery.`
     },
     {
       id:'re_literatura', title:'References and recommended reading',
-      simple:`For those who want to go deeper:
-
-Heller, J. — Resilience: The Secret of Psychological Resistance. One of the most accessible introductions, with practical exercises.
-
-Gruhl, M. — The Art of Resilience. Focus on everyday resilience, very applicable to situations of life change.
-
-Reichhart, T. & Pusch, C. — Resilience Coaching. For those who want to work on resilience systematically.
-
-Brown, B. — Daring Greatly. On vulnerability as strength — a fundamental shift in perspective.
-
-And always: honest observation of your own experience is the most valuable source. Don't copy — verify relevance for yourself.`,
-      expert:`Heller, J. (2019). Resilienz: Das Geheimnis der psychischen Widerstandskraft. Junfermann. ISBN: 978-3873878132
-
-Gruhl, M. (2014). Die Kunst der Resilienz. Beltz. ISBN: 978-3407859732
-
-Reichhart, T. & Pusch, C. (2015). Resilienz-Coaching. Kösel. ISBN: 978-3466346877
-
-Brown, B. (2013). Daring Greatly. Gotham Books. ISBN: 978-1592407330
-
-Berry, J.W. (1997). Immigration, acculturation, and adaptation. Applied Psychology, 46(1), 5-34.
-
-Pennebaker, J.W. & Smyth, J.M. (2016). Opening Up by Writing It Down. Guilford Press.
-
-Van der Kolk, B. (2014). The Body Keeps the Score. Viking Press.`
+      simple:`For those who want to go deeper:\n\nHeller, J. — Resilience: The Secret of Psychological Resistance. One of the most accessible introductions, with practical exercises.\n\nGruhl, M. — The Art of Resilience. Focus on everyday resilience, very applicable to situations of life change.\n\nReichhart, T. & Pusch, C. — Resilience Coaching. For those who want to work on resilience systematically.\n\nBrown, B. — Daring Greatly. On vulnerability as strength — a fundamental shift in perspective.\n\nAnd always: honest observation of your own experience is the most valuable source. Don't copy — verify relevance for yourself.`,
+      expert:`Heller, J. (2019). Resilienz: Das Geheimnis der psychischen Widerstandskraft. Junfermann. ISBN: 978-3873878132\n\nGruhl, M. (2014). Die Kunst der Resilienz. Beltz. ISBN: 978-3407859732\n\nReichhart, T. & Pusch, C. (2015). Resilienz-Coaching. Kösel. ISBN: 978-3466346877\n\nBrown, B. (2013). Daring Greatly. Gotham Books. ISBN: 978-1592407330\n\nBerry, J.W. (1997). Immigration, acculturation, and adaptation. Applied Psychology, 46(1), 5-34.\n\nPennebaker, J.W. & Smyth, J.M. (2016). Opening Up by Writing It Down. Guilford Press.\n\nVan der Kolk, B. (2014). The Body Keeps the Score. Viking Press.`
     },
 
   ]
