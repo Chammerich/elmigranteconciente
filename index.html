@@ -1745,7 +1745,7 @@
 <!-- TOP BAR -->
 <div class="top-bar" id="top-bar">
   <div class="top-bar-main">
-    <button class="top-logo" onclick="showHome()">⚖︎ El Migrante Consciente <span id="app-version-badge" style="font-size:9px;background:rgba(200,146,42,0.2);color:var(--gold);font-family:'DM Sans',sans-serif;font-weight:600;letter-spacing:0.5px;padding:2px 6px;border-radius:4px;margin-left:4px;">v12.61</span></button>
+    <button class="top-logo" onclick="showHome()">⚖︎ El Migrante Consciente <span id="app-version-badge" style="font-size:9px;background:rgba(200,146,42,0.2);color:var(--gold);font-family:'DM Sans',sans-serif;font-weight:600;letter-spacing:0.5px;padding:2px 6px;border-radius:4px;margin-left:4px;">v12.63</span></button>
     <div style="display:flex;align-items:center;gap:10px;">
       <div class="lang-switcher">
         <button class="lang-btn active" onclick="setLang('es',this)">ES</button>
@@ -2470,7 +2470,7 @@ let CHAPTERS = getCHAPTERS();
 let WISDOMS  = getWISDOMS();
 
 // ─── STATE ──────────────────────────────────────────────────
-const APP_VERSION = 63;
+const APP_VERSION = 65;
 let state = JSON.parse(localStorage.getItem('mc_state') || '{}');
 if (state.appVersion !== APP_VERSION) {
   state.appVersion = APP_VERSION;
@@ -2834,6 +2834,19 @@ const EXP_RESILIENCIA_ORIG = {
 const EXP_RESILIENCIA_ELAB = {
   es: [
     {
+      id:'re_intro', title:'La resiliencia como brújula interior de la migración',
+      simple:`A lo largo de este texto, la resiliencia ha aparecido una y otra vez como condición silenciosa del proceso migratorio. Es la fuerza que permite soportar la soledad, sobrevivir las contradicciones culturales, no interpretar la precariedad como fracaso y mantener la propia identidad en movimiento.
+
+La resiliencia no es un talento que se tiene o no se tiene. Es una capacidad — y se puede entrenar.
+
+Este texto profundiza en el tema de forma científica, pero personal y directa. Explica cómo trabaja el inconsciente, por qué nos habla — y cómo podemos aprender a responderle.
+
+Para el migrante, este conocimiento tiene un valor especial: el cuerpo y la psique registran el estrés del cambio cultural mucho antes de que la mente pueda nombrarlo. Cuando un migrante sufre de repente insomnio, irritabilidad inexplicable o agotamiento físico, no es debilidad. Es el lenguaje del inconsciente.`,
+      expert:`La resiliencia — capacidad psíquica de resistencia y adaptación ante crisis y traumas — constituye una variable mediadora central en la investigación sobre aculturación y estrés migratorio. Los modelos de Berry (1997) identifican la resiliencia como factor protector frente a los efectos adversos del choque cultural, la pérdida de redes sociales y la ambigüedad identitaria.
+
+A diferencia de los modelos de déficit, la psicología positiva contemporánea conceptualiza la resiliencia como recurso dinámico y cultivable. El presente texto examina sus mecanismos desde una perspectiva neurobiológica y experiencial.`
+    },
+    {
       id:'re0', title:'Introducción: Por qué este texto existe',
       simple:`Este texto no viene de un libro de psicología. Viene de la observación. De años mirando a personas — cómo reaccionan, cómo se rompen, cómo se recuperan. Primero por intuición. Después, con la confirmación de la ciencia.\n\nNo soy psicólogo. No tengo intención de serlo. Pero tuve la suerte de aprender mucho — primero a través de la experiencia propia, después en años de formación con científicos y expertos de primer nivel.\n\nLo que encontré: lo que había aprendido por observación era, en su mayoría, correcto.\n\nEste texto es transparente por diseño. Es la base de muchas de las recomendaciones del resto de la app.`,
       expert:`Este ensayo combina observación personal, análisis intuitivo y fundamentos científicos adquiridos en contextos de formación profesional de alto nivel. Los conceptos presentados no son prescriptivos sino orientativos. Su propósito es ofrecer transparencia sobre los mecanismos que subyacen a las recomendaciones del manual. La resiliencia se entiende aquí como capacidad dinámica — no como rasgo fijo de personalidad.`
@@ -2862,6 +2875,21 @@ const EXP_RESILIENCIA_ELAB = {
       id:'re5', title:'Lady Gaga y Liberace: dos formas de vivir',
       simple:`Lady Gaga dijo una vez: "Los monstruos nunca mueren. Invítalos a tu vida y baila con ellos."\n\nDurante años fue depresiva, ansiosa, paranoica. Y encontró su propia terapia: transparencia total. Habla de todo. Lo convierte en arte. Ayudó a millones — empezando por ella misma.\n\nLiberace, en cambio, construyó una fachada perfecta. Rico, brillante, espectacular. Y profundamente infeliz. Toda su vida negando quién era.\n\nDos caminos. Una pregunta: ¿qué quieres tú?`,
       expert:`La literatura clínica distingue entre estrategias de integración activa — confrontación, elaboración creativa, narración — y estrategias de evasión — supresión, negación, construcción de fachadas adaptativas. Las primeras están asociadas a mayor resiliencia a largo plazo; las segundas, a deterioro acumulativo. El ejemplo de Lady Gaga ilustra la elaboración creativa como mecanismo de integración; el de Liberace, el coste psíquico de la evasión sostenida.`
+    },
+    {
+      id:'re_tina', title:'Otras voces: Tina Turner, Shakespeare y tú',
+      simple:`Lady Gaga y Liberace son solo dos ejemplos. Hay muchos más.
+
+Tina Turner sobrevivió años de abuso y construyó a partir de ello una carrera y una vida que definió completamente como suya. No borrando el pasado — integrándolo.
+
+Shakespeare escribió sobre la oscuridad humana con una honestidad que cuatro siglos después sigue siendo exacta. Cada tragedia suya es un manual de lo que ocurre cuando no miramos lo que hay dentro.
+
+La inspiración está en todas partes: en la música, en el arte, en la literatura. La clave no es copiar — es identificar qué resuena contigo específicamente.
+
+No estás solo en lo que sientes. En algún lugar, alguien ya lo vivió y encontró una forma de convertirlo en algo. Busca esa persona. Deja que sea tu inspiración.`,
+      expert:`La función terapéutica del testimonio artístico ha sido documentada en la investigación sobre narrative exposure therapy (NET) y en los estudios de Pennebaker sobre escritura expresiva. La exposición a narrativas de superación activa procesos de identificación vicaria que facilitan la elaboración emocional propia.
+
+Turner y Shakespeare representan polos distintos del mismo fenómeno: la transformación de la experiencia traumática en expresión culturalmente transmisible. Para el migrante en proceso de reconstrucción identitaria, estos referentes ofrecen no solo consuelo sino modelos cognitivos de integración.`
     },
     {
       id:'re6', title:'El lenguaje del inconsciente',
@@ -2894,12 +2922,94 @@ const EXP_RESILIENCIA_ELAB = {
       expert:`La intervención profesional está indicada cuando la capacidad de autorregulación resulta insuficiente para la carga de procesamiento requerida. El criterio no es diagnóstico sino funcional: ¿puede el individuo, con sus recursos actuales, iniciar y sostener el proceso de integración? La psicofarmacología puede ser un apoyo transitorio; como respuesta primaria, tiende a suprimir la señal sin abordar la causa.`
     },
     {
+      id:'re_kommentar', title:'Comentario personal: por qué este tema me importa',
+      simple:`Este tema me importa porque en mi pasado he observado cómo exactamente esto destruyó el futuro de personas cercanas. Personas que reprimieron todo para "funcionar" — en el sentido alemán del trabajo como valor supremo.
+
+Luego, en el momento teóricamente más hermoso de su vida — tras los hijos, la casa, el trabajo, cuando la presión externa disminuye — esos procesos desarrollan de repente toda su fuerza negativa. Y entonces la medicina convencional está completamente desbordada.
+
+Y no menos importante: mi propia vida tampoco ha sido exclusivamente un paseo tranquilo por el paraíso. Estoy infinitamente agradecido de haber aprendido mucho sobre estas conexiones entre cuerpo, mente, consciencia e inconsciente.
+
+Cuando ignoramos las advertencias — que al principio llegan suaves y amables — el inconsciente se vuelve cada vez más enérgico. Si respondemos a tiempo, con respeto, nos ayuda con inspiración, fuerza y energía positiva auténtica.
+
+No hay razón para dudar. Cada persona, tal como es, es un individuo perfecto.`,
+      expert:`Desde una perspectiva clínica, la observación empírica descrita corresponde al fenómeno conocido como respuesta traumática diferida: la sintomatología permanece latente mientras el individuo mantiene estructuras externas de regulación y emerge cuando estas se retiran en la fase de transición vital.
+
+La crítica a la psicofarmacología como primera línea de intervención refleja un consenso creciente: los inhibidores de recaptación de serotonina tratan los síntomas sin abordar los mecanismos subyacentes, generando dependencia iatrogénica. Las intervenciones basadas en regulación somática y terapia narrativa muestran resultados superiores en seguimiento longitudinal.`
+    },
+    {
       id:'re12', title:'Lo que el inconsciente quiere de ti',
       simple:`Tu inconsciente no es tu enemigo. Es parte de ti que intenta protegerte — con los únicos medios que tiene.\n\nSi lo escuchas pronto, habla en voz baja. Si lo ignoras mucho tiempo, grita.\n\nResponde con respeto. Con herramientas. Con honestidad.\n\nY recuerda: cada persona es un individuo perfecto — con su historia, sus contradicciones, sus heridas y su fuerza. La reflexión no te cambia. Te devuelve a ti mismo.`,
       expert:`La resiliencia no es ausencia de vulnerabilidad sino capacidad de respuesta adaptativa ante ella. El inconsciente, como sistema de procesamiento autónomo, requiere atención activa — no control. Las estrategias de integración (reflexión, cierre, reencuadre, visualización) constituyen herramientas de diálogo, no de supresión. Su eficacia depende del entrenamiento previo, la honestidad autoperceptiva y la intervención temprana.`
     }
+    {
+      id:'re_resumen', title:'Resumen: lo que este texto quiere que te lleves',
+      simple:`La resiliencia es resistencia psíquica y la capacidad de superar crisis y reveses saliendo fortalecido.
+
+Los factores más importantes: resistencia, adaptabilidad y autorregulación.
+
+El inconsciente almacena todas las experiencias e influye en nuestro comportamiento a menudo sin que lo percibamos.
+
+La prevención se logra mediante reflexión activa, análisis y cierre consciente de experiencias — no mediante la represión.
+
+Técnicas como la visualización y el reframing ayudan a comunicarse con el inconsciente y enviar señales de control y calma.
+
+La autorreflexión honesta y el intercambio con personas de confianza fomentan la comprensión del "lenguaje" del inconsciente.
+
+Ignorar las señales de advertencia del inconsciente puede llevar a graves problemas psíquicos y físicos.
+
+La respuesta consciente a las señales del inconsciente fortalece la resiliencia y previene efectos negativos posteriores.
+
+Cada persona es un individuo perfecto — la reflexión y la adaptación ayudan a resolver conflictos entre los propios comportamientos y la realidad.
+
+Las respuestas tempranas y respetuosas a las advertencias del inconsciente conducen a más inspiración, fuerza y energía positiva.`,
+      expert:`Síntesis integradora: La resiliencia opera a nivel neurobiológico (regulación del eje HPA, plasticidad prefrontal), psicológico (autorregulación emocional, locus de control interno) y social (capital social, narrativas de apoyo).
+
+La comunicación con el inconsciente requiere intervención bottom-up: somática, sensorial, experiencial. Las técnicas de visualización y reframing actúan sobre los sistemas de memoria implícita y permiten la recodificación de esquemas activadores de estrés.
+
+La intervención temprana, antes de la cronificación sintomática, es el predictor más robusto de recuperación completa.`
+    },
+    {
+      id:'re_literatura', title:'Referencias y lecturas recomendadas',
+      simple:`Para quienes quieran profundizar:
+
+Heller, J. — Resilienz: Das Geheimnis der psychischen Widerstandskraft. Junfermann. Una de las introducciones más accesibles, con ejercicios prácticos.
+
+Gruhl, M. — Die Kunst der Resilienz. Beltz. Enfoque en la resiliencia cotidiana, muy aplicable a situaciones de cambio vital.
+
+Reichhart, T. & Pusch, C. — Resilienz-Coaching. Kösel. Para quien quiera trabajar la resiliencia de forma sistemática.
+
+Brown, B. — Laufen lernt man nur durch Hinfallen. Kailash. Sobre la vulnerabilidad como fortaleza — un cambio de perspectiva fundamental.
+
+Y siempre: la observación honesta de tu propia experiencia es la fuente más valiosa. No copies — verifica la relevancia para ti mismo.`,
+      expert:`Heller, J. (2019). Resilienz: Das Geheimnis der psychischen Widerstandskraft. Junfermann. ISBN: 978-3873878132
+
+Gruhl, M. (2014). Die Kunst der Resilienz. Beltz. ISBN: 978-3407859732
+
+Reichhart, T. & Pusch, C. (2015). Resilienz-Coaching. Kösel. ISBN: 978-3466346877
+
+Brown, B. (2013). Laufen lernt man nur durch Hinfallen. Kailash. ISBN: 978-3424631076
+
+Berry, J.W. (1997). Immigration, acculturation, and adaptation. Applied Psychology, 46(1), 5-34.
+
+Pennebaker, J.W. & Smyth, J.M. (2016). Opening Up by Writing It Down. Guilford Press.
+
+Van der Kolk, B. (2014). The Body Keeps the Score. Viking Press.`
+    },
   ],
   en: [
+    {
+      id:'re_intro', title:'Resilience as inner compass of migration',
+      simple:`Throughout this text, resilience has appeared again and again as the silent foundation of the migration process. It is the force that allows you to endure loneliness, survive cultural contradictions, not interpret precariousness as failure, and keep your own identity in motion.
+
+Resilience is not a talent you either have or don't have. It is a skill — and it can be trained.
+
+This text explores the topic in a scientific but personal and direct way. It explains how the unconscious works, why it speaks to us — and how we can learn to respond.
+
+For migrants, this knowledge has special value: body and psyche register the stress of cultural change long before the mind can name it. When a migrant suddenly suffers from insomnia, unexplained irritability or physical exhaustion, it is not weakness. It is the language of the unconscious.`,
+      expert:`Resilience — understood as psychological resistance and adaptation capacity in the face of crises and trauma — constitutes a central mediating variable in research on acculturation and migration stress. Berry's models (1997) identify resilience as a protective factor against the adverse effects of cultural shock, loss of social networks and identity ambiguity.
+
+Unlike deficit models, contemporary positive psychology conceptualizes resilience as a dynamic, cultivable resource. This text examines its mechanisms from a neurobiological and experiential perspective.`
+    },
     {
       id:'re0', title:'Introduction: Why this text exists',
       simple:`This text did not come from a psychology book. It came from observation. Years of watching people — how they react, how they break, how they recover. First by intuition. Then confirmed by science.\n\nI am not a psychologist. I have no intention of being one. But I had the luck to learn a great deal — first through personal experience, then through years of training alongside scientists and top-level experts.\n\nWhat I found: what I had learned through observation was, for the most part, correct.\n\nThis text is transparent by design. It forms the basis of many recommendations throughout this app.`,
@@ -2929,6 +3039,21 @@ const EXP_RESILIENCIA_ELAB = {
       id:'re5', title:'Lady Gaga and Liberace: two ways of living',
       simple:`Lady Gaga once said: "Monsters never die. Invite them into your life and dance with them."\n\nFor years she was depressive, anxious, paranoid. And she found her own therapy: total transparency. She talks about everything. She turns it into art. She helped millions — starting with herself.\n\nLiberace, on the other hand, built a perfect facade. Rich, brilliant, spectacular. And deeply unhappy. His whole life spent denying who he was.\n\nTwo paths. One question: what do you want?`,
       expert:`Clinical literature distinguishes between active integration strategies — confrontation, creative elaboration, narrative — and avoidance strategies — suppression, denial, construction of adaptive facades. The former are associated with greater long-term resilience; the latter, with cumulative deterioration. Lady Gaga illustrates creative elaboration as an integration mechanism; Liberace illustrates the psychic cost of sustained avoidance.`
+    },
+    {
+      id:'re_tina', title:'Other voices: Tina Turner, Shakespeare and you',
+      simple:`Lady Gaga and Liberace are just two examples. There are many more.
+
+Tina Turner survived years of abuse and built from it a career and a life she defined entirely on her own terms. Not by erasing the past — by integrating it.
+
+Shakespeare wrote about human darkness with a honesty that four centuries later is still exact. Each of his tragedies is a manual of what happens when we don't look at what is inside.
+
+Inspiration is everywhere: in music, in art, in literature. The key is not to copy — it is to identify what resonates with you specifically.
+
+You are not alone in what you feel. Somewhere, someone has already lived it and found a way to turn it into something. Find that person. Let them be your inspiration.`,
+      expert:`The therapeutic function of artistic testimony has been documented extensively in research on narrative exposure therapy (NET) and Pennebaker's studies on expressive writing. Exposure to narratives of overcoming activates vicarious identification processes that facilitate one's own emotional elaboration.
+
+Turner and Shakespeare represent different poles of the same phenomenon: the transformation of traumatic experience into culturally transmissible expression. For migrants in the process of identity reconstruction, these figures offer not only comfort but cognitive models of integration.`
     },
     {
       id:'re6', title:'The language of the unconscious',
@@ -2964,7 +3089,76 @@ const EXP_RESILIENCIA_ELAB = {
       id:'re12', title:'What your unconscious wants from you',
       simple:`Your unconscious is not your enemy. It is a part of you trying to protect you — with the only means it has.\n\nIf you listen to it early, it speaks quietly. If you ignore it too long, it shouts.\n\nAnswer it with respect. With tools. With honesty.\n\nAnd remember: every person is a perfect individual — with their history, their contradictions, their wounds and their strength. Reflection does not change you. It brings you back to yourself.`,
       expert:`Resilience is not the absence of vulnerability but the capacity for adaptive response to it. The unconscious, as an autonomous processing system, requires active attention — not control. Integration strategies (reflection, closure, reframing, visualization) constitute dialogue tools, not suppression tools. Their efficacy depends on prior training, self-perceptive honesty, and early intervention.`
-    }
+    }    {
+      id:'re_kommentar', title:'Personal note: why this topic matters to me',
+      simple:`This topic matters to me because in my past I have observed how exactly this destroyed the future of people close to me. People who suppressed everything to "function" — in the German sense of work as the supreme value.
+
+Then, at the theoretically most beautiful moment of their lives — after children, house, work, when external pressure decreases — those processes suddenly develop their full negative force.
+
+And not least: my own life has not been exclusively a quiet walk through paradise either. I am infinitely grateful to have learned much about these connections between body, mind, consciousness and unconscious.
+
+When we ignore the warnings — which at first arrive softly and gently — the unconscious becomes increasingly energetic. If we respond in time, with respect, it helps us with inspiration, strength and authentic positive energy.
+
+There is no reason to doubt. Each person, just as they are, is a perfect individual.`,
+      expert:`From a clinical perspective, the described empirical observation corresponds to the phenomenon known as deferred trauma response: symptomatology remains latent while the individual maintains external regulatory structures and emerges when these are withdrawn in the life transition phase.
+
+The critique of psychopharmacology as first-line intervention reflects a growing consensus: serotonin reuptake inhibitors treat symptoms without addressing underlying mechanisms, generating iatrogenic dependence. Interventions based on somatic regulation and narrative therapy show superior results in longitudinal follow-up.`
+    },
+    {
+      id:'re_resumen', title:'Summary: what this text wants you to take away',
+      simple:`Resilience is psychological resistance and the ability to overcome crises and setbacks and emerge stronger.
+
+The most important factors: resistance, adaptability and self-regulation.
+
+The unconscious stores all experiences and influences our behavior often without our awareness.
+
+Prevention is achieved through active reflection, analysis and conscious closure of experiences — not through repression.
+
+Techniques such as visualization and reframing help communicate with the unconscious and send signals of control and calm.
+
+Honest self-reflection and exchange with trusted people foster understanding of the unconscious's "language."
+
+Ignoring the warning signals of the unconscious can lead to serious psychological and physical problems.
+
+The conscious response to unconscious signals strengthens resilience and prevents negative subsequent effects.
+
+Each person is a perfect individual — reflection and adaptation help resolve conflicts between one's own behaviors and reality.
+
+Early and respectful responses to unconscious warnings lead to more inspiration, strength and positive energy.`,
+      expert:`Integrative synthesis: Resilience operates at neurobiological (HPA axis regulation, prefrontal plasticity), psychological (emotional self-regulation, internal locus of control) and social (social capital, support narratives) levels.
+
+Communication with the unconscious requires bottom-up intervention: somatic, sensory, experiential. Visualization and reframing techniques act on implicit memory systems and allow recoding of stress-activating schemas.
+
+Early intervention, before symptom chronification, is the most robust predictor of complete recovery.`
+    },
+    {
+      id:'re_literatura', title:'References and recommended reading',
+      simple:`For those who want to go deeper:
+
+Heller, J. — Resilience: The Secret of Psychological Resistance. One of the most accessible introductions, with practical exercises.
+
+Gruhl, M. — The Art of Resilience. Focus on everyday resilience, very applicable to situations of life change.
+
+Reichhart, T. & Pusch, C. — Resilience Coaching. For those who want to work on resilience systematically.
+
+Brown, B. — Daring Greatly. On vulnerability as strength — a fundamental shift in perspective.
+
+And always: honest observation of your own experience is the most valuable source. Don't copy — verify relevance for yourself.`,
+      expert:`Heller, J. (2019). Resilienz: Das Geheimnis der psychischen Widerstandskraft. Junfermann. ISBN: 978-3873878132
+
+Gruhl, M. (2014). Die Kunst der Resilienz. Beltz. ISBN: 978-3407859732
+
+Reichhart, T. & Pusch, C. (2015). Resilienz-Coaching. Kösel. ISBN: 978-3466346877
+
+Brown, B. (2013). Daring Greatly. Gotham Books. ISBN: 978-1592407330
+
+Berry, J.W. (1997). Immigration, acculturation, and adaptation. Applied Psychology, 46(1), 5-34.
+
+Pennebaker, J.W. & Smyth, J.M. (2016). Opening Up by Writing It Down. Guilford Press.
+
+Van der Kolk, B. (2014). The Body Keeps the Score. Viking Press.`
+    },
+
   ]
 };
 
@@ -6952,44 +7146,43 @@ function switchExpMain(section) {
 
 function renderExpNuevoDirect(type, containerId) {
   const container = document.getElementById(containerId);
-  if (!container) { console.warn('renderExpNuevoDirect: not found', containerId); return; }
-  const lang = typeof currentLang !== 'undefined' ? currentLang : 'es';
-  const isTrauma = type === 'trauma';
+  if (!container) return;
+  const lang = (typeof currentLang !== 'undefined') ? currentLang : 'es';
+  const isTrauma = (type === 'trauma');
   const data = isTrauma ? EXP_TRAUMA : EXP_RESILIENCIA_ELAB;
   const blocks = data[lang] || data.es;
   const title = isTrauma
-    ? (lang === 'en' ? 'Repression, Suppression & Trauma' : 'Represión, Supresión y Trauma')
-    : (lang === 'en' ? 'Resilience & the Language of the Unconscious' : 'Resiliencia y el Lenguaje del Inconsciente');
-
-  const done = blocks.filter(b => expProgress[b.id]).length;
+    ? (lang === 'en' ? 'Repression, Suppression & Trauma' : 'Represion, Supresion y Trauma')
+    : (lang === 'en' ? 'Resilience & the Unconscious' : 'Resiliencia y el Inconsciente');
+  const done = blocks.filter(function(b){ return expProgress[b.id]; }).length;
   const pct = Math.round((done / blocks.length) * 100);
-
-  let h = '<div style="padding:0 0 120px;">';
-  h += '<div style="padding:0 16px 14px;">';
-  h += '<div style="font-size:18px;font-weight:700;color:var(--ink);font-family:Georgia,serif;margin-bottom:12px;">' + title + '</div>';
-  h += '<div style="background:var(--border);border-radius:10px;height:4px;margin-bottom:6px;">';
-  h += '<div style="height:4px;border-radius:10px;background:var(--gold);width:' + pct + '%;transition:width 0.3s;"></div></div>';
-  h += '<div style="font-size:11px;color:var(--fog);margin-bottom:8px;">' + done + ' / ' + blocks.length + ' leídos</div>';
-  h += '</div>';
-
+  const parts = [];
+  parts.push('<div style="padding:0 0 120px;">');
+  parts.push('<div style="padding:0 16px 14px;">');
+  parts.push('<div style="font-size:17px;font-weight:700;color:var(--ink);margin-bottom:10px;">' + title + '</div>');
+  parts.push('<div style="background:var(--border);border-radius:10px;height:4px;margin-bottom:4px;">');
+  parts.push('<div style="height:4px;border-radius:10px;background:var(--gold);width:' + pct + '%;"></div></div>');
+  parts.push('<div style="font-size:11px;color:var(--fog);margin-bottom:8px;">' + done + ' / ' + blocks.length + ' leidos</div>');
+  parts.push('</div>');
   blocks.forEach(function(block) {
     const isDone = !!expProgress[block.id];
-    let text;
-    if (expMode === 'expert' && block.expert) text = block.expert;
-    else text = block.simple || block.text || '';
-    const textHtml = text.replace(/\n\n/g, '</p><p style="margin:10px 0 0;">').replace(/\n/g, '<br>');
-
-    h += '<div id="exp-card-' + block.id + '" style="margin:0 16px 12px;background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:14px;opacity:' + (isDone ? '0.6' : '1') + ';">';
-    h += '<div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:10px;">';
-    h += '<button onclick="toggleExpBlock('' + block.id + '')" style="flex-shrink:0;width:22px;height:22px;border-radius:6px;border:1.5px solid var(--gold);background:' + (isDone ? 'var(--gold)' : 'transparent') + ';cursor:pointer;margin-top:2px;"></button>';
-    h += '<div style="flex:1;font-size:13px;font-weight:600;color:var(--ink);">' + block.title + '</div>';
-    h += '</div>';
-    h += '<div style="font-size:13px;line-height:1.7;color:var(--ink);padding-left:32px;"><p style="margin:0;">' + textHtml + '</p></div>';
-    h += '</div>';
+    let text = '';
+    if (expMode === 'expert' && block.expert) { text = block.expert; }
+    else { text = block.simple || block.text || ''; }
+    const textHtml = text.split('\n\n').join('</p><p style="margin:10px 0 0;">').split('\n').join('<br>');
+    const bg = isDone ? 'var(--gold)' : 'transparent';
+    const op = isDone ? '0.6' : '1';
+    const bid = block.id;
+    parts.push('<div style="margin:0 16px 12px;background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:14px;opacity:' + op + ';">');
+    parts.push('<div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:10px;">');
+    parts.push('<button data-bid="' + bid + '" onclick="toggleExpBlock(this.dataset.bid)" style="flex-shrink:0;width:22px;height:22px;border-radius:6px;border:1.5px solid var(--gold);background:' + bg + ';cursor:pointer;margin-top:2px;"></button>');
+    parts.push('<div style="flex:1;font-size:13px;font-weight:600;color:var(--ink);">' + block.title + '</div>');
+    parts.push('</div>');
+    parts.push('<div style="font-size:13px;line-height:1.7;color:var(--ink);padding-left:32px;"><p style="margin:0;">' + textHtml + '</p></div>');
+    parts.push('</div>');
   });
-
-  h += '</div>';
-  container.innerHTML = h;
+  parts.push('</div>');
+  container.innerHTML = parts.join('');
 }
 function setTraumaMode(mode) {
   expMode = (mode === 'expert') ? 'expert' : (mode === 'glosario' ? 'glosario' : 'simple');
