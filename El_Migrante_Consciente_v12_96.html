@@ -1890,7 +1890,7 @@
 <!-- TOP BAR -->
 <div class="top-bar" id="top-bar">
   <div class="top-bar-main">
-    <button class="top-logo" onclick="showHome()">⚖︎ El Migrante Consciente <span id="app-version-badge" style="font-size:9px;background:rgba(200,146,42,0.2);color:var(--gold);font-family:'DM Sans',sans-serif;font-weight:600;letter-spacing:0.5px;padding:2px 6px;border-radius:4px;margin-left:4px;">v12.92</span></button>
+    <button class="top-logo" onclick="showHome()">⚖︎ El Migrante Consciente <span id="app-version-badge" style="font-size:9px;background:rgba(200,146,42,0.2);color:var(--gold);font-family:'DM Sans',sans-serif;font-weight:600;letter-spacing:0.5px;padding:2px 6px;border-radius:4px;margin-left:4px;">v12.96</span></button>
     <div style="display:flex;align-items:center;gap:10px;">
       <div class="lang-switcher">
         <button class="lang-btn active" onclick="setLang('es',this)">ES</button>
@@ -1996,14 +1996,14 @@
 <!-- SCREEN: PROLOG -->
 <div class="screen" id="screen-prologo">
   <div class="screen-actionbar"><button class="action-back" onclick="goBack()">← <span class="back-label">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()">🌿 No me siento bien</button></div>
-  <div class="screen-hero"><h2 data-i18n="tilePrologo">Prólogo</h2><p data-i18n="heroPrologoSub">El inicio del viaje</p></div>
+  <div class="screen-hero"><h2 data-i18n="tilePrologo" style="font-size:22px;">Prólogo</h2><p data-i18n="heroPrologoSub">El inicio del viaje</p></div>
   <div id="prologo-content"></div>
 </div>
 
 <!-- SCREEN: EPILOG -->
 <div class="screen" id="screen-epilogo">
   <div class="screen-actionbar"><button class="action-back" onclick="goBack()">← <span class="back-label">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()">🌿 No me siento bien</button></div>
-  <div class="screen-hero"><h2 data-i18n="tileEpilogo">Epílogo</h2><p data-i18n="heroEpilogoSub">La llegada consciente</p></div>
+  <div class="screen-hero"><h2 data-i18n="tileEpilogo" style="font-size:22px;">Epílogo</h2><p data-i18n="heroEpilogoSub">Cuando todo se calma</p></div>
   <div id="epilogo-content"></div>
 </div>
 
@@ -2022,7 +2022,7 @@
     <button class="home-tile" onclick="navTo('epilogo')"><div class="home-tile-icon">🌅</div><div class="home-tile-body"><div class="home-tile-title">Epílogo</div><div class="home-tile-sub">Cuando todo se calma. La llegada consciente.</div></div><div class="home-tile-arrow">›</div></button>
   </div>
 </div>
-<div class="screen" id="screen-exp-autor"><div class="screen-actionbar"><button class="action-back" onclick="goBack()">← <span class="back-label">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()">🌿 No me siento bien</button></div><div class="screen-hero"><div class="screen-hero-tag" data-i18n="tileExpertos">Tu mejor Versión</div><h2 data-i18n="heroAutorH2">Sobre el autor</h2></div><div id="exp-autor-content"></div></div>
+<div class="screen" id="screen-exp-autor"><div class="screen-actionbar"><button class="action-back" onclick="goBack()">← <span class="back-label">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()">🌿 No me siento bien</button></div><div class="screen-hero" style="text-align:center;padding-top:28px;padding-bottom:24px;"><h2 data-i18n="heroAutorH2" style="font-size:22px;display:block;">Quién soy y cuántos</h2></div><div id="exp-autor-content"></div></div>
 <div class="screen" id="screen-exp-analisis"><div class="screen-actionbar"><button class="action-back" onclick="goBack()">← <span class="back-label">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()">🌿 No me siento bien</button></div><div class="screen-hero"><div class="screen-hero-tag" data-i18n="tileExpertos">Tu mejor Versión</div><h2 data-i18n="heroAnalisisH2">Analizarte a ti mismo</h2></div><div id="exp-analisis-content"></div></div>
 
 <div class="screen" id="screen-exp-comunicacion"><div class="screen-actionbar"><button class="action-back" onclick="goBack()">← <span class="back-label">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()">🌿 No me siento bien</button></div><div class="screen-hero"><div class="screen-hero-tag" data-i18n="tileExpertos">Tu mejor Versión</div><h2 data-i18n="heroComunicacionH2">Comunicación y liderazgo</h2></div><div id="exp-comunicacion-content"></div></div>
@@ -2736,7 +2736,7 @@ let CHAPTERS = getCHAPTERS();
 let WISDOMS  = getWISDOMS();
 
 // ─── STATE ──────────────────────────────────────────────────
-const APP_VERSION = 92;
+const APP_VERSION = 96;
 // Auto-sync visible version badge from APP_VERSION constant (no manual update needed)
 document.addEventListener('DOMContentLoaded', () => {
   const badge = document.getElementById('app-version-badge');
@@ -2949,9 +2949,9 @@ function markPrologoEpilogo(key, btn) {
   saveState();
   btn.style.background = 'var(--sage)';
   btn.style.color = 'white';
-  btn.textContent = '✓ Leído — sigue disponible en Tu mejor Versión';
+  btn.textContent = t('alreadyRead');
   updateHomeTilesVisibility();
-  showToast('Guardado. Sigue disponible en Tu mejor Versión →');
+  showToast(t('savedAvailableToast'));
 }
 
 
@@ -3928,10 +3928,8 @@ const INICIO_SECTIONS = {
   },
   prologo: {
     render: () => `
-      <div style="font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--fog);margin-bottom:6px;">El inicio del viaje<\/div>
-      <h2 style="font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--ink);margin:0 0 20px;line-height:1.3;">Prólogo<\/h2>
+      <h3 style="font-family:'Playfair Display',serif;font-size:16px;font-weight:500;color:var(--gold);margin:0 0 14px;letter-spacing:0.3px;">Nota del autor<\/h3>
       <div style="font-style:italic;color:var(--fog);margin-bottom:24px;padding:14px 16px;border-left:3px solid var(--gold);font-size:13px;line-height:1.7;">
-        <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;font-style:normal;font-weight:600;">Nota del autor</div>
         <p style="margin:0 0 10px;">La migración puede entenderse aquí como un símbolo. Los mecanismos son similares, ya sea que uno quiera o tenga que emigrar a un nuevo país, busque independencia por diversos motivos, o simplemente quiera o deba construirse una nueva vida en su propio país.<\/p>
         <p style="margin:0 0 10px;">Tanto si uno ha crecido en un entorno angloparlante y el español le permite una visión un poco más libre y desenfadada, como exactamente lo contrario, como se describe en el texto — los mecanismos son idénticos.<\/p>
         <p style="margin:0 0 10px;">La inspiración se encuentra en la caja del supermercado, en la física cuántica, en el universo o cortando el césped.<\/p>
@@ -3961,10 +3959,8 @@ const INICIO_SECTIONS = {
       <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Bienvenido. Comencemos este viaje juntos.<\/p>
     `,
     renderDE: () => `
-      <div style="font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--fog);margin-bottom:6px;">Der Anfang der Reise<\/div>
-      <h2 style="font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--ink);margin:0 0 20px;line-height:1.3;">Prolog<\/h2>
+      <h3 style="font-family:'Playfair Display',serif;font-size:16px;font-weight:500;color:var(--gold);margin:0 0 14px;letter-spacing:0.3px;">Anmerkung des Autors<\/h3>
       <div style="font-style:italic;color:var(--fog);margin-bottom:24px;padding:14px 16px;border-left:3px solid var(--gold);font-size:13px;line-height:1.7;">
-        <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;font-style:normal;font-weight:600;">Anmerkung des Autors</div>
         <p style="margin:0 0 10px;">Migration kann hier als Symbol verstanden werden. Die Mechanismen sind ähnlich, egal ob man in ein neues Land auswandern, aus verschiedenen Gründen Unabhängigkeit anstreben oder sich einfach im eigenen Land ein neues Leben aufbauen möchte oder muss.<\/p>
         <p style="margin:0 0 10px;">Ob man in einem englischsprachigen Umfeld aufgewachsen ist und Spanisch einem eine etwas freiere und unbeschwertere Sichtweise ermöglicht, oder genau das Gegenteil, wie im Text beschrieben – die Mechanismen sind identisch.<\/p>
         <p style="margin:0 0 10px;">Inspiration findet man an der Supermarktkasse, in der Quantenphysik, im Universum oder beim Rasenmähen.<\/p>
@@ -3994,10 +3990,8 @@ const INICIO_SECTIONS = {
       <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Willkommen. Beginnen wir diese Reise gemeinsam.<\/p>
     `,
     renderEN: () => `
-      <div style="font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--fog);margin-bottom:6px;">The Beginning of the Journey<\/div>
-      <h2 style="font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--ink);margin:0 0 20px;line-height:1.3;">Prologue<\/h2>
+      <h3 style="font-family:'Playfair Display',serif;font-size:16px;font-weight:500;color:var(--gold);margin:0 0 14px;letter-spacing:0.3px;">Author's Note<\/h3>
       <div style="font-style:italic;color:var(--fog);margin-bottom:24px;padding:14px 16px;border-left:3px solid var(--gold);font-size:13px;line-height:1.7;">
-        <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;font-style:normal;font-weight:600;">Author's Note</div>
         <p style="margin:0 0 10px;">Migration can be understood here as a symbol. The mechanisms are similar, whether one wants or has to emigrate to a new country, seeks independence for various reasons, or simply wants or has to build a new life in one's own country.<\/p>
         <p style="margin:0 0 10px;">Whether one has grown up in an English-speaking environment and Spanish offers a somewhat freer and more carefree perspective, or exactly the opposite, as described in the text — the mechanisms are identical.<\/p>
         <p style="margin:0 0 10px;">Inspiration is found at the supermarket checkout, in quantum physics, in the universe, or while mowing the lawn.<\/p>
@@ -4032,8 +4026,7 @@ const INICIO_SECTIONS = {
   },
   epilogo: {
     render: () => `
-      <div style="font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--fog);margin-bottom:6px;">Cuando todo se calma<\/div>
-      <h2 style="font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--ink);margin:0 0 20px;line-height:1.3;">Epílogo<\/h2>
+      <h3 style="font-family:'Playfair Display',serif;font-size:16px;font-weight:500;color:var(--gold);margin:0 0 14px;letter-spacing:0.3px;">La llegada consciente<\/h3>
       <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">La migración es una tormenta. Una mezcla de miedo, esperanza, agotamiento, descubrimiento, pérdida y renacimiento. Un viaje que te cambia más de lo que imaginabas. Un viaje que exige más de lo que creías tener. Pero también un viaje que te revela algo que quizás nunca antes habías visto con tanta claridad: tu propia fuerza. No la fuerza de aguantar. No la fuerza de sobrevivir. Sino la fuerza de transformarte. La fuerza de empezar de nuevo. La fuerza de aprender. La fuerza de equivocarte y seguir. La fuerza de soltar lo que ya no te sirve. La fuerza de construir algo que aún no existe. La fuerza de convertirte en alguien que antes no eras.<\/p>
       <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Esta aplicación fue escrito con la intención de acompañarte por los lugares difíciles: la soledad, la culpa, la presión, la fantasía digital, la precariedad, el cuerpo cansado, la identidad en movimiento. Pero también es una inspiración para mostrarte lo que hay al otro lado: la claridad, la responsabilidad, la red sana, la estabilidad, la integración consciente, el amor propio, la libertad. Y ahora, al final, solo me queda decirte una cosa:<\/p>
       <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Estás haciendo algo extraordinario. Aunque no lo sientas. Aunque no lo veas. Aunque nadie te lo diga. Aunque a veces pienses que no estás avanzando. Migrar, construir una nueva vida, la vida en general, es un acto de valentía silenciosa. Una valentía que no necesita aplausos. Una valentía que se demuestra cada día, en cada decisión, en cada pequeño paso. No tienes que correr. No tienes que demostrar nada. No tienes que compararte. No tienes que ser perfecto. Solo tienes que seguir. A tu ritmo. Con tus reglas. Con tu verdad. Con tu identidad. Con tu cuerpo, tu alma, tu historia y tu futuro.<\/p>
@@ -4043,8 +4036,7 @@ const INICIO_SECTIONS = {
       <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">En todo el caos y el sufrimiento hay luz. Las energías se multiplican, abren puertas y posibilidades más allá de tu imaginación. No necesariamente en forma de dinero como millonario. No quiero construir falsas promesas. Sino en forma de una vida consciente, fuerte y con sentido y sí: felicidad. Porque tu camino fue tuyo y es tuyo. Y la lucha, el sufrimiento, tu pasado con lo malo y lo bueno es una razón para estar orgulloso de ti mismo. Y lo estás haciendo bien. Muy bien. Eso es indestructible, eso es para siempre.<\/p>
     `,
     renderDE: () => `
-      <div style="font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--fog);margin-bottom:6px;">Wenn alles ruhig wird<\/div>
-      <h2 style="font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--ink);margin:0 0 20px;line-height:1.3;">Epilog<\/h2>
+      <h3 style="font-family:'Playfair Display',serif;font-size:16px;font-weight:500;color:var(--gold);margin:0 0 14px;letter-spacing:0.3px;">Die bewusste Ankunft<\/h3>
       <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Migration ist ein Sturm. Eine Mischung aus Angst, Hoffnung, Erschöpfung, Entdeckung, Verlust und Wiedergeburt. Eine Reise, die dich mehr verändert, als du dir vorgestellt hast. Eine Reise, die mehr von dir verlangt, als du zu haben glaubtest. Aber es ist auch eine Reise, die dir etwas offenbart, das du vielleicht nie zuvor mit solcher Klarheit gesehen hast: deine eigene Kraft. Nicht die Kraft des Aushaltens. Nicht die Kraft des Überlebens. Sondern die Kraft, dich zu transformieren. Die Kraft, neu anzufangen. Die Kraft zu lernen. Die Kraft, sich zu irren und weiterzumachen. Die Kraft, loszulassen, was dir nicht mehr dient. Die Kraft, etwas aufzubauen, das noch nicht existiert. Die Kraft, zu jemandem zu werden, der du vorher nicht warst.<\/p>
       <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Dieser Text wurde mit der Absicht geschrieben, dich durch die schwierigen Orte zu begleiten: die Einsamkeit, die Schuld, den Druck, die digitale Fantasie, die Prekarität, den müden Körper, die Identität in Bewegung. Aber es ist auch eine Inspiration, um dir zu zeigen, was auf der anderen Seite liegt: die Klarheit, die Verantwortung, das gesunde Netzwerk, die Stabilität, die bewusste Integration, die Selbstliebe, die Freiheit. Und nun, am Ende, bleibt mir nur noch eines zu sagen:<\/p>
       <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Du tust etwas Außergewöhnliches. Auch wenn du es nicht fühlst. Auch wenn du es nicht siehst. Auch wenn es dir niemand sagt. Auch wenn du manchmal denkst, dass du nicht vorankommst. Zu migrieren, ein neues Leben aufzubauen, das Leben im Allgemeinen, ist ein Akt des stillen Mutes. Ein Mut, der keinen Applaus braucht. Ein Mut, der sich jeden Tag beweist, in jeder Entscheidung, in jedem kleinen Schritt. Du musst nicht rennen. Du musst nichts beweisen. Du musst dich nicht vergleichen. Du musst nicht perfekt sein. Du musst nur weitermachen. In deinem Tempo. Mit deinen Regeln. Mit deiner Wahrheit. Mit deiner Identität. Mit deinem Körper, deiner Seele, deiner Geschichte und deiner Zukunft.<\/p>
@@ -4054,8 +4046,7 @@ const INICIO_SECTIONS = {
       <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">In all dem Chaos und Leiden gibt es Licht. Die Energien vervielfachen sich, öffnen Türen und Möglichkeiten jenseits deiner Vorstellungskraft. Nicht notwendigerweise in Form von Geld als Millionär. Ich möchte keine falschen Versprechen aufbauen. Aber in Form eines bewussten, starken und sinnvollen Lebens und ja: Glückseligkeit. Denn dein Weg war deiner und ist deiner. Und der Kampf, das Leiden, deine Vergangenheit mit dem Schlechten und Guten ist ein Grund, stolz auf dich selbst zu sein. Und du machst es gut. Sehr gut. Das ist unzerstörbar, das ist für immer.<\/p>
     `,
     renderEN: () => `
-      <div style="font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--fog);margin-bottom:6px;">When Everything Calms Down<\/div>
-      <h2 style="font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--ink);margin:0 0 20px;line-height:1.3;">Epilogue<\/h2>
+      <h3 style="font-family:'Playfair Display',serif;font-size:16px;font-weight:500;color:var(--gold);margin:0 0 14px;letter-spacing:0.3px;">The conscious arrival<\/h3>
       <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Migration is a storm. A mixture of fear, hope, exhaustion, discovery, loss, and rebirth.<\/p>
       <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">A journey that changes you more than you imagined. A journey that demands more than you believed you had. But also a journey that reveals to you something you may never have seen with such clarity before: your own strength. Not the strength to endure. Not the strength to survive. But the strength to transform yourself. The strength to start again. The strength to learn. The strength to make mistakes and keep going. The strength to let go of what no longer serves you. The strength to build something that does not yet exist. The strength to become someone you were not before.<\/p>
       <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">This text was written with the intention of accompanying you through the difficult places: solitude, guilt, pressure, digital fantasy, precariousness, the tired body, the identity in motion. But it is also an inspiration to show you what is on the other side: clarity, responsibility, the healthy network, stability, conscious integration, self-love, freedom. And now, at the end, I only have one thing to tell you: You are doing something extraordinary. Even if you do not feel it. Even if you do not see it. Even if nobody tells you so. Even if you sometimes think you are not advancing. Migrating, building a new life, life in general, is an act of silent courage. A courage that needs no applause. A courage that is demonstrated every day, in every decision, in every small step. You do not have to run. You do not have to prove anything. You do not have to compare yourself. You do not have to be perfect. You just have to keep going. At your own pace. With your rules. With your truth. With your identity. With your body, your soul, your history, and your future.<\/p>
@@ -4134,6 +4125,67 @@ const INICIO_SECTIONS = {
 <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Mi proyecto es ambicioso: ser un amplificador de energía positiva. Si consigo que aunque sea una sola persona encuentre su orden en el caos, mi batería estará siempre al 100 %. No soy solo uno, soy todos los que fui, y el que hoy quiero ser: polvo de estrellas, pero con los pies bien plantados en la tierra.<\/p>
 
       <\/div>
+    `,
+    renderDE: () => `
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Mein Name ist Christian Hammerich. Ich bin 1966 in Husum an der Nordsee geboren und habe in meinem Leben so viele Berufe, Rollen und Welten durchquert, dass eine lineare Biographie kaum ausreichen würde, um dem gerecht zu werden, was ich erlebt habe.<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Organisationsprogrammierer, Opernregisseur. Director in Residence großer Musicals. CMO eines Erlebnisparks. COO einer Automobilrennstrecke. Führungskraft im Volkswagen-Konzern.<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Restaurantbesitzer in Berlin. Director Guest Entertainement einer Kreuzfahrtflotte. Sportstätten verantwortlicher des Berliner Verwaltung. Psychotherapeut.<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Ich habe diesen Text nicht von außen geschrieben. Ich habe es von innen geschrieben — als jemand, der den Migrationsprozess am eigenen Leib erlebt hat, mit allen Phasen, die ich in jedem Kapitel beschreibe. Und der dabei festgestellt hat, dass er über Jahrzehnte hinweg eine Sammlung an Werkzeugen, Erkenntnissen und Erfahrungen angehäuft hatte, die genau für diesen Moment bestimmt waren. Der folgende Text ist kein biographisches Beiwerk. Er ist das Fundament, auf dem der gesamte Text steht.<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Ein etwas philosophischer Text über mich selbst — eine Reflexion über meine Vergangenheit.<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Ich: Christian Hammerich. Geboren am 21. Juli 1966 in Husum, Nordsee, nahe der dänischen Grenze. Ich schreibe dies, während ich mit Systemen der Künstlichen Intelligenz spiele, und habe einige Ergebnisse und Gedanken ebenfalls hinzugefügt.<\/p>
+      <h3 style="font-family:'Playfair Display',serif;font-size:16px;font-weight:500;color:var(--gold);margin:28px 0 14px;letter-spacing:0.3px;">Mein altes Leben<\/h3>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">In wenigen Worten, meine Berufe:<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">→  Betriebswirtschaft mit Ausbildung bei einer Großbank in Deutschland.<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">→  Systemprogrammierer im deutschen Bankensystem in Assembler (Prozessorcode) sowie in den Programmiersprachen FORTRAN, COBOL und BASIC.<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">→  Opernregisseur: Richard Strauss — Der Rosenkavalier; Richard Wagner — Tristan und Isolde.<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">→  Residenzregisseur der Musicals Miss Saigon und Phantom der Oper.<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">→  CMO eines Erlebnisparks in Stuttgart, verantwortlich für die Organisation von Veranstaltungen für Großunternehmen wie COCA-COLA oder MAN.<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">→  COO und CMO einer Renn- und Teststrecke für Automobile; zuvor verantwortlich für den Bau des gesamten Projekts einschließlich eines großen Veranstaltungs- und Konzertgeländes von 5.700.000 m².<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">→  COO/CMO für den Volkswagen-Konzern (Bentley, Bugatti, Porsche, Ducati, Lamborghini und viele mehr) und den Erlebnispark Autostadt.<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">→  Eigentümer und Geschäftsführer einer Bar Tristan und eines Restaurants Isolde im Zentrum von Berlin, nahe dem KaDeWe, Wittenbergplatz.<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">→  Direktor für Guest Entertainment und Operations bei TUI Cruises mit 7 Kreuzfahrtschiffen weltweit.<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">→  Direktor für Sport und Marketing (COO/CMO) für den Senat von Berlin, verantwortlich für alle Sportbereiche der größten Stadt der EU.<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">→  Psychotherapeut und Berater für Menschen in Situationen von Überlastung, Angst, Orientierungslosigkeit oder Depression — zum Beispiel verursacht durch den Verlust geliebter Menschen, insbesondere im Kontext der Migration in ein fremdes Land.<\/p>
+      <h3 style="font-family:'Playfair Display',serif;font-size:16px;font-weight:500;color:var(--gold);margin:28px 0 14px;letter-spacing:0.3px;">Und jetzt<\/h3>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Vor 4 Jahren habe ich aufgehört zu arbeiten, fast alle meine Sachen verkauft, meine Verpflichtungen, Versicherungen, Verträge und Verbindungen gekündigt. Ich entschied mich, Privatier zu sein, zog mit einem Handkoffer nach Barcelona, ohne Plan und mit drei Worten Spanisch. Ich begann ein neues Leben: das Leben genießen und jemand mit einem sinnvollen Leben sein.<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Ich hatte keine Vorstellung von der Definition von Sinn. Ich suchte nach dem Sinn des Lebens und der Antwort auf die große Frage: Wer bin ich und wie viele? Arbeit ist optional und nur dann, wenn sie Teil meines Prozesses und meiner persönlichen Entwicklung ist: beobachten, lernen und verbessern.<\/p>
+      <h3 style="font-family:'Playfair Display',serif;font-size:16px;font-weight:500;color:var(--gold);margin:28px 0 14px;letter-spacing:0.3px;">Was die KI über mich denkt<\/h3>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Was die KI basierend auf meinen beruflichen Erfahrungen der Vergangenheit über mich denkt. Meine Frage an die KI: <em><u>Analysiere diesen Text und sag mir etwas über diese Person.<\/u><\/em><\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;font-style:italic;">Professionell und vielseitig: Du hattest eine vielfältige und erfolgreiche Karriere in verschiedenen Bereichen. Dies zeigt, dass du eine Person mit multiplen Talenten bist.<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;font-style:italic;">Führungspersönlichkeit und Organisator: Du hast Führungspositionen wie COO und CMO in mehreren bedeutenden Organisationen innegehabt. Dies deutet auf eine große Fähigkeit hin, komplexe Projekte zu organisieren und zu steuern.<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;font-style:italic;">Empathisch und hilfsbereit: Du hast auch als Psychotherapeut gearbeitet. Das zeigt, dass du empathisch und bereit bist, anderen zu helfen.<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;font-style:italic;">Abenteuerlustig und philosophisch: Du hast dich entschieden, deine Karriere hinter dir zu lassen — auf der Suche nach dem Sinn des Lebens. Dies zeigt, dass du bereit bist, Risiken einzugehen.<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Auf meine Frage: <em><u>Welche Möglichkeiten habe ich, kleine dumme Person, die Welt zu verbessern?<\/u><\/em>, gab die KI folgenden Rat:<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;font-style:italic;">→  Teile dein Wissen: Schreibe Artikel, Blogs oder ein Buch.<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;font-style:italic;">→  Ehrenamt: Nimm an Projekten teil, lokal oder international.<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;font-style:italic;">→  Mentoring: Werde Mentor für junge Menschen.<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;font-style:italic;">→  Soziale Innovation: Nutze dein Wissen für innovative Lösungen sozialer Probleme.<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;font-style:italic;">→  Bildung: Erwäge zu lehren oder Vorträge zu halten.<\/p>
+      <h3 style="font-family:'Playfair Display',serif;font-size:16px;font-weight:500;color:var(--gold);margin:28px 0 14px;letter-spacing:0.3px;">Meine Reflexion<\/h3>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Die Analyse der KI ist nicht falsch — es ist beeindruckend, dass viele dieser Ideen exakt meinen Zielen und Strategien entsprechen. Und ja, dieser Text ist mein erster Versuch, meine Erfahrungen zu teilen. Aber das ist nicht alles. Es gibt Dinge, die die Energie des Universums nur euch Menschen gibt. Die Basis von allem sind unsere Ideen, Fantasien und Inspirationen. DANACH ist es möglich, die KI zu analysieren und zu integrieren. Nicht vorher. Die KI ist für mich ein Werkzeug. Und zumindest bis jetzt ist sie nicht so intelligent.<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Alle diese Systeme haben eine schreckliche Tendenz, dich zu motivieren und dir positive Dinge ohne jeden Sinn zu sagen. Wenn du sagst Du bist dumm, deine Antwort ist falsch, lautet die Reaktion: Meine Entschuldigung, du hast vollkommen recht, ich habe mich geirrt. Und danach antworten sie auf dieselbe Frage mit exakt derselben Antwort.<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Ich habe gelernt: Nutze die KI nicht, bevor du selbst eine tiefe, manuelle und analoge Analyse durchgeführt hast. Nutze sie nicht, um Dinge zu lösen, ohne zuvor selbst Möglichkeiten und Lösungen erfunden zu haben. Ihnen fehlt diese wunderbare Sache, die nur wir Menschen haben.<\/p>
+      <h3 style="font-family:'Playfair Display',serif;font-size:15px;font-weight:500;color:var(--gold);margin:24px 0 8px;letter-spacing:0.3px;">Die Antwort auf Wer bin ich und wie viele<\/h3>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Diese Frage ist der Titel eines Buches von Richard David Precht aus dem Jahr 2007. Das Buch gefiel mir nicht, aber die Frage habe ich nie vergessen. Bis vor einigen Monaten war ich unfähig, auch nur ein bisschen Sinn in dieser Frage zu finden. Hier ist meine Antwort in klaren Worten:<\/p>
+      <div style="text-align:center;font-style:italic;color:var(--ink);margin:28px auto 28px;padding:24px 22px;border:1px solid var(--gold);border-radius:8px;background:rgba(200,146,42,0.06);font-size:15px;line-height:1.7;max-width:92%;">Wir sind Sternenstaub verbunden mit der Energie des Universums, ohne die Existenz von Zeit und innerhalb unendlicher Universen und Möglichkeiten.<\/div>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Lange Zeit war ich mir über meine Ziele und meinen Wert als Person sicher. Glücklich mit mir selbst und unabhängig. Mit dem großen Ziel, aufzuhören wie ein Roboter zu arbeiten und ein neues Leben als Mensch zu suchen. Jetzt habe ich alle Ziele erfüllt. Ohne große Lasten oder Verpflichtungen. Auf den ersten Blick das Paradies.<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Aber das Paradies existiert (zumindest jetzt) nicht. Im Kontext meines Umzugs und des Beginns eines neuen Lebens ohne Familie oder Freunde fehlte die Struktur, die Arbeit oder andere Verpflichtungen geben. Ende 2024, als alles fertig organisiert war, tauchte die große Frage auf: Joder, was werde ich tun — gesund, voller Energie, mit Unmengen an Erfahrungen und der Idee, die Welt zu retten, aber ohne eine konkrete Vorstellung wie.<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Um die Wahrheit zu sagen: Mein Charakter ist nicht der beste darin, Nein zu Vergnügungen zu sagen. Als Single hier in Barcelona habe ich in den ersten Monaten zu keiner Form von Spaß Nein gesagt. Die Folge war, dass ich nach 4–5 Monaten nur noch bei 3 % meiner Energie war. Mein Handy schickt eine Nachricht bei 3 %: Achtung, Energie sehr niedrig. Das Telefon schaltet sich in Kürze aus. Genau so fühlte ich mich.<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Glücklicherweise war es mir möglich, schnell zu verstehen, dass es meine Verantwortung ist, dies zu lösen. Mit Techniken aus meinem alten Berufsleben konnte ich meinen Lebensstil ändern und aufladen. Ich entfernte fast alle Bekannten radikal aus meinem Leben. Ich setzte spezifische Grenzen bezüglich Substanzen und lernte, mich vor toxischen Menschen zu schützen. Nach einigen Wochen war ich wie neu.<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Ich lernte, dass keine KI und keine andere Person den Weg DEINES Lebens definieren kann. Jetzt bin ich bereit, meinen Weg basierend auf meinem Glück und meiner inneren Kraft fortzusetzen.<\/p>
+      <h3 style="font-family:'Playfair Display',serif;font-size:16px;font-weight:500;color:var(--gold);margin:28px 0 14px;letter-spacing:0.3px;">Epilog<\/h3>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;font-style:italic;">Katalysator für Ruhe und Klarheit: Das war schon immer deine Rolle in deinem Leben.<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;font-style:italic;">Energetischer Verstärker: Deine Energie produziert chemische Veränderungen in anderen (Stressabbau, Endorphine).<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;font-style:italic;">Kohärenz schaffen: Durch deine Fähigkeiten als Psychotherapeut und Führungskraft schaffst du Ordnung im Chaos, was die globale Energie verstärkt.<\/p>
+      <h3 style="font-family:'Playfair Display',serif;font-size:16px;font-weight:500;color:var(--gold);margin:28px 0 14px;letter-spacing:0.3px;">Abschließendes Fazit<\/h3>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Am Ende erkenne ich, dass es nicht darum geht, den Sinn des Lebens wie einen Schatz in Barcelona zu suchen. Der Sinn bin ich selbst — in jeder Entscheidung, Nein zu sagen zu dem, was mir Energie raubt, und Ja zu dem, was mich vibrieren lässt. Ich bin der Programmierer, der nun seine eigene Freiheit codiert, und der Psychotherapeut, der zuerst seine eigene Einsamkeit im Paradies heilen musste.<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Mein Projekt ist ambitioniert: ein Verstärker für positive Energie zu sein. Wenn ich es schaffe, dass auch nur eine einzige Person ihre Ordnung im Chaos findet, dann wird meine Batterie immer bei 100 % sein. Ich bin nicht nur einer, ich bin alle, die ich war, und der, der ich heute sein möchte: Sternenstaub, aber mit den Füßen fest auf der Erde.<\/p>
+      <h3 style="font-family:'Playfair Display',serif;font-size:16px;font-weight:500;color:var(--gold);margin:28px 0 14px;letter-spacing:0.3px;">Selbstkenntnis als erster Schritt der Integration<\/h3>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Wer migriert, stellt früher oder später eine Frage, die er vielleicht noch nie so direkt gestellt hat: Wer bin ich — ohne meine Sprache, ohne mein Viertel, ohne meine Familie, ohne meinen gewohnten Alltag? Migration entkleidet den Menschen von seinen äußeren Orientierungspunkten. Was bleibt, ist das Innere. Und das Innere kennen die wenigsten wirklich gut.<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Kapitel 10 dieses Textes hat gezeigt, dass Integration bedeutet, sich selbst nicht zu verlieren. Aber man kann sich nur nicht verlieren, wenn man weiß, wer man ist. Selbstkenntnis ist keine Selbstverbesserung. Sie ist Selbstorientierung. Sie ist die Antwort auf die Frage: Was bringe ich mit? Was ist verhandelbar — und was nicht? Wo liegen meine Stärken, und wo meine blinden Flecken?<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Der folgende Anhang stellt ein konkretes, siebenstufiges Verfahren vor, das genau dabei hilft. Es ist kein Therapieprogramm und kein akademisches Modell. Es ist ein praktisches Werkzeug — entwickelt aus jahrzehntelanger Erfahrung mit Menschen in Übergangssituationen. Es funktioniert mit Stift und Papier, in der eigenen Sprache, im eigenen Tempo.<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Für den Migranten ist dieses Verfahren besonders wertvoll, weil der Migrationsprozess selbst eine erzwungene Selbstbefragung ist. Die neue Umgebung stellt Fragen, die die alte niemals gestellt hätte. Dieses Verfahren gibt dem Migranten die Möglichkeit, diese Fragen selbst zu stellen — bevor die Umgebung es tut. Das ist der Unterschied zwischen reagieren und gestalten.<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Wer diese sieben Etappen durchläuft, verlässt den Prozess nicht mit Antworten auf alle Fragen — aber mit Klarheit darüber, welche Fragen die eigenen sind. Und das ist, im Kontext der Migration, bereits ein außerordentlicher Gewinn.<\/p>
     `
   },
   anexoB: {
@@ -4526,8 +4578,8 @@ const UI = {
     reflPlaceholder: 'Escribe libremente…',
     diarioEmpty: 'Aún no hay entradas. Empieza hoy.', diarioToastEmpty: 'No hay entradas aún',
     midiaPlaceholderRefl: '¿Qué reflexionaste hoy?', midiaPlaceholderTarea: '¿Qué tienes que hacer?', midiaPlaceholderInsight: '¿Qué insight quieres recordar?',
-    heroPrologoSub: 'El inicio del viaje', heroEpilogoSub: 'La llegada consciente',
-    heroAutorH2: 'Sobre el autor', heroAnalisisH2: 'Analizarte a ti mismo', heroComunicacionH2: 'Comunicación y liderazgo',
+    heroPrologoSub: 'El inicio del viaje', heroEpilogoSub: 'Cuando todo se calma',
+    heroAutorH2: 'Quién soy y cuántos', heroAnalisisH2: 'Analizarte a ti mismo', heroComunicacionH2: 'Comunicación y liderazgo',
     heroExpertosLong: 'Aquí se vuelve más complejo, pero vale la pena. Convertirte en tu mejor versión no es magia — es trabajo duro. Avanza en pasos pequeños — pero avanza.',
     manifestoIntro: 'Este es tu manifiesto. No es poesía. No es motivación vacía. Es estrategia. Es claridad. Es poder.<br><br>Confirma cada afirmación, recházala, o marca tus dudas — las dudas quedan abiertas en tu diario hasta que decides.',
     tramitesHeroTag: 'España 2026', tramitesHeroH2: 'Guía Legal para Migrantes', tramitesHeroSub: 'Todas las vías, pasos y consecuencias · Actualizado 2026',
@@ -4541,6 +4593,7 @@ const UI = {
     midiaAddDeadline: 'Añadir fecha y hora límite', midiaSaveEntry: 'Guardar entrada →', midiaAllEntries: '📋 Todas las entradas',
     midiaCompleted: '✓ Completada', midiaMarkDone: '✓ Marcar listo', midiaNoEntries: 'Aún no hay entradas. Empieza hoy.',
     markAsRead: 'Marcar como leído →', alreadyRead: '✓ Leído — sigue disponible en Tu mejor Versión',
+    savedAvailableToast: 'Guardado. Sigue disponible en Tu mejor Versión →',
     backLabel: 'Atrás', emergBtn: '🌿 No me siento bien', emergBannerText: 'No me siento bien — Ayuda inmediata',
     sidebarMidia: 'Mi Día', sidebarGuia: 'La Guía', sidebarManifiesto: 'Manifiesto', sidebarContrato: 'Mi Contrato', sidebarFinanzas: 'Mis Finanzas', sidebarTramites: 'Migración & Trámites', sidebarExpertos: 'Tu mejor Versión',
     maniHeroTitle: 'Mi Manifiesto', maniHeroSub: '10 principios · Tu voz · Tu identidad',
@@ -4646,8 +4699,8 @@ const UI = {
     reflPlaceholder: 'Schreibe frei heraus…',
     diarioEmpty: 'Noch keine Einträge. Fang heute an.', diarioToastEmpty: 'Noch keine Einträge',
     midiaPlaceholderRefl: 'Worüber hast du heute nachgedacht?', midiaPlaceholderTarea: 'Was musst du tun?', midiaPlaceholderInsight: 'Welchen Insight willst du dir merken?',
-    heroPrologoSub: 'Der Beginn der Reise', heroEpilogoSub: 'Die bewusste Ankunft',
-    heroAutorH2: 'Über den Autor', heroAnalisisH2: 'Dich selbst analysieren', heroComunicacionH2: 'Kommunikation und Führung',
+    heroPrologoSub: 'Der Beginn der Reise', heroEpilogoSub: 'Wenn alles ruhig wird',
+    heroAutorH2: 'Wer bin ich – und wenn ja, wie viele?', heroAnalisisH2: 'Dich selbst analysieren', heroComunicacionH2: 'Kommunikation und Führung',
     heroExpertosLong: 'Hier wird es komplexer, aber es lohnt sich. Deine beste Version zu werden ist keine Magie — es ist harte Arbeit. Geh in kleinen Schritten voran — aber geh voran.',
     manifestoIntro: 'Dies ist dein Manifest. Es ist keine Poesie. Es ist keine leere Motivation. Es ist Strategie. Es ist Klarheit. Es ist Macht.<br><br>Bestätige jede Aussage, lehne sie ab oder markiere deine Zweifel — Zweifel bleiben offen in deinem Tagebuch, bis du entscheidest.',
     tramitesHeroTag: 'Spanien 2026', tramitesHeroH2: 'Rechts-Leitfaden für Migranten', tramitesHeroSub: 'Alle Wege, Schritte und Folgen · Aktualisiert 2026',
@@ -4661,6 +4714,7 @@ const UI = {
     midiaAddDeadline: 'Frist und Uhrzeit hinzufügen', midiaSaveEntry: 'Eintrag speichern →', midiaAllEntries: '📋 Alle Einträge',
     midiaCompleted: '✓ Erledigt', midiaMarkDone: '✓ Als erledigt markieren', midiaNoEntries: 'Noch keine Einträge. Beginne heute.',
     markAsRead: 'Als gelesen markieren →', alreadyRead: '✓ Gelesen — weiterhin verfügbar in „Deine beste Version"',
+    savedAvailableToast: 'Gespeichert. Weiterhin verfügbar in „Deine beste Version" →',
     backLabel: 'Zurück', emergBtn: '🌿 Mir geht es schlecht', emergBannerText: 'Mir geht es schlecht — Sofort-Hilfe',
     sidebarMidia: 'Mein Tag', sidebarGuia: 'Das Handbuch', sidebarManifiesto: 'Manifest', sidebarContrato: 'Mein Vertrag', sidebarFinanzas: 'Meine Finanzen', sidebarTramites: 'Migration & Formalitäten', sidebarExpertos: 'Deine beste Version',
     maniHeroTitle: 'Mein Manifest', maniHeroSub: '10 Prinzipien · Deine Stimme · Deine Identität',
@@ -4770,8 +4824,8 @@ const UI = {
     reflPlaceholder: 'Write freely…',
     diarioEmpty: 'No entries yet. Start today.', diarioToastEmpty: 'No entries yet',
     midiaPlaceholderRefl: 'What did you reflect on today?', midiaPlaceholderTarea: 'What do you need to do?', midiaPlaceholderInsight: 'What insight do you want to remember?',
-    heroPrologoSub: 'The start of the journey', heroEpilogoSub: 'The conscious arrival',
-    heroAutorH2: 'About the author', heroAnalisisH2: 'Analyze yourself', heroComunicacionH2: 'Communication and leadership',
+    heroPrologoSub: 'The start of the journey', heroEpilogoSub: 'When everything settles',
+    heroAutorH2: 'Who am I — and if so, how many?', heroAnalisisH2: 'Analyze yourself', heroComunicacionH2: 'Communication and leadership',
     heroExpertosLong: 'Here it gets more complex, but it is worth it. Becoming your best version is not magic — it is hard work. Move forward in small steps — but move forward.',
     manifestoIntro: 'This is your manifesto. It is not poetry. It is not empty motivation. It is strategy. It is clarity. It is power.<br><br>Confirm each statement, reject it, or mark your doubts — doubts stay open in your journal until you decide.',
     tramitesHeroTag: 'Spain 2026', tramitesHeroH2: 'Legal Guide for Migrants', tramitesHeroSub: 'All paths, steps and consequences · Updated 2026',
@@ -4785,6 +4839,7 @@ const UI = {
     midiaAddDeadline: 'Add deadline date and time', midiaSaveEntry: 'Save entry →', midiaAllEntries: '📋 All entries',
     midiaCompleted: '✓ Completed', midiaMarkDone: '✓ Mark done', midiaNoEntries: 'No entries yet. Start today.',
     markAsRead: 'Mark as read →', alreadyRead: '✓ Read — still available in Your Best Version',
+    savedAvailableToast: 'Saved. Still available in Your Best Version →',
     backLabel: 'Back', emergBtn: '🌿 I feel bad', emergBannerText: 'I feel bad — Immediate help',
     sidebarMidia: 'My Day', sidebarGuia: 'The Guide', sidebarManifiesto: 'Manifesto', sidebarContrato: 'My Contract', sidebarFinanzas: 'My Finances', sidebarTramites: 'Migration & Procedures', sidebarExpertos: 'Your Best Version',
     maniHeroTitle: 'My Manifesto', maniHeroSub: '10 principles · Your voice · Your identity',
