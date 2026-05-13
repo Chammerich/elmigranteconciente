@@ -1890,7 +1890,7 @@
 <!-- TOP BAR -->
 <div class="top-bar" id="top-bar">
   <div class="top-bar-main">
-    <button class="top-logo" onclick="showHome()">⚖︎ El Migrante Consciente <span id="app-version-badge" style="font-size:9px;background:rgba(200,146,42,0.2);color:var(--gold);font-family:'DM Sans',sans-serif;font-weight:600;letter-spacing:0.5px;padding:2px 6px;border-radius:4px;margin-left:4px;">v12.81</span></button>
+    <button class="top-logo" onclick="showHome()">⚖︎ El Migrante Consciente <span id="app-version-badge" style="font-size:9px;background:rgba(200,146,42,0.2);color:var(--gold);font-family:'DM Sans',sans-serif;font-weight:600;letter-spacing:0.5px;padding:2px 6px;border-radius:4px;margin-left:4px;">v12.84</span></button>
     <div style="display:flex;align-items:center;gap:10px;">
       <div class="lang-switcher">
         <button class="lang-btn active" onclick="setLang('es',this)">ES</button>
@@ -1971,13 +1971,13 @@
     <button class="home-tile" onclick="navTo('epilogo')"><div class="home-tile-icon">🌅</div><div class="home-tile-body"><div class="home-tile-title" id="tile-title-epilogo">Epílogo</div><div class="home-tile-sub" id="tile-sub-epilogo">Cuando todo se calma. La llegada consciente.</div></div><div class="home-tile-arrow">›</div></button>
   </div>
   <div style="padding:0 16px 16px;">
-    <button onclick="navTo('contacto')" style="width:100%;background:none;border:1px solid var(--border);border-radius:12px;padding:14px 16px;display:flex;align-items:center;gap:14px;cursor:pointer;text-align:left;">
-      <span style="font-size:24px;line-height:1;">✉️</span>
-      <div style="flex:1;line-height:1.4;">
+    <button onclick="navTo('contacto')" style="width:100%;background:white;border:1px solid var(--border);border-radius:12px;padding:10px 14px;display:flex;align-items:center;gap:12px;cursor:pointer;text-align:left;">
+      <span style="font-size:20px;line-height:1;flex-shrink:0;">✉️</span>
+      <div style="flex:1;line-height:1.3;min-width:0;">
         <div style="font-size:13px;font-weight:600;color:var(--ink);" data-i18n="homeContactTitle">Contactar al autor</div>
-        <div style="font-size:13px;color:var(--ink);font-family:'DM Sans',sans-serif;">chammerich@outlook.es</div>
-        <div style="font-size:11px;color:var(--fog);" data-i18n="homeContactSub">Comparte tu experiencia · Feedback · Preguntas</div>
+        <div style="font-size:11px;color:var(--fog);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">chammerich@outlook.es</div>
       </div>
+      <span style="color:rgba(0,0,0,0.25);font-size:18px;line-height:1;">›</span>
     </button>
   </div>
 </div>
@@ -2163,13 +2163,11 @@
 <div class="screen" id="screen-tramites">
   <div class="screen-actionbar"><button class="action-back" onclick="goBack()">← <span class="back-label">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()">🌿 No me siento bien</button></div>
   <div class="tramites-hero">
-    <div class="tramites-hero-tag">España 2026</div>
-    <h2>Guía Legal para Migrantes</h2>
-    <p>Todas las vías, pasos y consecuencias · Actualizado 2026</p>
-    <div class="tramites-aviso">
-      ⚖︎ Esta guía describe las vías legales disponibles. Las leyes cambian — consulta siempre a un abogado de extranjería.
-    </div>
-    <button class="tramites-legal-btn" onclick="openModal('modal-legal-aid')">🛡️ Buscar consulta jurídica gratuita</button>
+    <div class="tramites-hero-tag" data-i18n="tramitesHeroTag">España 2026</div>
+    <h2 data-i18n="tramitesHeroH2">Guía Legal para Migrantes</h2>
+    <p data-i18n="tramitesHeroSub">Todas las vías, pasos y consecuencias · Actualizado 2026</p>
+    <div class="tramites-aviso" data-i18n="tramitesAviso">⚖︎ Esta guía describe las vías legales disponibles. Las leyes cambian — consulta siempre a un abogado de extranjería.</div>
+    <button class="tramites-legal-btn" onclick="openModal('modal-legal-aid')" data-i18n="tramitesLegalBtn">🛡️ Buscar consulta jurídica gratuita</button>
   </div>
 
   <!-- Quick Nav Pills -->
@@ -2684,7 +2682,7 @@ let CHAPTERS = getCHAPTERS();
 let WISDOMS  = getWISDOMS();
 
 // ─── STATE ──────────────────────────────────────────────────
-const APP_VERSION = 81;
+const APP_VERSION = 84;
 let state = JSON.parse(localStorage.getItem('mc_state') || '{}');
 if (state.appVersion !== APP_VERSION) {
   state.appVersion = APP_VERSION;
@@ -4407,6 +4405,10 @@ const UI = {
     heroAutorH2: 'Sobre el autor', heroAnalisisH2: 'Analizarte a ti mismo', heroComunicacionH2: 'Comunicación y liderazgo',
     heroExpertosLong: 'Aquí se vuelve más complejo, pero vale la pena. Convertirte en tu mejor versión no es magia — es trabajo duro. Avanza en pasos pequeños — pero avanza.',
     manifestoIntro: 'Este es tu manifiesto. No es poesía. No es motivación vacía. Es estrategia. Es claridad. Es poder.<br><br>Confirma cada afirmación, recházala, o marca tus dudas — las dudas quedan abiertas en tu diario hasta que decides.',
+    tramitesHeroTag: 'España 2026', tramitesHeroH2: 'Guía Legal para Migrantes', tramitesHeroSub: 'Todas las vías, pasos y consecuencias · Actualizado 2026',
+    tramitesAviso: '⚖︎ Esta guía describe las vías legales disponibles. Las leyes cambian — consulta siempre a un abogado de extranjería.',
+    tramitesLegalBtn: '🛡️ Buscar consulta jurídica gratuita',
+    finanzasH1: 'Finanzas Conscientes', finanzasSub: 'El Migrante Consciente · Tu realidad económica', finanzasSituacion: 'Mi situación hoy',
     backLabel: 'Atrás', emergBtn: '🌿 No me siento bien', emergBannerText: 'No me siento bien — Ayuda inmediata',
     sidebarMidia: 'Mi Día', sidebarGuia: 'La Guía', sidebarManifiesto: 'Manifiesto', sidebarContrato: 'Mi Contrato', sidebarFinanzas: 'Mis Finanzas', sidebarTramites: 'Migración & Trámites', sidebarExpertos: 'Tu mejor Versión',
     maniHeroTitle: 'Mi Manifiesto', maniHeroSub: '15 principios · Tu voz · Tu identidad',
@@ -4512,6 +4514,10 @@ const UI = {
     heroAutorH2: 'Über den Autor', heroAnalisisH2: 'Dich selbst analysieren', heroComunicacionH2: 'Kommunikation und Führung',
     heroExpertosLong: 'Hier wird es komplexer, aber es lohnt sich. Deine beste Version zu werden ist keine Magie — es ist harte Arbeit. Geh in kleinen Schritten voran — aber geh voran.',
     manifestoIntro: 'Dies ist dein Manifest. Es ist keine Poesie. Es ist keine leere Motivation. Es ist Strategie. Es ist Klarheit. Es ist Macht.<br><br>Bestätige jede Aussage, lehne sie ab oder markiere deine Zweifel — Zweifel bleiben offen in deinem Tagebuch, bis du entscheidest.',
+    tramitesHeroTag: 'Spanien 2026', tramitesHeroH2: 'Rechts-Leitfaden für Migranten', tramitesHeroSub: 'Alle Wege, Schritte und Folgen · Aktualisiert 2026',
+    tramitesAviso: '⚖︎ Dieser Leitfaden beschreibt die verfügbaren rechtlichen Wege. Gesetze ändern sich — konsultiere immer einen Anwalt für Ausländerrecht.',
+    tramitesLegalBtn: '🛡️ Kostenlose Rechtsberatung suchen',
+    finanzasH1: 'Bewusste Finanzen', finanzasSub: 'El Migrante Consciente · Deine wirtschaftliche Realität', finanzasSituacion: 'Meine heutige Situation',
     backLabel: 'Zurück', emergBtn: '🌿 Mir geht es schlecht', emergBannerText: 'Mir geht es schlecht — Sofort-Hilfe',
     sidebarMidia: 'Mein Tag', sidebarGuia: 'Das Handbuch', sidebarManifiesto: 'Manifest', sidebarContrato: 'Mein Vertrag', sidebarFinanzas: 'Meine Finanzen', sidebarTramites: 'Migration & Formalitäten', sidebarExpertos: 'Deine beste Version',
     maniHeroTitle: 'Mein Manifest', maniHeroSub: '15 Prinzipien · Deine Stimme · Deine Identität',
@@ -4621,6 +4627,10 @@ const UI = {
     heroAutorH2: 'About the author', heroAnalisisH2: 'Analyze yourself', heroComunicacionH2: 'Communication and leadership',
     heroExpertosLong: 'Here it gets more complex, but it is worth it. Becoming your best version is not magic — it is hard work. Move forward in small steps — but move forward.',
     manifestoIntro: 'This is your manifesto. It is not poetry. It is not empty motivation. It is strategy. It is clarity. It is power.<br><br>Confirm each statement, reject it, or mark your doubts — doubts stay open in your journal until you decide.',
+    tramitesHeroTag: 'Spain 2026', tramitesHeroH2: 'Legal Guide for Migrants', tramitesHeroSub: 'All paths, steps and consequences · Updated 2026',
+    tramitesAviso: '⚖︎ This guide describes available legal paths. Laws change — always consult an immigration lawyer.',
+    tramitesLegalBtn: '🛡️ Find free legal consultation',
+    finanzasH1: 'Conscious Finances', finanzasSub: 'El Migrante Consciente · Your economic reality', finanzasSituacion: 'My situation today',
     backLabel: 'Back', emergBtn: '🌿 I feel bad', emergBannerText: 'I feel bad — Immediate help',
     sidebarMidia: 'My Day', sidebarGuia: 'The Guide', sidebarManifiesto: 'Manifesto', sidebarContrato: 'My Contract', sidebarFinanzas: 'My Finances', sidebarTramites: 'Migration & Procedures', sidebarExpertos: 'Your Best Version',
     maniHeroTitle: 'My Manifesto', maniHeroSub: '15 principles · Your voice · Your identity',
@@ -8328,14 +8338,14 @@ function analizarCompra() {
 <div class="header">
   <div class="header-seal">⚖︎</div>
   <div>
-    <h1>Finanzas Conscientes</h1>
-    <p>El Migrante Consciente · Tu realidad económica</p>
+    <h1 data-i18n="finanzasH1">Finanzas Conscientes</h1>
+    <p data-i18n="finanzasSub">El Migrante Consciente · Tu realidad económica</p>
   </div>
 </div>
 
 <!-- AMPEL — always on top -->
 <div class="ampel-bar">
-  <h2>Mi situación hoy</h2>
+  <h2 data-i18n="finanzasSituacion">Mi situación hoy</h2>
   <div class="ampel-grid">
     <div class="ampel-cell">
       <div class="label"><span class="ampel-dot" id="dot-hoy"></span>Hoy</div>
