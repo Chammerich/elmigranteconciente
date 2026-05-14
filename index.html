@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <title>El Migrante Consciente</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 
@@ -1076,6 +1079,7 @@
   .home-tile-title { font-size:16px; font-weight:600; color:rgba(255,255,255,0.96); margin-bottom:3px; }
   .home-tile-sub { font-size:12px; color:rgba(255,255,255,0.55); line-height:1.4; }
   .home-tile-arrow { font-size:20px; color:var(--fog); flex-shrink:0; }
+  .home-doc-divider { height:1px; background:linear-gradient(90deg, transparent, rgba(0,0,0,0.12), transparent); margin:8px 32px 4px; }
   .home-tile.gold-tile { background:linear-gradient(135deg,rgba(200,146,42,0.12),rgba(200,146,42,0.04)); border-color:rgba(200,146,42,0.35); }
   .home-tile.gold-tile .home-tile-title { color:var(--gold-light); }
   .midia-tab { flex:1; padding:10px; border:none; background:none; font-family:'DM Sans',sans-serif; font-size:13px; color:var(--fog); cursor:pointer; border-bottom:2px solid transparent; transition:all 0.2s; }
@@ -1891,7 +1895,7 @@
 <!-- TOP BAR -->
 <div class="top-bar" id="top-bar">
   <div class="top-bar-main">
-    <button class="top-logo" onclick="showHome()">⚖︎ El Migrante Consciente <span id="app-version-badge" style="font-size:9px;background:rgba(200,146,42,0.2);color:var(--gold);font-family:'DM Sans',sans-serif;font-weight:600;letter-spacing:0.5px;padding:2px 6px;border-radius:4px;margin-left:4px;">v12.113</span></button>
+    <button class="top-logo" onclick="showHome()">⚖︎ El Migrante Consciente</button>
     <div style="display:flex;align-items:center;gap:10px;">
       <div class="lang-switcher">
         <button class="lang-btn active" onclick="setLang('es',this)">ES</button>
@@ -1914,7 +1918,7 @@
 <div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
 <div class="sidebar" id="sidebar">
   <div class="sidebar-head">
-    <h3>El Migrante Consciente</h3>
+    <h3>El Migrante Consciente <span id="sidebar-version-badge" style="font-size:9px;background:rgba(200,146,42,0.2);color:var(--gold);font-family:'DM Sans',sans-serif;font-weight:600;letter-spacing:0.5px;padding:2px 6px;border-radius:4px;margin-left:6px;vertical-align:middle;">v1.0.116</span></h3>
     <p data-i18n="sidebarSub">Tu guía · Tu contrato · Tu diario</p>
   </div>
   <button class="sidebar-home-btn" onclick="showHome();closeSidebar()" data-i18n="sidebarHome">🏠 Menú principal</button>
@@ -1934,6 +1938,9 @@
     <button id="install-app-btn" onclick="installApp()" style="display:flex;align-items:center;justify-content:center;gap:6px;width:100%;margin-top:8px;background:transparent;color:var(--gold);font-size:12px;font-family:'DM Sans',sans-serif;border:1px solid rgba(200,146,42,0.35);border-radius:20px;padding:8px 16px;cursor:pointer;" data-i18n="sidebarInstall">
       📲 Instalar como app
     </button>
+    <button onclick="resetApp()" style="display:flex;align-items:center;justify-content:center;gap:6px;width:100%;margin-top:8px;background:transparent;color:rgba(255,255,255,0.5);font-size:11px;font-family:'DM Sans',sans-serif;border:1px solid rgba(255,255,255,0.12);border-radius:20px;padding:7px 16px;cursor:pointer;" data-i18n="sidebarReset">
+      🔄 Reiniciar app (borrar todo)
+    </button>
   </div>
   <div style="padding:14px 16px 18px;border-top:1px solid rgba(200,146,42,0.15);">
     <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(200,146,42,0.6);margin-bottom:8px;" data-i18n="sidebarPrivacyLabel">🔒 Privacidad</div>
@@ -1947,27 +1954,29 @@
 <div class="welcome-overlay" id="welcome-overlay">
   <div class="welcome-seal">⚖︎</div>
   <div class="welcome-title">El Migrante Consciente</div>
-  <div class="welcome-sub">Una guía práctica para tomar el control de tu proceso migratorio</div>
-  <div class="welcome-item"><div class="welcome-item-icon">📜</div><div class="welcome-item-text"><strong>Prólogo</strong><span>Dónde empieza el viaje. La invitación a reflexionar.</span></div></div>
-  <div class="welcome-item"><div class="welcome-item-icon">☀️</div><div class="welcome-item-text"><strong>Mi Día</strong><span>Un compromiso diario, una pregunta de reflexión y tu diario privado.</span></div></div>
-  <div class="welcome-item"><div class="welcome-item-icon">📖</div><div class="welcome-item-text"><strong>El Guide</strong><span>15 capítulos del manual de migración consciente.</span></div></div>
-  <div class="welcome-item"><div class="welcome-item-icon">⚖︎</div><div class="welcome-item-text"><strong>Mi Contrato</strong><span>14 compromisos concretos para pasar de reflexionar a actuar.</span></div></div>
-  <div class="welcome-item"><div class="welcome-item-icon">🗂️</div><div class="welcome-item-text"><strong>Migración & Trámites</strong><span>Guía legal 2026: visados, arraigo, asilo, empadronamiento, LGBTIQ+.</span></div></div>
-  <div class="welcome-item"><div class="welcome-item-icon">🌿</div><div class="welcome-item-text"><strong>Ayuda inmediata</strong><span>El banner verde en la parte superior siempre está visible. Úsalo cuando lo necesites.</span></div></div>
-  <div class="welcome-note">"La migración puede entenderse aquí como un símbolo. Los mecanismos son similares, independientemente de si se quiere emigrar a un nuevo país o simplemente construir una nueva vida."<br>— Christian Hammerich</div>
-  <button class="welcome-btn" onclick="closeWelcome()">Comenzar mi camino →</button>
+  <div class="welcome-sub" data-i18n="welcomeSub">Una guía práctica para tomar el control de tu proceso migratorio</div>
+  <div class="welcome-item"><div class="welcome-item-icon">📜</div><div class="welcome-item-text"><strong data-i18n="welcomeItem1Title">Prólogo</strong><span data-i18n="welcomeItem1Sub">Dónde empieza el viaje. La invitación a reflexionar.</span></div></div>
+  <div class="welcome-item"><div class="welcome-item-icon">☀️</div><div class="welcome-item-text"><strong data-i18n="welcomeItem2Title">Mi Día</strong><span data-i18n="welcomeItem2Sub">Un compromiso diario, una pregunta de reflexión y tu diario privado.</span></div></div>
+  <div class="welcome-item"><div class="welcome-item-icon">📖</div><div class="welcome-item-text"><strong data-i18n="welcomeItem3Title">La Guía</strong><span data-i18n="welcomeItem3Sub">15 capítulos del manual de migración consciente.</span></div></div>
+  <div class="welcome-item"><div class="welcome-item-icon">⚖︎</div><div class="welcome-item-text"><strong data-i18n="welcomeItem4Title">Mi Contrato</strong><span data-i18n="welcomeItem4Sub">14 compromisos concretos para pasar de reflexionar a actuar.</span></div></div>
+  <div class="welcome-item"><div class="welcome-item-icon">🗂️</div><div class="welcome-item-text"><strong data-i18n="welcomeItem5Title">Migración & Trámites</strong><span data-i18n="welcomeItem5Sub">Guía legal 2026: visados, arraigo, asilo, empadronamiento, LGBTIQ+.</span></div></div>
+  <div class="welcome-item"><div class="welcome-item-icon">🌿</div><div class="welcome-item-text"><strong data-i18n="welcomeItem6Title">Ayuda inmediata</strong><span data-i18n="welcomeItem6Sub">El banner verde en la parte superior siempre está visible. Úsalo cuando lo necesites.</span></div></div>
+  <div class="welcome-note">"<span data-i18n="welcomeNote">La migración puede entenderse aquí como un símbolo. Los mecanismos son similares, independientemente de si se quiere emigrar a un nuevo país o simplemente construir una nueva vida.</span>"<br>— Christian Hammerich</div>
+  <button class="welcome-btn" onclick="closeWelcome()" data-i18n="welcomeBtn">Comenzar mi camino →</button>
 </div>
 
 <!-- HOME SCREEN -->
 <div class="screen active" id="screen-home">
   <div class="home-screen">
     <button class="home-tile" onclick="navTo('prologo')"><div class="home-tile-icon">📜</div><div class="home-tile-body"><div class="home-tile-title" id="tile-title-prologo">Prólogo</div><div class="home-tile-sub" id="tile-sub-prologo">El inicio del viaje. Por dónde empieza todo.</div></div><div class="home-tile-arrow">›</div></button>
+    <div class="home-doc-divider"></div>
     <button class="home-tile" onclick="navTo('midia')" style="position:relative;"><span class="notif-dot" id="dot-home-midia"></span><span id="tarea-badge-home" onclick="event.stopPropagation();toggleTareaOverlay();" style="display:none;position:absolute;top:10px;right:38px;width:22px;height:22px;border-radius:50%;color:#fff;font-size:11px;font-weight:700;align-items:center;justify-content:center;cursor:pointer;z-index:2;box-shadow:0 2px 6px rgba(0,0,0,0.2);">!</span><div class="home-tile-icon">☀️</div><div class="home-tile-body"><div class="home-tile-title" id="tile-title-midia">Mi Día</div><div class="home-tile-sub" id="tile-sub-midia">Impulso diario · Reflexión · Diario privado</div></div><div class="home-tile-arrow">›</div></button>
     <button class="home-tile" onclick="navTo('manifiesto')"><span class="notif-dot" id="dot-home-manifiesto"></span><div class="home-tile-icon" style="color:var(--gold);">⚖︎</div><div class="home-tile-body"><div class="home-tile-title" id="tile-title-manifiesto">Mi Manifiesto</div><div class="home-tile-sub" id="tile-sub-manifiesto">Mi nueva realidad · 14 compromisos · Tu firma</div></div><div class="home-tile-arrow">›</div></button>
     <button class="home-tile" onclick="navTo('guia')"><span class="notif-dot" id="dot-home-guia"></span><div class="home-tile-icon">📖</div><div class="home-tile-body"><div class="home-tile-title" id="tile-title-guia">La Guía</div><div class="home-tile-sub" id="tile-sub-guia">15 capítulos del manual de migración consciente</div></div><div class="home-tile-arrow">›</div></button>
     <button class="home-tile" onclick="navTo('expertos')"><span class="notif-dot" id="dot-home-expertos"></span><div class="home-tile-icon">🔬</div><div class="home-tile-body"><div class="home-tile-title" id="tile-title-expertos">Tu mejor Versión</div><div class="home-tile-sub" id="tile-sub-expertos">Sobre el autor · Inconsciente y Trauma · Autoanálisis · Liderazgo</div></div><div class="home-tile-arrow">›</div></button>
     <button class="home-tile" onclick="navTo('finanzas')"><span class="notif-dot" id="dot-home-finanzas"></span><div class="home-tile-icon">💰</div><div class="home-tile-body"><div class="home-tile-title" id="tile-title-finanzas">Mis Finanzas</div><div class="home-tile-sub" id="tile-sub-finanzas">Activos · Compromisos · Ampel · El Freno</div></div><div class="home-tile-arrow">›</div></button>
     <button class="home-tile" onclick="navTo('tramites')"><span class="notif-dot" id="dot-home-tramites"></span><div class="home-tile-icon">🗂️</div><div class="home-tile-body"><div class="home-tile-title" id="tile-title-tramites">Migración & Trámites</div><div class="home-tile-sub" id="tile-sub-tramites">Guía legal 2026 · Visados · Arraigo · LGBTIQ+</div></div><div class="home-tile-arrow">›</div></button>
+    <div class="home-doc-divider"></div>
     <button class="home-tile" onclick="navTo('epilogo')"><div class="home-tile-icon">🌅</div><div class="home-tile-body"><div class="home-tile-title" id="tile-title-epilogo">Epílogo</div><div class="home-tile-sub" id="tile-sub-epilogo">Cuando todo se calma. La llegada consciente.</div></div><div class="home-tile-arrow">›</div></button>
   </div>
   <div style="padding:0 16px 16px;">
@@ -2016,6 +2025,7 @@
     <button class="home-tile gold-tile" onclick="navTo('exp-nuevo')" style="border:2px solid var(--gold);"><div class="home-tile-icon">🧠</div><div class="home-tile-body"><div class="home-tile-title" data-i18n="tileExpNuevo">Resiliencia & Trauma</div><div class="home-tile-sub" data-i18n="tileSubExpNuevo">Textos completos · Bloques · Glosario · Descarga</div></div><div class="home-tile-arrow">›</div></button>
     <button class="home-tile" onclick="navTo('exp-analisis')"><div class="home-tile-icon">🪞</div><div class="home-tile-body"><div class="home-tile-title" data-i18n="tileExpAnalisis">Analizarte a ti mismo</div><div class="home-tile-sub" data-i18n="tileSubExpAnalisis">El autoanálisis como fundamento del desarrollo individual.</div></div><div class="home-tile-arrow">›</div></button>
     <button class="home-tile" onclick="navTo('exp-comunicacion')"><div class="home-tile-icon">💬</div><div class="home-tile-body"><div class="home-tile-title" data-i18n="tileExpComunicacion">Comunicación y liderazgo</div><div class="home-tile-sub" data-i18n="tileSubExpComunicacion">Como jefe de tu propia vida o en el trabajo</div></div><div class="home-tile-arrow">›</div></button>
+    <div class="home-doc-divider"></div>
 
     <!-- Prólogo & Epílogo — always available -->
     <button class="home-tile" onclick="navTo('prologo')"><div class="home-tile-icon">📜</div><div class="home-tile-body"><div class="home-tile-title">Prólogo</div><div class="home-tile-sub">El inicio del viaje. Por dónde empieza todo.</div></div><div class="home-tile-arrow">›</div></button>
@@ -2389,7 +2399,7 @@
     <div class="modal-handle"></div>
     <div class="modal-title">Consulta jurídica gratuita</div>
     <div class="modal-body">
-      <p style="margin-bottom:14px;font-size:13px;line-height:1.6;">Servicios de asistencia legal gratuita o de bajo coste para migrantes en España. Antes de pagar a un gestor o abogado, agota estas vías oficiales.</p>
+      <p style="margin-bottom:14px;font-size:13px;line-height:1.6;" data-i18n="tramitesRecursosIntro">Servicios de asistencia legal gratuita o de bajo coste para migrantes en España. Antes de pagar a un gestor o abogado, agota estas vías oficiales.</p>
 
       <div class="legal-aid-section-title">Servicios oficiales</div>
       <a class="legal-aid-item" href="https://www.abogacia.es/servicios/ciudadanos/servicios-de-orientacion-juridica/" target="_blank" rel="noopener">
@@ -2729,11 +2739,11 @@ let CHAPTERS = getCHAPTERS();
 let WISDOMS  = getWISDOMS();
 
 // ─── STATE ──────────────────────────────────────────────────
-const APP_VERSION = 113;
+const APP_VERSION = 116;
 // Auto-sync visible version badge from APP_VERSION constant (no manual update needed)
 document.addEventListener('DOMContentLoaded', () => {
-  const badge = document.getElementById('app-version-badge');
-  if (badge) badge.textContent = 'v12.' + APP_VERSION;
+  const badge = document.getElementById('sidebar-version-badge');
+  if (badge) badge.textContent = 'v1.0.' + APP_VERSION;
 });
 let state = JSON.parse(localStorage.getItem('mc_state') || '{}');
 if (state.appVersion !== APP_VERSION) {
@@ -2847,6 +2857,18 @@ function closeSidebar() {
   document.getElementById('sidebar').classList.remove('open');
   document.getElementById('sidebar-overlay').classList.remove('open');
   document.getElementById('burger-btn').classList.remove('open');
+}
+
+function resetApp() {
+  if (!confirm(t('resetConfirm'))) return;
+  try {
+    // Clear localStorage AND sessionStorage
+    localStorage.clear();
+    sessionStorage.clear();
+  } catch(e) { console.error('Reset error', e); }
+  alert(t('resetDone'));
+  // Hard reload: location.reload(true) is deprecated, use forced replace
+  window.location.replace(window.location.pathname + '?v=' + Date.now());
 }
 
 function closeWelcome() {
@@ -3132,7 +3154,7 @@ const EXP_RESILIENCIA_ELAB = {
 
 Este texto profundiza en el tema de una manera que antes se había dejado conscientemente abierta: con fundamento científico, pero personal y directa. Explica cómo trabaja el inconsciente, por qué nos habla — y cómo podemos aprender a responderle. Para el migrante, este conocimiento tiene un valor especial: porque el cuerpo y la psique registran el estrés del cambio cultural, la pérdida de rutinas y la ausencia de redes familiares mucho antes de que la mente pueda nombrarlo.
 
-Cuando un migrante sufre de repente insomnio, irritabilidad inexplicable o agotamiento físico, no es señal de debilidad. Es el lenguaje del inconsciente — aquel lenguaje que este anexo describe y descifra.`, expert:`` },
+Cuando un migrante sufre de repente insomnio, irritabilidad inexplicable o agotamiento físico, no es señal de debilidad. Es el lenguaje del inconsciente — aquel lenguaje que este texto describe y descifra.`, expert:`` },
     { id:'re0', title:'Introducción: Por qué este texto existe', simple:`No soy psicólogo y no pretendo dar consejos aquí desde un punto de vista médico profesional.
 
 Pero tuve la gran suerte de poder aprender mucho. Curiosamente, primero a través de la experiencia y mucho „Trial and Error", y en mi época en Volkswagen profesionalmente en un número infinito de talleres y cursos de formación. Lo satisfactorio: lo aprendido por la experiencia y convertido en técnicas desarrolladas intuitivamente resultó ser bastante acertado.
@@ -3266,7 +3288,7 @@ ISBN: 978-3424631076`, expert:`` }
 
 This text deepens the topic in a way I previously left consciously open: scientifically grounded, but personal and direct. It explains how the unconscious works, why it speaks to us — and how we can learn to answer it. For the migrant, this knowledge has special value: because body and psyche register the stress of cultural change, the loss of routines, and the absence of familiar networks long before the mind can name them.
 
-When a migrant suddenly suffers from insomnia, inexplicable irritability, or physical exhaustion, it is not a sign of weakness. It is the language of the unconscious — the language this appendix describes and decodes.`, expert:`` },
+When a migrant suddenly suffers from insomnia, inexplicable irritability, or physical exhaustion, it is not a sign of weakness. It is the language of the unconscious — the language this text describes and decodes.`, expert:`` },
     { id:'re0', title:'Introduction: Why this text exists', simple:`I am not a psychologist and I do not pretend to give professional medical advice here.
 
 But I had the great fortune of being allowed to learn a lot. Interestingly, first through experience and a great deal of „Trial and Error", and during my time at Volkswagen professionally in an endless number of workshops and training courses. The satisfying part: what I had learned through experience and translated into intuitively developed techniques turned out to be fairly accurate.
@@ -3400,7 +3422,7 @@ ISBN: 978-3424631076`, expert:`` }
 
 Dieser Text vertieft dieses Thema auf eine Weise, die ich vorher bewusst offengelassen habe: wissenschaftlich fundiert, aber persönlich und direkt. Er erklärt, wie das Unterbewusstsein arbeitet, warum es mit uns spricht — und wie wir lernen können, ihm zu antworten. Für den Migranten ist dieses Wissen besonders wertvoll: Denn der Körper und die Psyche registrieren den Stress des Kulturwechsels, den Verlust von Routinen und die Abwesenheit vertrauter Netze lange bevor der Verstand sie benennen kann.
 
-Wenn ein Migrant plötzlich unter Schlaflosigkeit, unerklärlicher Reizbarkeit oder körperlicher Erschöpfung leidet, ist das kein Zeichen von Schwäche. Es ist die Sprache des Unterbewusstseins — jene Sprache, die dieser Anhang beschreibt und entschlüsselt.` },
+Wenn ein Migrant plötzlich unter Schlaflosigkeit, unerklärlicher Reizbarkeit oder körperlicher Erschöpfung leidet, ist das kein Zeichen von Schwäche. Es ist die Sprache des Unterbewusstseins — jene Sprache, die dieser Text beschreibt und entschlüsselt.` },
     { id:'re0', title:'Einleitung: Warum dieser Text existiert', simple:`Ich bin kein Psychologe und will mir nicht anmaßen hier fachlich aus medizinischer Sicht Rat geben zu können.
 
 Aber ich hatte das große Glück, viel lernen zu dürfen. Interessanterweise zuerst durch Erfahrung und sehr viel „Trial and Error" und in meiner Zeit bei Volkswagen professionell in einer unendlichen Zahl von Workshops und Lehrgängen. Das befriedigende: Das aus der Erfahrung Gelernte und in intuitiv entwickelten Techniken Umgesetzte war ziemlich richtig.
@@ -5786,6 +5808,26 @@ const UI = {
     vozSubmit: 'Compartir anónimamente',
     ringTitle: 'Progreso del Contrato',
     ringSub: 'Completa los 14 puntos',
+    welcomeSub: 'Una guía práctica para tomar el control de tu proceso migratorio',
+    welcomeItem1Title: 'Prólogo',
+    welcomeItem1Sub: 'Dónde empieza el viaje. La invitación a reflexionar.',
+    welcomeItem2Title: 'Mi Día',
+    welcomeItem2Sub: 'Un compromiso diario, una pregunta de reflexión y tu diario privado.',
+    welcomeItem3Title: 'La Guía',
+    welcomeItem3Sub: '15 capítulos del manual de migración consciente.',
+    welcomeItem4Title: 'Mi Contrato',
+    welcomeItem4Sub: '14 compromisos concretos para pasar de reflexionar a actuar.',
+    welcomeItem5Title: 'Migración & Trámites',
+    welcomeItem5Sub: 'Guía legal 2026: visados, arraigo, asilo, empadronamiento, LGBTIQ+.',
+    welcomeItem6Title: 'Ayuda inmediata',
+    welcomeItem6Sub: 'El banner verde en la parte superior siempre está visible. Úsalo cuando lo necesites.',
+    welcomeNote: 'La migración puede entenderse aquí como un símbolo. Los mecanismos son similares, independientemente de si se quiere emigrar a un nuevo país o simplemente construir una nueva vida.',
+    welcomeBtn: 'Comenzar mi camino →',
+    sidebarReset: '🔄 Reiniciar app (borrar todo)',
+    resetConfirm: '¿Estás seguro? Esto borrará todo: tu progreso, diario, perfil, contrato. Esta acción es irreversible.',
+    resetDone: 'App reiniciada. Recargando…',
+    finanzasActSubtitle: 'Marca lo que tienes — sin engañarte',
+    tramitesRecursosIntro: 'Servicios de asistencia legal gratuita o de bajo coste para migrantes en España. Antes de pagar a un gestor o abogado, agota estas vías oficiales.',
     // --- v12.102: Trauma/Inconsciente i18n ---
     expTabResiliencia: '🌱 Resiliencia & el Inconsciente',
     expTabTrauma: '🧬 Trauma',
@@ -5802,7 +5844,7 @@ const UI = {
     tileSubPrologo: 'El inicio del viaje. Por dónde empieza todo.',
     tileMidia: 'Mi Día',
     tileSubMidia: 'Impulso diario · Reflexión · Diario privado',
-    tileGuia: 'El Guide',
+    tileGuia: 'La Guía',
     tileSubGuia: '15 capítulos del manual de migración consciente',
     tileManifiesto: 'Mi Manifiesto',
     tileSubManifiesto: '10 principios · Define quién eres · Tu voz',
@@ -5927,6 +5969,26 @@ const UI = {
     vozSubmit: 'Anonym teilen',
     ringTitle: 'Fortschritt deines Vertrags',
     ringSub: 'Schließe die 14 Punkte ab',
+    welcomeSub: 'Ein praktischer Leitfaden, um die Kontrolle über deinen Migrationsprozess zu übernehmen',
+    welcomeItem1Title: 'Prolog',
+    welcomeItem1Sub: 'Wo die Reise beginnt. Die Einladung zum Nachdenken.',
+    welcomeItem2Title: 'Mein Tag',
+    welcomeItem2Sub: 'Ein tägliches Versprechen, eine Reflexionsfrage und dein privates Tagebuch.',
+    welcomeItem3Title: 'Der Leitfaden',
+    welcomeItem3Sub: '15 Kapitel des Handbuchs der bewussten Migration.',
+    welcomeItem4Title: 'Mein Vertrag',
+    welcomeItem4Sub: '14 konkrete Verpflichtungen, um vom Reflektieren zum Handeln zu gelangen.',
+    welcomeItem5Title: 'Migration & Behördengänge',
+    welcomeItem5Sub: 'Rechtsleitfaden 2026: Visa, Arraigo, Asyl, Empadronamiento, LGBTIQ+.',
+    welcomeItem6Title: 'Soforthilfe',
+    welcomeItem6Sub: 'Das grüne Banner oben ist immer sichtbar. Nutze es, wann immer du es brauchst.',
+    welcomeNote: 'Migration kann hier als Symbol verstanden werden. Die Mechanismen sind ähnlich, unabhängig davon, ob man in ein neues Land auswandern oder einfach ein neues Leben aufbauen will.',
+    welcomeBtn: 'Meinen Weg beginnen →',
+    sidebarReset: '🔄 App zurücksetzen (alles löschen)',
+    resetConfirm: 'Bist du sicher? Dies löscht alles: deinen Fortschritt, dein Tagebuch, dein Profil, deinen Vertrag. Diese Aktion ist nicht rückgängig zu machen.',
+    resetDone: 'App zurückgesetzt. Lade neu…',
+    finanzasActSubtitle: 'Markiere, was du hast — ohne dich selbst zu täuschen',
+    tramitesRecursosIntro: 'Kostenlose oder günstige Rechtsberatung für Migranten in Spanien. Bevor du einen Gestor oder Anwalt bezahlst, schöpfe diese offiziellen Wege aus.',
     // --- v12.102: Trauma/Inconsciente i18n ---
     expTabResiliencia: '🌱 Resilienz & das Unbewusste',
     expTabTrauma: '🧬 Trauma',
@@ -6068,6 +6130,26 @@ const UI = {
     vozSubmit: 'Share anonymously',
     ringTitle: 'Contract Progress',
     ringSub: 'Complete the 14 points',
+    welcomeSub: 'A practical guide to taking control of your migration process',
+    welcomeItem1Title: 'Prologue',
+    welcomeItem1Sub: 'Where the journey begins. The invitation to reflect.',
+    welcomeItem2Title: 'My Day',
+    welcomeItem2Sub: 'A daily commitment, a reflection question, and your private journal.',
+    welcomeItem3Title: 'The Guide',
+    welcomeItem3Sub: '15 chapters of the conscious migration manual.',
+    welcomeItem4Title: 'My Contract',
+    welcomeItem4Sub: '14 concrete commitments to move from reflection to action.',
+    welcomeItem5Title: 'Migration & Procedures',
+    welcomeItem5Sub: 'Legal guide 2026: visas, arraigo, asylum, empadronamiento, LGBTIQ+.',
+    welcomeItem6Title: 'Immediate help',
+    welcomeItem6Sub: 'The green banner at the top is always visible. Use it whenever you need.',
+    welcomeNote: 'Migration can be understood here as a symbol. The mechanisms are similar, regardless of whether one wants to emigrate to a new country or simply build a new life.',
+    welcomeBtn: 'Begin my journey →',
+    sidebarReset: '🔄 Reset app (delete everything)',
+    resetConfirm: 'Are you sure? This will delete everything: your progress, journal, profile, contract. This action cannot be undone.',
+    resetDone: 'App reset. Reloading…',
+    finanzasActSubtitle: 'Mark what you have — without deceiving yourself',
+    tramitesRecursosIntro: 'Free or low-cost legal aid services for migrants in Spain. Before paying a gestor or lawyer, exhaust these official channels.',
     // --- v12.102: Trauma/Inconsciente i18n ---
     expTabResiliencia: '🌱 Resilience & the Unconscious',
     expTabTrauma: '🧬 Trauma',
@@ -10438,7 +10520,7 @@ function toggleLiderazgoBlock(id) {
 <!-- ===== TAB: SUSCRIPCIONES ===== -->
 <div class="section" id="tab-subs">
   <h2 class="section-title">Suscripciones</h2>
-  <p class="section-subtitle">Marca lo que tienes — sin engañarte</p>
+  <p class="section-subtitle" data-i18n="finanzasActSubtitle">Marca lo que tienes — sin engañarte</p>
 
   <!-- VIDEO STREAMING -->
   <div class="card">
