@@ -1038,6 +1038,7 @@
     font-size: 11px; margin: 3px 0 0;
     line-height: 1.4;
   }
+  .screen-hero + div { padding-top: 18px; }
 
   .top-bar { position:fixed; top:0; left:0; right:0; z-index:200; display:flex; flex-direction:column; }
   .top-bar-main { height:52px; background:var(--ink); display:flex; align-items:center; justify-content:space-between; padding:0 16px; border-bottom:1px solid rgba(200,146,42,0.25); }
@@ -1890,7 +1891,7 @@
 <!-- TOP BAR -->
 <div class="top-bar" id="top-bar">
   <div class="top-bar-main">
-    <button class="top-logo" onclick="showHome()">⚖︎ El Migrante Consciente <span id="app-version-badge" style="font-size:9px;background:rgba(200,146,42,0.2);color:var(--gold);font-family:'DM Sans',sans-serif;font-weight:600;letter-spacing:0.5px;padding:2px 6px;border-radius:4px;margin-left:4px;">v12.96</span></button>
+    <button class="top-logo" onclick="showHome()">⚖︎ El Migrante Consciente <span id="app-version-badge" style="font-size:9px;background:rgba(200,146,42,0.2);color:var(--gold);font-family:'DM Sans',sans-serif;font-weight:600;letter-spacing:0.5px;padding:2px 6px;border-radius:4px;margin-left:4px;">v12.98</span></button>
     <div style="display:flex;align-items:center;gap:10px;">
       <div class="lang-switcher">
         <button class="lang-btn active" onclick="setLang('es',this)">ES</button>
@@ -1904,7 +1905,7 @@
   </div>
   <button class="emerg-banner" onclick="openEmergencia()">
     <span>🌿</span>
-    <span class="emerg-banner-text">No me siento bien — Ayuda inmediata</span>
+    <span class="emerg-banner-text" data-i18n="emergBannerText">No me siento bien — Ayuda inmediata</span>
   </button>
 </div>
 <div class="translating-badge" id="translating-badge">Traduciendo…</div>
@@ -1984,7 +1985,7 @@
 
 <!-- SCREEN: MI DÍA (HOY + DIARIO) -->
 <div class="screen" id="screen-midia">
-  <div class="screen-actionbar"><button class="action-back" onclick="goBack()">← <span class="back-label">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()">🌿 No me siento bien</button></div>
+  <div class="screen-actionbar"><button class="action-back" onclick="goBack()">← <span class="back-label" data-i18n="backLabel">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()" data-i18n="emergBtn">🌿 No me siento bien</button></div>
   <div class="screen-hero"><div class="screen-hero-tag" data-i18n="heroTagHoy">Hoy</div><h2 data-i18n="tileMidia">Mi Día</h2></div>
   <div style="display:flex;border-bottom:1px solid var(--border);margin:0 16px 0;">
     
@@ -1995,21 +1996,21 @@
 
 <!-- SCREEN: PROLOG -->
 <div class="screen" id="screen-prologo">
-  <div class="screen-actionbar"><button class="action-back" onclick="goBack()">← <span class="back-label">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()">🌿 No me siento bien</button></div>
+  <div class="screen-actionbar"><button class="action-back" onclick="goBack()">← <span class="back-label" data-i18n="backLabel">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()" data-i18n="emergBtn">🌿 No me siento bien</button></div>
   <div class="screen-hero"><h2 data-i18n="tilePrologo" style="font-size:22px;">Prólogo</h2><p data-i18n="heroPrologoSub">El inicio del viaje</p></div>
   <div id="prologo-content"></div>
 </div>
 
 <!-- SCREEN: EPILOG -->
 <div class="screen" id="screen-epilogo">
-  <div class="screen-actionbar"><button class="action-back" onclick="goBack()">← <span class="back-label">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()">🌿 No me siento bien</button></div>
+  <div class="screen-actionbar"><button class="action-back" onclick="goBack()">← <span class="back-label" data-i18n="backLabel">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()" data-i18n="emergBtn">🌿 No me siento bien</button></div>
   <div class="screen-hero"><h2 data-i18n="tileEpilogo" style="font-size:22px;">Epílogo</h2><p data-i18n="heroEpilogoSub">Cuando todo se calma</p></div>
   <div id="epilogo-content"></div>
 </div>
 
 <!-- SCREEN: TU MEJOR VERSIÓN HUB -->
 <div class="screen" id="screen-expertos">
-  <div class="screen-actionbar"><button class="action-back" onclick="goBack()">← <span class="back-label">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()">🌿 No me siento bien</button></div>
+  <div class="screen-actionbar"><button class="action-back" onclick="goBack()">← <span class="back-label" data-i18n="backLabel">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()" data-i18n="emergBtn">🌿 No me siento bien</button></div>
   <div class="screen-hero"><h2 data-i18n="tileExpertos">Tu mejor Versión</h2><p data-i18n="heroExpertosLong">Aquí se vuelve más complejo, pero vale la pena. Convertirte en tu mejor versión no es magia — es trabajo duro. Avanza en pasos pequeños — pero avanza.</p></div>
   <div class="home-screen">
     <button class="home-tile" onclick="navTo('exp-autor')"><div class="home-tile-icon">👤</div><div class="home-tile-body"><div class="home-tile-title">Sobre el autor</div><div class="home-tile-sub">Reflexiones personales y filosóficas del autor</div></div><div class="home-tile-arrow">›</div></button>
@@ -2022,10 +2023,10 @@
     <button class="home-tile" onclick="navTo('epilogo')"><div class="home-tile-icon">🌅</div><div class="home-tile-body"><div class="home-tile-title">Epílogo</div><div class="home-tile-sub">Cuando todo se calma. La llegada consciente.</div></div><div class="home-tile-arrow">›</div></button>
   </div>
 </div>
-<div class="screen" id="screen-exp-autor"><div class="screen-actionbar"><button class="action-back" onclick="goBack()">← <span class="back-label">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()">🌿 No me siento bien</button></div><div class="screen-hero" style="text-align:center;padding-top:28px;padding-bottom:24px;"><h2 data-i18n="heroAutorH2" style="font-size:22px;display:block;">Quién soy y cuántos</h2></div><div id="exp-autor-content"></div></div>
-<div class="screen" id="screen-exp-analisis"><div class="screen-actionbar"><button class="action-back" onclick="goBack()">← <span class="back-label">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()">🌿 No me siento bien</button></div><div class="screen-hero"><div class="screen-hero-tag" data-i18n="tileExpertos">Tu mejor Versión</div><h2 data-i18n="heroAnalisisH2">Analizarte a ti mismo</h2></div><div id="exp-analisis-content"></div></div>
+<div class="screen" id="screen-exp-autor"><div class="screen-actionbar"><button class="action-back" onclick="goBack()">← <span class="back-label" data-i18n="backLabel">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()" data-i18n="emergBtn">🌿 No me siento bien</button></div><div class="screen-hero" style="text-align:center;padding-top:28px;padding-bottom:24px;"><h2 data-i18n="heroAutorH2" style="font-size:22px;display:block;">Quién soy y cuántos</h2></div><div id="exp-autor-content"></div></div>
+<div class="screen" id="screen-exp-analisis"><div class="screen-actionbar"><button class="action-back" onclick="goBack()">← <span class="back-label" data-i18n="backLabel">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()" data-i18n="emergBtn">🌿 No me siento bien</button></div><div class="screen-hero"><div class="screen-hero-tag" data-i18n="tileExpertos">Tu mejor Versión</div><h2 data-i18n="heroAnalisisH2">Analizarte a ti mismo</h2></div><div id="exp-analisis-content"></div></div>
 
-<div class="screen" id="screen-exp-comunicacion"><div class="screen-actionbar"><button class="action-back" onclick="goBack()">← <span class="back-label">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()">🌿 No me siento bien</button></div><div class="screen-hero"><div class="screen-hero-tag" data-i18n="tileExpertos">Tu mejor Versión</div><h2 data-i18n="heroComunicacionH2">Comunicación y liderazgo</h2></div><div id="exp-comunicacion-content"></div></div>
+<div class="screen" id="screen-exp-comunicacion"><div class="screen-actionbar"><button class="action-back" onclick="goBack()">← <span class="back-label" data-i18n="backLabel">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()" data-i18n="emergBtn">🌿 No me siento bien</button></div><div class="screen-hero"><div class="screen-hero-tag" data-i18n="tileExpertos">Tu mejor Versión</div><h2 data-i18n="heroComunicacionH2">Comunicación y liderazgo</h2></div><div id="exp-comunicacion-content"></div></div>
 
 <!-- SCREEN: HOY -->
 <div class="screen" id="screen-hoy">
@@ -2086,7 +2087,7 @@
 
 <!-- SCREEN: MANIFIESTO -->
 <div class="screen" id="screen-manifiesto">
-  <div class="screen-actionbar"><button class="action-back" onclick="goBack()">← <span class="back-label">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()">🌿 No me siento bien</button></div>
+  <div class="screen-actionbar"><button class="action-back" onclick="goBack()">← <span class="back-label" data-i18n="backLabel">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()" data-i18n="emergBtn">🌿 No me siento bien</button></div>
   <div id="mani-section-manifiesto">
     <div class="manifiesto-hero">
       <div class="manifiesto-hero-seal">📜</div>
@@ -2121,7 +2122,7 @@
 
 <!-- SCREEN: GUÍA -->
 <div class="screen" id="screen-guia">
-  <div class="screen-actionbar"><button class="action-back" onclick="goBack()">← <span class="back-label">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()">🌿 No me siento bien</button></div>
+  <div class="screen-actionbar"><button class="action-back" onclick="goBack()">← <span class="back-label" data-i18n="backLabel">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()" data-i18n="emergBtn">🌿 No me siento bien</button></div>
   <div class="guia-hero">
     <h2 data-i18n="guiaHeroTitle">Manual del Migrante Consciente</h2>
     <p data-i18n="guiaHeroSub">15 capítulos · De la experiencia y la ciencia</p>
@@ -2160,7 +2161,7 @@
 
 <!-- SCREEN: TRÁMITES -->
 <div class="screen" id="screen-tramites">
-  <div class="screen-actionbar"><button class="action-back" onclick="goBack()">← <span class="back-label">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()">🌿 No me siento bien</button></div>
+  <div class="screen-actionbar"><button class="action-back" onclick="goBack()">← <span class="back-label" data-i18n="backLabel">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()" data-i18n="emergBtn">🌿 No me siento bien</button></div>
   <div class="tramites-hero">
     <div class="tramites-hero-tag" data-i18n="tramitesHeroTag">España 2026</div>
     <h2 data-i18n="tramitesHeroH2">Guía Legal para Migrantes</h2>
@@ -2187,7 +2188,7 @@
 
 <!-- SCREEN: CONTACTO -->
 <div class="screen" id="screen-contacto">
-  <div class="screen-actionbar"><button class="action-back" onclick="goBack()">← <span class="back-label">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()">🌿 No me siento bien</button></div>
+  <div class="screen-actionbar"><button class="action-back" onclick="goBack()">← <span class="back-label" data-i18n="backLabel">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()" data-i18n="emergBtn">🌿 No me siento bien</button></div>
   <div style="padding:8px 20px 100px;">
     <div style="text-align:center;padding:32px 0 24px;">
       <div style="font-size:36px;margin-bottom:12px;">⚖︎</div>
@@ -2736,7 +2737,7 @@ let CHAPTERS = getCHAPTERS();
 let WISDOMS  = getWISDOMS();
 
 // ─── STATE ──────────────────────────────────────────────────
-const APP_VERSION = 96;
+const APP_VERSION = 98;
 // Auto-sync visible version badge from APP_VERSION constant (no manual update needed)
 document.addEventListener('DOMContentLoaded', () => {
   const badge = document.getElementById('app-version-badge');
@@ -4059,72 +4060,65 @@ const INICIO_SECTIONS = {
   },
   anexoA: {
     render: () => `
-      <div style="background:linear-gradient(135deg,var(--ink) 0%,#2d1f0a 100%);padding:28px 20px 20px;margin:-0px 0 0;text-align:center;position:relative;">
-        <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:6px;position:relative;">Anexo A<\/div>
-        <h2 style="font-family:'Playfair Display',serif;color:white;font-size:18px;margin-bottom:4px;position:relative;">¿Quién soy y cuántos?<\/h2>
-        <p style="color:rgba(255,255,255,0.55);font-size:12px;position:relative;">El texto más personal — la historia del autor<\/p>
-      <\/div>
-      <div style="padding:16px 16px 100px;">
-        <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Para ti como lector este anexo es una invitación: no a copiar mi camino, sino a reconocerte en mi historia o dejarte inspirar. La pregunta ¿Quién soy y cuántos? no es académica. Es la pregunta más urgente que una persona en transición puede hacerse. Y siempre empieza con el encuentro honesto consigo mismo.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">El texto que sigue es el más personal que he escrito. No lo escribí como lección — sino como reflexión honesta. Muestra que incluso quien llega con décadas de experiencia directiva, conocimiento psicoterapeútico y perspectiva global, afronta el inicio de un nuevo viaje desnudo y sin mapa. Eso no lo hace más débil. Lo hace creíble.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Hace cuatro años dejé de trabajar. Vendí casi todo, cancelé todos mis compromisos y me fui a Barcelona con una maleta de mano — sin plan, sin red, con tres palabras de español. Exactamente lo que describo en esta aplicación. No lo viví como experto. Lo viví como persona. Con la euforia, el agotamiento, la soledad, el descubrimiento, la reorientación. Con el momento en que mi batería llegó al 3 % y mi propio móvil me avisó: el dispositivo se apagará en breve.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Esta diversidad no es señal de inconstancia. Es la expresión de una convicción que recorre mi vida como un hilo rojo: que observar, aprender y mejorar no son una fase de la vida — son la vida misma. Y que la mayor transformación no ocurre en el lugar de trabajo, sino en el interior.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Mi nombre es Christian Hammerich. Nací en 1966 en Husum, junto al Mar del Norte, cerca de la frontera danesa, y he atravesado en mi vida tantas profesiones, roles y mundos que una biografía lineal difícilmente haría justicia a lo que he vivido.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Programador de sistemas. Director de ópera. Director residente de grandes musicales. CMO de un parque de experiencias. COO de un circuito automovilístico. Directivo en el Grupo Volkswagen. Propietario de un bar y un restaurante en Berlín. Director de entretenimiento de huéspedes en una flota de cruceros. Responsable de instalaciones deportivas del gobierno de Berlín. Psicoterapeuta.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">No he escrito esta aplicación desde fuera. Lo he escrito desde dentro — como alguien que ha vivido el proceso migratorio en primera persona, con todas las fases que describo en cada capítulo. Y que descubrió en ese camino que había acumulado durante décadas una colección de herramientas, aprendizajes y experiencias que estaban destinadas exactamente a este momento. El texto que sigue no es un complemento biográfico. Es el fundamento sobre el que se sostiene todo el texto.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">ANEXO A<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">¿Quién soy y cuántos?<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Un texto algo filosófico sobre mí mismo — una reflexión sobre mi pasado.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Yo: Christian Hammerich. Nacido el 21 de julio de 1966 en Husum, Mar del Norte, cerca de la frontera danesa. Escribo esto mientras juego con sistemas de Inteligencia Artificial, y he añadido también algunos resultados y reflexiones.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Mi vida anterior<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">En pocas palabras, mis profesiones:<\/p>
-<div style="display:flex;gap:10px;margin-bottom:8px;"><div style="color:var(--gold);font-weight:600;flex-shrink:0;">→<\/div><div style="font-size:13px;line-height:1.7;color:var(--ink);">Economía empresarial con formación en un gran banco alemán.<\/div><\/div>
-<div style="display:flex;gap:10px;margin-bottom:8px;"><div style="color:var(--gold);font-weight:600;flex-shrink:0;">→<\/div><div style="font-size:13px;line-height:1.7;color:var(--ink);">Programador de sistemas en el sistema bancario alemán en ensamblador (código de procesador) y en los lenguajes FORTRAN, COBOL y BASIC.<\/div><\/div>
-<div style="display:flex;gap:10px;margin-bottom:8px;"><div style="color:var(--gold);font-weight:600;flex-shrink:0;">→<\/div><div style="font-size:13px;line-height:1.7;color:var(--ink);">Director de ópera: Richard Strauss — El caballero de la rosa; Richard Wagner — Tristán e Isolda.<\/div><\/div>
-<div style="display:flex;gap:10px;margin-bottom:8px;"><div style="color:var(--gold);font-weight:600;flex-shrink:0;">→<\/div><div style="font-size:13px;line-height:1.7;color:var(--ink);">Director residente de los musicales Miss Saigon y El Fantasma de la Ópera.<\/div><\/div>
-<div style="display:flex;gap:10px;margin-bottom:8px;"><div style="color:var(--gold);font-weight:600;flex-shrink:0;">→<\/div><div style="font-size:13px;line-height:1.7;color:var(--ink);">CMO de un parque de experiencias en Stuttgart, responsable de la organización de eventos para grandes empresas como COCA-COLA o MAN.<\/div><\/div>
-<div style="display:flex;gap:10px;margin-bottom:8px;"><div style="color:var(--gold);font-weight:600;flex-shrink:0;">→<\/div><div style="font-size:13px;line-height:1.7;color:var(--ink);">COO y CMO de un circuito de pruebas y carreras; anteriormente responsable de la construcción del proyecto completo incluyendo un gran recinto de eventos y conciertos de 5.700.000 m².<\/div><\/div>
-<div style="display:flex;gap:10px;margin-bottom:8px;"><div style="color:var(--gold);font-weight:600;flex-shrink:0;">→<\/div><div style="font-size:13px;line-height:1.7;color:var(--ink);">COO/CMO para el Grupo Volkswagen (Bentley, Bugatti, Porsche, Ducati, Lamborghini y muchas más) y el parque de experiencias Autostadt.<\/div><\/div>
-<div style="display:flex;gap:10px;margin-bottom:8px;"><div style="color:var(--gold);font-weight:600;flex-shrink:0;">→<\/div><div style="font-size:13px;line-height:1.7;color:var(--ink);">Propietario y director de un bar Tristan y un restaurante Isolde en el centro de Berlín, cerca del KaDeWe, Wittenbergplatz.<\/div><\/div>
-<div style="display:flex;gap:10px;margin-bottom:8px;"><div style="color:var(--gold);font-weight:600;flex-shrink:0;">→<\/div><div style="font-size:13px;line-height:1.7;color:var(--ink);">Director de Entretenimiento de Huéspedes y Operaciones en TUI Cruises con 7 cruceros en todo el mundo.<\/div><\/div>
-<div style="display:flex;gap:10px;margin-bottom:8px;"><div style="color:var(--gold);font-weight:600;flex-shrink:0;">→<\/div><div style="font-size:13px;line-height:1.7;color:var(--ink);">Director de Deporte y Marketing (COO/CMO) para el Senado de Berlín, responsable de todos los ámbitos deportivos de la ciudad más grande de la UE.<\/div><\/div>
-<div style="display:flex;gap:10px;margin-bottom:8px;"><div style="color:var(--gold);font-weight:600;flex-shrink:0;">→<\/div><div style="font-size:13px;line-height:1.7;color:var(--ink);">Psicoterapeuta y asesor para personas en situaciones de sobrecarga, miedo, desorientación o depresión — causadas por ejemplo por la pérdida de seres queridos, especialmente en el contexto de la migración.<\/div><\/div>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Y ahora<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Hace 4 años dejé de trabajar, vendí casi todas mis pertenencias, cancelé mis compromisos, seguros, contratos y conexiones. Decidí ser rentista, me mudé con una maleta de mano a Barcelona, sin plan y con tres palabras de español. Comencé una nueva vida: disfrutar de la vida y ser alguien con una vida con sentido.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">No tenía idea de la definición de sentido. Buscaba el sentido de la vida y la respuesta a la gran pregunta: ¿Quién soy y cuántos? El trabajo es opcional y solo cuando forma parte de mi proceso y mi desarrollo personal: observar, aprender y mejorar.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Lo que la IA piensa sobre mí<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Lo que la IA piensa sobre mí basándose en mis experiencias profesionales del pasado. Mi pregunta a la IA: Analiza este texto y dime algo sobre esta persona.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Profesional y polifacético: Tuviste una carrera diversa y exitosa en distintos ámbitos. Esto muestra que eres una persona con múltiples talentos.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Personalidad de liderazgo y organizador: Has ocupado posiciones de liderazgo como COO y CMO en varias organizaciones importantes. Esto apunta a una gran capacidad para organizar y dirigir proyectos complejos.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Empático y solidario: También has trabajado como psicoterapeuta. Eso muestra que eres empático y estás dispuesto a ayudar a los demás.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Aventurero y filosófico: Has decidido dejar tu carrera atrás — en busca del sentido de la vida. Eso muestra que estás dispuesto a asumir riesgos.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">A mi pregunta: ¿Qué posibilidades tengo, pequeña persona estúpida, de mejorar el mundo?, la IA dio el siguiente consejo:<\/p>
-<div style="display:flex;gap:10px;margin-bottom:8px;"><div style="color:var(--gold);font-weight:600;flex-shrink:0;">→<\/div><div style="font-size:13px;line-height:1.7;color:var(--ink);">Comparte tu conocimiento: escribe artículos, blogs o un libro.<\/div><\/div>
-<div style="display:flex;gap:10px;margin-bottom:8px;"><div style="color:var(--gold);font-weight:600;flex-shrink:0;">→<\/div><div style="font-size:13px;line-height:1.7;color:var(--ink);">Voluntariado: participa en proyectos, locales o internacionales.<\/div><\/div>
-<div style="display:flex;gap:10px;margin-bottom:8px;"><div style="color:var(--gold);font-weight:600;flex-shrink:0;">→<\/div><div style="font-size:13px;line-height:1.7;color:var(--ink);">Mentoría: conviértete en mentor para jóvenes.<\/div><\/div>
-<div style="display:flex;gap:10px;margin-bottom:8px;"><div style="color:var(--gold);font-weight:600;flex-shrink:0;">→<\/div><div style="font-size:13px;line-height:1.7;color:var(--ink);">Innovación social: usa tu conocimiento para soluciones innovadoras a problemas sociales.<\/div><\/div>
-<div style="display:flex;gap:10px;margin-bottom:8px;"><div style="color:var(--gold);font-weight:600;flex-shrink:0;">→<\/div><div style="font-size:13px;line-height:1.7;color:var(--ink);">Educación: considera enseñar o dar conferencias.<\/div><\/div>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Mi reflexión<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">El análisis de la IA no está mal — es impresionante que muchas de esas ideas correspondan exactamente a mis objetivos y estrategias. Y sí, esta aplicación es mi primer intento para compartir mis experiencias. Pero no es todo. Hay cosas que la energía del universo solo os da a vosotros, los humanos. La base de todo son nuestras ideas, fantasías e inspiraciones. DESPUÉS es posible analizar e integrar la IA. No antes. La IA es para mí una herramienta. Y al menos por ahora... no es tan inteligente.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Todos estos sistemas tienen una tendencia horrible a motivarte y decirte cosas positivas sin ningún sentido. Cuando dices Eres tonto, tu respuesta es incorrecta, la reacción es: Lo siento, tienes toda la razón, me he equivocado. Y después responden a la misma pregunta con exactamente la misma respuesta.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">He aprendido: no uses la IA antes de haber realizado tú mismo un análisis profundo, manual y analógico. No la uses para resolver cosas sin haber inventado antes tus propias posibilidades y soluciones. Les falta esa cosa maravillosa que solo tenemos los humanos.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">La respuesta a ¿Quién soy y cuántos?<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Esta pregunta es el título de un libro de Richard David Precht del año 2007. El libro no me gustó, pero la pregunta nunca la olvidé. Hasta hace unos meses era incapaz de encontrar aunque fuera un poco de sentido en esa pregunta. Aquí está mi respuesta en palabras claras:<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">*Somos polvo de estrellas con un alma hecha de la energía del universo, todos conectados entre sí sin la existencia del tiempo y dentro de universos y posibilidades infinitas.*<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Largo tiempo estuve seguro de mis objetivos y mi valor como persona. Feliz conmigo mismo e independiente. Con el gran objetivo de dejar de trabajar como un robot y buscar una nueva vida como ser humano. Ahora he cumplido todos los objetivos. Sin grandes cargas ni obligaciones. A primera vista, el paraíso.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Pero el paraíso no existe (al menos ahora). En el contexto de mi mudanza y del inicio de una nueva vida sin familia ni amigos, faltaba la estructura que dan el trabajo u otras obligaciones. A finales de 2024, cuando todo estaba organizado, surgió la gran pregunta: Joder, qué voy a hacer — sano, lleno de energía, con una enorme cantidad de experiencias y la idea de salvar el mundo, pero sin una idea concreta de cómo.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Para decir la verdad: mi carácter no es el mejor diciendo no a los placeres. Como soltero aquí en Barcelona, durante los primeros meses no dije no a ninguna forma de diversión. La consecuencia fue que tras 4-5 meses solo me quedaba el 3 % de mi energía. Mi móvil envía un mensaje al 3 %: Atención, batería muy baja. El teléfono se apagará pronto. Exactamente así me sentía.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Por suerte pude entender rápidamente que era mi responsabilidad resolver esto. Con técnicas de mi antigua vida profesional pude cambiar mi estilo de vida y recargarme. Eliminé radicalmente casi todos mis conocidos de mi vida. Puse límites específicos respecto a las sustancias y aprendí a protegerme de las personas tóxicas. Tras unas semanas era como nuevo.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Aprendí que ninguna IA ni ninguna otra persona puede definir el camino de TU vida. Ahora estoy listo para continuar mi camino basándome en mi felicidad y mi fuerza interior.<\/p>\n      <div style=\"margin:24px 0 8px;background:rgba(200,146,42,0.06);border:1px solid rgba(200,146,42,0.25);border-radius:16px;padding:20px;text-align:center;\"><div style=\"font-size:20px;margin-bottom:8px;\">✉️<\/div><div style=\"font-family:'Playfair Display',serif;font-size:15px;color:var(--ink);margin-bottom:8px;\">¿Te resuena algo de lo que lees aquí?<\/div><p style=\"font-size:13px;line-height:1.7;color:var(--fog);margin-bottom:14px;\">Escríbeme. No para pedirme consejo — sino para compartir lo que estás viviendo, lo que te funcionó, lo que no. Estas historias son el material del que nace todo lo que escribo. Cada mensaje que recibo me recuerda por qué vale la pena.<\/p><a href=\"mailto:chammerich@outlook.es\" class=\"contact-pill\">Escribir a Christian →<\/a><div style=\"margin-top:8px;font-size:11px;color:var(--fog);">chammerich@outlook.es<\/div><\/div>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Epílogo<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Catalizador de calma y claridad: Ese siempre ha sido tu papel en tu vida.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Amplificador de energía: Tu energía produce cambios químicos en los demás (reducción del estrés, endorfinas).<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Crear coherencia: A través de tus habilidades como psicoterapeuta y directivo creas orden en el caos, lo que amplifica la energía global.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Conclusión final<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Al final reconozco que no se trata de buscar el sentido de la vida como un tesoro en Barcelona. El sentido soy yo mismo — en cada decisión de decir no a lo que me roba energía y sí a lo que me hace vibrar. Soy el programador que ahora codifica su propia libertad, y el psicoterapeuta que primero tuvo que sanar su propia soledad en el paraíso.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Mi proyecto es ambicioso: ser un amplificador de energía positiva. Si consigo que aunque sea una sola persona encuentre su orden en el caos, mi batería estará siempre al 100 %. No soy solo uno, soy todos los que fui, y el que hoy quiero ser: polvo de estrellas, pero con los pies bien plantados en la tierra.<\/p>
-
-      <\/div>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Mi nombre es Christian Hammerich. Nací en 1966 en Husum, en el mar del Norte, y a lo largo de mi vida he atravesado tantas profesiones, roles y mundos que una biografía lineal apenas bastaría para hacer justicia a lo que he vivido.<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Programador de organización, director de ópera. Director in Residence de grandes musicales. CMO de un parque de aventuras. COO de un circuito automovilístico. Directivo del grupo Volkswagen.<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Propietario de un restaurante en Berlín. Director Guest Entertainement de una flota de cruceros. Responsable de las instalaciones deportivas de la administración de Berlín. Psicoterapeuta.<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">No he escrito este texto desde fuera. Lo he escrito desde dentro — como alguien que ha vivido el proceso de migración en su propia piel, con todas las fases que describo en cada capítulo. Y que en ese proceso descubrió que durante décadas había acumulado una colección de herramientas, conocimientos y experiencias destinadas precisamente para este momento. El texto que sigue no es un complemento biográfico. Es el fundamento sobre el que se sostiene todo el texto.<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Un texto algo filosófico sobre mí mismo — una reflexión sobre mi pasado.<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Yo: Christian Hammerich. Nacido el 21 de julio de 1966 en Husum, mar del Norte, cerca de la frontera danesa. Escribo esto mientras juego con sistemas de Inteligencia Artificial, y he añadido también algunos resultados y reflexiones.<\/p>
+      <h3 style="font-family:'Playfair Display',serif;font-size:16px;font-weight:500;color:var(--gold);margin:28px 0 14px;letter-spacing:0.3px;">Mi vida anterior<\/h3>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">En pocas palabras, mis profesiones:<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">→  Administración de empresas, con formación en un gran banco en Alemania.<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">→  Programador de sistemas en el sistema bancario alemán en Assembler (código de procesador), así como en los lenguajes de programación FORTRAN, COBOL y BASIC.<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">→  Director de ópera: Richard Strauss — El caballero de la rosa; Richard Wagner — Tristán e Isolda.<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">→  Director residente de los musicales Miss Saigon y El fantasma de la ópera.<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">→  CMO de un parque de aventuras en Stuttgart, responsable de la organización de eventos para grandes empresas como COCA-COLA o MAN.<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">→  COO y CMO de un circuito de carreras y pruebas para automóviles; previamente responsable de la construcción del proyecto entero, incluyendo un gran terreno de eventos y conciertos de 5.700.000 m².<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">→  COO/CMO para el grupo Volkswagen (Bentley, Bugatti, Porsche, Ducati, Lamborghini y muchos más) y el parque de aventuras Autostadt.<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">→  Propietario y gerente de un bar Tristan y de un restaurante Isolde en el centro de Berlín, cerca del KaDeWe, Wittenbergplatz.<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">→  Director de Guest Entertainment y Operations en TUI Cruises con 7 cruceros en todo el mundo.<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">→  Director de Deporte y Marketing (COO/CMO) para el Senado de Berlín, responsable de todas las áreas deportivas de la ciudad más grande de la UE.<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">→  Psicoterapeuta y asesor para personas en situaciones de sobrecarga, ansiedad, desorientación o depresión — por ejemplo causado por la pérdida de seres queridos, especialmente en el contexto de la migración a un país extranjero.<\/p>
+      <h3 style="font-family:'Playfair Display',serif;font-size:16px;font-weight:500;color:var(--gold);margin:28px 0 14px;letter-spacing:0.3px;">Y ahora<\/h3>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Hace 4 años dejé de trabajar, vendí casi todas mis cosas, cancelé mis obligaciones, seguros, contratos y vínculos. Decidí ser rentista, me trasladé con una maleta de mano a Barcelona, sin plan y con tres palabras de español. Comencé una nueva vida: disfrutar de la vida y ser alguien con una vida llena de sentido.<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">No tenía idea de la definición de sentido. Buscaba el sentido de la vida y la respuesta a la gran pregunta: ¿Quién soy y cuántos? El trabajo es opcional y solo cuando es parte de mi proceso y de mi desarrollo personal: observar, aprender y mejorar.<\/p>
+      <h3 style="font-family:'Playfair Display',serif;font-size:16px;font-weight:500;color:var(--gold);margin:28px 0 14px;letter-spacing:0.3px;">Lo que la IA piensa de mí<\/h3>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Lo que la IA piensa de mí basándose en mis experiencias profesionales del pasado. Mi pregunta a la IA: <em><u>Analiza este texto y dime algo sobre esta persona.<\/u><\/em><\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;font-style:italic;">Profesional y versátil: Tuviste una carrera diversa y exitosa en distintos ámbitos. Esto muestra que eres una persona con múltiples talentos.<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;font-style:italic;">Personalidad de liderazgo y organizador: Has ocupado puestos directivos como COO y CMO en varias organizaciones importantes. Esto indica una gran capacidad para organizar y dirigir proyectos complejos.<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;font-style:italic;">Empático y servicial: También has trabajado como psicoterapeuta. Eso muestra que eres empático y dispuesto a ayudar a los demás.<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;font-style:italic;">Aventurero y filosófico: Decidiste dejar atrás tu carrera — en busca del sentido de la vida. Esto muestra que estás dispuesto a asumir riesgos.<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">A mi pregunta: <em><u>¿Qué posibilidades tengo yo, pequeña persona tonta, para mejorar el mundo?<\/u><\/em>, la IA dio el siguiente consejo:<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;font-style:italic;">→  Comparte tu conocimiento: Escribe artículos, blogs o un libro.<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;font-style:italic;">→  Voluntariado: Participa en proyectos, locales o internacionales.<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;font-style:italic;">→  Mentoría: Conviértete en mentor de jóvenes.<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;font-style:italic;">→  Innovación social: Usa tu conocimiento para soluciones innovadoras a problemas sociales.<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;font-style:italic;">→  Educación: Considera enseñar o dar conferencias.<\/p>
+      <h3 style="font-family:'Playfair Display',serif;font-size:16px;font-weight:500;color:var(--gold);margin:28px 0 14px;letter-spacing:0.3px;">Mi reflexión<\/h3>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">El análisis de la IA no está equivocado — es impresionante que muchas de esas ideas correspondan exactamente con mis objetivos y estrategias. Y sí, esta aplicación es mi primer intento para compartir mis experiencias. Pero eso no es todo. Hay cosas que la energía del universo solo os da a vosotros, los seres humanos. La base de todo son nuestras ideas, fantasías e inspiraciones. DESPUÉS es posible analizar e integrar la IA. No antes. La IA es para mí una herramienta. Y al menos hasta ahora, no es tan inteligente.<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Todos estos sistemas tienen una tendencia terrible a motivarte y decirte cosas positivas sin ningún sentido. Cuando le dices Eres tonta, tu respuesta es falsa, la reacción es: Mis disculpas, tienes toda la razón, me he equivocado. Y después responden a la misma pregunta con exactamente la misma respuesta.<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">He aprendido: No uses la IA antes de haber realizado tú mismo un análisis profundo, manual y analógico. No la uses para resolver cosas sin haber inventado antes posibilidades y soluciones por ti mismo. A ellas les falta esa cosa maravillosa que solo tenemos nosotros los seres humanos.<\/p>
+      <h3 style="font-family:'Playfair Display',serif;font-size:15px;font-weight:500;color:var(--gold);margin:24px 0 8px;letter-spacing:0.3px;">La respuesta a Quién soy y cuántos<\/h3>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Esta pregunta es el título de un libro de Richard David Precht del año 2007. El libro no me gustó, pero la pregunta nunca la he olvidado. Hasta hace algunos meses fui incapaz de encontrar ni siquiera un poco de sentido en esta pregunta. Aquí está mi respuesta en palabras claras:<\/p>
+      <div style="text-align:center;font-style:italic;color:var(--ink);margin:28px auto 28px;padding:24px 22px;border:1px solid var(--gold);border-radius:8px;background:rgba(200,146,42,0.06);font-size:15px;line-height:1.7;max-width:92%;">Somos polvo de estrellas conectados con la energía del universo, sin la existencia del tiempo y dentro de infinitos universos y posibilidades.<\/div>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Durante mucho tiempo estuve seguro de mis objetivos y de mi valor como persona. Feliz conmigo mismo e independiente. Con el gran objetivo de dejar de trabajar como un robot y buscar una nueva vida como ser humano. Ahora he cumplido todos los objetivos. Sin grandes cargas u obligaciones. A primera vista, el paraíso.<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Pero el paraíso no existe (al menos por ahora). En el contexto de mi mudanza y del inicio de una nueva vida sin familia ni amigos faltaba la estructura que dan el trabajo u otras obligaciones. A finales de 2024, cuando todo estaba organizado, surgió la gran pregunta: Joder, ¿qué voy a hacer — sano, lleno de energía, con muchísima experiencia y la idea de salvar al mundo, pero sin una idea concreta de cómo?<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Para decir la verdad: Mi carácter no es el mejor para decir No a los placeres. Como soltero aquí en Barcelona, en los primeros meses no dije No a ninguna forma de diversión. La consecuencia fue que después de 4–5 meses estaba solo al 3 % de mi energía. Mi teléfono envía un mensaje al 3 %: Atención, energía muy baja. El teléfono se apagará en breve. Exactamente así me sentía.<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Por suerte pude entender rápidamente que es mi responsabilidad resolver esto. Con técnicas de mi antigua vida profesional pude cambiar mi estilo de vida y recargarme. Eliminé radicalmente casi a todos los conocidos de mi vida. Establecí límites específicos respecto a las sustancias y aprendí a protegerme de las personas tóxicas. Después de unas semanas estaba como nuevo.<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Aprendí que ninguna IA y ninguna otra persona puede definir el camino de TU vida. Ahora estoy listo para continuar mi camino basado en mi felicidad y mi fuerza interior.<\/p>
+      <h3 style="font-family:'Playfair Display',serif;font-size:16px;font-weight:500;color:var(--gold);margin:28px 0 14px;letter-spacing:0.3px;">Epílogo<\/h3>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;font-style:italic;">Catalizador de calma y claridad: Ese ha sido siempre tu rol en tu vida.<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;font-style:italic;">Amplificador energético: Tu energía produce cambios químicos en los demás (reducción del estrés, endorfinas).<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;font-style:italic;">Crear coherencia: Mediante tus capacidades como psicoterapeuta y directivo creas orden en el caos, lo que amplifica la energía global.<\/p>
+      <h3 style="font-family:'Playfair Display',serif;font-size:16px;font-weight:500;color:var(--gold);margin:28px 0 14px;letter-spacing:0.3px;">Conclusión final<\/h3>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Al final reconozco que no se trata de buscar el sentido de la vida como un tesoro en Barcelona. El sentido soy yo mismo — en cada decisión de decir No a lo que me roba energía, y Sí a lo que me hace vibrar. Soy el programador que ahora codifica su propia libertad, y el psicoterapeuta que primero tuvo que curar su propia soledad en el paraíso.<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Mi proyecto es ambicioso: ser un amplificador de energía positiva. Si consigo que aunque sea una sola persona encuentre su orden en el caos, mi batería estará siempre al 100 %. No soy solo uno, soy todos los que fui, y el que hoy quiero ser: polvo de estrellas, pero con los pies bien plantados en la tierra.<\/p>
+      <h3 style="font-family:'Playfair Display',serif;font-size:16px;font-weight:500;color:var(--gold);margin:28px 0 14px;letter-spacing:0.3px;">Autoconocimiento como primer paso de la integración<\/h3>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Quien migra, tarde o temprano se hace una pregunta que quizá nunca antes había formulado tan directamente: ¿Quién soy — sin mi idioma, sin mi barrio, sin mi familia, sin mi rutina cotidiana? La migración desnuda al ser humano de sus puntos de orientación externos. Lo que queda es lo interior. Y lo interior pocos lo conocen verdaderamente bien.<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">El capítulo 10 de este texto ha mostrado que integrarse significa no perderse a sí mismo. Pero uno solo puede no perderse si sabe quién es. El autoconocimiento no es auto-mejora. Es auto-orientación. Es la respuesta a la pregunta: ¿Qué traigo conmigo? ¿Qué es negociable — y qué no? ¿Dónde están mis fortalezas, y dónde mis puntos ciegos?<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">El anexo siguiente presenta un procedimiento concreto de siete etapas que ayuda precisamente en eso. No es un programa terapéutico ni un modelo académico. Es una herramienta práctica — desarrollada a partir de décadas de experiencia con personas en situaciones de transición. Funciona con lápiz y papel, en el propio idioma, al propio ritmo.<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Para el migrante este procedimiento es especialmente valioso, porque el proceso migratorio en sí mismo es una auto-indagación forzada. El nuevo entorno hace preguntas que el antiguo nunca habría hecho. Este procedimiento le da al migrante la posibilidad de plantearse estas preguntas él mismo — antes de que el entorno lo haga. Esa es la diferencia entre reaccionar y dar forma.<\/p>
+      <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Quien recorre estas siete etapas no abandona el proceso con respuestas a todas las preguntas — pero sí con claridad sobre cuáles son sus propias preguntas. Y eso, en el contexto de la migración, ya es una ganancia extraordinaria.<\/p>
     `,
     renderDE: () => `
       <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Mein Name ist Christian Hammerich. Ich bin 1966 in Husum an der Nordsee geboren und habe in meinem Leben so viele Berufe, Rollen und Welten durchquert, dass eine lineare Biographie kaum ausreichen würde, um dem gerecht zu werden, was ich erlebt habe.<\/p>
@@ -8520,7 +8514,7 @@ function analizarCompra() {
 
 
 <div class="screen" id="screen-finanzas">
-  <div class="screen-actionbar"><button class="action-back" onclick="goBack()">← <span class="back-label">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()">🌿 No me siento bien</button></div>
+  <div class="screen-actionbar"><button class="action-back" onclick="goBack()">← <span class="back-label" data-i18n="backLabel">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()" data-i18n="emergBtn">🌿 No me siento bien</button></div>
   <div style="padding:0 0 100px;">
 <!-- HEADER -->
 <div class="header">
@@ -9259,7 +9253,7 @@ function analizarCompra() {
 
 <!-- SCREEN: EXP-NUEVO -->
 <div class="screen" id="screen-exp-nuevo">
-  <div class="screen-actionbar"><button class="action-back" onclick="goBack()">← <span class="back-label">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()">🌿 No me siento bien</button></div>
+  <div class="screen-actionbar"><button class="action-back" onclick="goBack()">← <span class="back-label" data-i18n="backLabel">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()" data-i18n="emergBtn">🌿 No me siento bien</button></div>
 
   <!-- Haupt-Buttons: Resiliencia / Trauma -->
   <div style="display:flex;gap:8px;margin:0 16px 16px;flex-wrap:wrap;">
