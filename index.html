@@ -126,6 +126,8 @@
     --gold-light: #e8b84b;
     --rust: #8B3A1E;
     --sage: #4a6741;
+    --sage-light: #a8d5b5;
+    --sage-mid: #7eb38e;
     --fog: #8a8278;
     --card-bg: #fffdf8;
     --border: #ddd5c4;
@@ -518,6 +520,18 @@
     color: var(--fog); transition: all 0.2s; white-space: nowrap;
   }
   .tpill.active { background: var(--ink); border-color: var(--ink); color: var(--gold); }
+  .regul-pill {
+    background: linear-gradient(135deg, #c44 0%, #a23 100%) !important;
+    color: #fff !important;
+    font-weight: 600;
+    border-color: #d55 !important;
+    box-shadow: 0 2px 8px rgba(196,68,68,0.25);
+  }
+  .regul-pill.active {
+    background: linear-gradient(135deg, #8B2818 0%, #6a1010 100%) !important;
+    border-color: #c44 !important;
+    color: #fff !important;
+  }
   .lgbtq-pill { border-color: #9c27b0; color: #9c27b0; }
   .lgbtq-pill.active { background: #9c27b0; border-color: #9c27b0; color: white; }
   .badge-purple { background: #f3e5f5; color: #6a1b9a; }
@@ -1880,6 +1894,484 @@
     .ampel-cell .amount { font-size: 16px; }
 #screen-finanzas     .item-amount { width: 75px; }
   }
+
+  .reader-print-btn {
+    background: transparent;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    padding: 10px 18px;
+    border-radius: 999px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-left: 8px;
+  }
+  .reader-print-btn:hover { background: rgba(200,146,42,0.08); }
+  @media print {
+    body * { visibility: hidden; }
+    .reader-overlay, .reader-overlay * { visibility: visible; }
+    .reader-overlay { position: absolute; left: 0; top: 0; width: 100%; }
+    .reader-header, .reader-footer, .reader-progress-bar { display: none !important; }
+    .reader-body { overflow: visible !important; height: auto !important; padding: 20px !important; }
+  }
+
+  /* Soforthilfe-Modus v1.0.120 erweiterte Sektionen */
+  .emerg-emergency-box {
+    background: rgba(196,68,68,0.15);
+    border: 1px solid rgba(196,68,68,0.4);
+    border-left: 4px solid #d55;
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin: 0 0 18px;
+  }
+  .emerg-emergency-title {
+    color: #ffb0b0;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .emerg-emergency-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+  .emerg-emergency-call {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(0,0,0,0.25);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    padding: 10px 12px;
+    text-decoration: none;
+    color: #fff;
+    font-family: 'DM Sans', sans-serif;
+    transition: background 0.15s;
+  }
+  .emerg-emergency-call:hover, .emerg-emergency-call:active {
+    background: rgba(196,68,68,0.25);
+  }
+  .ec-num { font-size: 15px; font-weight: 700; color: #ffd0a0; letter-spacing: 0.5px; }
+  .ec-label { font-size: 11px; color: rgba(255,255,255,0.75); text-align: right; }
+  .emerg-emergency-note {
+    margin-top: 10px;
+    font-size: 11px;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.5;
+    font-style: italic;
+  }
+  .emerg-breathe-tabs {
+    display: flex;
+    gap: 6px;
+    margin: 8px 0 4px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .ebtab {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.7);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .ebtab.active {
+    background: rgba(74,103,65,0.4);
+    border-color: var(--sage);
+    color: #fff;
+  }
+  .emerg-grounding-list {
+    list-style: none;
+    padding: 0;
+    margin: 12px 0 0;
+  }
+  .emerg-grounding-list li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 4px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    cursor: pointer;
+    transition: opacity 0.2s;
+    font-size: 13px;
+    color: rgba(255,255,255,0.85);
+  }
+  .emerg-grounding-list li:last-child { border-bottom: none; }
+  .emerg-grounding-list li.done { opacity: 0.4; text-decoration: line-through; }
+  .gnum {
+    width: 26px; height: 26px; border-radius: 50%;
+    background: rgba(74,103,65,0.3); border: 1px solid var(--sage);
+    color: var(--sage); font-weight: 700; font-size: 13px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .emerg-grounding-list li.done .gnum {
+    background: var(--sage); color: #fff;
+  }
+  .emerg-bodyscan-step {
+    background: rgba(0,0,0,0.25);
+    border-radius: 8px;
+    padding: 14px;
+    margin: 12px 0 8px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.9);
+    min-height: 60px;
+    transition: opacity 0.3s;
+  }
+  .emerg-bodyscan-progress {
+    height: 4px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 2px;
+    overflow: hidden;
+    margin: 0 0 6px;
+  }
+  .emerg-bodyscan-bar {
+    height: 100%;
+    background: var(--sage);
+    width: 0%;
+    transition: width 0.5s linear;
+  }
+  .emerg-bodyscan-counter {
+    font-size: 10px;
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+    margin-bottom: 8px;
+    font-family: 'DM Sans', sans-serif;
+    letter-spacing: 1px;
+  }
+  .emerg-bodyscan-btn {
+    width: 100%;
+    background: rgba(74,103,65,0.25);
+    border: 1px solid var(--sage);
+    color: var(--sage);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  .emerg-message-box {
+    background: rgba(0,0,0,0.25);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    padding: 12px;
+    margin: 10px 0;
+  }
+  .emerg-message-label {
+    font-size: 10px;
+    color: var(--gold);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+  }
+  .emerg-message-text {
+    font-size: 13px;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.9);
+    margin-bottom: 10px;
+    font-style: italic;
+  }
+  .emerg-message-copy {
+    background: transparent;
+    border: 1px solid rgba(168, 213, 181, 0.5);
+    color: var(--sage-light);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    padding: 6px 14px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background 0.15s;
+  }
+  .emerg-message-copy:hover { background: rgba(168, 213, 181, 0.12); }
+  .emerg-message-copy.copied {
+    background: rgba(168, 213, 181, 0.25);
+    border-color: var(--sage-light);
+    color: #fff;
+  }
+  .emerg-trauma-link {
+    display: block;
+    width: 100%;
+    background: rgba(74,103,65,0.18);
+    border: 1px solid var(--sage);
+    color: var(--sage);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 14px;
+    border-radius: 12px;
+    cursor: pointer;
+    margin: 12px 0 18px;
+    text-align: center;
+  }
+  .emerg-trauma-link:hover { background: rgba(74,103,65,0.28); }
+
+  /* v1.0.121 — Helle Grüntöne im Soforthilfe-Modus */
+  .emerg-overlay .emerg-card-title,
+  .emerg-overlay .emerg-breathe-title,
+  .emerg-overlay .emerg-card-text strong {
+    color: var(--sage-light);
+  }
+  .emerg-overlay .emerg-card-text { color: rgba(232, 245, 234, 0.92); }
+  .emerg-overlay .emerg-action     { color: var(--sage-mid); }
+
+  /* Header mit Crisis-Button */
+  .emerg-title-row {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 12px; flex-wrap: wrap; margin-bottom: 6px;
+  }
+  .emerg-title-row .emerg-title { margin-bottom: 0; }
+  .emerg-crisis-btn {
+    background: rgba(220, 90, 90, 0.18);
+    border: 1px solid rgba(220, 90, 90, 0.55);
+    color: #ffb8b8;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 9px 14px;
+    border-radius: 999px;
+    cursor: pointer;
+    line-height: 1.3;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .emerg-crisis-btn:hover, .emerg-crisis-btn:active {
+    background: rgba(220, 90, 90, 0.28);
+    color: #ffd0d0;
+  }
+
+  /* Atem-Tabs Kontrast */
+  .ebtab { color: var(--sage-light); border-color: rgba(168, 213, 181, 0.35); }
+  .ebtab.active {
+    background: rgba(168, 213, 181, 0.18);
+    border-color: var(--sage-light);
+    color: #fff;
+  }
+  .emerg-breathe-text { color: var(--sage-light); opacity: 0.85; }
+  .emerg-breathe-btn {
+    color: var(--sage-light);
+    border-color: var(--sage-light);
+    background: rgba(168, 213, 181, 0.08);
+  }
+  .emerg-breathe-btn:hover { background: rgba(168, 213, 181, 0.18); }
+  .breathe-circle { border-color: var(--sage-light); color: var(--sage-light); }
+
+  /* Grounding Kontrast */
+  .gnum { background: rgba(168, 213, 181, 0.18); border-color: var(--sage-light); color: var(--sage-light); }
+  .emerg-grounding-list li.done .gnum { background: var(--sage-mid); color: #1a1208; }
+
+  /* Body-Scan: deutlich heller */
+  .emerg-bodyscan-step { color: rgba(232, 245, 234, 0.95); }
+  .emerg-bodyscan-bar  { background: var(--sage-mid); }
+  .emerg-bodyscan-btn  {
+    background: rgba(168, 213, 181, 0.14);
+    border: 1px solid var(--sage-light);
+    color: var(--sage-light);
+    font-weight: 500;
+  }
+  .emerg-bodyscan-btn:hover { background: rgba(168, 213, 181, 0.24); }
+
+  /* Trauma-Link: deutlich heller */
+  .emerg-trauma-link {
+    background: rgba(168, 213, 181, 0.12);
+    border: 1px solid var(--sage-light);
+    color: var(--sage-light);
+    font-weight: 500;
+  }
+  .emerg-trauma-link:hover { background: rgba(168, 213, 181, 0.22); }
+
+  /* Message-Copy Kontrast */
+  .emerg-message-label { color: var(--sage-light); letter-spacing: 1.2px; }
+  .emerg-message-text  { color: rgba(232, 245, 234, 0.92); }
+
+  /* Crisis-Contacts Modal */
+  .crisis-overlay {
+    position: fixed; inset: 0; z-index: 10000;
+    background: linear-gradient(180deg, #1f1610 0%, #161210 100%);
+    display: flex; flex-direction: column;
+    transform: translateY(100%);
+    transition: transform 0.32s ease;
+    overflow: hidden;
+  }
+  .crisis-overlay.open { transform: translateY(0); }
+  .crisis-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 18px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    background: rgba(0,0,0,0.25);
+    flex-shrink: 0;
+  }
+  .crisis-header-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    color: #ffb8b8;
+  }
+  .crisis-close {
+    background: transparent; border: 1px solid rgba(255,255,255,0.18);
+    color: rgba(255,255,255,0.75);
+    padding: 6px 14px; border-radius: 999px;
+    font-family: 'DM Sans', sans-serif; font-size: 12px;
+    cursor: pointer;
+  }
+  .crisis-body {
+    flex: 1; overflow-y: auto;
+    padding: 18px 16px 80px;
+  }
+  .crisis-intro {
+    color: rgba(232, 245, 234, 0.9);
+    font-size: 13px; line-height: 1.6;
+    margin-bottom: 16px;
+    padding: 12px 14px;
+    background: rgba(220, 90, 90, 0.10);
+    border-left: 3px solid #d55;
+    border-radius: 6px;
+  }
+  .crisis-section { margin-bottom: 16px; }
+  .crisis-section-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--sage-light);
+    margin-bottom: 8px;
+    padding-left: 4px;
+  }
+  .crisis-call {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    background: rgba(0,0,0,0.30);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    padding: 11px 14px;
+    margin-bottom: 6px;
+    text-decoration: none;
+    color: #fff;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .crisis-call:active, .crisis-call:hover {
+    background: rgba(220, 90, 90, 0.18);
+    border-color: rgba(220, 90, 90, 0.4);
+  }
+  .cc-num {
+    font-size: 14px; font-weight: 700; color: #ffd0a0;
+    letter-spacing: 0.5px; white-space: nowrap;
+  }
+  .cc-label {
+    font-size: 11px; color: rgba(232, 245, 234, 0.78);
+    text-align: right; line-height: 1.4;
+  }
+  .crisis-foot {
+    margin-top: 14px;
+    font-size: 11px;
+    color: rgba(232, 245, 234, 0.55);
+    line-height: 1.55;
+    font-style: italic;
+    padding: 0 4px;
+  }
+
+  /* v1.0.122 — Crisis-Btn oben im Header */
+  .emerg-header { padding: 14px 16px; }
+  .emerg-header-left {
+    display: flex; align-items: center; gap: 12px;
+    flex-wrap: wrap; flex: 1; min-width: 0;
+  }
+  .emerg-header-title { color: var(--sage-light); }
+  .emerg-crisis-btn-top {
+    background: rgba(220, 90, 90, 0.16);
+    border: 1px solid rgba(220, 90, 90, 0.45);
+    color: #ffb8b8;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 5px 12px;
+    border-radius: 999px;
+    cursor: pointer;
+    line-height: 1.3;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .emerg-crisis-btn-top:hover, .emerg-crisis-btn-top:active {
+    background: rgba(220, 90, 90, 0.26);
+    color: #ffd0d0;
+  }
+
+  /* Preparación Modal — re-uses crisis-overlay styles, plus eigene */
+  .prep-overlay {
+    position: fixed; inset: 0; z-index: 10001;
+    background: linear-gradient(180deg, #1a1e1a 0%, #14181a 100%);
+    display: flex; flex-direction: column;
+    transform: translateY(100%);
+    transition: transform 0.32s ease;
+    overflow: hidden;
+  }
+  .prep-overlay.open { transform: translateY(0); }
+  .prep-overlay .crisis-header {
+    border-bottom: 1px solid rgba(168, 213, 181, 0.15);
+  }
+  .prep-header-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    color: var(--sage-light);
+  }
+  .prep-overlay .crisis-body {
+    padding: 18px 18px 80px;
+    color: rgba(232, 245, 234, 0.92);
+    font-size: 14px;
+    line-height: 1.7;
+  }
+  .prep-section {
+    margin-bottom: 22px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid rgba(168, 213, 181, 0.10);
+  }
+  .prep-section:last-child { border-bottom: none; }
+  .prep-section-num {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--sage-mid);
+    margin-bottom: 4px;
+  }
+  .prep-section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    color: var(--sage-light);
+    margin-bottom: 10px;
+    line-height: 1.35;
+  }
+  .prep-section-intro {
+    margin-bottom: 10px;
+    color: rgba(232, 245, 234, 0.85);
+  }
+  .prep-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .prep-section ul li {
+    padding: 8px 0 8px 18px;
+    position: relative;
+    color: rgba(232, 245, 234, 0.88);
+  }
+  .prep-section ul li::before {
+    content: "·";
+    position: absolute;
+    left: 4px;
+    color: var(--sage-mid);
+    font-weight: 700;
+  }
+  .prep-section ul li strong {
+    color: var(--sage-light);
+    font-weight: 600;
+  }
 </style>
 </head>
 <body>
@@ -1918,7 +2410,7 @@
 <div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
 <div class="sidebar" id="sidebar">
   <div class="sidebar-head">
-    <h3>El Migrante Consciente <span id="sidebar-version-badge" style="font-size:9px;background:rgba(200,146,42,0.2);color:var(--gold);font-family:'DM Sans',sans-serif;font-weight:600;letter-spacing:0.5px;padding:2px 6px;border-radius:4px;margin-left:6px;vertical-align:middle;">v1.0.116</span></h3>
+    <h3>El Migrante Consciente <span id="sidebar-version-badge" style="font-size:9px;background:rgba(200,146,42,0.2);color:var(--gold);font-family:'DM Sans',sans-serif;font-weight:600;letter-spacing:0.5px;padding:2px 6px;border-radius:4px;margin-left:6px;vertical-align:middle;">v1.0.122</span></h3>
     <p data-i18n="sidebarSub">Tu guía · Tu contrato · Tu diario</p>
   </div>
   <button class="sidebar-home-btn" onclick="showHome();closeSidebar()" data-i18n="sidebarHome">🏠 Menú principal</button>
@@ -2183,7 +2675,8 @@
   <div class="tramites-pills" id="tramites-pills">
     <button class="tpill active" onclick="showTramiteSection('entrada',this)">Entrada</button>
     <button class="tpill" onclick="showTramiteSection('visados',this)">Visados</button>
-    <button class="tpill" onclick="showTramiteSection('familia',this)">Familia</button>
+    <button class="tpill regul-pill" onclick="showTramiteSection('regularizacion',this)">★ Regularización 2026</button>
+    <button class="tpill" onclick="showTramiteSection('familia',this)">Familia/Pareja</button>
     <button class="tpill" onclick="showTramiteSection('arraigo',this)">Arraigo</button>
     <button class="tpill" onclick="showTramiteSection('padron',this)">Padrón</button>
     <button class="tpill" onclick="showTramiteSection('nacionalidad',this)">Nacionalidad</button>
@@ -2217,6 +2710,87 @@
       </div>
     </div>
     <p style="text-align:center;font-size:11px;color:var(--fog);padding:8px 0;">© Christian Hammerich · Barcelona · El Migrante Consciente</p>
+  </div>
+</div>
+
+
+<!-- CRISIS CONTACTS MODAL -->
+<div class="crisis-overlay" id="crisis-overlay">
+  <div class="crisis-header">
+    <div class="crisis-header-title" data-i18n="crisisTitle">⚠ En peligro o en crisis · Contactos</div>
+    <button class="crisis-close" onclick="closeCrisisContacts()" data-i18n="emergClose">Cerrar ✕</button>
+  </div>
+  <div class="crisis-body">
+    <div class="crisis-intro" data-i18n="crisisIntro">Si estás en una situación de peligro inmediato, llama. Todas estas líneas son confidenciales y gratuitas.</div>
+
+    <!-- NACIONAL -->
+    <div class="crisis-section">
+      <div class="crisis-section-label" data-i18n="crisisLabelNacional">🇪🇸 Toda España · Nacional 24h</div>
+      <a class="crisis-call" href="tel:112"><span class="cc-num">112</span><span class="cc-label" data-i18n="crisis112">Emergencias (multiidioma)</span></a>
+      <a class="crisis-call" href="tel:024"><span class="cc-num">024</span><span class="cc-label" data-i18n="crisis024">Crisis emocional · suicidio · 24h gratuito (Cruz Roja, con interpretación)</span></a>
+      <a class="crisis-call" href="tel:016"><span class="cc-num">016</span><span class="cc-label" data-i18n="crisis016">Violencia de género · 24h · sin huella en factura</span></a>
+      <a class="crisis-call" href="tel:717003717"><span class="cc-num">717 003 717</span><span class="cc-label" data-i18n="crisisEsperanza">Teléfono de la Esperanza · 24h · anónimo</span></a>
+      <a class="crisis-call" href="tel:900202010"><span class="cc-num">900 20 20 10</span><span class="cc-label" data-i18n="crisisANAR">ANAR · niños y adolescentes en riesgo</span></a>
+      <a class="crisis-call" href="tel:900221122"><span class="cc-num">900 22 11 22</span><span class="cc-label" data-i18n="crisisCruzRoja">Cruz Roja Española · atención general</span></a>
+      <a class="crisis-call" href="tel:091"><span class="cc-num">091</span><span class="cc-label" data-i18n="crisis091">Policía Nacional</span></a>
+      <a class="crisis-call" href="tel:062"><span class="cc-num">062</span><span class="cc-label" data-i18n="crisis062">Guardia Civil</span></a>
+      <a class="crisis-call" href="tel:061"><span class="cc-num">061</span><span class="cc-label" data-i18n="crisis061">Emergencias sanitarias</span></a>
+    </div>
+
+    <!-- BARCELONA -->
+    <div class="crisis-section">
+      <div class="crisis-section-label" data-i18n="crisisLabelBcn">🏙 Barcelona</div>
+      <a class="crisis-call" href="tel:900703030"><span class="cc-num">900 703 030</span><span class="cc-label" data-i18n="crisisBcn1">CUESB · urgencias sociales 24h · gratuito</span></a>
+      <a class="crisis-call" href="tel:900922357"><span class="cc-num">900 922 357</span><span class="cc-label" data-i18n="crisisBcn2">Servicios Sociales · gratuito</span></a>
+      <a class="crisis-call" href="tel:931532815"><span class="cc-num">93 153 28 15</span><span class="cc-label" data-i18n="crisisBcn3">SAIER · atención a migrantes (Lu-Vi 9-15h)</span></a>
+      <a class="crisis-call" href="tel:092"><span class="cc-num">092</span><span class="cc-label" data-i18n="crisisBcn4">Guàrdia Urbana</span></a>
+    </div>
+
+    <!-- MADRID -->
+    <div class="crisis-section">
+      <div class="crisis-section-label" data-i18n="crisisLabelMad">🏙 Madrid</div>
+      <a class="crisis-call" href="tel:112"><span class="cc-num">112</span><span class="cc-label" data-i18n="crisisMad1">SAMUR Social · urgencia social 24h (vía 112)</span></a>
+      <a class="crisis-call" href="tel:010"><span class="cc-num">010</span><span class="cc-label" data-i18n="crisisMad2">Atención al Ciudadano · Ayuntamiento</span></a>
+      <a class="crisis-call" href="tel:915354354"><span class="cc-num">91 535 43 54</span><span class="cc-label" data-i18n="crisisMad3">Cruz Roja Madrid</span></a>
+      <a class="crisis-call" href="tel:092"><span class="cc-num">092</span><span class="cc-label" data-i18n="crisisMad4">Policía Municipal</span></a>
+    </div>
+
+    <!-- VALENCIA -->
+    <div class="crisis-section">
+      <div class="crisis-section-label" data-i18n="crisisLabelVlc">🏙 Valencia</div>
+      <a class="crisis-call" href="tel:112"><span class="cc-num">112</span><span class="cc-label" data-i18n="crisisVlc1">Emergencia social 24h (vía 112)</span></a>
+      <a class="crisis-call" href="tel:010"><span class="cc-num">010</span><span class="cc-label" data-i18n="crisisVlc2">Atención al Ciudadano · Ayuntamiento</span></a>
+      <a class="crisis-call" href="tel:963677500"><span class="cc-num">96 367 75 00</span><span class="cc-label" data-i18n="crisisVlc3">Cruz Roja Valencia</span></a>
+    </div>
+
+    <!-- SEVILLA -->
+    <div class="crisis-section">
+      <div class="crisis-section-label" data-i18n="crisisLabelSev">🏙 Sevilla</div>
+      <a class="crisis-call" href="tel:112"><span class="cc-num">112</span><span class="cc-label" data-i18n="crisisSev1">Emergencias sociales 24h (vía 112)</span></a>
+      <a class="crisis-call" href="tel:010"><span class="cc-num">010</span><span class="cc-label" data-i18n="crisisSev2">Atención al Ciudadano · Ayuntamiento</span></a>
+      <a class="crisis-call" href="tel:954376261"><span class="cc-num">95 437 62 61</span><span class="cc-label" data-i18n="crisisSev3">Cruz Roja Sevilla</span></a>
+    </div>
+
+    <!-- ZARAGOZA -->
+    <div class="crisis-section">
+      <div class="crisis-section-label" data-i18n="crisisLabelZgz">🏙 Zaragoza</div>
+      <a class="crisis-call" href="tel:112"><span class="cc-num">112</span><span class="cc-label" data-i18n="crisisZgz1">Emergencia social 24h (vía 112)</span></a>
+      <a class="crisis-call" href="tel:010"><span class="cc-num">010</span><span class="cc-label" data-i18n="crisisZgz2">Atención al Ciudadano · Ayuntamiento</span></a>
+      <a class="crisis-call" href="tel:976224880"><span class="cc-num">976 22 48 80</span><span class="cc-label" data-i18n="crisisZgz3">Cruz Roja Zaragoza</span></a>
+    </div>
+
+    <div class="crisis-foot" data-i18n="crisisFoot">En cualquier ciudad española, el 112 conecta con los servicios sociales de urgencia 24h y los servicios sanitarios y policiales. El 010 es la atención general del ayuntamiento (no de urgencia).</div>
+  </div>
+</div>
+
+<!-- PREPARACIÓN EN TIEMPOS BUENOS MODAL -->
+<div class="prep-overlay" id="prep-overlay">
+  <div class="crisis-header">
+    <div class="prep-header-title" data-i18n="prepTitle">🧰 Cómo prepararte en tiempos buenos</div>
+    <button class="crisis-close" onclick="closePreparacion()" data-i18n="emergClose">Cerrar ✕</button>
+  </div>
+  <div class="crisis-body" id="prep-body">
+    <!-- Content injected by JS based on currentLang -->
   </div>
 </div>
 
@@ -2332,32 +2906,97 @@
 <!-- EMERGENCIA -->
 <div class="emerg-overlay" id="emerg-overlay">
   <div class="emerg-header">
-    <div style="font-family:'Playfair Display',serif; color:var(--sage); font-size:15px;">Estoy aquí contigo</div>
-    <button class="emerg-close" onclick="closeEmergencia()">Cerrar ✕</button>
+    <div class="emerg-header-left">
+      <div class="emerg-header-title" style="font-family:'Playfair Display',serif;font-size:15px;">Estoy aquí contigo</div>
+      <button class="emerg-crisis-btn-top" onclick="openCrisisContacts()" data-i18n="emergCrisisBtn">⚠ En peligro · Contactos</button>
+    </div>
+    <button class="emerg-close" onclick="closeEmergencia()" data-i18n="emergClose">Cerrar ✕</button>
   </div>
   <div class="emerg-body">
-    <div class="emerg-title">Estoy mal ahora.</div>
-    <div class="emerg-sub">Tres pasos simples. Solo uno a la vez.</div>
+    <div class="emerg-title" data-i18n="emergTitle">Estoy mal ahora.</div>
+    <div class="emerg-sub" data-i18n="emergSub">Estás aquí. Vamos paso a paso. Toma lo que necesites.</div>
+    <!-- (Notrufnummern in eigenem Modal — siehe Crisis-Button im Header) -->
+
+    <!-- 1) ATEM mit 3 Varianten -->
     <div class="emerg-breathe">
-      <div class="emerg-breathe-title">Primero: respira.</div>
+      <div class="emerg-breathe-title" data-i18n="emergBreatheTitle">Primero: respira.</div>
+      <div class="emerg-breathe-tabs">
+        <button class="ebtab active" onclick="setBreathePattern('calma',this)" data-i18n="emergPatternCalma">Calma 4·4·4</button>
+        <button class="ebtab" onclick="setBreathePattern('relax',this)" data-i18n="emergPatternRelax">Relax 4·7·8</button>
+        <button class="ebtab" onclick="setBreathePattern('caja',this)" data-i18n="emergPatternCaja">Caja 4·4·4·4</button>
+      </div>
       <div class="breathe-circle" id="breathe-circle"><span>RESPIRA</span></div>
-      <div class="emerg-breathe-text">4 segundos inhala · 4 pausa · 4 exhala</div>
-      <button class="emerg-breathe-btn" onclick="startBreathe()">Iniciar respiración guiada</button>
+      <div class="emerg-breathe-text" id="emerg-breathe-text" data-i18n="emergBreatheTextCalma">4 segundos inhala · 4 pausa · 4 exhala</div>
+      <button class="emerg-breathe-btn" onclick="toggleBreathe()" data-i18n="emergBreatheStart">▶ Iniciar respiración guiada</button>
     </div>
+
+    <!-- 3) GROUNDING 5-4-3-2-1 -->
+    <div class="emerg-card emerg-grounding">
+      <div class="emerg-card-num" data-i18n="emergGroundingNum">Ejercicio de anclaje</div>
+      <div class="emerg-card-title" data-i18n="emergGroundingTitle">5 · 4 · 3 · 2 · 1 — Vuelve al presente</div>
+      <div class="emerg-card-text" data-i18n="emergGroundingIntro">Cuando la mente se acelera, los sentidos te traen de vuelta. Marca cada paso al completarlo.</div>
+      <ul class="emerg-grounding-list">
+        <li onclick="toggleGroundItem(this)"><span class="gnum">5</span><span class="gtxt" data-i18n="emergGround5">cosas que VES a tu alrededor</span></li>
+        <li onclick="toggleGroundItem(this)"><span class="gnum">4</span><span class="gtxt" data-i18n="emergGround4">cosas que OYES</span></li>
+        <li onclick="toggleGroundItem(this)"><span class="gnum">3</span><span class="gtxt" data-i18n="emergGround3">cosas que SIENTES con el tacto</span></li>
+        <li onclick="toggleGroundItem(this)"><span class="gnum">2</span><span class="gtxt" data-i18n="emergGround2">cosas que HUELES</span></li>
+        <li onclick="toggleGroundItem(this)"><span class="gnum">1</span><span class="gtxt" data-i18n="emergGround1">cosa que SABOREAS</span></li>
+      </ul>
+    </div>
+
+    <!-- 4) BODY-SCAN -->
+    <div class="emerg-card emerg-bodyscan">
+      <div class="emerg-card-num" data-i18n="emergBodyscanNum">Repaso corporal</div>
+      <div class="emerg-card-title" data-i18n="emergBodyscanTitle">Vuelve a tu cuerpo — 5 pasos suaves</div>
+      <div class="emerg-card-text" data-i18n="emergBodyscanIntro">Sin presionar, sin forzar. Solo observa. Cada paso dura 20 segundos.</div>
+      <div class="emerg-bodyscan-step" id="bodyscan-step" data-i18n="emergBodyscanStep1">Pies — siente el contacto con el suelo o el zapato. Solo siéntelos.</div>
+      <div class="emerg-bodyscan-progress"><div class="emerg-bodyscan-bar" id="bodyscan-bar"></div></div>
+      <div class="emerg-bodyscan-counter" id="bodyscan-counter" data-i18n="emergBodyscanReady">Paso 1 de 5</div>
+      <button class="emerg-bodyscan-btn" onclick="toggleBodyscan()" id="bodyscan-btn" data-i18n="emergBodyscanStart">▶ Comenzar repaso</button>
+    </div>
+
+    <!-- 5) MENSAJES PARA PEDIR AYUDA -->
+    <div class="emerg-card emerg-messages">
+      <div class="emerg-card-num" data-i18n="emergMessagesNum">Pedir ayuda</div>
+      <div class="emerg-card-title" data-i18n="emergMessagesTitle">Mensajes listos para enviar</div>
+      <div class="emerg-card-text" data-i18n="emergMessagesIntro">Si te cuesta encontrar palabras, copia uno de estos. Te lo permite todo: pedir, callar, equivocarte, volver mañana.</div>
+
+      <div class="emerg-message-box">
+        <div class="emerg-message-label" data-i18n="emergMsg1Label">A una persona de confianza (WhatsApp/SMS)</div>
+        <div class="emerg-message-text" id="emerg-msg-1" data-i18n="emergMsg1Text">Hola. No estoy bien hoy. No necesito que arregles nada, solo necesito que sepas dónde estoy. ¿Puedes escribirme o llamarme cuando puedas? Gracias.</div>
+        <button class="emerg-message-copy" onclick="copyEmergMsg('emerg-msg-1',this)" data-i18n="emergMsgCopy">📋 Copiar</button>
+      </div>
+
+      <div class="emerg-message-box">
+        <div class="emerg-message-label" data-i18n="emergMsg2Label">Pedir apoyo psicológico (email/WhatsApp)</div>
+        <div class="emerg-message-text" id="emerg-msg-2" data-i18n="emergMsg2Text">Buenos días. Estoy atravesando un momento difícil y necesito apoyo psicológico. ¿Tienen disponibilidad para una primera consulta esta semana? Gracias.</div>
+        <button class="emerg-message-copy" onclick="copyEmergMsg('emerg-msg-2',this)" data-i18n="emergMsgCopy">📋 Copiar</button>
+      </div>
+
+      <div class="emerg-message-box">
+        <div class="emerg-message-label" data-i18n="emergMsg3Label">Faltar al trabajo o a un compromiso</div>
+        <div class="emerg-message-text" id="emerg-msg-3" data-i18n="emergMsg3Text">Hola. Hoy no me encuentro bien y no podré asistir. Lo siento por las molestias. Me pondré en contacto cuando esté recuperado/a. Gracias por la comprensión.</div>
+        <button class="emerg-message-copy" onclick="copyEmergMsg('emerg-msg-3',this)" data-i18n="emergMsgCopy">📋 Copiar</button>
+      </div>
+    </div>
+
+    <!-- 6) LINK ZUR TRAUMA-SEKTION -->
+    <button class="emerg-trauma-link" onclick="goToTraumaSection()" data-i18n="emergTraumaLink">📘 Entender por qué sientes esto — Resiliencia & Trauma</button>
+
+    <!-- 7) PREPARACIÓN EN TIEMPOS BUENOS -->
+    <button class="emerg-trauma-link" onclick="openPreparacion()" data-i18n="emergPreparacionLink">🧰 Cómo me preparo en tiempos buenos para estos momentos</button>
+
     <div class="emerg-card">
-      <div class="emerg-card-num">Segundo paso</div>
       <div class="emerg-card-title">Recuerda: esto es temporal.</div>
       <div class="emerg-card-text">"El Don Migrante presente acepta las fases difíciles como temporales y se compromete a no sacrificar su identidad, salud ni futuro por emergencias puntuales." Lo que sientes ahora es real. Y también pasará. Siempre ha pasado.</div>
       <div class="emerg-action">Punto 4 del Contrato</div>
     </div>
     <div class="emerg-card">
-      <div class="emerg-card-num">Tercer paso</div>
       <div class="emerg-card-title">Una sola acción pequeña.</div>
       <div class="emerg-card-text">No tienes que resolver todo hoy. Solo una cosa: beber un vaso de agua. Salir 10 minutos. Escribir tres líneas. Llamar a una persona de confianza. Una sola acción rompe el bloqueo.</div>
       <div class="emerg-action">Capítulo 15 — El cuerpo migrante</div>
     </div>
     <div class="emerg-card">
-      <div class="emerg-card-num">Para recordar siempre</div>
       <div class="emerg-card-title">La soledad es tu maestra, no tu castigo.</div>
       <div class="emerg-card-text">"Migrante Presente acepta y reconoce la soledad como etapa intrínseca e inevitable del proceso migratorio, y declara su determinación de transformarla en instrumento de autoconocimiento." No estás fallando. Estás migrando.</div>
       <div class="emerg-action">Punto 8 del Contrato · Capítulo 13</div>
@@ -2522,6 +3161,7 @@
   <div class="reader-body" id="reader-body" onscroll="updateReadProgress()"></div>
   <div class="reader-footer">
     <button class="reader-mark-btn" id="reader-mark-btn" onclick="markFromReader()">Marcar como leído</button>
+    <button class="reader-print-btn" id="reader-print-btn" onclick="printReader()" data-i18n="readerPrintBtn">🖨️ Imprimir</button>
   </div>
 </div>
 
@@ -2739,7 +3379,7 @@ let CHAPTERS = getCHAPTERS();
 let WISDOMS  = getWISDOMS();
 
 // ─── STATE ──────────────────────────────────────────────────
-const APP_VERSION = 116;
+const APP_VERSION = 122;
 // Auto-sync visible version badge from APP_VERSION constant (no manual update needed)
 document.addEventListener('DOMContentLoaded', () => {
   const badge = document.getElementById('sidebar-version-badge');
@@ -5146,25 +5786,48 @@ function closeEmergencia() {
 
 let breatheInterval = null;
 let breatheRunning = false;
+// v1.0.120 — Multi-Pattern Breathing
+let currentBreathePattern = 'calma';
+const BREATHE_PATTERNS = {
+  calma: { durations: [4000, 4000, 4000, 4000], labels: ['INHALA','PAUSA','EXHALA','PAUSA'], scales: ['scale(1.55)','scale(1.55)','scale(0.85)','scale(0.85)'] },
+  relax: { durations: [4000, 7000, 8000, 0],    labels: ['INHALA','PAUSA','EXHALA','—'],   scales: ['scale(1.55)','scale(1.55)','scale(0.85)','scale(0.85)'] },
+  caja:  { durations: [4000, 4000, 4000, 4000], labels: ['INHALA','PAUSA','EXHALA','PAUSA'], scales: ['scale(1.55)','scale(1.55)','scale(0.85)','scale(0.85)'] }
+};
+
+function setBreathePattern(name, btn) {
+  if (breatheRunning) stopBreathe();
+  currentBreathePattern = name;
+  document.querySelectorAll('.ebtab').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  const txt = document.getElementById('emerg-breathe-text');
+  if (txt) {
+    txt.textContent = t('emergBreatheText' + name.charAt(0).toUpperCase() + name.slice(1)) || txt.textContent;
+  }
+}
+
+function toggleBreathe() {
+  if (breatheRunning) stopBreathe();
+  else startBreathe();
+}
+
 function startBreathe() {
   stopBreathe();
   breatheRunning = true;
   const circle = document.getElementById('breathe-circle');
   const btn = document.querySelector('.emerg-breathe-btn');
   if (!circle) return;
-  if (btn) btn.textContent = '⏸ Pausar respiración';
+  if (btn) btn.textContent = t('emergBreathePause') || '⏸ Pausar respiración';
+  const pat = BREATHE_PATTERNS[currentBreathePattern] || BREATHE_PATTERNS.calma;
   let phase = 0;
-  const phases = ['inhala','pausa','exhala','pausa'];
-  const labels = ['INHALA','PAUSA','EXHALA','PAUSA'];
-  const durations = [4000, 4000, 4000, 4000];
-  const scales = ['scale(1.55)', 'scale(1.55)', 'scale(0.85)', 'scale(0.85)'];
+  // For 4-7-8: skip the 4th phase (duration 0)
+  const phaseCount = pat.durations.filter(d => d > 0).length;
   function nextPhase() {
     if (!breatheRunning) return;
-    circle.querySelector('span').textContent = labels[phase];
-    circle.style.transition = 'transform ' + (durations[phase]/1000) + 's ease-in-out';
-    circle.style.transform = scales[phase];
-    phase = (phase + 1) % 4;
-    breatheInterval = setTimeout(nextPhase, durations[phase]);
+    circle.querySelector('span').textContent = pat.labels[phase];
+    circle.style.transition = 'transform ' + (pat.durations[phase]/1000) + 's ease-in-out';
+    circle.style.transform = pat.scales[phase];
+    phase = (phase + 1) % phaseCount;
+    breatheInterval = setTimeout(nextPhase, pat.durations[phase] || 100);
   }
   circle.style.transform = 'scale(0.85)';
   setTimeout(nextPhase, 200);
@@ -5180,8 +5843,311 @@ function stopBreathe() {
     if (span) span.textContent = 'RESPIRA';
   }
   const btn = document.querySelector('.emerg-breathe-btn');
-  if (btn) btn.textContent = '▶ Iniciar respiración guiada';
+  if (btn) btn.textContent = t('emergBreatheStart') || '▶ Iniciar respiración guiada';
 }
+
+// v1.0.120 — Grounding 5-4-3-2-1
+function toggleGroundItem(el) {
+  el.classList.toggle('done');
+}
+
+// v1.0.120 — Body-Scan (5 Schritte, je 20s)
+let bodyscanRunning = false;
+let bodyscanTimer = null;
+let bodyscanIdx = 0;
+const BODYSCAN_DURATION = 20000; // 20s je Schritt
+
+function toggleBodyscan() {
+  if (bodyscanRunning) stopBodyscan();
+  else startBodyscan();
+}
+
+function startBodyscan() {
+  bodyscanRunning = true;
+  bodyscanIdx = 0;
+  const btn = document.getElementById('bodyscan-btn');
+  if (btn) btn.textContent = t('emergBodyscanStop') || '⏸ Detener';
+  runBodyscanStep();
+}
+
+function runBodyscanStep() {
+  if (!bodyscanRunning) return;
+  if (bodyscanIdx >= 5) {
+    stopBodyscan(true);
+    return;
+  }
+  const step = document.getElementById('bodyscan-step');
+  const counter = document.getElementById('bodyscan-counter');
+  const bar = document.getElementById('bodyscan-bar');
+  if (step) {
+    step.style.opacity = '0';
+    setTimeout(function() {
+      step.textContent = t('emergBodyscanStep' + (bodyscanIdx + 1)) || step.textContent;
+      step.style.opacity = '1';
+    }, 200);
+  }
+  if (counter) {
+    const tmpl = t('emergBodyscanCounter') || 'Paso {n} de 5';
+    counter.textContent = tmpl.replace('{n}', bodyscanIdx + 1);
+  }
+  if (bar) {
+    bar.style.transition = 'none';
+    bar.style.width = '0%';
+    setTimeout(function() {
+      bar.style.transition = 'width ' + (BODYSCAN_DURATION/1000) + 's linear';
+      bar.style.width = '100%';
+    }, 30);
+  }
+  bodyscanIdx++;
+  bodyscanTimer = setTimeout(runBodyscanStep, BODYSCAN_DURATION);
+}
+
+function stopBodyscan(completed) {
+  bodyscanRunning = false;
+  if (bodyscanTimer) { clearTimeout(bodyscanTimer); bodyscanTimer = null; }
+  const btn = document.getElementById('bodyscan-btn');
+  const bar = document.getElementById('bodyscan-bar');
+  const counter = document.getElementById('bodyscan-counter');
+  const step = document.getElementById('bodyscan-step');
+  if (completed) {
+    if (step) step.textContent = t('emergBodyscanDone') || 'Bien. Quédate aquí unos segundos más.';
+    if (counter) counter.textContent = t('emergBodyscanDoneLabel') || 'Completado';
+    if (bar) bar.style.width = '100%';
+  } else {
+    if (step) step.textContent = t('emergBodyscanStep1') || step.textContent;
+    if (counter) counter.textContent = t('emergBodyscanReady') || 'Paso 1 de 5';
+    if (bar) { bar.style.transition = 'width 0.3s'; bar.style.width = '0%'; }
+  }
+  if (btn) btn.textContent = t('emergBodyscanStart') || '▶ Comenzar repaso';
+  bodyscanIdx = 0;
+}
+
+// v1.0.120 — Copy Help Messages
+function copyEmergMsg(elId, btn) {
+  const el = document.getElementById(elId);
+  if (!el) return;
+  const txt = el.textContent.trim();
+  const fallback = function() {
+    try {
+      const ta = document.createElement('textarea');
+      ta.value = txt;
+      ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+    } catch(e) { console.error('Copy fallback failed', e); }
+  };
+  const showCopied = function() {
+    if (!btn) return;
+    const orig = btn.textContent;
+    btn.classList.add('copied');
+    btn.textContent = t('emergMsgCopied') || '✓ Copiado';
+    setTimeout(function() {
+      btn.classList.remove('copied');
+      btn.textContent = orig;
+    }, 1800);
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(txt).then(showCopied).catch(function() { fallback(); showCopied(); });
+  } else {
+    fallback(); showCopied();
+  }
+}
+
+// v1.0.120 — Trauma-Link Navigation
+function goToTraumaSection() {
+  closeEmergencia();
+  setTimeout(function() {
+    navTo('exp-nuevo');
+  }, 200);
+}
+
+// v1.0.121 — Crisis-Contacts Modal
+function openCrisisContacts() {
+  document.getElementById('crisis-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeCrisisContacts() {
+  document.getElementById('crisis-overlay').classList.remove('open');
+  // emerg-overlay was likely open before; restore its scroll lock
+  if (document.getElementById('emerg-overlay').classList.contains('open')) {
+    document.body.style.overflow = 'hidden';
+  } else {
+    document.body.style.overflow = '';
+  }
+}
+
+// v1.0.122 — Preparación en tiempos buenos
+const PREP_CONTENT = {
+  es: `<div class="prep-section">
+  <div class="prep-section-num">1 · Botiquín de los sentidos</div>
+  <div class="prep-section-title">El "Kit de Crisis" — preparado físico</div>
+  <div class="prep-section-intro">En una fase tranquila prepara una caja o bolsa con objetos que despierten los sentidos y te traigan de vuelta al "aquí y ahora" (grounding).</div>
+  <ul>
+    <li><strong>Olfato:</strong> un aceite esencial (ej. lavanda para calmar; sales aromáticas fuertes de la farmacia para disociaciones intensas — consultar con tu terapeuta).</li>
+    <li><strong>Sabor:</strong> caramelos extremadamente ácidos o chicles fuertes. El estímulo intenso puede interrumpir una crisis de pánico.</li>
+    <li><strong>Tacto:</strong> una pelota antiestrés, una piedra lisa, un trozo de tela suave.</li>
+    <li><strong>Vista:</strong> una foto de un lugar donde te sientes seguro/a, o una tarjeta con una frase que te calma.</li>
+  </ul>
+</div>
+<div class="prep-section">
+  <div class="prep-section-num">2 · Carta a ti mismo</div>
+  <div class="prep-section-title">Un "Manual de Crisis" personal</div>
+  <div class="prep-section-intro">En una crisis de pánico se olvida lo que ayuda. Escríbete una guía corta y amable, en papel o en el móvil:</div>
+  <ul>
+    <li><strong>Paso 1:</strong> "Estás teniendo una crisis de pánico. Es horrible, pero no es peligroso. Pasará."</li>
+    <li><strong>Paso 2:</strong> Ejercicio de respiración (ej. método 4·7·8: 4 seg inhalar, 7 retener, 8 exhalar).</li>
+    <li><strong>Paso 3:</strong> Método 5·4·3·2·1 (5 cosas que ves, 4 que oyes, 3 que sientes, 2 que hueles, 1 que saboreas).</li>
+    <li><strong>Paso 4:</strong> Lista de contactos (una persona de confianza, una entidad como ACATHI, tu terapeuta).</li>
+  </ul>
+</div>
+<div class="prep-section">
+  <div class="prep-section-num">3 · Preparación digital</div>
+  <div class="prep-section-title">El móvil como herramienta — antes de la crisis</div>
+  <div class="prep-section-intro">Usa el móvil mientras tienes energía para hacerlo:</div>
+  <ul>
+    <li><strong>Marcación rápida:</strong> guarda los teléfonos críticos con nombres claros como "Ayuda Ahora" o "Apoyo" — más fáciles de encontrar en pánico que un nombre técnico.</li>
+    <li><strong>Apps:</strong> instala una app de meditación o de apoyo en crisis (Insight Timer, Calm, etc.) y practica los ejercicios <em>antes</em>, también en días buenos. Así se vuelven hábito.</li>
+    <li><strong>Acceso directo:</strong> guarda esta app en la pantalla de inicio del móvil (Menú → Instalar como app).</li>
+  </ul>
+</div>
+<div class="prep-section">
+  <div class="prep-section-num">4 · Red de apoyo</div>
+  <div class="prep-section-title">Avisar al entorno antes de necesitarlo</div>
+  <ul>
+    <li><strong>Personas de confianza:</strong> explícales en una fase tranquila: "Cuando tengo una crisis necesito [silencio / que me recuerdes respirar / simplemente que estés ahí]." Que sepan qué hacer evita el caos en el momento.</li>
+    <li><strong>Anclaje profesional:</strong> conoce la dirección del CAP (Centre d\\'Atenció Primària) más cercano si vives en Cataluña, o de tu centro de salud equivalente. Tener esa información reduce la incertidumbre.</li>
+  </ul>
+</div>
+<div class="prep-section">
+  <div class="prep-section-num">5 · Anclaje somático</div>
+  <div class="prep-section-title">El "Lugar Seguro" — técnica de terapia de trauma</div>
+  <div class="prep-section-intro">Una técnica clásica de la terapia de trauma:</div>
+  <ul>
+    <li>Siéntate relajado/a e imagina un lugar donde te sientes absolutamente seguro/a (real o inventado).</li>
+    <li>Entra en todos los detalles: ¿cómo huele allí? ¿cuál es la temperatura? ¿qué oyes?</li>
+    <li>Elige una "palabra clave" o un gesto (ej. apretar pulgar e índice) <em>mientras</em> piensas en ese lugar. Si lo practicas en estado de calma con suficiente repetición, el gesto puede ayudarte a invocar la sensación de seguridad más rápidamente en una crisis.</li>
+  </ul>
+</div>`,
+  de: `<div class="prep-section">
+  <div class="prep-section-num">1 · Sinnes-Koffer</div>
+  <div class="prep-section-title">Den "Notfall-Koffer" (Crisis Kit) packen</div>
+  <div class="prep-section-intro">Stelle dir in einer guten Phase eine physische Box oder Tasche zusammen, die deine Sinne anspricht und dich ins "Hier und Jetzt" zurückholt (Grounding).</div>
+  <ul>
+    <li><strong>Geruch:</strong> ein ätherisches Öl (z. B. Lavendel zur Beruhigung; bei starken Dissoziationen Riechstäbchen aus der Apotheke — Absprache mit Therapeut/in empfohlen).</li>
+    <li><strong>Geschmack:</strong> extrem saure Bonbons oder scharfe Kaugummis. Der starke Reiz kann eine Panikattacke unterbrechen.</li>
+    <li><strong>Haptik:</strong> ein Anti-Stress-Ball, ein glatter Stein, ein Stück weicher Stoff.</li>
+    <li><strong>Visuell:</strong> ein Foto von einem Ort, an dem du dich sicher fühlst, oder eine Karte mit einem beruhigenden Satz.</li>
+  </ul>
+</div>
+<div class="prep-section">
+  <div class="prep-section-num">2 · Brief an dich selbst</div>
+  <div class="prep-section-title">Ein persönliches "Krisen-Handbuch" schreiben</div>
+  <div class="prep-section-intro">In einer Panikattacke vergisst man oft, was hilft. Schreibe dir selbst eine kurze, liebevolle Anleitung auf Papier oder ins Handy:</div>
+  <ul>
+    <li><strong>Schritt 1:</strong> "Du hast eine Panikattacke. Das ist furchtbar, aber es ist nicht gefährlich. Es geht vorbei."</li>
+    <li><strong>Schritt 2:</strong> Atemübung (z. B. 4·7·8-Methode: 4 Sek. einatmen, 7 Sek. halten, 8 Sek. ausatmen).</li>
+    <li><strong>Schritt 3:</strong> 5·4·3·2·1-Methode (5 Dinge sehen, 4 hören, 3 spüren, 2 riechen, 1 schmecken).</li>
+    <li><strong>Schritt 4:</strong> Kontaktliste (eine Vertrauensperson, eine Stelle wie ACATHI, dein/e Therapeut/in).</li>
+  </ul>
+</div>
+<div class="prep-section">
+  <div class="prep-section-num">3 · Digitale Vorbereitung</div>
+  <div class="prep-section-title">Das Handy als Werkzeug — vor der Krise einrichten</div>
+  <div class="prep-section-intro">Nutze dein Handy, solange du die Energie dazu hast:</div>
+  <ul>
+    <li><strong>Schnellwahl:</strong> speichere kritische Nummern unter klaren Namen wie "Hilfe Jetzt" oder "Unterstützung" — leichter zu finden in der Panik als ein technischer Name.</li>
+    <li><strong>Apps:</strong> installiere eine App für Achtsamkeit oder Panikhilfe (Insight Timer, Calm, spezifische Panik-Apps) und übe die Übungen <em>vorher</em>, auch an guten Tagen. So werden sie Gewohnheit.</li>
+    <li><strong>Direktzugriff:</strong> speichere diese App auf dem Homescreen (Menü → Als App installieren).</li>
+  </ul>
+</div>
+<div class="prep-section">
+  <div class="prep-section-num">4 · Soziale Absicherung</div>
+  <div class="prep-section-title">Das Umfeld vorab informieren</div>
+  <ul>
+    <li><strong>Vertrauenspersonen:</strong> erkläre ihnen in einer guten Phase: "Wenn ich eine Krise habe, brauche ich [Stille / dass du mich an das Atmen erinnerst / dass du einfach nur da bist]." Wenn sie wissen, was zu tun ist, vermeidet das Chaos im Moment.</li>
+    <li><strong>Professionelle Anbindung:</strong> kenne die Adresse des nächsten CAP (Centre d\\'Atenció Primària) in Katalonien oder deines entsprechenden Gesundheitszentrums. Diese Info vorab zu haben reduziert Unsicherheit.</li>
+  </ul>
+</div>
+<div class="prep-section">
+  <div class="prep-section-num">5 · Somatische Verankerung</div>
+  <div class="prep-section-title">Den "Sicheren Ort" (Safe Space) verankern</div>
+  <div class="prep-section-intro">Eine klassische Technik aus der Traumatherapie:</div>
+  <ul>
+    <li>Setze dich entspannt hin und stelle dir einen Ort vor, an dem du absolut sicher bist (real oder erfunden).</li>
+    <li>Gehe in alle Details: wie riecht es dort? Wie ist die Temperatur? Was hörst du?</li>
+    <li>Wähle ein "Codewort" oder eine Geste (z. B. Daumen und Zeigefinger zusammenpressen), <em>während</em> du an diesen Ort denkst. Wenn du das oft genug im entspannten Zustand übst, kann die Geste in der Krise helfen, das Gefühl von Sicherheit schneller abzurufen.</li>
+  </ul>
+</div>`,
+  en: `<div class="prep-section">
+  <div class="prep-section-num">1 · Senses Kit</div>
+  <div class="prep-section-title">Pack a "Crisis Kit" — physical preparation</div>
+  <div class="prep-section-intro">In a calm phase, prepare a box or bag with objects that engage your senses and bring you back to the "here and now" (grounding).</div>
+  <ul>
+    <li><strong>Smell:</strong> an essential oil (e.g. lavender to calm; strong smelling salts from the pharmacy for severe dissociation — consult your therapist).</li>
+    <li><strong>Taste:</strong> extremely sour candies or strong gum. The intense stimulus can interrupt a panic attack.</li>
+    <li><strong>Touch:</strong> a stress ball, a smooth stone, a piece of soft fabric.</li>
+    <li><strong>Sight:</strong> a photo of a place where you feel safe, or a card with a sentence that calms you.</li>
+  </ul>
+</div>
+<div class="prep-section">
+  <div class="prep-section-num">2 · Letter to yourself</div>
+  <div class="prep-section-title">A personal "Crisis Manual"</div>
+  <div class="prep-section-intro">In a panic attack, it is easy to forget what helps. Write yourself a short, kind guide on paper or in your phone:</div>
+  <ul>
+    <li><strong>Step 1:</strong> "You are having a panic attack. It is horrible, but it is not dangerous. It will pass."</li>
+    <li><strong>Step 2:</strong> Breathing exercise (e.g. 4·7·8 method: 4 sec inhale, 7 hold, 8 exhale).</li>
+    <li><strong>Step 3:</strong> 5·4·3·2·1 method (5 things you see, 4 you hear, 3 you feel, 2 you smell, 1 you taste).</li>
+    <li><strong>Step 4:</strong> Contact list (a trusted person, an organisation like ACATHI, your therapist).</li>
+  </ul>
+</div>
+<div class="prep-section">
+  <div class="prep-section-num">3 · Digital preparation</div>
+  <div class="prep-section-title">The phone as a tool — set up before the crisis</div>
+  <div class="prep-section-intro">Use your phone while you have the energy to do so:</div>
+  <ul>
+    <li><strong>Speed dial:</strong> save critical numbers under clear names like "Help Now" or "Support" — easier to find in panic than a technical name.</li>
+    <li><strong>Apps:</strong> install a mindfulness or panic support app (Insight Timer, Calm, panic-specific apps) and practice the exercises <em>beforehand</em>, also on good days. So they become habit.</li>
+    <li><strong>Direct access:</strong> save this app to your home screen (Menu → Install as app).</li>
+  </ul>
+</div>
+<div class="prep-section">
+  <div class="prep-section-num">4 · Social safety net</div>
+  <div class="prep-section-title">Inform your circle in advance</div>
+  <ul>
+    <li><strong>Trusted people:</strong> explain to them in a calm phase: "When I have a crisis I need [silence / you to remind me to breathe / you to just be there]." Them knowing what to do prevents chaos in the moment.</li>
+    <li><strong>Professional anchor:</strong> know the address of the nearest CAP (Centre d\\'Atenció Primària) in Catalonia, or your equivalent health centre. Having that info in advance reduces uncertainty.</li>
+  </ul>
+</div>
+<div class="prep-section">
+  <div class="prep-section-num">5 · Somatic anchoring</div>
+  <div class="prep-section-title">Anchor a "Safe Place" — trauma therapy technique</div>
+  <div class="prep-section-intro">A classic technique from trauma therapy:</div>
+  <ul>
+    <li>Sit relaxed and imagine a place where you feel absolutely safe (real or invented).</li>
+    <li>Go into all the details: how does it smell? What is the temperature? What do you hear?</li>
+    <li>Choose a "code word" or a gesture (e.g. pressing thumb and index finger together) <em>while</em> thinking of that place. If you practice this often enough in a state of calm, the gesture can help you recall the feeling of safety more quickly in a crisis.</li>
+  </ul>
+</div>`
+};
+
+function openPreparacion() {
+  const body = document.getElementById('prep-body');
+  if (body) body.innerHTML = PREP_CONTENT[currentLang] || PREP_CONTENT.es;
+  document.getElementById('prep-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closePreparacion() {
+  document.getElementById('prep-overlay').classList.remove('open');
+  if (document.getElementById('emerg-overlay').classList.contains('open')) {
+    document.body.style.overflow = 'hidden';
+  } else {
+    document.body.style.overflow = '';
+  }
+}
+
+
 
 // ─── VOCES ───────────────────────────────────────────────────
 const SEED_VOCES = [
@@ -5823,6 +6789,96 @@ const UI = {
     welcomeItem6Sub: 'El banner verde en la parte superior siempre está visible. Úsalo cuando lo necesites.',
     welcomeNote: 'La migración puede entenderse aquí como un símbolo. Los mecanismos son similares, independientemente de si se quiere emigrar a un nuevo país o simplemente construir una nueva vida.',
     welcomeBtn: 'Comenzar mi camino →',
+    readerPrintBtn: '🖨️ Imprimir',
+    emergEmergencyTitle: '⚠️ Si estás en peligro o en crisis — llama ahora',
+    emerg112Label: 'Emergencias (multiidioma)',
+    emerg024Label: 'Crisis emocional · 24h gratuito',
+    emerg016Label: 'Violencia de género · 24h',
+    emergEsperanzaLabel: 'Teléfono de la Esperanza · 24h',
+    emergCruzRojaLabel: 'Cruz Roja · atención migrantes',
+    emergANARLabel: 'ANAR · niños y adolescentes',
+    emergEmergencyNote: 'Todas estas líneas son confidenciales y gratuitas. El 024 incluye interpretación en otros idiomas.',
+    emergBreatheTitle: 'Primero: respira.',
+    emergPatternCalma: 'Calma 4·4·4',
+    emergPatternRelax: 'Relax 4·7·8',
+    emergPatternCaja: 'Caja 4·4·4·4',
+    emergBreatheTextCalma: '4 seg inhala · 4 pausa · 4 exhala',
+    emergBreatheTextRelax: '4 inhala · 7 retén · 8 exhala — relajación profunda',
+    emergBreatheTextCaja: '4 inhala · 4 retén · 4 exhala · 4 retén — concentración',
+    emergBreatheStart: '▶ Iniciar respiración guiada',
+    emergBreathePause: '⏸ Pausar respiración',
+    emergGroundingNum: 'Ejercicio de anclaje',
+    emergGroundingTitle: '5 · 4 · 3 · 2 · 1 — Vuelve al presente',
+    emergGroundingIntro: 'Cuando la mente se acelera, los sentidos te traen de vuelta. Marca cada paso al completarlo.',
+    emergGround5: 'cosas que VES a tu alrededor',
+    emergGround4: 'cosas que OYES',
+    emergGround3: 'cosas que SIENTES con el tacto',
+    emergGround2: 'cosas que HUELES',
+    emergGround1: 'cosa que SABOREAS',
+    emergBodyscanNum: 'Repaso corporal',
+    emergBodyscanTitle: 'Vuelve a tu cuerpo — 5 pasos suaves',
+    emergBodyscanIntro: 'Sin presionar, sin forzar. Solo observa. Cada paso dura 20 segundos.',
+    emergBodyscanStep1: 'Pies — siente el contacto con el suelo o el zapato. Solo siéntelos.',
+    emergBodyscanStep2: 'Manos — siente la temperatura del aire en ellas, o el peso del teléfono.',
+    emergBodyscanStep3: 'Pecho — observa cómo sube y baja con cada respiración. No la cambies.',
+    emergBodyscanStep4: 'Cuello y hombros — afloja, suelta el peso. Deja caer.',
+    emergBodyscanStep5: 'Cara — afloja la mandíbula. La frente. Las cejas. Suaviza.',
+    emergBodyscanReady: 'Paso 1 de 5',
+    emergBodyscanCounter: 'Paso {n} de 5',
+    emergBodyscanStart: '▶ Comenzar repaso',
+    emergBodyscanStop: '⏸ Detener',
+    emergBodyscanDone: 'Bien. Quédate aquí unos segundos más. Tu cuerpo está contigo.',
+    emergBodyscanDoneLabel: 'Completado',
+    emergMessagesNum: 'Pedir ayuda',
+    emergMessagesTitle: 'Mensajes listos para enviar',
+    emergMessagesIntro: 'Si te cuesta encontrar palabras, copia uno de estos. Te lo permite todo: pedir, callar, equivocarte, volver mañana.',
+    emergMsg1Label: 'A una persona de confianza (WhatsApp/SMS)',
+    emergMsg1Text: 'Hola. No estoy bien hoy. No necesito que arregles nada, solo necesito que sepas dónde estoy. ¿Puedes escribirme o llamarme cuando puedas? Gracias.',
+    emergMsg2Label: 'Pedir apoyo psicológico (email/WhatsApp)',
+    emergMsg2Text: 'Buenos días. Estoy atravesando un momento difícil y necesito apoyo psicológico. ¿Tienen disponibilidad para una primera consulta esta semana? Gracias.',
+    emergMsg3Label: 'Faltar al trabajo o a un compromiso',
+    emergMsg3Text: 'Hola. Hoy no me encuentro bien y no podré asistir. Lo siento por las molestias. Me pondré en contacto cuando esté recuperado/a. Gracias por la comprensión.',
+    emergMsgCopy: '📋 Copiar',
+    emergMsgCopied: '✓ Copiado',
+    emergTraumaLink: '📘 Entender por qué sientes esto — Resiliencia & Trauma',
+    emergCrisisBtn: '⚠ En peligro · Contactos',
+    emergPreparacionLink: '🧰 Cómo me preparo en tiempos buenos para estos momentos',
+    prepTitle: '🧰 Cómo prepararte en tiempos buenos',
+    crisisTitle: '⚠ En peligro o en crisis · Contactos',
+    crisisIntro: 'Si estás en una situación de peligro inmediato, llama. Todas estas líneas son confidenciales y gratuitas.',
+    crisisLabelNacional: '🇪🇸 Toda España · Nacional 24h',
+    crisis112: 'Emergencias (multiidioma)',
+    crisis024: 'Crisis emocional · suicidio · 24h gratuito (Cruz Roja, con interpretación)',
+    crisis016: 'Violencia de género · 24h · sin huella en factura',
+    crisisEsperanza: 'Teléfono de la Esperanza · 24h · anónimo',
+    crisisANAR: 'ANAR · niños y adolescentes en riesgo',
+    crisisCruzRoja: 'Cruz Roja Española · atención general',
+    crisis091: 'Policía Nacional',
+    crisis062: 'Guardia Civil',
+    crisis061: 'Emergencias sanitarias',
+    crisisLabelBcn: '🏙 Barcelona',
+    crisisBcn1: 'CUESB · urgencias sociales 24h · gratuito',
+    crisisBcn2: 'Servicios Sociales · gratuito',
+    crisisBcn3: 'SAIER · atención a migrantes (Lu-Vi 9-15h)',
+    crisisBcn4: 'Guàrdia Urbana',
+    crisisLabelMad: '🏙 Madrid',
+    crisisMad1: 'SAMUR Social · urgencia social 24h (vía 112)',
+    crisisMad2: 'Atención al Ciudadano · Ayuntamiento',
+    crisisMad3: 'Cruz Roja Madrid',
+    crisisMad4: 'Policía Municipal',
+    crisisLabelVlc: '🏙 Valencia',
+    crisisVlc1: 'Emergencia social 24h (vía 112)',
+    crisisVlc2: 'Atención al Ciudadano · Ayuntamiento',
+    crisisVlc3: 'Cruz Roja Valencia',
+    crisisLabelSev: '🏙 Sevilla',
+    crisisSev1: 'Emergencias sociales 24h (vía 112)',
+    crisisSev2: 'Atención al Ciudadano · Ayuntamiento',
+    crisisSev3: 'Cruz Roja Sevilla',
+    crisisLabelZgz: '🏙 Zaragoza',
+    crisisZgz1: 'Emergencia social 24h (vía 112)',
+    crisisZgz2: 'Atención al Ciudadano · Ayuntamiento',
+    crisisZgz3: 'Cruz Roja Zaragoza',
+    crisisFoot: 'En cualquier ciudad española, el 112 conecta con los servicios sociales de urgencia 24h y los servicios sanitarios y policiales. El 010 es la atención general del ayuntamiento (no de urgencia).',
     sidebarReset: '🔄 Reiniciar app (borrar todo)',
     resetConfirm: '¿Estás seguro? Esto borrará todo: tu progreso, diario, perfil, contrato. Esta acción es irreversible.',
     resetDone: 'App reiniciada. Recargando…',
@@ -5893,7 +6949,7 @@ const UI = {
     coachClose: 'Continuar →',
     emergClose: 'Cerrar ✕',
     emergTitle: 'Estoy mal ahora.',
-    emergSub: 'Tres pasos simples. Solo uno a la vez.',
+    emergSub: 'Estás aquí. Vamos paso a paso. Toma lo que necesites.',
     breatheTitle: 'Primero: respira.',
     breatheText: '4 segundos inhala · 4 pausa · 4 exhala',
     breatheBtn: 'Iniciar respiración guiada',
@@ -5984,6 +7040,96 @@ const UI = {
     welcomeItem6Sub: 'Das grüne Banner oben ist immer sichtbar. Nutze es, wann immer du es brauchst.',
     welcomeNote: 'Migration kann hier als Symbol verstanden werden. Die Mechanismen sind ähnlich, unabhängig davon, ob man in ein neues Land auswandern oder einfach ein neues Leben aufbauen will.',
     welcomeBtn: 'Meinen Weg beginnen →',
+    readerPrintBtn: '🖨️ Drucken',
+    emergEmergencyTitle: '⚠️ Wenn du in Gefahr bist oder in einer Krise — ruf jetzt an',
+    emerg112Label: 'Notruf (mehrsprachig)',
+    emerg024Label: 'Emotionale Krise · 24h gratis',
+    emerg016Label: 'Geschlechterbezogene Gewalt · 24h',
+    emergEsperanzaLabel: 'Telefon der Hoffnung · 24h',
+    emergCruzRojaLabel: 'Rotes Kreuz · Migrantenhilfe',
+    emergANARLabel: 'ANAR · Kinder und Jugendliche',
+    emergEmergencyNote: 'Alle Nummern sind vertraulich und kostenlos. Die 024 bietet Übersetzung in andere Sprachen.',
+    emergBreatheTitle: 'Zuerst: atme.',
+    emergPatternCalma: 'Ruhe 4·4·4',
+    emergPatternRelax: 'Entspannung 4·7·8',
+    emergPatternCaja: 'Box 4·4·4·4',
+    emergBreatheTextCalma: '4 Sek. einatmen · 4 halten · 4 ausatmen',
+    emergBreatheTextRelax: '4 ein · 7 halten · 8 aus — tiefe Entspannung',
+    emergBreatheTextCaja: '4 ein · 4 halten · 4 aus · 4 halten — Konzentration',
+    emergBreatheStart: '▶ Geführte Atmung starten',
+    emergBreathePause: '⏸ Pausieren',
+    emergGroundingNum: 'Erdungs-Übung',
+    emergGroundingTitle: '5 · 4 · 3 · 2 · 1 — Zurück in die Gegenwart',
+    emergGroundingIntro: 'Wenn die Gedanken rasen, holen dich die Sinne zurück. Hake jeden Schritt ab, wenn er erledigt ist.',
+    emergGround5: 'Dinge, die du um dich SIEHST',
+    emergGround4: 'Dinge, die du HÖRST',
+    emergGround3: 'Dinge, die du FÜHLST mit dem Tastsinn',
+    emergGround2: 'Dinge, die du RIECHST',
+    emergGround1: 'Sache, die du SCHMECKST',
+    emergBodyscanNum: 'Körperreise',
+    emergBodyscanTitle: 'Zurück zum Körper — 5 sanfte Schritte',
+    emergBodyscanIntro: 'Ohne Druck, ohne Zwang. Nur beobachten. Jeder Schritt dauert 20 Sekunden.',
+    emergBodyscanStep1: 'Füße — spüre den Kontakt mit dem Boden oder dem Schuh. Nur spüren.',
+    emergBodyscanStep2: 'Hände — spüre die Lufttemperatur auf ihnen, oder das Gewicht des Telefons.',
+    emergBodyscanStep3: 'Brust — beobachte, wie sie sich beim Atmen hebt und senkt. Ändere nichts.',
+    emergBodyscanStep4: 'Nacken und Schultern — lockern, das Gewicht loslassen. Fallen lassen.',
+    emergBodyscanStep5: 'Gesicht — Kiefer lockern. Die Stirn. Die Brauen. Weich werden.',
+    emergBodyscanReady: 'Schritt 1 von 5',
+    emergBodyscanCounter: 'Schritt {n} von 5',
+    emergBodyscanStart: '▶ Körperreise starten',
+    emergBodyscanStop: '⏸ Anhalten',
+    emergBodyscanDone: 'Gut. Bleib noch ein paar Sekunden hier. Dein Körper ist bei dir.',
+    emergBodyscanDoneLabel: 'Abgeschlossen',
+    emergMessagesNum: 'Hilfe holen',
+    emergMessagesTitle: 'Vorgefertigte Nachrichten zum Senden',
+    emergMessagesIntro: 'Wenn dir die Worte fehlen, kopier eine davon. Du darfst alles: fragen, schweigen, dich irren, morgen wiederkommen.',
+    emergMsg1Label: 'An eine vertraute Person (WhatsApp/SMS)',
+    emergMsg1Text: 'Hallo. Mir geht es heute nicht gut. Du musst nichts lösen, ich brauche nur, dass du weißt, wo ich bin. Kannst du mir schreiben oder anrufen, wenn du kannst? Danke.',
+    emergMsg2Label: 'Psychologische Unterstützung anfragen (Email/WhatsApp)',
+    emergMsg2Text: 'Guten Tag. Ich durchlebe eine schwierige Phase und brauche psychologische Unterstützung. Haben Sie Verfügbarkeit für einen ersten Termin diese Woche? Danke.',
+    emergMsg3Label: 'Arbeit oder Termin absagen',
+    emergMsg3Text: 'Hallo. Mir geht es heute nicht gut und ich werde nicht teilnehmen können. Es tut mir leid für die Umstände. Ich melde mich, sobald ich wieder fit bin. Danke für das Verständnis.',
+    emergMsgCopy: '📋 Kopieren',
+    emergMsgCopied: '✓ Kopiert',
+    emergTraumaLink: '📘 Verstehen, warum du das fühlst — Resilienz & Trauma',
+    emergCrisisBtn: '⚠ Gefahr · Kontakte',
+    emergPreparacionLink: '🧰 Wie ich mich in guten Zeiten auf solche Momente vorbereite',
+    prepTitle: '🧰 Vorbereitung in guten Zeiten',
+    crisisTitle: '⚠ In Gefahr oder Krise · Kontakte',
+    crisisIntro: 'Wenn du in einer unmittelbaren Gefahrensituation bist, ruf an. Alle Nummern sind vertraulich und kostenlos.',
+    crisisLabelNacional: '🇪🇸 Ganz Spanien · National 24h',
+    crisis112: 'Notruf (mehrsprachig)',
+    crisis024: 'Emotionale Krise · Suizid · 24h gratis (Rotes Kreuz, mit Übersetzung)',
+    crisis016: 'Geschlechterbezogene Gewalt · 24h · keine Spur auf Rechnung',
+    crisisEsperanza: 'Telefon der Hoffnung · 24h · anonym',
+    crisisANAR: 'ANAR · Kinder und Jugendliche in Gefahr',
+    crisisCruzRoja: 'Spanisches Rotes Kreuz · allgemeine Hilfe',
+    crisis091: 'Nationalpolizei',
+    crisis062: 'Guardia Civil',
+    crisis061: 'Medizinischer Notruf',
+    crisisLabelBcn: '🏙 Barcelona',
+    crisisBcn1: 'CUESB · soziale Notfälle 24h · gratis',
+    crisisBcn2: 'Sozialdienste · gratis',
+    crisisBcn3: 'SAIER · Migrantenhilfe (Mo-Fr 9-15 Uhr)',
+    crisisBcn4: 'Stadtpolizei (Guàrdia Urbana)',
+    crisisLabelMad: '🏙 Madrid',
+    crisisMad1: 'SAMUR Social · sozialer Notruf 24h (über 112)',
+    crisisMad2: 'Bürgerservice · Rathaus',
+    crisisMad3: 'Rotes Kreuz Madrid',
+    crisisMad4: 'Stadtpolizei',
+    crisisLabelVlc: '🏙 Valencia',
+    crisisVlc1: 'Sozialer Notruf 24h (über 112)',
+    crisisVlc2: 'Bürgerservice · Rathaus',
+    crisisVlc3: 'Rotes Kreuz Valencia',
+    crisisLabelSev: '🏙 Sevilla',
+    crisisSev1: 'Soziale Notfälle 24h (über 112)',
+    crisisSev2: 'Bürgerservice · Rathaus',
+    crisisSev3: 'Rotes Kreuz Sevilla',
+    crisisLabelZgz: '🏙 Zaragoza',
+    crisisZgz1: 'Sozialer Notruf 24h (über 112)',
+    crisisZgz2: 'Bürgerservice · Rathaus',
+    crisisZgz3: 'Rotes Kreuz Zaragoza',
+    crisisFoot: 'In jeder spanischen Stadt erreichst du über die 112 die sozialen Notdienste 24h sowie Sanitäts- und Polizeidienste. Die 010 ist der allgemeine Bürgerservice der Stadt (nicht für Notfälle).',
     sidebarReset: '🔄 App zurücksetzen (alles löschen)',
     resetConfirm: 'Bist du sicher? Dies löscht alles: deinen Fortschritt, dein Tagebuch, dein Profil, deinen Vertrag. Diese Aktion ist nicht rückgängig zu machen.',
     resetDone: 'App zurückgesetzt. Lade neu…',
@@ -6054,7 +7200,7 @@ const UI = {
     coachClose: 'Weiter →',
     emergClose: 'Schließen ✕',
     emergTitle: 'Mir geht es jetzt schlecht.',
-    emergSub: 'Drei einfache Schritte. Einer nach dem anderen.',
+    emergSub: 'Du bist hier. Geh Schritt für Schritt. Nimm, was du brauchst.',
     breatheTitle: 'Zuerst: atme.',
     breatheText: '4 Sekunden einatmen · 4 Pause · 4 ausatmen',
     breatheBtn: 'Geführte Atmung starten',
@@ -6145,6 +7291,96 @@ const UI = {
     welcomeItem6Sub: 'The green banner at the top is always visible. Use it whenever you need.',
     welcomeNote: 'Migration can be understood here as a symbol. The mechanisms are similar, regardless of whether one wants to emigrate to a new country or simply build a new life.',
     welcomeBtn: 'Begin my journey →',
+    readerPrintBtn: '🖨️ Print',
+    emergEmergencyTitle: '⚠️ If you are in danger or in crisis — call now',
+    emerg112Label: 'Emergency (multilingual)',
+    emerg024Label: 'Emotional crisis · 24h free',
+    emerg016Label: 'Gender violence · 24h',
+    emergEsperanzaLabel: 'Hope Helpline · 24h',
+    emergCruzRojaLabel: 'Red Cross · migrant support',
+    emergANARLabel: 'ANAR · children & teens',
+    emergEmergencyNote: 'All these lines are confidential and free. 024 includes interpretation in other languages.',
+    emergBreatheTitle: 'First: breathe.',
+    emergPatternCalma: 'Calm 4·4·4',
+    emergPatternRelax: 'Relax 4·7·8',
+    emergPatternCaja: 'Box 4·4·4·4',
+    emergBreatheTextCalma: '4 sec in · 4 hold · 4 out',
+    emergBreatheTextRelax: '4 in · 7 hold · 8 out — deep relaxation',
+    emergBreatheTextCaja: '4 in · 4 hold · 4 out · 4 hold — focus',
+    emergBreatheStart: '▶ Start guided breathing',
+    emergBreathePause: '⏸ Pause',
+    emergGroundingNum: 'Grounding exercise',
+    emergGroundingTitle: '5 · 4 · 3 · 2 · 1 — Return to the present',
+    emergGroundingIntro: 'When the mind races, the senses bring you back. Check off each step when complete.',
+    emergGround5: 'things you SEE around you',
+    emergGround4: 'things you HEAR',
+    emergGround3: 'things you FEEL by touch',
+    emergGround2: 'things you SMELL',
+    emergGround1: 'thing you TASTE',
+    emergBodyscanNum: 'Body scan',
+    emergBodyscanTitle: 'Return to your body — 5 gentle steps',
+    emergBodyscanIntro: 'No pressure, no force. Just observe. Each step lasts 20 seconds.',
+    emergBodyscanStep1: 'Feet — feel the contact with the floor or shoe. Just feel them.',
+    emergBodyscanStep2: 'Hands — feel the air temperature on them, or the weight of the phone.',
+    emergBodyscanStep3: 'Chest — observe how it rises and falls with each breath. Don\'t change it.',
+    emergBodyscanStep4: 'Neck and shoulders — loosen, drop the weight. Let go.',
+    emergBodyscanStep5: 'Face — soften the jaw. The forehead. The brows. Soften.',
+    emergBodyscanReady: 'Step 1 of 5',
+    emergBodyscanCounter: 'Step {n} of 5',
+    emergBodyscanStart: '▶ Begin body scan',
+    emergBodyscanStop: '⏸ Stop',
+    emergBodyscanDone: 'Good. Stay here a few more seconds. Your body is with you.',
+    emergBodyscanDoneLabel: 'Completed',
+    emergMessagesNum: 'Ask for help',
+    emergMessagesTitle: 'Ready-to-send messages',
+    emergMessagesIntro: 'If words are hard to find, copy one of these. You\'re allowed everything: to ask, to be silent, to be wrong, to try again tomorrow.',
+    emergMsg1Label: 'To a trusted person (WhatsApp/SMS)',
+    emergMsg1Text: 'Hi. I\'m not okay today. I don\'t need you to fix anything, I just need you to know where I am. Could you write or call me when you can? Thanks.',
+    emergMsg2Label: 'Request psychological support (email/WhatsApp)',
+    emergMsg2Text: 'Hello. I\'m going through a difficult time and need psychological support. Do you have availability for a first appointment this week? Thank you.',
+    emergMsg3Label: 'Miss work or an appointment',
+    emergMsg3Text: 'Hello. I\'m not feeling well today and won\'t be able to attend. Sorry for the inconvenience. I\'ll be in touch once I\'m feeling better. Thank you for your understanding.',
+    emergMsgCopy: '📋 Copy',
+    emergMsgCopied: '✓ Copied',
+    emergTraumaLink: '📘 Understand why you feel this — Resilience & Trauma',
+    emergCrisisBtn: '⚠ Danger · Contacts',
+    emergPreparacionLink: '🧰 How I prepare in good times for these moments',
+    prepTitle: '🧰 Preparing in good times',
+    crisisTitle: '⚠ In danger or crisis · Contacts',
+    crisisIntro: 'If you are in immediate danger, call. All these lines are confidential and free.',
+    crisisLabelNacional: '🇪🇸 All Spain · National 24h',
+    crisis112: 'Emergency (multilingual)',
+    crisis024: 'Emotional crisis · suicide · 24h free (Red Cross, with interpretation)',
+    crisis016: 'Gender violence · 24h · no trace on phone bill',
+    crisisEsperanza: 'Hope Helpline · 24h · anonymous',
+    crisisANAR: 'ANAR · children & teens at risk',
+    crisisCruzRoja: 'Spanish Red Cross · general support',
+    crisis091: 'National Police',
+    crisis062: 'Civil Guard',
+    crisis061: 'Medical emergency',
+    crisisLabelBcn: '🏙 Barcelona',
+    crisisBcn1: 'CUESB · social emergencies 24h · free',
+    crisisBcn2: 'Social Services · free',
+    crisisBcn3: 'SAIER · migrant support (Mon-Fri 9am-3pm)',
+    crisisBcn4: 'Urban Guard',
+    crisisLabelMad: '🏙 Madrid',
+    crisisMad1: 'SAMUR Social · social emergency 24h (via 112)',
+    crisisMad2: 'Citizen Service · City Hall',
+    crisisMad3: 'Red Cross Madrid',
+    crisisMad4: 'Municipal Police',
+    crisisLabelVlc: '🏙 Valencia',
+    crisisVlc1: 'Social emergency 24h (via 112)',
+    crisisVlc2: 'Citizen Service · City Hall',
+    crisisVlc3: 'Red Cross Valencia',
+    crisisLabelSev: '🏙 Sevilla',
+    crisisSev1: 'Social emergencies 24h (via 112)',
+    crisisSev2: 'Citizen Service · City Hall',
+    crisisSev3: 'Red Cross Sevilla',
+    crisisLabelZgz: '🏙 Zaragoza',
+    crisisZgz1: 'Social emergency 24h (via 112)',
+    crisisZgz2: 'Citizen Service · City Hall',
+    crisisZgz3: 'Red Cross Zaragoza',
+    crisisFoot: 'In any Spanish city, 112 connects to 24h social emergency services, medical and police. 010 is the general city hall info line (not for emergencies).',
     sidebarReset: '🔄 Reset app (delete everything)',
     resetConfirm: 'Are you sure? This will delete everything: your progress, journal, profile, contract. This action cannot be undone.',
     resetDone: 'App reset. Reloading…',
@@ -6219,7 +7455,7 @@ const UI = {
     coachClose: 'Continue →',
     emergClose: 'Close ✕',
     emergTitle: 'I\'m not okay right now.',
-    emergSub: 'Three simple steps. Just one at a time.',
+    emergSub: 'You are here. Step by step. Take what you need.',
     breatheTitle: 'First: breathe.',
     breatheText: '4 seconds inhale · 4 hold · 4 exhale',
     breatheBtn: 'Start guided breathing',
@@ -6957,6 +8193,7 @@ const TRAMITES_FULL_TEXTS = {
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">- Aprobación en ~20 días hábiles.<\/p>
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">- En España, solicite la Tarjeta de Residencia para Inversores.<\/p>
 <table class="tramites-table"><tr><td>Duración<\/td><td>Visado 1 año → Autorización 2 años → renovable indefinidamente<\/td><\/tr><tr><td>¿Permite trabajar?<\/td><td>Sí<\/td><\/tr><tr><td>Estado 2026<\/td><td>VERIFICAR: posible supresión para inmuebles. Consulte fuente oficial.<\/td><\/tr><\/table>` },
+  regularizacion: { title: `Regularización Extraordinaria 2026 — Texto Completo`, html: `<div class="tramites-info" style="background:#3a1818;border-left:3px solid #c44;color:#ffd0d0;margin:14px 0;"><strong>⏰ PLAZO IMPRORROGABLE — 30 de junio de 2026<\/strong><br><br>El proceso de Regularización Extraordinaria abre del 16 de abril al 30 de junio de 2026. Después de esa fecha esta vía se cierra para siempre. No habrá prórroga. Si cumples los requisitos, no esperes — las citas se están saturando en todas las ciudades.<\/div><h5 style="font-size:14px;font-weight:600;color:var(--ink);margin:18px 0 8px;">1. ¿Qué es la Regularización Extraordinaria 2026?<\/h5><p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">El Gobierno español aprobó el <strong>Real Decreto 316/2026, de 14 de abril<\/strong>, que abre una Regularización Extraordinaria para personas en situación administrativa irregular. Se basa en la <em>Disposición Adicional Vigesimoprimera<\/em> del Reglamento de Extranjería.<\/p><p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">Permite obtener una <strong>autorización de residencia y trabajo de 1 año<\/strong>, renovable. Más de medio millón de personas pueden beneficiarse en toda España. Información oficial: <a href="https://www.inclusion.gob.es/regularizacion" target="_blank">inclusion.gob.es/regularizacion<\/a><\/p><h5 style="font-size:14px;font-weight:600;color:var(--ink);margin:18px 0 8px;">2. ¿Quién puede acogerse?<\/h5><p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">Dos requisitos obligatorios para todos:<\/p><ul style="font-size:14px;line-height:1.85;color:var(--ink);margin:0 0 16px 22px;"><li style="margin-bottom:6px;">Encontrarse en España <strong>antes del 1 de enero de 2026<\/strong><\/li><li style="margin-bottom:6px;">Permanencia ininterrumpida de <strong>al menos 5 meses<\/strong> antes de la solicitud (sin salidas del territorio)<\/li><li style="margin-bottom:6px;">Carecer de antecedentes penales<\/li><li style="margin-bottom:6px;">No suponer amenaza para el orden público, la seguridad pública o la salud pública<\/li><\/ul><p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">Y <strong>uno solo de estos tres supuestos<\/strong> (basta uno):<\/p><ul style="font-size:14px;line-height:1.85;color:var(--ink);margin:0 0 16px 22px;"><li style="margin-bottom:6px;"><strong>Vía laboral:<\/strong> haber trabajado por cuenta ajena/propia, tener oferta de trabajo, o declaración responsable de autoempleo (modelo EX032)<\/li><li style="margin-bottom:6px;"><strong>Vía familiar:<\/strong> convivencia con hijos menores de edad, mayores con discapacidad, o ascendientes en primer grado<\/li><li style="margin-bottom:6px;"><strong>Vía vulnerabilidad:<\/strong> certificado de vulnerabilidad social<\/li><\/ul><h5 style="font-size:14px;font-weight:600;color:var(--ink);margin:18px 0 8px;">3. ¿Quién NO puede acogerse?<\/h5><ul style="font-size:14px;line-height:1.85;color:var(--ink);margin:0 0 16px 22px;"><li style="margin-bottom:6px;">Titulares de autorización de residencia o estancia <strong>en vigor<\/strong><\/li><li style="margin-bottom:6px;">Personas con solicitud de cualquier permiso <strong>en trámite<\/strong> (continúa automáticamente)<\/li><li style="margin-bottom:6px;">Personas en procedimiento de expulsión (queda paralizado si solicitan la regularización)<\/li><li style="margin-bottom:6px;">Beneficiarios de protección temporal Ucrania con autorización en vigor<\/li><li style="margin-bottom:6px;">Personas apátridas (tienen procedimiento propio — RD 865/2001)<\/li><\/ul><h5 style="font-size:14px;font-weight:600;color:var(--ink);margin:18px 0 8px;">4. El Certificado de Vulnerabilidad — ¿Qué es?<\/h5><p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">El Certificado / Informe de Vulnerabilidad (<strong>Anexo II<\/strong> del RD 316/2026) es un documento oficial que acredita que te encuentras en situación de fragilidad social, económica, habitacional o personal como consecuencia de tu situación administrativa irregular.<\/p><p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">Solo lo necesitas si NO puedes acreditar la vía laboral ni la familiar. Es una de las tres opciones — basta con cumplir una.<\/p><p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;"><strong>NO debes presentar el certificado de vulnerabilidad si:<\/p><ul style="font-size:14px;line-height:1.85;color:var(--ink);margin:0 0 16px 22px;"><li style="margin-bottom:6px;">Eres o has sido solicitante de Protección Internacional (asilo)<\/li><li style="margin-bottom:6px;">Has trabajado anteriormente (informe de vida laboral, contrato, nóminas)<\/li><li style="margin-bottom:6px;">Tienes contrato u oferta de trabajo, o vas a trabajar por cuenta propia (declaración responsable en EX032)<\/li><li style="margin-bottom:6px;">Convives con hijos menores, mayores con discapacidad o ascendientes en primer grado<\/li><\/ul><h5 style="font-size:14px;font-weight:600;color:var(--ink);margin:18px 0 8px;">5. Motivos de vulnerabilidad — qué se valora<\/h5><p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">El RD considera vulnerabilidad cuando, debido a la situación administrativa irregular, se ven afectadas las condiciones de vida o el acceso efectivo a derechos. Se valoran circunstancias:<\/p><ul style="font-size:14px;line-height:1.85;color:var(--ink);margin:0 0 16px 22px;"><li style="margin-bottom:6px;"><strong>Económicas:<\/strong> sin ingresos regulares, dependencia económica de terceros, deudas, imposibilidad de pagar vivienda o alimentación básica.<\/li><li style="margin-bottom:6px;"><strong>Habitacionales:<\/strong> sin vivienda, ocupación, infravivienda, hacinamiento, riesgo de desahucio, vivir en la calle.<\/li><li style="margin-bottom:6px;"><strong>Sociales:<\/strong> aislamiento, ausencia de red de apoyo, exclusión social, dificultad de acceso a servicios públicos.<\/li><li style="margin-bottom:6px;"><strong>Psicosociales:<\/strong> ansiedad, depresión, secuelas de violencia, estrés migratorio severo, problemas de salud mental.<\/li><li style="margin-bottom:6px;"><strong>Familiares:<\/strong> ruptura familiar, separación de hijos en el país de origen, violencia de género o intrafamiliar, cargas familiares no contempladas en otras vías.<\/li><li style="margin-bottom:6px;"><strong>Personales:<\/strong> enfermedad crónica, discapacidad sobrevenida, edad avanzada sin recursos, condición de víctima (trata, violencia, abuso).<\/li><\/ul><p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">Importante: no basta con afirmarlo. El trabajador o trabajadora social del centro al que acudas hará una entrevista de valoración. Sé honesto y aporta documentación: empadronamiento, informes médicos, recibos, denuncias, contratos de alquiler precarios, fotos, testimonios, etc.<\/p><h5 style="font-size:14px;font-weight:600;color:var(--ink);margin:18px 0 8px;">6. Paso a paso para conseguir el certificado<\/h5><p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;"><strong>1) Reúne documentación previa:<\/strong><\/p><ul style="font-size:14px;line-height:1.85;color:var(--ink);margin:0 0 16px 22px;"><li style="margin-bottom:6px;">Pasaporte en vigor (imprescindible — sin él no se puede tramitar nada)<\/li><li style="margin-bottom:6px;">Empadronamiento (certificado histórico preferible)<\/li><li style="margin-bottom:6px;">Documentos que acrediten permanencia en España: recibos, facturas, transferencias, fotos fechadas, billetes de transporte, comunicaciones oficiales, etc.<\/li><li style="margin-bottom:6px;">Si aplica: informes médicos, informes sociales previos, denuncias, contratos de alquiler, justificantes de pagos<\/li><\/ul><p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;"><strong>2) Solicita cita en un centro habilitado<\/strong> (ver lista de Barcelona y otras ciudades más abajo). Si en tu ayuntamiento te dicen que no, prueba con una entidad del RECEX — pueden emitirlo de forma independiente.<\/p><p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;"><strong>3) Acude a la cita.<\/strong> Un trabajador social te hará una entrevista. Explica tu situación con claridad. No exageres ni minimices — sé honesto.<\/p><p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;"><strong>4) Espera la resolución.<\/strong> El plazo máximo es de 1 mes; en la práctica 2–4 semanas según saturación.<\/p><p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;"><strong>5) Recibe el certificado.<\/strong> En Barcelona se envía por SMS/email con un enlace de descarga; también se puede recoger presencialmente.<\/p><p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;"><strong>6) Adjunta el certificado a tu solicitud de regularización<\/strong> junto con el formulario EX032 y el resto de documentación. Presentación telemática (24h/7d) o presencial (cita previa) a través de la plataforma <strong>Mercurio<\/strong>.<\/p><h5 style="font-size:14px;font-weight:600;color:var(--ink);margin:18px 0 8px;">7. Anlaufstellen — Barcelona<\/h5><p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">Para usar los circuitos municipales, debes estar empadronado/a en Barcelona.<\/p><p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;"><strong>SAIER — Servicio de Atención a Inmigrantes, Emigrantes y Refugiados<\/strong><\/p><ul style="font-size:14px;line-height:1.85;color:var(--ink);margin:0 0 16px 22px;"><li style="margin-bottom:6px;">Sede Tarragona: C/ Tarragona, 141 · Lu–Vi 9:00–15:00 — atención sin cita para situaciones de urgencia o vulnerabilidad social/jurídica<\/li><li style="margin-bottom:6px;">Teléfono: 93 153 28 15<\/li><li style="margin-bottom:6px;">Cita previa: <a href="https://ajuntament.barcelona.cat/cita/saier" target="_blank">ajuntament.barcelona.cat/cita/saier<\/a><\/li><\/ul><p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;"><strong>OAC Sant Miquel<\/strong> — Oficina de Atención Ciudadana, sin cita previa. Pl. Sant Miquel, 4 (Ciutat Vella).<\/p><p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;"><strong>OAC Monumental<\/strong> — sin cita previa, única con horario de sábado (8:30–20:00). C/ Sicília, 216 (Eixample).<\/p><p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;"><strong>Punto Miquel Bleach — Espai d&apos;acompanyament a la regularització<\/strong> — sin cita previa. C/ Miquel Bleach, 24 (Sants). Lu–Vi 8:30–19:00.<\/p><p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;"><strong>Centros de Servicios Sociales (CSS)<\/strong> — si ya estás siendo atendido por servicios sociales, recibirás SMS o email con enlace al certificado. Teléfono central: 900 922 357 (gratuito). Web: <a href="https://barcelona.cat/regularitzacio" target="_blank">barcelona.cat/regularitzacio<\/a><\/p><p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;"><strong>CUESB — Centro de Urgencias y Emergencias Sociales<\/strong> — 24h, solo emergencias. C/ Llacuna, 25 · Tel. 900 703 030 (24h/7d, gratuito).<\/p><div class="tramites-info" style="margin:14px 0;"><strong>Tip:<\/strong> Hasta ahora se han tramitado más de 26.000 certificados de vulnerabilidad y se han emitido más de 170.000 justificantes de empadronamiento en los puntos municipales de Barcelona. Las colas son largas: acude pronto y lleva todo organizado.<\/div><h5 style="font-size:14px;font-weight:600;color:var(--ink);margin:18px 0 8px;">8. Entidades nacionales (RECEX) — válidas en toda España<\/h5><p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">El Registro Electrónico de Colaboradores de Extranjería (RECEX) cuenta con más de 220 entidades acreditadas que pueden emitir el certificado de vulnerabilidad <strong>de forma independiente<\/strong> al ayuntamiento. Especialmente útil cuando los servicios sociales municipales están saturados.<\/p><p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;"><strong>Principales ONGs (presencia nacional):<\/strong><\/p><ul style="font-size:14px;line-height:1.85;color:var(--ink);margin:0 0 16px 22px;"><li style="margin-bottom:6px;">CEAR — Comisión Española de Ayuda al Refugiado · asistencia jurídica gratuita, asilo y regularización · <a href="https://www.cear.es" target="_blank">cear.es<\/a><\/li><li style="margin-bottom:6px;">Cruz Roja Española · acogida e integración de migrantes · 900 22 11 22 · <a href="https://www.cruzroja.es" target="_blank">cruzroja.es<\/a><\/li><li style="margin-bottom:6px;">Cáritas Española · ayuda humanitaria y acompañamiento a personas en situación irregular · <a href="https://www.caritas.es" target="_blank">caritas.es<\/a><\/li><li style="margin-bottom:6px;">Fundación Cepaim · integración sociolaboral · <a href="https://cepaim.org" target="_blank">cepaim.org<\/a><\/li><li style="margin-bottom:6px;">Red Acoge · federación de organizaciones de integración · <a href="https://www.redacoge.org" target="_blank">redacoge.org<\/a><\/li><li style="margin-bottom:6px;">Servicio Jesuita a Migrantes (SJM) · acompañamiento y defensa de derechos · <a href="https://sjme.org" target="_blank">sjme.org<\/a><\/li><li style="margin-bottom:6px;">Provivienda · apoyo a personas sin vivienda y migrantes · <a href="https://www.provivienda.org" target="_blank">provivienda.org<\/a><\/li><li style="margin-bottom:6px;">ACCEM · atención integral a refugiados y migrantes · <a href="https://www.accem.es" target="_blank">accem.es<\/a><\/li><\/ul><p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;"><strong>Sindicatos (también pueden emitir el certificado):<\/strong><\/p><ul style="font-size:14px;line-height:1.85;color:var(--ink);margin:0 0 16px 22px;"><li style="margin-bottom:6px;">CITE — CCOO · Centro de Información para Trabajadores Extranjeros · <a href="https://www.ccoo.es/cite" target="_blank">ccoo.es/cite<\/a><\/li><li style="margin-bottom:6px;">AMIC — UGT · Associació d&apos;Ajuda Mútua d&apos;Immigrants a Catalunya · <a href="https://amicugt.cat" target="_blank">amicugt.cat<\/a><\/li><\/ul><div class="tramites-info" style="margin:14px 0;"><strong>⚠️ Verificación importante:<\/strong> antes de presentar un certificado, comprueba que la entidad esté inscrita en el RECEX y reconocida para tu provincia. Buscador oficial en <a href="https://www.inclusion.gob.es/regularizacion" target="_blank">inclusion.gob.es/regularizacion<\/a><\/div><h5 style="font-size:14px;font-weight:600;color:var(--ink);margin:18px 0 8px;">9. Asesoramiento jurídico profesional<\/h5><p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">Puedes ser representado en el trámite por:<\/p><ul style="font-size:14px;line-height:1.85;color:var(--ink);margin:0 0 16px 22px;"><li style="margin-bottom:6px;"><strong>Abogados:<\/strong> los Colegios de la Abogacía publican listados específicos para regularización extraordinaria. En Barcelona: ICAB — Il·lustre Col·legi de l&apos;Advocacia de Barcelona (turno de oficio para personas sin recursos) · <a href="https://www.icab.cat" target="_blank">icab.cat<\/a><\/li><li style="margin-bottom:6px;">Graduados sociales<\/li><li style="margin-bottom:6px;">Gestores administrativos<\/li><\/ul><p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;"><strong>Justicia gratuita:<\/strong> si careces de recursos económicos, puedes solicitar abogado de oficio. La asistencia jurídica gratuita está reconocida por ley.<\/p><div class="tramites-info" style="background:#3a1818;border-left:3px solid #c44;color:#ffd0d0;margin:14px 0;"><strong>⚠️ Cuidado con estafas:<\/strong> nadie está obligado a pagar por una "cita previa" o por "garantías" de aprobación. La presentación es gratuita. Las ONGs y sindicatos del RECEX asesoran sin coste. Desconfía de quien te cobre cantidades elevadas con promesas de éxito.<\/div><h5 style="font-size:14px;font-weight:600;color:var(--ink);margin:18px 0 8px;">10. Otras ciudades (Madrid, Valencia, Sevilla, Bilbao…)<\/h5><p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;"><strong>Madrid:<\/strong> Informe de vulnerabilidad solicitable en los Servicios Sociales del distrito en el que residas. Sede electrónica: <a href="https://sede.madrid.es" target="_blank">sede.madrid.es<\/a> · Trámite directo disponible online. Por distrito: hay 21 distritos, cada uno con su CSS. Llama al 010 (atención ciudadana del Ayuntamiento de Madrid).<\/p><p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;"><strong>Valencia:<\/strong> Servicios Sociales municipales · Tel. 010 (Ayuntamiento). También CEAR Valencia y Cruz Roja Valencia.<\/p><p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;"><strong>Bilbao / Bizkaia:<\/strong> CEAR Euskadi, Cruz Roja Bizkaia, SOS Racismo Bizkaia.<\/p><p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;"><strong>Sevilla:<\/strong> Servicios Sociales municipales · ACCEM Sevilla, Cruz Roja, CEAR Andalucía.<\/p><p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;"><strong>Resto:<\/strong> dirígete al Ayuntamiento de tu municipio y pregunta por los Servicios Sociales. Alternativamente, contacta a una de las ONGs nacionales — todas tienen sedes provinciales.<\/p><p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">Listado oficial completo: <a href="https://www.inclusion.gob.es/regularizacion" target="_blank">inclusion.gob.es/regularizacion<\/a> — sección "Documentos de Interés" — buscador de entidades por provincia.<\/p><h5 style="font-size:14px;font-weight:600;color:var(--ink);margin:18px 0 8px;">11. Modelos y documentación oficial<\/h5><ul style="font-size:14px;line-height:1.85;color:var(--ink);margin:0 0 16px 22px;"><li style="margin-bottom:6px;"><strong>Modelo EX031:<\/strong> solicitud por la Disposición Adicional Vigésima (solicitantes de protección internacional)<\/li><li style="margin-bottom:6px;"><strong>Modelo EX032:<\/strong> solicitud por la Disposición Adicional Vigesimoprimera (situación irregular — la vía mayoritaria)<\/li><li style="margin-bottom:6px;"><strong>Anexo II:<\/strong> modelo de certificado de vulnerabilidad<\/li><li style="margin-bottom:6px;"><strong>Modelo 790, código 052, epígrafe 2.3.1:<\/strong> tasa administrativa (obligatorio pagarla en 10 días hábiles tras admisión a trámite)<\/li><\/ul><p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">Todos los modelos se descargan desde <a href="https://www.inclusion.gob.es/regularizacion" target="_blank">inclusion.gob.es/regularizacion<\/a><\/p><p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;"><strong>Plataforma de presentación: MERCURIO.<\/strong> Toda la solicitud se presenta a través de la plataforma Mercurio del Ministerio. Disponible 24h/7d para vía telemática. Para vía presencial: cita previa.<\/p><h5 style="font-size:14px;font-weight:600;color:var(--ink);margin:18px 0 8px;">12. Consejos prácticos finales<\/h5><ul style="font-size:14px;line-height:1.85;color:var(--ink);margin:0 0 16px 22px;"><li style="margin-bottom:6px;"><strong>Pasaporte primero:<\/strong> verifica que está en vigor. Sin pasaporte válido no podrás tramitar nada. Renueva en tu Consulado si es necesario — puede llevar semanas.<\/li><li style="margin-bottom:6px;"><strong>Empadronamiento:<\/strong> si no estás empadronado, hazlo cuanto antes. En Barcelona puedes empadronarte por domicilio o, sin domicilio fijo, en el "empadronamiento sin domicilio" del distrito (consulta el Ayuntamiento).<\/li><li style="margin-bottom:6px;"><strong>Antecedentes penales:<\/strong> si llevas menos de 5 años en España necesitarás el certificado de antecedentes del país de origen (y de países donde hayas residido los últimos 5 años), apostillado y traducido por traductor jurado. Solicítalo ya — puede tardar meses según el país.<\/li><li style="margin-bottom:6px;"><strong>Si te deniegan el certificado de vulnerabilidad:<\/strong> no significa que no tengas derecho a regularizarte. Revisa la vía laboral (basta una oferta de trabajo o declaración responsable de autoempleo) o la familiar. Y prueba con una entidad RECEX distinta.<\/li><li style="margin-bottom:6px;"><strong>Conserva copias de TODO:<\/strong> sellado, fechado. En digital y en papel.<\/li><li style="margin-bottom:6px;"><strong>Si tu solicitud está en trámite el 30 de junio:<\/strong> sigue su curso normal. La fecha límite es para presentar, no para resolver.<\/li><li style="margin-bottom:6px;"><strong>Resolución favorable:<\/strong> tendrás 1 mes desde la resolución para tramitar la Tarjeta de Identidad de Extranjero (TIE).<\/li><\/ul>` },
   familia: { title: `Residencia por Vínculos Familiares`, html: `<h5 style="font-size:14px;font-weight:600;color:var(--ink);margin:16px 0 6px;">3A. Matrimonio con Ciudadano Español o de la UE<\/h5>
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">El matrimonio con un ciudadano español o de otro estado miembro de la UE otorga derecho a una Tarjeta de Residencia de Familiar de Ciudadano de la Unión.<\/p>
 <h5 style="font-size:14px;font-weight:600;color:var(--ink);margin:16px 0 6px;">Paso a Paso:<\/h5>
@@ -6974,7 +8211,7 @@ const TRAMITES_FULL_TEXTS = {
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">- Registrar la pareja en el Registro de Parejas de Hecho de la CCAA correspondiente.<\/p>
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">- Solicitar la Tarjeta de Residencia de Familiar de Ciudadano de la UE.<\/p>
 <div class="tramites-warn"><strong>⚠️  RIESGO: Pareja de hecho ficticia — Denuncia, consecuencias penales y dependencia<\/strong><ul style="margin:8px 0 0 18px;padding:0;"><li style="margin-bottom:6px;line-height:1.55;">Simular una pareja de hecho constituye una infracción MUY GRAVE de la Ley de Extranjería. Las Unidades contra las Redes de Inmigración y Falsedades Documentales (UCRIF) de la Policía Nacional investigan activamente estas situaciones, con operativos que han desmantelado redes que cobraban hasta 4.000 € por pareja ficticia (Alicante, mayo 2025).<\/li><li style="margin-bottom:6px;line-height:1.55;">Cualquier persona que tenga conocimiento del fraude puede denunciarlo ante la Oficina de Extranjería o directamente ante la Policía Nacional. La investigación puede iniciarse también de oficio, por ejemplo si los dos miembros de la pareja están empadronados en domicilios diferentes.<\/li><li style="margin-bottom:6px;line-height:1.55;">Consecuencias para la persona extranjera: multa de hasta 10.000 €, revocación inmediata del permiso obtenido, expulsión del territorio Schengen, prohibición de entrada de 1 a 5 años, y cierre definitivo de la vía a la nacionalidad española (el Ministerio de Justicia audita el historial completo durante el trámite de nacionalidad).<\/li><li style="margin-bottom:6px;line-height:1.55;">Consecuencias penales: los delitos imputados son falsedad de documento oficial y favorecimiento de la inmigración ilegal (art. 318 bis Código Penal). Tanto la persona extranjera como el ciudadano español o comunitario que participa pueden ser detenidos y puestos a disposición judicial.<\/li><li style="margin-bottom:6px;line-height:1.55;">RIESGO DE DEPENDENCIA Y EXTORSIÓN: Quien paga por una pareja de hecho ficticia queda en una posición de total vulnerabilidad frente a la otra parte. Al haber cometido un acto ilegal, la persona extranjera no puede acudir a las autoridades si la otra parte le exige más dinero, le amenaza con denunciarla o le impone condiciones abusivas. Esta dependencia puede perpetuarse durante años. Se han documentado casos de extorsión continuada después de obtenerse el permiso.<\/li><li style="margin-bottom:6px;line-height:1.55;">Extranjерía realiza visitas domiciliarias sorpresa para verificar la convivencia real. En 2026, el nivel de control se ha intensificado, con tarjetas comunitarias que en muchos casos se conceden por menos años cuando existe sospecha de fraude.<\/li><\/ul><\/div>
-<div class="tramites-info"><strong>ℹ️  NOVEDAD 2026: Regularización Extraordinaria — Una alternativa legal urgente El Gobierno español aprobó mediante Real Decreto 316/2026, de 14 de abril, una Regularización Extraordinaria para personas en situación irregular. El proceso está abierto del 16 de abril al 30 de junio de 2026 (plazo improrrogable). Quienes reúnan los requisitos pueden obtener una autorización de residencia de 1 año, con derecho a trabajar desde la admisión a trámite (máximo 15 días), sin necesidad de recurrir a vías fraudulentas. Requisitos principales: Encontrarse en España antes del 1 de enero de 2026<\/strong><ul style="margin:8px 0 0 18px;padding:0;"><li style="margin-bottom:6px;line-height:1.55;">Permanencia ininterrumpida de al menos 5 meses (sin salidas del territorio)<\/li><li style="margin-bottom:6px;line-height:1.55;">Carecer de antecedentes penales<\/li><li style="margin-bottom:6px;line-height:1.55;">No suponer amenaza para el orden público<\/li><li style="margin-bottom:6px;line-height:1.55;">Acreditar vínculo laboral (trabajo realizado, oferta de empleo o declaración responsable de autoempleo), convivencia con menores o personas dependientes, o situación de especial fragilidad social. Solicitantes de protección internacional: Pueden acogerse quienes presentaron su solicitud de asilo antes del 1 de enero de 2026, incluso si está pendiente o ha sido denegada, acreditando 5 meses de permanencia ininterrumpida. Presentación: Telemtáticamente (24h/7d) o presencialmente con cita previa, a través de la plataforma Mercurio. Información oficial actualizada en: inclusion.gob.es/regularización<\/li><li style="margin-bottom:6px;line-height:1.55;">Quién NO puede acogerse: titulares de autorización de estancia o residencia en vigor, personas con solicitudes ordinarias de arraigo ya en trámite (éstas continúan automáticamente), personas incursas en procedimiento de expulsión (el procedimiento queda paralizado si solicitan la regularización).<\/li><\/ul><\/div>
+<div class="tramites-info" style="border-left:3px solid #c44;background:#3a1818;color:#ffd0d0;"><strong>⚠️ ¿Estás en situación irregular?</strong><br><br>Hay una vía urgente abierta hasta el <strong>30 de junio de 2026</strong>: la Regularización Extraordinaria 2026 (RD 316/2026). Permite obtener residencia y trabajo de 1 año. Más información, anlaufstellen y certificado de vulnerabilidad en la sección dedicada.<br><br><button onclick="closeReader();setTimeout(function(){navTo('tramites');setTimeout(function(){var pill=document.querySelector('.regul-pill');if(pill)showTramiteSection('regularizacion',pill);},100);},100);" style="display:inline-block;background:#c44;color:#fff;border:none;border-radius:8px;padding:10px 18px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;">★ Ir a Regularización 2026 →</button></div>
 <h5 style="font-size:14px;font-weight:600;color:var(--ink);margin:16px 0 6px;">3C. Reagrupación Familiar<\/h5>
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">Un residente legal en España puede reagrupar a ciertos familiares directos una vez que cumple requisitos de tiempo de residencia y económicos.<\/p>
 <h5 style="font-size:14px;font-weight:600;color:var(--ink);margin:16px 0 6px;">¿Quiénes pueden reagruparse?<\/h5>
@@ -7000,25 +8237,6 @@ const TRAMITES_FULL_TEXTS = {
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">- Apelación: Si se deniega, se puede recurrir ante el juzgado contencioso-administrativo. El proceso judicial puede durar años adicionales.<\/p>
 <div class="tramites-info"><strong>ℹ️  Consejos para la solicitud de asilo<\/strong><ul style="margin:8px 0 0 18px;padding:0;"><li style="margin-bottom:6px;line-height:1.55;">Documente todo antes de abandonar su país: fotos, pantallazos de amenazas, informes médicos, noticias sobre su persecución.<\/li><li style="margin-bottom:6px;line-height:1.55;">Acuda a organizaciones como CEAR o ACNUR desde el primer momento para asistencia jurídica gratuita.<\/li><li style="margin-bottom:6px;line-height:1.55;">La coherencia entre la entrevista inicial y entrevistas posteriores es fundamental. Cualquier inconsistencia puede utilizarse para denegar la solicitud.<\/li><li style="margin-bottom:6px;line-height:1.55;">Para solicitantes LGBTIQ+: la organización Kifkif ofrece apoyo legal especializado.<\/li><\/ul><\/div>
 <div class="tramites-warn"><strong>⚠️  RIESGOS de una solicitud de asilo infundada<\/strong><ul style="margin:8px 0 0 18px;padding:0;"><li style="margin-bottom:6px;line-height:1.55;">Presentar una solicitud de asilo sin fundamento real con el único objetivo de regularizarse temporalmente es legal pero arriesgado.<\/li><li style="margin-bottom:6px;line-height:1.55;">Si se deniega y no se recurre o no prospera, el expediente puede derivar en una orden de expulsión.<\/li><li style="margin-bottom:6px;line-height:1.55;">El rechazo de una solicitud de asilo NO cierra todas las vías, pero dificulta futuras solicitudes y genera antecedente negativo en el sistema.<\/li><\/ul><\/div>` },
-  arraigo: { title: `Arraigo: Regularización de Situación Irregular`, html: `<p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">El Arraigo es la vía más común para personas que llevan tiempo en situación irregular en España. Existen varios tipos, cada uno con requisitos distintos.<\/p>
-<h5 style="font-size:14px;font-weight:600;color:var(--ink);margin:16px 0 6px;">5A. Arraigo Social (la vía más frecuente)<\/h5>
-<table class="tramites-table"><tr><td>Tiempo mínimo en España<\/td><td>3 años de permanencia continuada (probada con empadronamiento histórico, contratos, facturas, etc.)<\/td><\/tr><tr><td>Antecedentes penales<\/td><td>Sin antecedentes penales en España ni en países de residencia anteriores durante los últimos 5 años<\/td><\/tr><tr><td>Contrato de trabajo<\/td><td>Contrato de trabajo firmado por al menos 30 horas semanales durante mínimo 1 año. Puede ser de un familiar.<\/td><\/tr><tr><td>Arraigo con formación<\/td><td>Variante (desde 2022): Tras 2 años en España, si se completa un curso de formación laboral de 200 horas, también se puede obtener.<\/td><\/tr><\/table>
-<h5 style="font-size:14px;font-weight:600;color:var(--ink);margin:16px 0 6px;">Paso a Paso: Arraigo Social<\/h5>
-<p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">- Empadronarse en el municipio de residencia lo antes posible (incluso sin contrato ni papeles). El empadronamiento NO implica ningún riesgo de expulsión.<\/p>
-<p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">- Reunir pruebas de permanencia continuada durante 3 años: cartas certificadas, recibos bancarios, informes de vecinos, contratos, etc.<\/p>
-<p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">- Conseguir un contrato de trabajo firmado.<\/p>
-<p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">- Solicitar en la Oficina de Extranjería la autorización de residencia por Arraigo Social (formulario EX-10).<\/p>
-<p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">- Si se aprueba, se otorga un permiso inicial de 1 año que permite trabajar. Se renueva por 2 años y luego por otros 2.<\/p>
-<h5 style="font-size:14px;font-weight:600;color:var(--ink);margin:16px 0 6px;">5B. Arraigo Laboral<\/h5>
-<p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">Para personas en situación irregular que llevan al menos 2 años en España y pueden demostrar una relación laboral con un empleador durante al menos 6 meses.<\/p>
-<table class="tramites-table"><tr><td>Tiempo en España<\/td><td>Mínimo 2 años<\/td><\/tr><tr><td>Relación laboral<\/td><td>Resolución de acta de infracción de la empresa o sentencia judicial que acredite al menos 6 meses de relación laboral<\/td><\/tr><tr><td>Antecedentes<\/td><td>Sin antecedentes penales<\/td><\/tr><\/table>
-<h5 style="font-size:14px;font-weight:600;color:var(--ink);margin:16px 0 6px;">5C. Arraigo Familiar<\/h5>
-<p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">Para personas en situación irregular que son padres o madres de un ciudadano español o tienen un familiar español de primer grado (padre, madre, hijo).<\/p>
-<h5 style="font-size:14px;font-weight:600;color:var(--ink);margin:16px 0 6px;">Paso a Paso:<\/h5>
-<p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">- Acreditar el parentesco con documentación oficial (partida de nacimiento, libro de familia).<\/p>
-<p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">- Si el hijo es español menor de edad, no se requiere tiempo mínimo de estancia.<\/p>
-<p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">- Si el familiar es ascendiente español, se requiere demostrar dependencia económica.<\/p>
-<div class="tramites-warn"><strong>⚠️  Peligros del período de espera en situación irregular<\/strong><ul style="margin:8px 0 0 18px;padding:0;"><li style="margin-bottom:6px;line-height:1.55;">Trabajar sin permiso es una infracción tanto para el trabajador como para el empleador (multa de €10.000 a €100.000 para empresas en caso de empleo de extranjeros irregulares).<\/li><li style="margin-bottom:6px;line-height:1.55;">Sin permiso de trabajo, no se puede acceder al sistema público de salud ordinario, aunque sí a urgencias y atención materno-infantil.<\/li><li style="margin-bottom:6px;line-height:1.55;">La situación irregular no impide empadronarse, y el empadronamiento es fundamental para futuras regularizaciones.<\/li><li style="margin-bottom:6px;line-height:1.55;">Ser detenido en situación irregular puede desencadenar un Centro de Internamiento de Extranjeros (CIE) de hasta 60 días previo a la expulsión.<\/li><\/ul><\/div>` },
   padron: { title: `El Empadronamiento: Su Derecho Más Importante`, html: `<p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">El empadronamiento es el registro municipal de habitantes de un municipio español. Independientemente de la situación administrativa — regular o irregular —, toda persona que resida en un municipio español tiene el DERECHO y la OBLIGACIóN legal de empadronarse. Es la herramienta más importante para cualquier persona que viva en España, y su utilidad es fundamental tanto en el presente como para el futuro.<\/p>
 <h5 style="font-size:14px;font-weight:600;color:var(--ink);margin:16px 0 6px;">6A. Por qué el Empadronamiento es Decisivo<\/h5>
 <p style="font-size:14px;line-height:1.85;color:var(--ink);margin-bottom:16px;">El padrón municipal acredita oficialmente el tiempo de residencia en España. Sin esta acreditación, resulta prácticamente imposible demostrar los años de permanencia exigidos por el arraigo social (3 años), el arraigo laboral (2 años) o la regularización extraordinaria (5 meses). Además, el empadronamiento es requisito imprescindible o muy útil para:<\/p>
@@ -7162,6 +8380,242 @@ const TRAMITES_SECTIONS = {
       }
     ],
   },
+  regularizacion: {
+    title: '★ Regularización Extraordinaria 2026',
+    sub: 'Plazo: 30 de junio de 2026 (improrrogable) · Certificado de vulnerabilidad',
+    cards: [
+      {
+        icon: '⏰', title: 'PLAZO IMPRORROGABLE', badge: 'badge-red', badgeText: '30 junio 2026',
+        body: `
+          <div class="tramites-info" style="background:#3a1818;border-left:3px solid #c44;color:#ffd0d0;">
+            <strong>⚠️ Plazo único: del 16 de abril al 30 de junio de 2026</strong><br><br>
+            Después del 30 de junio de 2026 esta vía se cierra para siempre. No habrá prórroga. Si cumples los requisitos, no esperes — las citas se están saturando en todas las ciudades.
+          </div>
+        `
+      },
+      {
+        icon: 'ℹ️', title: '¿Qué es la Regularización Extraordinaria?', badge: 'badge-blue', badgeText: 'RD 316/2026',
+        body: `
+          <p>El Gobierno español aprobó el <strong>Real Decreto 316/2026, de 14 de abril</strong>, que abre una Regularización Extraordinaria para personas en situación administrativa irregular. Se basa en la <em>Disposición Adicional Vigesimoprimera</em> del Reglamento de Extranjería.</p>
+          <p>Permite obtener una <strong>autorización de residencia y trabajo de 1 año</strong>, renovable. Más de medio millón de personas pueden beneficiarse en toda España.</p>
+          <p><strong>Información oficial:</strong> <a href="https://www.inclusion.gob.es/regularizacion" target="_blank" style="color:var(--gold);">inclusion.gob.es/regularizacion</a></p>
+        `
+      },
+      {
+        icon: '✓', title: '¿Quién puede acogerse?', badge: 'badge-green', badgeText: 'Requisitos',
+        body: `
+          <p><strong>Dos requisitos obligatorios para todos:</strong></p>
+          <ol style="margin-left:18px;line-height:1.85;">
+            <li>Encontrarse en España <strong>antes del 1 de enero de 2026</strong></li>
+            <li>Permanencia ininterrumpida de <strong>al menos 5 meses</strong> antes de la solicitud (sin salidas del territorio)</li>
+          </ol>
+          <p><strong>Más:</strong> carecer de antecedentes penales y no suponer amenaza para el orden público.</p>
+          <p>Y <strong>uno solo de estos tres supuestos</strong> (basta uno):</p>
+          <ul style="margin-left:18px;line-height:1.85;">
+            <li><strong>Vía laboral:</strong> haber trabajado por cuenta ajena/propia, tener oferta de trabajo, o declaración responsable de autoempleo (modelo EX032)</li>
+            <li><strong>Vía familiar:</strong> convivencia con hijos menores de edad, mayores con discapacidad, o ascendientes en primer grado</li>
+            <li><strong>Vía vulnerabilidad:</strong> certificado de vulnerabilidad social</li>
+          </ul>
+        `
+      },
+      {
+        icon: '🚫', title: '¿Quién NO puede acogerse?', badge: 'badge-amber', badgeText: 'Excluidos',
+        body: `
+          <ul style="margin-left:18px;line-height:1.85;">
+            <li>Titulares de autorización de residencia o estancia <strong>en vigor</strong></li>
+            <li>Personas con solicitud de cualquier permiso <strong>en trámite</strong> (continúa automáticamente)</li>
+            <li>Personas en procedimiento de expulsión (queda paralizado si solicitan la regularización)</li>
+            <li>Beneficiarios de protección temporal Ucrania con autorización en vigor</li>
+            <li>Personas apátridas (tienen procedimiento propio — RD 865/2001)</li>
+          </ul>
+        `
+      },
+      {
+        icon: '📄', title: 'Certificado de Vulnerabilidad — ¿Qué es?', badge: 'badge-gold', badgeText: 'Anexo II',
+        body: `
+          <p>El <strong>Certificado / Informe de Vulnerabilidad</strong> (Anexo II del RD 316/2026) es un documento oficial que acredita que te encuentras en situación de fragilidad social, económica, habitacional o personal como consecuencia de tu situación administrativa irregular.</p>
+          <p><strong>Solo lo necesitas si NO puedes acreditar la vía laboral ni la familiar.</strong> Es una de las tres opciones — basta con cumplir una.</p>
+          <p><strong>NO debes presentar el certificado de vulnerabilidad si:</strong></p>
+          <ul style="margin-left:18px;line-height:1.85;">
+            <li>Eres o has sido solicitante de Protección Internacional (asilo)</li>
+            <li>Has trabajado anteriormente (informe de vida laboral, contrato, nóminas)</li>
+            <li>Tienes contrato u oferta de trabajo, o vas a trabajar por cuenta propia (declaración responsable en EX032)</li>
+            <li>Convives con hijos menores, mayores con discapacidad o ascendientes en primer grado</li>
+          </ul>
+        `
+      },
+      {
+        icon: '🎯', title: 'Motivos de vulnerabilidad (qué se valora)', badge: 'badge-purple', badgeText: 'Criterios',
+        body: `
+          <p>El RD considera vulnerabilidad cuando, debido a la situación administrativa irregular, se ven afectadas las condiciones de vida o el acceso efectivo a derechos. Se valoran circunstancias:</p>
+          <ul style="margin-left:18px;line-height:1.85;">
+            <li><strong>Económicas:</strong> sin ingresos regulares, dependencia económica de terceros, deudas, imposibilidad de pagar vivienda o alimentación básica</li>
+            <li><strong>Habitacionales:</strong> sin vivienda, ocupación, infravivienda, hacinamiento, riesgo de desahucio, vivir en la calle</li>
+            <li><strong>Sociales:</strong> aislamiento, ausencia de red de apoyo, exclusión social, dificultad de acceso a servicios públicos</li>
+            <li><strong>Psicosociales:</strong> ansiedad, depresión, secuelas de violencia, estrés migratorio severo, problemas de salud mental</li>
+            <li><strong>Familiares:</strong> ruptura familiar, separación de hijos en el país de origen, cargas familiares no contempladas en otras vías, violencia de género o intrafamiliar</li>
+            <li><strong>Personales:</strong> enfermedad crónica, discapacidad sobrevenida, edad avanzada sin recursos, condición de víctima (trata, violencia, abuso)</li>
+          </ul>
+          <p><em>Importante:</em> no basta con afirmarlo — el trabajador o trabajadora social del centro al que acudas hará una entrevista de valoración. Sé honesto y aporta documentación: empadronamiento, informes médicos, recibos, denuncias, contratos de alquiler precarios, etc.</p>
+        `
+      },
+      {
+        icon: '📋', title: 'Paso a paso para conseguirlo', badge: 'badge-blue', badgeText: 'Procedimiento',
+        body: `
+          <ol style="margin-left:18px;line-height:1.85;">
+            <li><strong>Reúne documentación previa:</strong>
+              <ul style="margin-left:18px;margin-top:6px;">
+                <li>Pasaporte en vigor (imprescindible — sin él no se puede tramitar nada)</li>
+                <li>Empadronamiento (certificado histórico preferible)</li>
+                <li>Documentos que acrediten permanencia en España (recibos, facturas, transferencias, fotos fechadas, billetes de transporte, etc.)</li>
+                <li>Si aplica: informes médicos, informes sociales previos, denuncias, contratos de alquiler, justificantes de pagos</li>
+              </ul>
+            </li>
+            <li><strong>Solicita cita en un centro habilitado</strong> (ver lista de Barcelona y otras ciudades en las tarjetas siguientes). Si en tu ayuntamiento te dicen que no, prueba con una entidad del RECEX — pueden emitirlo de forma independiente.</li>
+            <li><strong>Acude a la cita.</strong> Un trabajador social te hará una entrevista. Explica tu situación con claridad. No exageres ni minimices — sé honesto.</li>
+            <li><strong>Espera la resolución.</strong> El plazo máximo es de 1 mes; en la práctica 2–4 semanas según saturación.</li>
+            <li><strong>Recibe el certificado.</strong> En Barcelona se envía por SMS/email con un enlace de descarga; también se puede recoger presencialmente.</li>
+            <li><strong>Adjunta el certificado a tu solicitud de regularización</strong> junto con el formulario EX032 y el resto de documentación. Presentación telemática (24h/7d) o presencial (cita previa) a través de la plataforma Mercurio.</li>
+          </ol>
+        `
+      },
+      {
+        icon: '🏛️', title: 'Anlaufstellen Barcelona', badge: 'badge-green', badgeText: 'Ciudad Condal',
+        body: `
+          <p><em>Para usar los circuitos municipales, debes estar empadronado/a en Barcelona.</em></p>
+
+          <h5 style="font-size:13px;font-weight:600;color:var(--ink);margin:14px 0 6px;">SAIER — Servicio de Atención a Inmigrantes, Emigrantes y Refugiados</h5>
+          <p>Servicio municipal especializado desde 1989.</p>
+          <ul style="margin-left:18px;line-height:1.85;">
+            <li><strong>Sede Tarragona:</strong> C/ Tarragona, 141 · Lu-Vi 9:00–15:00 — atención sin cita para situaciones de urgencia o vulnerabilidad social/jurídica</li>
+            <li><strong>Teléfono:</strong> 93 153 28 15</li>
+            <li><strong>Cita previa:</strong> <a href="https://ajuntament.barcelona.cat/cita/saier" target="_blank" style="color:var(--gold);">ajuntament.barcelona.cat/cita/saier</a></li>
+            <li><strong>Cita previa (vía teléfono):</strong> 93 153 28 15</li>
+          </ul>
+
+          <h5 style="font-size:13px;font-weight:600;color:var(--ink);margin:14px 0 6px;">OAC Sant Miquel</h5>
+          <p>Oficina de Atención Ciudadana — <strong>sin cita previa</strong>.</p>
+          <ul style="margin-left:18px;line-height:1.85;">
+            <li><strong>Dirección:</strong> Pl. Sant Miquel, 4 (Ciutat Vella)</li>
+          </ul>
+
+          <h5 style="font-size:13px;font-weight:600;color:var(--ink);margin:14px 0 6px;">OAC Monumental</h5>
+          <p><strong>Sin cita previa</strong> — única con horario de sábado.</p>
+          <ul style="margin-left:18px;line-height:1.85;">
+            <li><strong>Dirección:</strong> C/ Sicília, 216 (Eixample)</li>
+            <li><strong>Horario sábados:</strong> 8:30–20:00 (importante para quienes trabajan entre semana)</li>
+          </ul>
+
+          <h5 style="font-size:13px;font-weight:600;color:var(--ink);margin:14px 0 6px;">Punto Miquel Bleach — Espai d'acompanyament a la regularització</h5>
+          <p>Centro municipal específico para la regularización. <strong>Sin cita previa.</strong></p>
+          <ul style="margin-left:18px;line-height:1.85;">
+            <li><strong>Dirección:</strong> C/ Miquel Bleach, 24 (Sants)</li>
+            <li><strong>Horario:</strong> Lu-Vi 8:30–19:00</li>
+          </ul>
+
+          <h5 style="font-size:13px;font-weight:600;color:var(--ink);margin:14px 0 6px;">Centros de Servicios Sociales (CSS)</h5>
+          <p>Si ya estás siendo atendido por servicios sociales, recibirás SMS o email con enlace al certificado.</p>
+          <ul style="margin-left:18px;line-height:1.85;">
+            <li><strong>Teléfono central:</strong> 900 922 357 (gratuito)</li>
+            <li><strong>Web:</strong> <a href="https://barcelona.cat/regularitzacio" target="_blank" style="color:var(--gold);">barcelona.cat/regularitzacio</a></li>
+          </ul>
+
+          <h5 style="font-size:13px;font-weight:600;color:var(--ink);margin:14px 0 6px;">CUESB — Centro de Urgencias y Emergencias Sociales</h5>
+          <p>Solo emergencias 24h. No emite certificados directamente, pero deriva.</p>
+          <ul style="margin-left:18px;line-height:1.85;">
+            <li><strong>Dirección:</strong> C/ Llacuna, 25 (Metro L4 Llacuna)</li>
+            <li><strong>Teléfono:</strong> 900 703 030 (24h/7d, gratuito)</li>
+          </ul>
+
+          <div class="tramites-info" style="margin-top:12px;">
+            <strong>Tip:</strong> Hasta ahora se han tramitado más de 26.000 certificados de vulnerabilidad y se han emitido más de 170.000 justificantes de empadronamiento en los puntos municipales de Barcelona. Las colas son largas: acude pronto y lleva todo organizado.
+          </div>
+        `
+      },
+      {
+        icon: '🌍', title: 'Entidades nacionales (RECEX) — válidas en toda España', badge: 'badge-blue', badgeText: '223 entidades',
+        body: `
+          <p>El Registro Electrónico de Colaboradores de Extranjería (RECEX) cuenta con más de 220 entidades acreditadas que pueden emitir el certificado de vulnerabilidad <strong>de forma independiente</strong> al ayuntamiento. Especialmente útil cuando los servicios sociales municipales están saturados.</p>
+
+          <h5 style="font-size:13px;font-weight:600;color:var(--ink);margin:14px 0 6px;">Principales ONGs (presencia nacional)</h5>
+          <ul style="margin-left:18px;line-height:1.85;">
+            <li><strong>CEAR — Comisión Española de Ayuda al Refugiado:</strong> asistencia jurídica gratuita, asilo y regularización · <a href="https://www.cear.es" target="_blank" style="color:var(--gold);">cear.es</a></li>
+            <li><strong>Cruz Roja Española:</strong> acogida e integración de migrantes · 900 22 11 22 · <a href="https://www.cruzroja.es" target="_blank" style="color:var(--gold);">cruzroja.es</a></li>
+            <li><strong>Cáritas Española:</strong> ayuda humanitaria y acompañamiento a personas en situación irregular · <a href="https://www.caritas.es" target="_blank" style="color:var(--gold);">caritas.es</a></li>
+            <li><strong>Fundación Cepaim:</strong> integración sociolaboral · <a href="https://cepaim.org" target="_blank" style="color:var(--gold);">cepaim.org</a></li>
+            <li><strong>Red Acoge:</strong> federación de organizaciones de integración · <a href="https://www.redacoge.org" target="_blank" style="color:var(--gold);">redacoge.org</a></li>
+            <li><strong>Servicio Jesuita a Migrantes (SJM):</strong> acompañamiento y defensa de derechos · <a href="https://sjme.org" target="_blank" style="color:var(--gold);">sjme.org</a></li>
+            <li><strong>Provivienda:</strong> apoyo a personas sin vivienda y migrantes · <a href="https://www.provivienda.org" target="_blank" style="color:var(--gold);">provivienda.org</a></li>
+            <li><strong>ACCEM:</strong> atención integral a refugiados y migrantes · <a href="https://www.accem.es" target="_blank" style="color:var(--gold);">accem.es</a></li>
+          </ul>
+
+          <h5 style="font-size:13px;font-weight:600;color:var(--ink);margin:14px 0 6px;">Sindicatos (también pueden emitir el certificado)</h5>
+          <ul style="margin-left:18px;line-height:1.85;">
+            <li><strong>CITE — CCOO:</strong> Centro de Información para Trabajadores Extranjeros · <a href="https://www.ccoo.es/cite" target="_blank" style="color:var(--gold);">ccoo.es/cite</a></li>
+            <li><strong>AMIC — UGT:</strong> Associació d'Ajuda Mútua d'Immigrants a Catalunya · <a href="https://amicugt.cat" target="_blank" style="color:var(--gold);">amicugt.cat</a></li>
+          </ul>
+
+          <div class="tramites-info" style="margin-top:12px;">
+            <strong>⚠️ Verificación importante:</strong> antes de presentar un certificado, comprueba que la entidad esté inscrita en el RECEX y reconocida para tu provincia. Buscador oficial en <a href="https://www.inclusion.gob.es/regularizacion" target="_blank" style="color:var(--gold);">inclusion.gob.es/regularizacion</a>.
+          </div>
+        `
+      },
+      {
+        icon: '⚖️', title: 'Asesoramiento jurídico profesional', badge: 'badge-amber', badgeText: 'Abogados',
+        body: `
+          <p>Puedes ser representado en el trámite por:</p>
+          <ul style="margin-left:18px;line-height:1.85;">
+            <li><strong>Abogados:</strong> los Colegios de la Abogacía publican listados específicos para regularización extraordinaria. En Barcelona: <a href="https://www.icab.cat" target="_blank" style="color:var(--gold);">ICAB — Il·lustre Col·legi de l'Advocacia de Barcelona</a> (turno de oficio para personas sin recursos)</li>
+            <li><strong>Graduados sociales</strong></li>
+            <li><strong>Gestores administrativos</strong></li>
+          </ul>
+          <p><strong>Justicia gratuita:</strong> si careces de recursos económicos, puedes solicitar abogado de oficio. La asistencia jurídica gratuita está reconocida por ley.</p>
+          <div class="tramites-info" style="margin-top:12px;">
+            <strong>⚠️ Cuidado con estafas:</strong> nadie está obligado a pagar por una "cita previa" o por "garantías" de aprobación. La presentación es gratuita. Las ONGs y sindicatos del RECEX asesoran sin coste. Desconfía de quien te cobre cantidades elevadas con promesas de éxito.
+          </div>
+        `
+      },
+      {
+        icon: '🌎', title: 'Otras ciudades (Madrid, Valencia, Sevilla...)', badge: 'badge-blue', badgeText: 'Resto España',
+        body: `
+          <p><strong>Madrid:</strong> Informe de vulnerabilidad solicitable en los Servicios Sociales del distrito en el que residas. Sede electrónica: <a href="https://sede.madrid.es" target="_blank" style="color:var(--gold);">sede.madrid.es</a> · Trámite directo disponible online. Por distrito: hay 21 distritos, cada uno con su CSS. Llama al 010 (atención ciudadana del Ayuntamiento de Madrid).</p>
+          <p><strong>Valencia:</strong> Servicios Sociales municipales · Tel. 010 (Ayuntamiento). También CEAR Valencia y Cruz Roja Valencia.</p>
+          <p><strong>Bilbao / Bizkaia:</strong> CEAR Euskadi, Cruz Roja Bizkaia, SOS Racismo Bizkaia.</p>
+          <p><strong>Sevilla:</strong> Servicios Sociales municipales · ACCEM Sevilla, Cruz Roja, CEAR Andalucía.</p>
+          <p><strong>Resto:</strong> dirígete al Ayuntamiento de tu municipio y pregunta por los Servicios Sociales. Alternativamente, contacta a una de las ONGs nacionales — todas tienen sedes provinciales.</p>
+          <p><strong>Listado oficial completo:</strong> <a href="https://www.inclusion.gob.es/regularizacion" target="_blank" style="color:var(--gold);">inclusion.gob.es/regularizacion</a> (sección "Documentos de Interés" — buscador de entidades por provincia).</p>
+        `
+      },
+      {
+        icon: '📝', title: 'Modelos y documentación oficial', badge: 'badge-gold', badgeText: 'Descargas',
+        body: `
+          <ul style="margin-left:18px;line-height:1.85;">
+            <li><strong>Modelo EX031:</strong> solicitud por la Disposición Adicional Vigésima (solicitantes de protección internacional)</li>
+            <li><strong>Modelo EX032:</strong> solicitud por la Disposición Adicional Vigesimoprimera (situación irregular — la vía mayoritaria)</li>
+            <li><strong>Anexo II:</strong> modelo de certificado de vulnerabilidad</li>
+            <li><strong>Modelo 790, código 052, epígrafe 2.3.1:</strong> tasa administrativa (obligatorio pagarla en 10 días hábiles tras admisión a trámite)</li>
+          </ul>
+          <p>Todos los modelos se descargan desde <a href="https://www.inclusion.gob.es/regularizacion" target="_blank" style="color:var(--gold);">inclusion.gob.es/regularizacion</a></p>
+          <h5 style="font-size:13px;font-weight:600;color:var(--ink);margin:14px 0 6px;">Plataforma de presentación: MERCURIO</h5>
+          <p>Toda la solicitud se presenta a través de la plataforma <strong>Mercurio</strong> del Ministerio. Disponible 24h/7d para vía telemática. Para vía presencial: cita previa.</p>
+        `
+      },
+      {
+        icon: '💡', title: 'Consejos prácticos', badge: 'badge-green', badgeText: 'No olvides',
+        body: `
+          <ul style="margin-left:18px;line-height:1.85;">
+            <li><strong>Pasaporte primero:</strong> verifica que está en vigor. Sin pasaporte válido no podrás tramitar nada. Renueva en tu Consulado si es necesario — puede llevar semanas.</li>
+            <li><strong>Empadronamiento:</strong> si no estás empadronado, hazlo cuanto antes. En Barcelona puedes empadronarte por domicilio o, sin domicilio fijo, en el "empadronamiento sin domicilio" del distrito (consulta el Ayuntamiento).</li>
+            <li><strong>Antecedentes penales:</strong> si llevas menos de 5 años en España necesitarás el certificado de antecedentes del país de origen (y de países donde hayas residido los últimos 5 años), apostillado y traducido por traductor jurado. Solicítalo ya — puede tardar meses según el país.</li>
+            <li><strong>Si te deniegan el certificado de vulnerabilidad:</strong> no significa que no tengas derecho a regularizarte. Revisa la vía laboral (basta una oferta de trabajo o declaración responsable de autoempleo) o la familiar. Y prueba con una entidad RECEX distinta.</li>
+            <li><strong>Conserva copias de TODO:</strong> sellado, fechado. En digital y en papel.</li>
+            <li><strong>Si tu solicitud está en trámite el 30 de junio:</strong> sigue su curso normal. La fecha límite es para presentar, no para resolver.</li>
+            <li><strong>Resolución favorable:</strong> tendrás 1 mes desde la resolución para tramitar la Tarjeta de Identidad de Extranjero (TIE).</li>
+          </ul>
+        `
+      }
+    ]
+  },
   familia: {
     title: '3. Residencia por Vínculos Familiares',
     sub: 'Matrimonio · Pareja de hecho · Reagrupación',
@@ -7184,7 +8638,7 @@ const TRAMITES_SECTIONS = {
           <div class="tramites-step"><div class="tramites-step-num">3<\/div><div class="tramites-step-text">Registrar la pareja en el <strong>Registro de Parejas de Hecho</strong> de la Comunidad Autónoma correspondiente.<\/div><\/div>
           <div class="tramites-step"><div class="tramites-step-num">4<\/div><div class="tramites-step-text">Solicitar la <strong>Tarjeta de Residencia de Familiar de Ciudadano de la UE</strong> en la Oficina de Extranjería. Permite trabajar y acceder al sistema público de salud.<\/div><\/div>
           <div class="tramites-info">💡 <strong>Importante:</strong> Las autoridades pueden verificar que la convivencia es real (visitas domiciliarias). Una pareja de hecho genuina no tiene nada que temer — el sistema está diseñado para proteger relaciones reales.<\/div>
-          <div class="tramites-warn" style="margin-top:10px;font-size:11px;">⚠️ Solo en caso de pareja ficticia (simulada para obtener papeles): consecuencias graves — multa €10.000, expulsión y cierre de la vía a la nacionalidad. Se menciona solo como advertencia informativa; no aplica a parejas reales.<\/div>`
+          <div class="tramites-warn" style="margin-top:12px;font-size:12px;line-height:1.6;"><strong>⚠️ Pareja de hecho ficticia (simulada para obtener papeles) — riesgos graves</strong><br>No aplica a parejas reales; se incluye solo como advertencia informativa.<br><br><strong>Consecuencias administrativas:</strong><ul style="margin:6px 0 8px 18px;padding:0;line-height:1.55;"><li>Multa de hasta €10.000<\/li><li>Revocación inmediata del permiso obtenido<\/li><li>Expulsión del territorio Schengen + prohibición de entrada de 1 a 5 años<\/li><li>Cierre definitivo de la vía a la nacionalidad española (el Ministerio de Justicia audita el historial completo)<\/li><\/ul><strong>Consecuencias penales (art. 318 bis CP):</strong><ul style="margin:6px 0 8px 18px;padding:0;line-height:1.55;"><li>Delito de falsedad de documento oficial y favorecimiento de la inmigración ilegal<\/li><li>Detención y disposición judicial — para AMBAS partes (extranjero y español/UE)<\/li><\/ul><strong>Riesgo de dependencia y extorsión:</strong><ul style="margin:6px 0 8px 18px;padding:0;line-height:1.55;"><li>Quien paga queda en posición de total vulnerabilidad frente a la otra parte<\/li><li>Al haber cometido un acto ilegal, no puede acudir a las autoridades si la otra parte exige más dinero, amenaza o impone condiciones abusivas<\/li><li>La dependencia puede perpetuarse durante años — hay casos documentados de extorsión continuada después de obtener el permiso<\/li><\/ul><strong>Control administrativo:</strong><ul style="margin:6px 0 0 18px;padding:0;line-height:1.55;"><li>Extranjería realiza visitas domiciliarias sorpresa para verificar la convivencia real<\/li><li>En 2026 el nivel de control se ha intensificado; algunas tarjetas comunitarias se conceden por menos años ante sospecha de fraude<\/li><\/ul><\/div>`
       },
       {
         icon: '👨‍👩‍👧', title: 'Reagrupación Familiar', badge: 'badge-blue', badgeText: '2-4 meses',
@@ -7505,6 +8959,11 @@ function initTramites() {
 
 
 let currentReaderChap = null;
+
+function printReader() {
+  // Use browser native print dialog. CSS @media print isolates the reader content.
+  window.print();
+}
 
 function openTramitesReader(key) {
   const fullData = TRAMITES_FULL_TEXTS[key];
