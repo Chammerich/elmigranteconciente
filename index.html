@@ -161,7 +161,7 @@
   .tint-midia .screen-actionbar {
     background: #f0dcd3;
     border-bottom: none;
-    padding: 10px 20px;
+    padding: 10px 20px 4px;
     gap: 8px;
     display: flex;
     align-items: center;
@@ -169,7 +169,7 @@
   }
   .tint-midia .screen-hero {
     background: #f0dcd3;
-    padding: 6px 20px 18px;
+    padding: 2px 20px 4px;
   }
   .tint-midia .screen-hero h2 {
     font-family: 'DM Sans', sans-serif;
@@ -2527,9 +2527,11 @@
 <!-- SCREEN: MI DÍA (HOY + DIARIO) -->
 <div class="screen tint-midia" id="screen-midia">
   <div class="screen-actionbar"><button class="action-back" onclick="goBack()">← <span class="back-label" data-i18n="backLabel">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()" data-i18n="emergBtn">🌿 No me siento bien</button></div>
-  <div class="screen-hero"><div class="screen-hero-tag" data-i18n="heroTagHoy">Hoy</div><h2 data-i18n="tileMidia">Mi Día</h2></div>
-  <div style="display:flex;border-bottom:1px solid var(--border);margin:0 16px 0;">
-    
+  <div class="screen-hero"><h2 data-i18n="tileMidia">Mi Día</h2></div>
+  <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin:2px 20px 6px;">
+    <div style="flex:1;height:1px;max-width:60px;background:linear-gradient(90deg,transparent,rgba(200,146,42,0.5),transparent);"></div>
+    <span style="color:var(--gold);font-size:11px;opacity:0.7;">⚖︎</span>
+    <div style="flex:1;height:1px;max-width:60px;background:linear-gradient(90deg,transparent,rgba(200,146,42,0.5),transparent);"></div>
   </div>
   <div id="midia-hoy-content"></div>
   <div id="midia-diario-inline"></div>
@@ -3395,8 +3397,17 @@ let PUNTOS   = getPUNTOS();
 let CHAPTERS = getCHAPTERS();
 let WISDOMS  = getWISDOMS();
 
+// v126: temporarily display only first 10 puntos. Original design had 14 (one per Guía chapter)
+// but the Contrato had only 10; the extra 4 came spontaneously. TODO: decide which 10 to keep
+// definitively (see TODO_post_V1.0.md).
+const ACTIVE_PUNTOS_COUNT = 10;
+function getActivePuntos() { return PUNTOS.slice(0, ACTIVE_PUNTOS_COUNT); }
+function getActivePuntosDoneCount() {
+  return getActivePuntos().filter(p => state.puntosDone && state.puntosDone[p.num]).length;
+}
+
 // ─── STATE ──────────────────────────────────────────────────
-const APP_VERSION = 126;
+const APP_VERSION = 127;
 // Auto-sync visible version badge from APP_VERSION constant (no manual update needed)
 document.addEventListener('DOMContentLoaded', () => {
   const badge = document.getElementById('sidebar-version-badge');
@@ -3539,7 +3550,7 @@ function closeWelcome() {
 function initMiDia() {
   const now = new Date();
   const dayOfYear = Math.floor((now - new Date(now.getFullYear(),0,0)) / 86400000);
-  const punto = PUNTOS[dayOfYear % PUNTOS.length];
+  const punto = PUNTOS[dayOfYear % ACTIVE_PUNTOS_COUNT];
   const wisdom = getWISDOMS()[dayOfYear % getWISDOMS().length];
   const reflQ = punto.reflPreguntas ? punto.reflPreguntas[0] : '';
   const hoyEl = document.getElementById('midia-hoy-content');
@@ -3552,25 +3563,32 @@ function initMiDia() {
   const greeting = g ? g.greeting.replace(/([^.!?]+[.!?])/, '<em>$1<\/em>') : t('midiaProcesoLegitimo');
   const greetSub = g ? g.sub : t('midiaPasoConsciente');
   const tag = g ? '<div style="display:inline-block;font-weight:500;font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:4px 10px;border-radius:6px;background:rgba(139,58,30,0.14);color:#8B3A1E;margin-bottom:14px;">' + g.tag + '<\/div>' : '';
-  const pct = Math.round((Object.values(state.puntosDone||{}).filter(Boolean).length / PUNTOS.length)*100);
-  const done = Object.values(state.puntosDone||{}).filter(Boolean).length;
+  const MANIF = typeof getMANIFIESTO === 'function' ? getMANIFIESTO() : (typeof MANIFIESTO_PUNTOS !== 'undefined' ? MANIFIESTO_PUNTOS : []);
+  const mState = state.manifiestoState || {};
+  // v126: cap displayed compromisos to ACTIVE_PUNTOS_COUNT (=10). The Manifest currently has 10
+  // entries but the constant guards against future extensions until the 10-vs-14 question is resolved.
+  const MANIF_VIS = MANIF.slice(0, ACTIVE_PUNTOS_COUNT);
+  const manifDone = MANIF_VIS.filter((punto, pi) => punto.frases.every((_f, fi) => mState[mKey(pi, fi)] === 'confirmado')).length;
+  const manifTotal = ACTIVE_PUNTOS_COUNT;
+  const pct = manifTotal > 0 ? Math.round((manifDone / manifTotal) * 100) : 0;
+  const done = manifDone;
 
   hoyEl.innerHTML = `
     <div style="padding:18px 20px 0;">
       <div style="font-family:'DM Sans',sans-serif;font-weight:500;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#8B3A1E;margin-bottom:8px;">${d}<\/div>
       ${tag}
       <div style="font-family:'DM Sans',sans-serif;font-weight:300;font-size:22px;color:#5a2412;line-height:1.3;margin-bottom:6px;letter-spacing:0.3px;">${greeting}<\/div>
-      <div style="font-family:'DM Sans',sans-serif;font-size:12px;color:var(--fog);margin-bottom:20px;line-height:1.55;">${greetSub}<\/div>
+      <div style="font-family:'DM Sans',sans-serif;font-size:12px;color:#8a5530;margin-bottom:20px;line-height:1.55;">${greetSub}<\/div>
     <\/div>
     <div style="margin:0 20px 12px;background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:14px 16px;">
       <div style="font-family:'DM Sans',sans-serif;font-weight:500;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#8B3A1E;margin-bottom:8px;">${t('midiaProgresoLabel')}<\/div>
       <div style="display:flex;align-items:center;gap:14px;">
         <div style="font-family:'DM Sans',sans-serif;font-weight:300;font-size:22px;color:#8B3A1E;">${pct}%<\/div>
-        <div style="flex:1;"><div style="height:3px;background:rgba(139,58,30,0.15);border-radius:2px;"><div style="height:3px;background:#8B3A1E;border-radius:2px;width:${pct}%;"><\/div><\/div><div style="font-family:'DM Sans',sans-serif;font-size:12px;color:var(--fog);margin-top:6px;">${done} / ${PUNTOS.length} ${t('midiaCompromisosActivos')}<\/div><\/div>
+        <div style="flex:1;"><div style="height:3px;background:rgba(139,58,30,0.15);border-radius:2px;"><div style="height:3px;background:#8B3A1E;border-radius:2px;width:${pct}%;"><\/div><\/div><div style="font-family:'DM Sans',sans-serif;font-size:12px;color:#8a5530;margin-top:6px;">${done} / ${manifTotal} ${t('midiaCompromisosActivos')}<\/div><\/div>
       <\/div>
     <\/div>
     <div style="margin:0 20px 12px;">
-      <div style="background:var(--card-bg);border:1px solid var(--border);border-left:3px solid #8B3A1E;border-radius:14px;padding:16px 18px;position:relative;overflow:hidden;">
+      <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:16px 18px;position:relative;overflow:hidden;">
         <div style="position:absolute;top:-10px;right:-10px;font-family:'DM Sans',sans-serif;font-weight:300;font-size:80px;color:rgba(139,58,30,0.06);line-height:1;letter-spacing:-2px;">${punto.num}<\/div>
         <div style="font-family:'DM Sans',sans-serif;font-weight:500;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#8B3A1E;margin-bottom:8px;">${t('midiaCompromisoLabel')}<\/div>
         <div style="font-family:'DM Sans',sans-serif;font-weight:300;font-size:22px;color:#5a2412;margin-bottom:10px;line-height:1.25;letter-spacing:0.3px;">${punto.titulo}<\/div>
@@ -3583,7 +3601,7 @@ function initMiDia() {
       <div style="font-family:'DM Sans',sans-serif;font-size:12px;color:#8a5530;margin-bottom:8px;letter-spacing:0.3px;">${wisdom.cap}<\/div>
       <div style="font-family:'DM Sans',sans-serif;font-size:12px;color:var(--ink);line-height:1.7;font-style:italic;">"${wisdom.quote}"<\/div>
     <\/div>
-    <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin:20px 20px 8px;">
+    <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin:6px 20px 0;">
       <div style="flex:1;height:1px;max-width:60px;background:linear-gradient(90deg,transparent,rgba(200,146,42,0.5),transparent);"><\/div>
       <span style="color:var(--gold);font-size:11px;opacity:0.7;">⚖︎<\/span>
       <div style="flex:1;height:1px;max-width:60px;background:linear-gradient(90deg,transparent,rgba(200,146,42,0.5),transparent);"><\/div>
@@ -5505,13 +5523,18 @@ function saveHoyRefl() {
 }
 
 function updateRing() {
-  const done = Object.values(state.puntosDone).filter(Boolean).length;
-  const pct = Math.round((done / PUNTOS.length) * 100);
+  // v126: cap to ACTIVE_PUNTOS_COUNT (=10). See TODO_post_V1.0.md for the 10-vs-14 question.
+  const activeNums = PUNTOS.slice(0, ACTIVE_PUNTOS_COUNT).map(p => p.num);
+  const done = activeNums.filter(n => state.puntosDone[n]).length;
+  const pct = Math.round((done / ACTIVE_PUNTOS_COUNT) * 100);
   const circumference = 170;
   const offset = circumference - (pct / 100) * circumference;
-  document.getElementById('ring-circle').style.strokeDashoffset = offset;
-  document.getElementById('ring-pct').textContent = pct + '%';
-  document.getElementById('ring-sub').textContent = done + ' ' + t('ringOf') + ' ' + PUNTOS.length + ' ' + t('ringActive');
+  const ringCircle = document.getElementById('ring-circle');
+  if (ringCircle) ringCircle.style.strokeDashoffset = offset;
+  const ringPct = document.getElementById('ring-pct');
+  if (ringPct) ringPct.textContent = pct + '%';
+  const ringSub = document.getElementById('ring-sub');
+  if (ringSub) ringSub.textContent = done + ' ' + t('ringOf') + ' ' + ACTIVE_PUNTOS_COUNT + ' ' + t('ringActive');
 }
 
 // ─── CONTRATO ────────────────────────────────────────────────
@@ -9241,9 +9264,9 @@ function selectMiDiaMood(btn, mood) {
   miDiaMood = mood;
   document.querySelectorAll('#midia-diario-inline [data-mood]').forEach(b => {
     const active = b.dataset.mood === mood;
-    b.style.background = active ? 'var(--gold)' : 'none';
-    b.style.color = active ? 'white' : 'var(--fog)';
-    b.style.borderColor = active ? 'var(--gold)' : 'var(--border)';
+    b.style.background = active ? 'rgba(139,58,30,0.20)' : 'rgba(139,58,30,0.06)';
+    b.style.color = active ? '#8B3A1E' : 'rgba(139,58,30,0.5)';
+    b.style.borderColor = 'transparent';
   });
 }
 
@@ -9259,12 +9282,12 @@ function renderMiDiaDiario() {
   const statusColors = {overdue:'#c0392b', today:'#27ae60', tomorrow:'#e67e22'};
   const statusLabels = {overdue:'Vencida', today:'Hoy', tomorrow:'Mañana'};
 
-  let h = '<div style="border-top:1px solid var(--border);padding:16px 16px 8px;">';
+  let h = '<div style="padding:8px 20px 8px;">';
 
   // Urgent tasks banner
   if (pending.length) {
-    h += '<div style="background:rgba(200,146,42,0.07);border:1px solid rgba(200,146,42,0.25);border-radius:12px;padding:12px 14px;margin-bottom:14px;">';
-    h += '<div style="font-size:11px;color:var(--gold);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">⏰ Tareas próximas</div>';
+    h += '<div style="background:rgba(139,58,30,0.07);border:1px solid rgba(139,58,30,0.25);border-radius:12px;padding:12px 14px;margin-bottom:14px;">';
+    h += '<div style="font-family:\'DM Sans\',sans-serif;font-weight:500;font-size:10px;color:#8B3A1E;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;">⏰ Tareas próximas</div>';
     pending.forEach(t => {
       const color = statusColors[t.status] || '#888';
       const label = statusLabels[t.status] || '';
@@ -9287,16 +9310,16 @@ function renderMiDiaDiario() {
 
   // New entry form
   h += `<div style="background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:14px;margin-bottom:16px;">
-    <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;">${t('midiaNuevaEntrada')}</div>
+    <div style="font-family:'DM Sans',sans-serif;font-weight:500;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#8B3A1E;margin-bottom:10px;">${t('midiaNuevaEntrada')}</div>
     <div style="display:flex;gap:6px;margin-bottom:10px;" id="midia-tipo-btns">
-      <button onclick="selectMiDiaTipo(this,'reflexion')" data-tipo="reflexion" style="flex:1;border:1px solid var(--gold);background:rgba(200,146,42,0.12);border-radius:8px;padding:7px 4px;font-size:10px;cursor:pointer;color:var(--gold);font-weight:600;">${t('midiaTipoReflexion')}</button>
-      <button onclick="selectMiDiaTipo(this,'pensamiento')" data-tipo="pensamiento" style="flex:1;border:1px solid var(--border);background:none;border-radius:8px;padding:7px 4px;font-size:10px;cursor:pointer;color:var(--fog);">${t('midiaTipoPensamiento')}</button>
-      <button onclick="selectMiDiaTipo(this,'tarea')" data-tipo="tarea" style="flex:1;border:1px solid var(--border);background:none;border-radius:8px;padding:7px 4px;font-size:10px;cursor:pointer;color:var(--fog);">${t('midiaTipoTarea')}</button>
+      <button onclick="selectMiDiaTipo(this,'reflexion')" data-tipo="reflexion" style="flex:1;border:none;background:rgba(139,58,30,0.20);border-radius:6px;padding:7px 4px;font-family:'DM Sans',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;color:#8B3A1E;font-weight:500;">${t('midiaTipoReflexion')}</button>
+      <button onclick="selectMiDiaTipo(this,'pensamiento')" data-tipo="pensamiento" style="flex:1;border:none;background:rgba(139,58,30,0.06);border-radius:6px;padding:7px 4px;font-family:'DM Sans',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;color:rgba(139,58,30,0.5);font-weight:500;">${t('midiaTipoPensamiento')}</button>
+      <button onclick="selectMiDiaTipo(this,'tarea')" data-tipo="tarea" style="flex:1;border:none;background:rgba(139,58,30,0.06);border-radius:6px;padding:7px 4px;font-family:'DM Sans',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;color:rgba(139,58,30,0.5);font-weight:500;">${t('midiaTipoTarea')}</button>
     </div>
     <textarea id="midia-diario-input" placeholder="${t('midiaReflexionPlaceholder')}" style="width:100%;box-sizing:border-box;min-height:80px;background:var(--cream);border:1px solid var(--border);border-radius:10px;padding:12px;font-size:13px;font-family:'DM Sans',sans-serif;color:var(--ink);resize:none;outline:none;"></textarea>
-    <div id="midia-deadline-row" style="display:none;margin-top:8px;background:rgba(200,146,42,0.07);border-radius:10px;padding:10px 12px;">
+    <div id="midia-deadline-row" style="display:none;margin-top:8px;background:rgba(139,58,30,0.07);border-radius:10px;padding:10px 12px;">
       <label style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--ink);cursor:pointer;margin-bottom:6px;">
-        <input type="checkbox" id="midia-has-deadline" onchange="toggleDeadlineInput(this)" style="width:16px;height:16px;accent-color:var(--gold);cursor:pointer;">
+        <input type="checkbox" id="midia-has-deadline" onchange="toggleDeadlineInput(this)" style="width:16px;height:16px;accent-color:#8B3A1E;cursor:pointer;">
         <span>${t('midiaAddDeadline')}</span>
       </label>
       <div id="midia-deadline-inputs" style="display:none;gap:8px;flex-wrap:wrap;">
@@ -9305,15 +9328,15 @@ function renderMiDiaDiario() {
       </div>
     </div>
     <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;" id="midia-mood-btns">
-      ${moods.map(([em,lb]) => `<button onclick="selectMiDiaMood(this,this.dataset.mood)" data-mood="${em}" style="border:1px solid var(--border);background:none;border-radius:20px;padding:5px 10px;font-size:11px;cursor:pointer;color:var(--fog);">${em} ${lb}</button>`).join('')}
+      ${moods.map(([em,lb]) => `<button onclick="selectMiDiaMood(this,this.dataset.mood)" data-mood="${em}" style="border:none;background:rgba(139,58,30,0.06);border-radius:6px;padding:5px 10px;font-family:'DM Sans',sans-serif;font-size:10px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;color:rgba(139,58,30,0.5);font-weight:500;">${em} ${lb}</button>`).join('')}
     </div>
-    <button onclick="saveMiDiaDiario()" style="margin-top:10px;width:100%;background:var(--gold);color:var(--ink);border:none;border-radius:10px;padding:12px;font-size:13px;font-weight:600;cursor:pointer;">${t('midiaSaveEntry')}</button>
+    <button onclick="saveMiDiaDiario()" style="margin-top:14px;width:100%;background:rgba(139,58,30,0.20);color:#8B3A1E;border:none;border-radius:8px;padding:11px 16px;font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:500;cursor:pointer;">${t('midiaSaveEntry')}</button>
   </div>`;
 
   // All diary entries grouped by date
   const allEntries = (state.diario || []).map((e, i) => ({...e, _idx: i}));
   if (allEntries.length) {
-    h += '<div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;">'+t('midiaAllEntries')+'</div>';
+    h += '<div style="font-family:\'DM Sans\',sans-serif;font-weight:500;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#8B3A1E;margin-bottom:12px;">'+t('midiaAllEntries')+'</div>';
     // Group by date
     const byDate = {};
     allEntries.forEach(e => {
@@ -9343,12 +9366,12 @@ function renderMiDiaDiario() {
           </div>
           <div style="font-size:13px;line-height:1.6;color:var(--ink);${strike}">${e.text}</div>
           ${deadlineChip ? `<div style="display:flex;align-items:center;flex-wrap:wrap;gap:4px;margin-top:6px;">${deadlineChip}</div>` : ''}
-          ${(e.tipo==='tarea' && !e.done) ? `<button onclick="markTareaDone(${e._idx});renderMiDiaDiario();updateTareaBadge();" style="margin-top:8px;background:none;border:1px solid var(--border);border-radius:8px;padding:5px 12px;font-size:11px;color:var(--fog);cursor:pointer;">${t('midiaMarkDone')}</button>` : ''}
+          ${(e.tipo==='tarea' && !e.done) ? `<button onclick="markTareaDone(${e._idx});renderMiDiaDiario();updateTareaBadge();" style="margin-top:8px;background:rgba(139,58,30,0.14);border:none;border-radius:6px;padding:5px 10px;font-family:'DM Sans',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:500;color:#8B3A1E;cursor:pointer;">${t('midiaMarkDone')}</button>` : ''}
         </div>`;
       });
     });
   } else {
-    h += '<div style="text-align:center;color:var(--fog);font-size:14px;padding:20px;">'+t('midiaNoEntries')+'</div>';
+    h += '<div style="text-align:center;color:#8a5530;font-family:\'DM Sans\',sans-serif;font-size:13px;padding:20px;">'+t('midiaNoEntries')+'</div>';
   }
 
   h += '</div>';
@@ -9361,10 +9384,10 @@ function selectMiDiaTipo(btn, tipo) {
   miDiaTipo = tipo;
   document.querySelectorAll('#midia-tipo-btns button').forEach(b => {
     const on = b.dataset.tipo === tipo;
-    b.style.borderColor = on ? 'var(--gold)' : 'var(--border)';
-    b.style.background  = on ? 'rgba(200,146,42,0.12)' : 'none';
-    b.style.color       = on ? 'var(--gold)' : 'var(--fog)';
-    b.style.fontWeight  = on ? '600' : '400';
+    b.style.borderColor = 'transparent';
+    b.style.background  = on ? 'rgba(139,58,30,0.20)' : 'rgba(139,58,30,0.06)';
+    b.style.color       = on ? '#8B3A1E' : 'rgba(139,58,30,0.5)';
+    b.style.fontWeight  = '500';
   });
   const row = document.getElementById('midia-deadline-row');
   if (row) row.style.display = tipo === 'tarea' ? 'block' : 'none';
@@ -11937,7 +11960,7 @@ function toggleLiderazgoBlock(id) {
     </div>
     <div id="tarea-overlay-list" style="overflow-y:auto;flex:1;"></div>
     <div style="padding:12px 16px;">
-      <button onclick="toggleTareaOverlay();navTo('midia');" style="width:100%;background:var(--gold);color:var(--ink);border:none;border-radius:10px;padding:12px;font-size:13px;font-weight:600;cursor:pointer;">Ver todas en Mi Día →</button>
+      <button onclick="toggleTareaOverlay();navTo('midia');" style="width:100%;background:rgba(200,146,42,0.20);color:var(--gold);border:none;border-radius:8px;padding:11px 16px;font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:500;cursor:pointer;">Ver todas en Mi Día →</button>
     </div>
   </div>
 </div>
