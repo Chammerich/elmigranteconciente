@@ -36,21 +36,21 @@
     orientation: "portrait",
     icons: [
       {
-        src: "./icon-192.png",
+        src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='80' fill='%23f5f0e8'/%3E%3Ccircle cx='256' cy='256' r='200' fill='none' stroke='%23c8922a' stroke-width='16'/%3E%3Ctext x='256' y='322' text-anchor='middle' font-size='220' fill='%23c8922a'%3E%E2%9A%96%3C/text%3E%3C/svg%3E",
         sizes: "192x192",
-        type: "image/png",
+        type: "image/svg+xml",
         purpose: "any"
       },
       {
-        src: "./icon-512.png",
+        src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='80' fill='%23f5f0e8'/%3E%3Ccircle cx='256' cy='256' r='200' fill='none' stroke='%23c8922a' stroke-width='16'/%3E%3Ctext x='256' y='322' text-anchor='middle' font-size='220' fill='%23c8922a'%3E%E2%9A%96%3C/text%3E%3C/svg%3E",
         sizes: "512x512",
-        type: "image/png",
+        type: "image/svg+xml",
         purpose: "any"
       },
       {
-        src: "./icon-512.png",
+        src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' fill='%23c8922a'/%3E%3Ctext x='256' y='340' text-anchor='middle' font-size='240' fill='%23f5f0e8'%3E%E2%9A%96%3C/text%3E%3C/svg%3E",
         sizes: "512x512",
-        type: "image/png",
+        type: "image/svg+xml",
         purpose: "maskable"
       }
     ]
@@ -62,12 +62,35 @@
   link.href = manifestUrl;
   document.addEventListener('DOMContentLoaded', () => document.head.appendChild(link));
 
-  // Service Worker registration — enables offline + install prompts
+  // Service Worker registration — enables offline + install prompts + auto-update
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
       navigator.serviceWorker.register('./sw.js')
-        .then(reg => console.log('SW registered:', reg.scope))
-        .catch(err => console.warn('SW registration failed:', err));
+        .then(reg => {
+          console.log('SW registered:', reg.scope);
+          // Auto-update: check for new SW every time the page loads
+          reg.update();
+          // When a new SW is waiting, activate it immediately
+          reg.addEventListener('updatefound', () => {
+            const newWorker = reg.installing;
+            if (newWorker) {
+              newWorker.addEventListener('statechange', () => {
+                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                  // New version available — apply on next reload
+                  newWorker.postMessage({type: 'SKIP_WAITING'});
+                }
+              });
+            }
+          });
+        })
+        .catch(err => console.warn('SW registration failed (expected outside hosting):', err.message));
+      // Reload when the new SW takes control
+      let refreshing = false;
+      navigator.serviceWorker.addEventListener('controllerchange', () => {
+        if (refreshing) return;
+        refreshing = true;
+        window.location.reload();
+      });
     });
   }
 
@@ -132,6 +155,70 @@
     --card-bg: #fffdf8;
     --border: #ddd5c4;
   }
+
+  /* ═══════════════ v126 · SECTION TINTING (Mi Día) ═══════════════ */
+  .tint-midia { background: #f0dcd3; }
+  .tint-midia .screen-actionbar {
+    background: #f0dcd3;
+    border-bottom: none;
+    padding: 10px 20px;
+    gap: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .tint-midia .screen-hero {
+    background: #f0dcd3;
+    padding: 6px 20px 18px;
+  }
+  .tint-midia .screen-hero h2 {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-size: 22px;
+    color: #5a2412;
+    line-height: 1.25;
+    letter-spacing: 0.3px;
+  }
+  .tint-midia .screen-hero-tag {
+    color: #8B3A1E;
+    font-weight: 500;
+  }
+  .tint-midia .action-back {
+    flex: 0 0 auto;
+    margin-left: -10px;
+    padding: 5px 10px;
+    background: rgba(139,58,30,0.14);
+    border: none;
+    border-radius: 6px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #8B3A1E;
+    gap: 4px;
+    min-width: 0;
+    width: auto;
+    justify-content: flex-start;
+  }
+  .tint-midia .action-emerg {
+    flex: 0 0 auto;
+    padding: 5px 10px;
+    background: rgba(74,103,65,0.16);
+    border: none;
+    border-radius: 6px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #4a6741;
+    gap: 4px;
+    min-width: 0;
+    width: auto;
+    justify-content: flex-start;
+  }
+
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -814,58 +901,17 @@
   }
 
   /* ── INICIO (Home Screen) ── */
-  .inicio-overlay {
-    display: none; position: fixed; inset: 0; z-index: 400;
-    background: var(--ink); flex-direction: column; overflow: hidden;
-  }
   .inicio-overlay.open { display: none !important; }
-
-  .inicio-header {
-    flex-shrink: 0; padding: 20px 20px 0;
-    display: flex; align-items: center; justify-content: space-between;
-  }
-  .inicio-close-btn {
-    background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
-    color: var(--gold); border-radius: 20px; padding: 8px 16px;
-    font-family: 'DM Sans', sans-serif; font-size: 12px; cursor: pointer;
-    letter-spacing: 1px; text-transform: uppercase; transition: background 0.2s;
-  }
   .inicio-close-btn:hover { background: rgba(255,255,255,0.15); }
-  .inicio-seal { font-size: 28px; }
-
-  .inicio-hero {
-    flex-shrink: 0; padding: 28px 24px 20px; text-align: center;
-  }
   .inicio-hero h1 {
     font-family: 'Playfair Display', serif; color: var(--gold);
     font-size: 30px; line-height: 1.15; margin-bottom: 8px;
   }
   .inicio-hero h1 em { color: white; font-style: italic; }
   .inicio-hero p { color: var(--fog); font-size: 13px; letter-spacing: 0.5px; }
-
-  .inicio-tabs {
-    display: flex; flex-shrink: 0; border-bottom: 1px solid rgba(255,255,255,0.1);
-    padding: 0 16px; gap: 4px; overflow-x: auto;
-  }
-  .inicio-tab {
-    background: none; border: none; color: var(--fog);
-    font-family: 'DM Sans', sans-serif; font-size: 12px; cursor: pointer;
-    padding: 10px 12px; white-space: nowrap; position: relative;
-    transition: color 0.2s; flex-shrink: 0; letter-spacing: 0.5px;
-  }
-  .inicio-tab.active { color: var(--gold); }
   .inicio-tab.active::after {
     content: ''; position: absolute; bottom: 0; left: 12px; right: 12px;
     height: 2px; background: var(--gold); border-radius: 1px;
-  }
-
-  .inicio-content {
-    flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch;
-    padding: 24px 22px 40px;
-  }
-  .inicio-content p {
-    font-size: 14px; line-height: 1.85; color: rgba(255,255,255,0.78);
-    margin-bottom: 16px;
   }
   .inicio-content .sec-head {
     font-family: 'Playfair Display', serif; color: var(--gold-light);
@@ -2124,11 +2170,6 @@
   .emerg-overlay .emerg-action     { color: var(--sage-mid); }
 
   /* Header mit Crisis-Button */
-  .emerg-title-row {
-    display: flex; align-items: center; justify-content: space-between;
-    gap: 12px; flex-wrap: wrap; margin-bottom: 6px;
-  }
-  .emerg-title-row .emerg-title { margin-bottom: 0; }
   .emerg-crisis-btn {
     background: rgba(220, 90, 90, 0.18);
     border: 1px solid rgba(220, 90, 90, 0.55);
@@ -2410,7 +2451,7 @@
 <div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
 <div class="sidebar" id="sidebar">
   <div class="sidebar-head">
-    <h3>El Migrante Consciente <span id="sidebar-version-badge" style="font-size:9px;background:rgba(200,146,42,0.2);color:var(--gold);font-family:'DM Sans',sans-serif;font-weight:600;letter-spacing:0.5px;padding:2px 6px;border-radius:4px;margin-left:6px;vertical-align:middle;">v1.0.122</span></h3>
+    <h3>El Migrante Consciente <span id="sidebar-version-badge" style="font-size:9px;background:rgba(200,146,42,0.2);color:var(--gold);font-family:'DM Sans',sans-serif;font-weight:600;letter-spacing:0.5px;padding:2px 6px;border-radius:4px;margin-left:6px;vertical-align:middle;">v1.0.126</span></h3>
     <p data-i18n="sidebarSub">Tu guía · Tu contrato · Tu diario</p>
   </div>
   <button class="sidebar-home-btn" onclick="showHome();closeSidebar()" data-i18n="sidebarHome">🏠 Menú principal</button>
@@ -2484,7 +2525,7 @@
 </div>
 
 <!-- SCREEN: MI DÍA (HOY + DIARIO) -->
-<div class="screen" id="screen-midia">
+<div class="screen tint-midia" id="screen-midia">
   <div class="screen-actionbar"><button class="action-back" onclick="goBack()">← <span class="back-label" data-i18n="backLabel">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()" data-i18n="emergBtn">🌿 No me siento bien</button></div>
   <div class="screen-hero"><div class="screen-hero-tag" data-i18n="heroTagHoy">Hoy</div><h2 data-i18n="tileMidia">Mi Día</h2></div>
   <div style="display:flex;border-bottom:1px solid var(--border);margin:0 16px 0;">
@@ -3007,29 +3048,6 @@
 <!-- EMERGENCIA FAB -->
 
 
-<!-- INICIO OVERLAY -->
-<div class="inicio-overlay" id="inicio-overlay">
-  <div class="inicio-header">
-    <div class="inicio-seal">⚖︎</div>
-    <button class="inicio-close-btn" onclick="closeInicio()">Entrar a la App →</button>
-  </div>
-  <div class="inicio-hero">
-    <h1>MIGRACIÓN<br><em>o una nueva vida</em></h1>
-    <p>Un manual del migrante consciente</p>
-  </div>
-  <div class="inicio-tabs">
-    <button class="inicio-tab active" onclick="switchInicioTab('intro',this)">Introducción</button>
-    <button class="inicio-tab" onclick="switchInicioTab('prologo',this)">Prólogo</button>
-    <button class="inicio-tab" onclick="switchInicioTab('epilogo',this)">Epílogo</button>
-    <button class="inicio-tab" onclick="switchInicioTab('anexoA',this)">Anexo A</button>
-    <button class="inicio-tab" onclick="switchInicioTab('anexoB',this)">Anexo B</button>
-    <button class="inicio-tab" onclick="switchInicioTab('anexoC',this)">Anexo C</button>
-    <button class="inicio-tab" onclick="switchInicioTab('anexoD',this)">Anexo D</button>
-    <button class="inicio-tab lgbtq-inicio-tab" onclick="switchInicioTab('lgbtqcap',this)">🏳️‍🌈 LGBTIQ+</button>
-  </div>
-  <div class="inicio-content" id="inicio-content"></div>
-</div>
-
 <!-- tab-bar removed v7 -->
 
 <!-- MODAL -->
@@ -3360,7 +3378,6 @@ let currentLang = (function() {
     return stored;
   } catch(e) { return 'es'; }
 })();
-let currentInicioTab = 'intro';
 
 // ── Accessor functions ──────────────────────────────────────
 function getPUNTOS()   { return PUNTOS_DATA[currentLang]   || PUNTOS_DATA.es; }
@@ -3379,7 +3396,7 @@ let CHAPTERS = getCHAPTERS();
 let WISDOMS  = getWISDOMS();
 
 // ─── STATE ──────────────────────────────────────────────────
-const APP_VERSION = 122;
+const APP_VERSION = 126;
 // Auto-sync visible version badge from APP_VERSION constant (no manual update needed)
 document.addEventListener('DOMContentLoaded', () => {
   const badge = document.getElementById('sidebar-version-badge');
@@ -3534,37 +3551,42 @@ function initMiDia() {
   const g = (p && p.time) ? TIME_G[p.time] : null;
   const greeting = g ? g.greeting.replace(/([^.!?]+[.!?])/, '<em>$1<\/em>') : t('midiaProcesoLegitimo');
   const greetSub = g ? g.sub : t('midiaPasoConsciente');
-  const tag = g ? '<div style="display:inline-block;font-size:11px;padding:3px 10px;border-radius:20px;background:rgba(200,146,42,0.12);color:var(--gold);border:1px solid rgba(200,146,42,0.3);margin-bottom:10px;">' + g.tag + '<\/div>' : '';
+  const tag = g ? '<div style="display:inline-block;font-weight:500;font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:4px 10px;border-radius:6px;background:rgba(139,58,30,0.14);color:#8B3A1E;margin-bottom:14px;">' + g.tag + '<\/div>' : '';
   const pct = Math.round((Object.values(state.puntosDone||{}).filter(Boolean).length / PUNTOS.length)*100);
   const done = Object.values(state.puntosDone||{}).filter(Boolean).length;
 
   hoyEl.innerHTML = `
-    <div style="padding:16px 18px 0;">
-      <div style="font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--fog);margin-bottom:6px;">${d}<\/div>
+    <div style="padding:18px 20px 0;">
+      <div style="font-family:'DM Sans',sans-serif;font-weight:500;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#8B3A1E;margin-bottom:8px;">${d}<\/div>
       ${tag}
-      <div style="font-family:'Playfair Display',serif;font-size:24px;color:var(--gold);line-height:1.3;margin-bottom:4px;">${greeting}<\/div>
-      <div style="font-size:13px;color:var(--fog);margin-bottom:20px;">${greetSub}<\/div>
+      <div style="font-family:'DM Sans',sans-serif;font-weight:300;font-size:22px;color:#5a2412;line-height:1.3;margin-bottom:6px;letter-spacing:0.3px;">${greeting}<\/div>
+      <div style="font-family:'DM Sans',sans-serif;font-size:12px;color:var(--fog);margin-bottom:20px;line-height:1.55;">${greetSub}<\/div>
     <\/div>
-    <div style="margin:0 14px 12px;background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:16px 18px;">
-      <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--fog);margin-bottom:4px;">${t('midiaProgresoLabel')}<\/div>
+    <div style="margin:0 20px 12px;background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:14px 16px;">
+      <div style="font-family:'DM Sans',sans-serif;font-weight:500;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#8B3A1E;margin-bottom:8px;">${t('midiaProgresoLabel')}<\/div>
       <div style="display:flex;align-items:center;gap:14px;">
-        <div style="font-size:28px;font-weight:700;color:var(--gold);">${pct}%<\/div>
-        <div style="flex:1;"><div style="height:4px;background:var(--border);border-radius:2px;"><div style="height:4px;background:var(--gold);border-radius:2px;width:${pct}%;"><\/div><\/div><div style="font-size:11px;color:var(--fog);margin-top:4px;">${done} / ${PUNTOS.length} ${t('midiaCompromisosActivos')}<\/div><\/div>
+        <div style="font-family:'DM Sans',sans-serif;font-weight:300;font-size:22px;color:#8B3A1E;">${pct}%<\/div>
+        <div style="flex:1;"><div style="height:3px;background:rgba(139,58,30,0.15);border-radius:2px;"><div style="height:3px;background:#8B3A1E;border-radius:2px;width:${pct}%;"><\/div><\/div><div style="font-family:'DM Sans',sans-serif;font-size:12px;color:var(--fog);margin-top:6px;">${done} / ${PUNTOS.length} ${t('midiaCompromisosActivos')}<\/div><\/div>
       <\/div>
     <\/div>
-    <div style="margin:0 14px 12px;">
-      <div style="background:var(--rust);border-radius:14px;padding:20px;position:relative;overflow:hidden;">
-        <div style="position:absolute;top:-20px;right:-20px;font-size:80px;font-weight:900;color:rgba(255,255,255,0.06);font-family:'Playfair Display',serif;line-height:1;">${punto.num}<\/div>
-        <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:6px;">${t('midiaCompromisoLabel')}<\/div>
-        <div style="font-family:'Playfair Display',serif;font-size:20px;color:white;margin-bottom:8px;font-weight:600;">${punto.titulo}<\/div>
-        <div style="font-size:13px;color:rgba(255,255,255,0.85);line-height:1.6;margin-bottom:14px;">${punto.declaracion}<\/div>
-        <button onclick="navTo('contrato')" style="background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);color:white;border-radius:8px;padding:9px 16px;font-size:13px;cursor:pointer;">${t('midiaSeeActions')}<\/button>
+    <div style="margin:0 20px 12px;">
+      <div style="background:var(--card-bg);border:1px solid var(--border);border-left:3px solid #8B3A1E;border-radius:14px;padding:16px 18px;position:relative;overflow:hidden;">
+        <div style="position:absolute;top:-10px;right:-10px;font-family:'DM Sans',sans-serif;font-weight:300;font-size:80px;color:rgba(139,58,30,0.06);line-height:1;letter-spacing:-2px;">${punto.num}<\/div>
+        <div style="font-family:'DM Sans',sans-serif;font-weight:500;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#8B3A1E;margin-bottom:8px;">${t('midiaCompromisoLabel')}<\/div>
+        <div style="font-family:'DM Sans',sans-serif;font-weight:300;font-size:22px;color:#5a2412;margin-bottom:10px;line-height:1.25;letter-spacing:0.3px;">${punto.titulo}<\/div>
+        <div style="font-family:'DM Sans',sans-serif;font-size:12px;color:var(--ink);line-height:1.6;margin-bottom:14px;font-style:italic;">${punto.declaracion}<\/div>
+        <button onclick="navTo('contrato')" style="display:inline-flex;align-items:center;gap:4px;background:rgba(139,58,30,0.14);border:none;border-radius:6px;padding:5px 10px;font-family:'DM Sans',sans-serif;font-weight:500;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#8B3A1E;cursor:pointer;">${t('midiaSeeActions')}<\/button>
       <\/div>
     <\/div>
-    <div style="margin:0 14px 24px;background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:18px;">
-      <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--fog);margin-bottom:6px;">${t('midiaSabiduriaLabel')}<\/div>
-      <div style="font-size:11px;color:var(--gold);margin-bottom:8px;">${wisdom.cap}<\/div>
-      <div style="font-family:'Playfair Display',serif;font-size:14px;color:var(--ink);line-height:1.7;font-style:italic;">"${wisdom.quote}"<\/div>
+    <div style="margin:0 20px 16px;background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:16px 18px;">
+      <div style="font-family:'DM Sans',sans-serif;font-weight:500;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#8B3A1E;margin-bottom:8px;">${t('midiaSabiduriaLabel')}<\/div>
+      <div style="font-family:'DM Sans',sans-serif;font-size:12px;color:#8a5530;margin-bottom:8px;letter-spacing:0.3px;">${wisdom.cap}<\/div>
+      <div style="font-family:'DM Sans',sans-serif;font-size:12px;color:var(--ink);line-height:1.7;font-style:italic;">"${wisdom.quote}"<\/div>
+    <\/div>
+    <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin:20px 20px 8px;">
+      <div style="flex:1;height:1px;max-width:60px;background:linear-gradient(90deg,transparent,rgba(200,146,42,0.5),transparent);"><\/div>
+      <span style="color:var(--gold);font-size:11px;opacity:0.7;">⚖︎<\/span>
+      <div style="flex:1;height:1px;max-width:60px;background:linear-gradient(90deg,transparent,rgba(200,146,42,0.5),transparent);"><\/div>
     <\/div>
   `;
   renderMiDiaDiario();
@@ -6190,25 +6212,6 @@ function submitVoz() {
 
 // ─── INICIO ──────────────────────────────────────────────────
 const INICIO_SECTIONS = {
-  intro: {
-    render: () => `
-      <button class="inicio-enter-btn" onclick="closeInicio()">Entrar a la App — Comenzar mi viaje<\/button>
-      <div class="inicio-divider"><\/div>
-      <div class="sec-sub">Nota del autor<\/div>
-      <p>La migración puede entenderse aquí como un símbolo. Los mecanismos son similares, independientemente de si se quiere emigrar a un nuevo país, si se busca la independencia por diversas razones o si simplemente se quiere o se debe construir una nueva vida en el propio país.<\/p>
-      <p>Ya sea que se haya crecido en un entorno anglófono y el español ofrezca una perspectiva algo más libre y despreocupada, o exactamente lo contrario — los mecanismos son idénticos.<\/p>
-      <p>La inspiración se encuentra en la caja del supermercado, en la física cuántica, en el universo o cortando el césped.<\/p>
-      <div class="inicio-imperativo"><p>Déjese inspirar. Todos los capítulos y anexos pueden leerse en cualquier orden. Nada transcurre de forma lineal — somos todo al mismo tiempo.<\/p><\/div>
-      <div class="inicio-divider"><\/div>
-      <div class="sec-head">Qué encontrarás en esta app<\/div>
-      <div class="inicio-list-item"><div class="inicio-list-num">☀️<\/div><div class="inicio-list-text"><strong style="color:white">Hoy<\/strong> — Un compromiso diario, una pregunta de reflexión y una cita de la guía para acompañarte cada día.<\/div><\/div>
-      <div class="inicio-list-item"><div class="inicio-list-num">⚖︎<\/div><div class="inicio-list-text"><strong style="color:white">Contrato<\/strong> — Los 14 compromisos del Migrante Consciente con acciones concretas para pasar de las palabras a los hechos.<\/div><\/div>
-      <div class="inicio-list-item"><div class="inicio-list-num">📖<\/div><div class="inicio-list-text"><strong style="color:white">Guía<\/strong> — Los 15 capítulos del manual, resumidos y con acceso al texto original completo de cada uno.<\/div><\/div>
-      <div class="inicio-list-item"><div class="inicio-list-num">✍️<\/div><div class="inicio-list-text"><strong style="color:white">Diario<\/strong> — Tu espacio privado de reflexión. Lo que escribes aquí es solo tuyo.<\/div><\/div>
-      <div class="inicio-divider"><\/div>
-      <button class="inicio-enter-btn" onclick="closeInicio()">Comenzar →<\/button>
-    `
-  },
   prologo: {
     render: () => `
       <h3 style="font-family:'Playfair Display',serif;font-size:16px;font-weight:500;color:var(--gold);margin:0 0 14px;letter-spacing:0.3px;">Nota del autor<\/h3>
@@ -6464,295 +6467,10 @@ const INICIO_SECTIONS = {
       <p style="font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:14px;">Wer diese sieben Etappen durchläuft, verlässt den Prozess nicht mit Antworten auf alle Fragen — aber mit Klarheit darüber, welche Fragen die eigenen sind. Und das ist, im Kontext der Migration, bereits ein außerordentlicher Gewinn.<\/p>
     `
   },
-  anexoB: {
-    render: () => `
-      <div style="background:linear-gradient(135deg,var(--ink) 0%,#2d1f0a 100%);padding:28px 20px 20px;margin:-0px 0 0;text-align:center;position:relative;">
-        <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:6px;position:relative;">Anexo B<\/div>
-        <h2 style="font-family:'Playfair Display',serif;color:white;font-size:18px;margin-bottom:4px;position:relative;">El autoanálisis como fundamento<\/h2>
-        <p style="color:rgba(255,255,255,0.55);font-size:12px;position:relative;">Las 7 etapas del análisis autorresponsable<\/p>
-      <\/div>
-      <div style="padding:16px 16px 100px;">
-        <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">El autoconocimiento como primer paso de la integración<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Quien migra se hace tarde o temprano una pregunta que quizás nunca se había planteado con tanta claridad: ¿Quién soy — sin mi idioma, sin mi barrio, sin mi familia, sin mi rutina cotidiana? La migración despoja al ser humano de sus puntos de referencia externos. Lo que queda es el interior. Y el interior muy pocos lo conocen realmente bien.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">El capítulo 10 de esta aplicación mostró que integrarse significa no perderse a uno mismo. Pero solo puedes no perderte si sabes quién eres. El autoconocimiento no es automejora. Es auto-orientación. Es la respuesta a la pregunta: ¿Qué traigo conmigo? ¿Qué es negociable — y qué no? ¿Dónde están mis fortalezas, y dónde mis puntos ciegos?<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">El anexo que sigue presenta un proceso concreto de siete etapas que ayuda exactamente con eso. No es un programa terapéutico ni un modelo académico. Es una herramienta práctica — desarrollada a partir de décadas de experiencia con personas en situaciones de transición. Funciona con lápiz y papel, en tu propio idioma, a tu propio ritmo.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Para el migrante este proceso es especialmente valioso, porque la migración misma es un interrogatorio forzoso. El nuevo entorno plantea preguntas que el antiguo nunca hubiera planteado. Este proceso le da al migrante la posibilidad de hacerse esas preguntas él mismo — antes de que lo haga el entorno. Esa es la diferencia entre reaccionar y construir.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Quien recorre estas siete etapas no sale del proceso con respuestas a todas las preguntas — pero sí con claridad sobre cuáles son las suyas propias. Y eso, en el contexto de la migración, ya es una ganancia extraordinaria.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">*Este texto se reproduce sin modificaciones.*<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">ANEXO B<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">El autoanálisis como fundamento del desarrollo individual<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Contenido de este texto<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">A. Introducción<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">B. Las siete etapas del análisis autorresponsable<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">C. Inspiración: Lady Gaga<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">D. Por qué es importante empezar a mano<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Recomendaciones bibliográficas<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">A. Introducción<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">No eres una víctima de las circunstancias ni de este mundo injusto. Tú tienes el control.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">La vida es complicada, compleja, injusta y dura. Sí. Pero ¿vale la pena huir de eso o luchar contra ello? ¿O es mejor aceptarlo como realidad, tener el control — vivir en la consciencia de que tu vida es en última instancia la consecuencia de tus decisiones?<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Si lo aceptas, tienes la posibilidad de buscar soluciones, técnicas y estrategias. Si lo rechazas y siempre buscas la culpa en los demás, en el universo o en todo lo malo de este mundo, eso no resuelve nada — y los vientos te llevan a veces en una dirección, a veces en otra, pero raramente en la correcta.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Estas 7 etapas son una inspiración para ordenar el caos y tomar el control. Pero todavía no son una solución. Solo forman la estructura. Observar, analizar, aprender y mejorarse constantemente son tareas que nos acompañan hasta el final de nuestras vidas.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Por supuesto: solo inspiración. Cada persona con su carácter, sus experiencias, sus traumas y sus fortalezas es un individuo. Un individuo maravilloso. Un individuo perfecto. Por eso no existen soluciones ni técnicas estándar.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Tú como individuo no tienes que cambiarte. Solo adaptar comportamientos — en la forma de comunicación, expresión, lenguaje corporal, técnicas para controlar la impaciencia, la agresión, las emociones en general. Eso no es negación de uno mismo. Es absolutamente necesario.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Tanto en el ámbito privado como especialmente en el empresarial es siempre necesario percibir y respetar las distintas energías de las personas en tu entorno. Ese respeto por el otro individuo requiere una adaptación situacional del comportamiento. Pero en tu interior eres siempre la persona maravillosa que eres. No hay errores, no hay aspectos malos en ti.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">El fundamento de todo es primero saber quién es uno mismo y conocer su camino. Empieza de manera muy simple: escribir todo con un bolígrafo sobre papel. Hay evidencias de que esta técnica activa partes de nuestro cerebro que al escribir buscan automáticamente sentido, contradicciones, errores y dependencias.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Solo quien se conoce a sí mismo, sus fortalezas y sus áreas de desarrollo, y es consciente de ello, puede diseñar su futuro, encontrar y proteger su felicidad interior y determinar sus objetivos y la dirección que, de acuerdo a su esencia, es la correcta. Los demás son arrastrados por las circunstancias — y entonces todo es tan difícil e injusto.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Así que: todo comienza con un autoanálisis. Este proceso es un modelo — descrito de forma general. Estás invitado en todo momento a adaptarlo a ti mismo. Solo tú, con honestidad hacia ti mismo, puedes decidir cómo debe ser el proceso para ti.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">B. Las siete etapas del análisis autorresponsable<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">1. Crea una lista completa de tus experiencias, pensamientos y planes: pasado, presente, futuro<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Fortalezas, debilidades, experiencias, formación, talentos, aficiones, miedos, traumas, objetivos, carácter, ingresos, buenos amigos, amigos tóxicos, personas que amas, personas que no te gustan, pequeños objetivos — dónde quieres estar en dos años, dónde en 5 o 20, qué te impide mejorar, qué puede ayudarte, dónde te interpones a ti mismo. Todo, sin mentirte ni omitir cosas que sean incómodas o dolorosas. Esta lista es solo para ti. Sin orden y sin pensar si tiene sentido — simplemente escribe todo lo que te ronda por la cabeza. Pero siempre en frases completas, gramaticalmente correctas.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">2. Revisar y agrupar<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Lee la lista otro día, añade cosas si es necesario. Elimina las que tienen un carácter más onírico o que evidentemente no son realizables. Busca elementos similares y agrúpalos — reescríbelos en grupos de cosas que sean similares, contradictorias o dependientes entre sí. Especialmente el grupo de experiencias de tu pasado sin efectos actuales especiales sobre el presente o el futuro no debe olvidarse.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">3. Añade detalles y dependencias<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Repite el proceso otro día, añade tantos detalles como sea posible. Especialmente para tus objetivos y planes de futuro: ¿qué necesitas? Dinero, tiempo, apoyo, formación — qué recursos son necesarios para abordar o resolver los temas necesarios, cuándo y cómo. ¿Qué hay que resolver antes de que otra cosa sea posible?<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">4. Busca una persona de confianza para reflexionar<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Busca una persona que NO forme parte de tu entorno vital directo, pero en quien confíes. Explícale el proceso y preséntale tu lista. No puede evaluar ni juzgar, solo escuchar y preguntar. El sentido es una reflexión desde fuera — como un espejo. Anota todos los comentarios de esa persona.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">5. Usa el feedback para mejorar<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Usa el feedback de esa persona para trabajar tu lista con más estructura y detalles. Busca si es necesario en internet o en todo tipo de fuentes de información más datos sobre temas concretos. No olvides tu lista personal — si lo consideras oportuno, sigue siendo privada.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">6. Ahora se vuelve formal<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">A partir de ahora es necesario usar Word, Excel o PowerPoint. Todos tus campos de aprendizaje, talentos y características positivas, objetivos y proyectos los introduces en una tabla u otra forma. Ten en cuenta tus prioridades y dependencias. En este momento esta tabla es una lista de deseos. Es imposible determinar ya plazos y recursos para todos los temas — entonces introdúcelos sin esos datos. Nada puede olvidarse ni ignorarse.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">7. Análisis final y determinaciones definitivas<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Después de un tiempo más, analizas esta tabla en cuanto a su viabilidad. Reordena la tabla. El objetivo: de la lista de deseos surge en esta fase una tabla con temas realistamente realizables, una línea de tiempo clara y una planificación realista de recursos. Los temas para los que aún falta información o que en este momento no son realizables forman una sección propia — eso es completamente normal y parte importante del proceso.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">No te asustes, todo esto suena mucho peor de lo que es. Hay muchas menos cosas de las que ahora parece.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Más bien el camino es la meta. Probablemente el día en que termines la lista en la etapa 7 ya habrá cambios o nuevas percepciones. Eso es el caos normal de nuestra vida.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Pero aquel que tiene claro adónde quiere ir y cómo puede lograrlo está siempre tranquilo y sereno. Los cambios no generan miedo, solo necesitan pequeñas adaptaciones del plan, quizás un pequeño desvío.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">La gran ventaja a partir de ahora: de manera completamente automática tu cerebro puede relajarse un poco. Con este proceso los pensamientos y el caos se externalizan y te alivian. Los procesos inconscientes reciben el mensaje: todo bajo control. Se genera energía libre para la creatividad, la innovación o simplemente: el descanso.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">C. Inspiración: Lady Gaga<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Lady Gaga es un ejemplo mundialmente conocido de resiliencia y autoaceptación. Habla abiertamente de sus desafíos psíquicos, entre ellos un trastorno de estrés postraumático (TEPT) que desarrolló tras experiencias traumáticas en su juventud.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">*Sí, tengo una enfermedad mental. Y lucho con ella cada día. Pero también me digo cada día: eres valiente, y eres mucho.*<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">*Mi propio trauma me ha ayudado a entender mejor a los demás. Es tremendamente importante recordarles a esos niños traumatizados que son amados y que no están solos.*<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">*La autenticidad es poder: tu rareza y singularidad no son debilidades, sino tus mayores superpoderes. Deja de esconderte.*<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">*La autoconfianza no es negociable: quizás solo hace falta una persona que crea en ti — pero esa persona tienes que ser tú mismo. Siempre.*<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">*La vulnerabilidad es fortaleza: la fuerza real no está en ser invulnerable, sino en mostrar las propias heridas y transformarlas en arte.*<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">*La disciplina supera al talento: las visiones solas no te llevan a ningún lado. Es el trabajo incansable y diario lo que convierte los sueños en realidad.*<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">La inspiración puede venir de cualquier lugar — en lo pequeño o en lo grande, en una conversación con el cajero del supermercado o en un discurso de la reina de Inglaterra: our purpose here on Earth is to observe, to learn, to grow — and to love. And then we return Home.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Conclusión<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Las experiencias y pensamientos de Lady Gaga muestran lo importante que es aceptarse a uno mismo, ver los reveses como oportunidades de aprendizaje y seguir el propio camino con disciplina y valentía. Su apertura ante los desafíos psíquicos y su mensaje de amor propio son un valioso complemento para cualquier concepto de autocontrol y resiliencia.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">D. Por qué es importante empezar a mano<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">La escritura a mano es un poderoso instrumento para promover la autorreflexión y el autoconocimiento. Estudios neurocientíficos muestran que al escribir a mano se activan complejas redes neuronales que apoyan el pensamiento estructurado y el procesamiento de emociones. A diferencia de escribir en dispositivos digitales, escribir con lápiz y papel obliga a desacelerar los pensamientos, ordenarlos y formularlos conscientemente.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Los psicólogos destacan que las notas manuscritas fortalecen la llamada metacognición — es decir, el pensar sobre el propio pensamiento. Quien lleva un diario regularmente o escribe sus pensamientos desarrolla una mejor comprensión de sus propios patrones de pensamiento, deseos y miedos.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Estudios de la investigación sobre el aprendizaje muestran además que escribir a mano mejora la memoria y favorece el recuerdo a largo plazo de los contenidos. La interacción activa con lo escrito lleva a que la información se procese más profundamente y se ancle mejor.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">También en la terapia se utiliza la escritura a mano como método de autorreflexión y procesamiento emocional. Escribir cartas a uno mismo o llevar un diario de reflexión puede ayudar a ordenar pensamientos difíciles y obtener nuevos conocimientos sobre la propia personalidad.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">En resumen: las anotaciones manuscritas son mucho más que una técnica de aprendizaje. Son un medio científicamente probado para procesar pensamientos, conocerse mejor a uno mismo y obtener conocimientos personales — una valiosa contribución al desarrollo de la autoconciencia y la resiliencia.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Recomendaciones bibliográficas<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Berndt, C. — Resiliencia: El secreto de la resistencia psíquica<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Brown, B. — El poder de ser vulnerable<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Newport, C. — Trabajo profundo: Reglas para el éxito en un mundo distraído<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Goleman, D. — Inteligencia emocional<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Sharma, R. — El líder que no tenía cargo<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Tolle, E. — El poder del ahora<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Dweck, C. S. — Mindset: La actitud del éxito<\/p>
-
-      <\/div>
-    `
-  },
-  anexoC: {
-    render: () => `
-      <div style="background:linear-gradient(135deg,var(--ink) 0%,#2d1f0a 100%);padding:28px 20px 20px;margin:-0px 0 0;text-align:center;position:relative;">
-        <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:6px;position:relative;">Anexo C<\/div>
-        <h2 style="font-family:'Playfair Display',serif;color:white;font-size:18px;margin-bottom:4px;position:relative;">Resiliencia y el inconsciente<\/h2>
-        <p style="color:rgba(255,255,255,0.55);font-size:12px;position:relative;">La brújula interior de la migración<\/p>
-      <\/div>
-      <div style="padding:16px 16px 100px;">
-        <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">La resiliencia como brújula interior de la migración<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">A lo largo de esta aplicación la resiliencia ha aparecido una y otra vez como la condición silenciosa de fondo de todo proceso migratorio — como esa fuerza que permite aguantar la soledad, sobrevivir las contradicciones culturales, no interpretar la precariedad como derrota y mantener la propia identidad en movimiento. La resiliencia no es un talento que se tiene o no se tiene. Es una habilidad — y se puede entrenar.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">El anexo que sigue profundiza en este tema de una manera que el texto principal ha dejado deliberadamente abierta: con base científica, pero personal y directa. Explica cómo funciona el inconsciente, por qué nos habla — y cómo podemos aprender a responderle. Para el migrante este conocimiento es especialmente valioso: el cuerpo y la psique registran el estrés del cambio cultural, la pérdida de rutinas y la ausencia de redes familiares mucho antes de que la mente pueda ponerles nombre.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Cuando un migrante sufre de repente insomnio, irritabilidad inexplicable o agotamiento físico, no es señal de debilidad. Es el lenguaje del inconsciente — ese lenguaje que este anexo describe y descifra.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">*Este texto fue escrito originalmente en un contexto profesional. Se reproduce aquí sin modificaciones, porque su mensaje es universal: la resiliencia no conoce fronteras ni pasaportes.*<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">ANEXO C<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Resiliencia y el lenguaje del inconsciente<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Contenido de este texto<\/p>
-<h5 style="font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--ink);margin:20px 0 8px;">I. Introducción<\/h5>
-<h5 style="font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--ink);margin:20px 0 8px;">II. Aspectos clave de la resiliencia<\/h5>
-<h5 style="font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--ink);margin:20px 0 8px;">III. Prevención<\/h5>
-<h5 style="font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--ink);margin:20px 0 8px;">IV. El lenguaje del inconsciente<\/h5>
-<h5 style="font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--ink);margin:20px 0 8px;">V. Comentario personal<\/h5>
-<h5 style="font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--ink);margin:20px 0 8px;">VI. Resumen<\/h5>
-<h5 style="font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--ink);margin:20px 0 8px;">VII. Referencias bibliográficas<\/h5>
-<h5 style="font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--ink);margin:20px 0 8px;">I. Introducción<\/h5>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">No soy psicólogo y no me atrevo a dar consejos desde un punto de vista médico o clínico.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Pero he tenido la gran suerte de poder aprender mucho. Curiosamente, primero a través de la experiencia y de mucho ensayo y error, y en mi etapa en Volkswagen de forma profesional en un número infinito de talleres y cursos. Lo satisfactorio: lo aprendido desde la experiencia y plasmado en técnicas desarrolladas intuitivamente era bastante correcto.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Así, esta combinación de observación propia, análisis y enfoques de solución intuitivos, junto con las experiencias científicas de docentes e investigadores de primer nivel, forma una maravillosa colección de enfoques para los más diversos desafíos.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">La resiliencia se entiende a menudo como el sistema inmunitario interior o la capacidad de adaptación, promovida por factores como el optimismo, la autoeficacia y las redes sociales.<\/p>
-<h5 style="font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--ink);margin:20px 0 8px;">II. Aspectos clave de la resiliencia<\/h5>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Resistencia: La fuerza para mantenerse estable a pesar de la presión.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Adaptabilidad: La flexibilidad para ajustarse a situaciones nuevas y difíciles.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Autorregulación: La capacidad de controlar las emociones en momentos de crisis.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">El foco aquí está esencialmente en la autorregulación y la adaptabilidad, ya que en ellas residen las posibilidades más importantes de actuar de forma preventiva e independiente. A través de la comprensión de cómo las señales del inconsciente pueden entenderse como un tipo de lenguaje, podemos aprender a comunicarnos con él. Nosotros tenemos el control.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">En términos generales: es imposible olvidar algo. Sin nuestro control, nuestro inconsciente lo almacena todo. Por desgracia no solo almacena, sino que — en un momento que no podemos controlar y por razones que no podemos comprender directamente — produce reacciones que pueden ser un riesgo potencial para nuestra salud física o psíquica.<\/p>
-<h5 style="font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--ink);margin:20px 0 8px;">III. Prevención<\/h5>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">La técnica: toma de consciencia, análisis, aprendizaje, cierre — sin olvidar.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Reflexión activa sobre nuestro pasado con sus buenas y malas experiencias o, en casos graves, incluso traumas. Esto puede hacerse por escrito, pero no es obligatorio. También puede ser un momento de quietud y reflexión. Ver fotos antiguas. Escuchar música del pasado — de forma completamente individual.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Análisis personal de las causas — no se trata aquí de culpa, bien o mal, exclusivamente de un análisis sin juicios de valor — y aprender cómo y si hay algo en mi comportamiento que mejorar.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Si se trata de experiencias positivas: asegurarse de la alegría por el éxito y simplemente estar orgulloso de uno mismo. Almacenar esa energía y usarla para fortalecer la autoconciencia.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Con esta técnica es posible evitar que el pasado influya negativamente en el presente y el futuro. Así nuestro inconsciente está en paz. Nosotros tenemos el control — no nuestro pasado nos controla a nosotros.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">*Lady Gaga: Monsters never die. Invite them into your life and dance with them. Habla de todo abiertamente y entreteje sus experiencias en su forma de arte — y con eso no solo se ha ayudado a sí misma, sino a millones de personas.*<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Superar la conducta de ignorar, que tenemos profundamente arraigada, requiere fuerza y energía — y solo es posible en fases de relativa calma y estabilidad. Un breve tiempo de reflexión, aunque sea doloroso o difícil, es una valiosa inversión para evitar consecuencias posiblemente largas y más graves.<\/p>
-<h5 style="font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--ink);margin:20px 0 8px;">IV. El lenguaje del inconsciente<\/h5>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Puede ocurrir que nuestra percepción consciente no coincida con el procesamiento que tiene lugar en el inconsciente. Eso no es un error — es más bien como entre dos personas: la percepción desde la perspectiva de una persona no siempre es la misma que la de la otra. Nuestro inconsciente tiene su propia manera de interpretar y priorizar los eventos. Y en esos momentos quiere comunicarse con nosotros como persona consciente.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Nuestro inconsciente usa como lenguaje los únicos medios que tiene: los mismos sentidos a través de los que recibe su información. Por ejemplo: tensiones musculares, dolores de estómago, mal humor, problemas de sueño, falta de energía y de motivación — pero también un buen humor casi maníaco sin razón pueden ser señales.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Ignorar las señales puede llevar a consecuencias graves — depresión, paranoia, ataques de pánico repentinos hasta problemas graves del sistema inmunológico. Nuestro inconsciente se volverá cada vez más enérgico y más ruidoso.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">¿Cómo respondemos?<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Enviando señales de calma por el mismo canal o por uno similar — señales de que tenemos el control. Las técnicas para ello son individualmente distintas, pero se basan en principios similares:<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Visualización: Nos imaginamos mentalmente una imagen de la felicidad, la calma, la paz. El punto decisivo es haberlo entrenado en momentos de quietud. Las variantes usan música, olores, tacto — todos los sentidos disponibles.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Reencuadre: Si no puedo cambiar una situación, sí puedo cambiar el efecto que tiene sobre mí. La nueva perspectiva no tiene que corresponder a mi percepción real — pero envía una señal de control de vuelta.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Si somos honestos con nosotros mismos: nos conocemos mejor que nadie. Y sabemos qué es correcto y bueno para nosotros mismos como individuos con nuestras maravillosas, únicas y valiosas características.<\/p>
-<h5 style="font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--ink);margin:20px 0 8px;">V. Comentario personal<\/h5>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Este tema me importa tanto porque en mi pasado he tenido que observar cómo exactamente este asunto ha destruido el futuro de personas que siempre reprimieron todo — para funcionar en el sentido de nuestra cultura alemana: el trabajo es todo.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Y no por último: también mi vida fue y es no exclusivamente un sencillo paseo por el paraíso. Estoy infinitamente agradecido de haber tenido la posibilidad de aprender mucho sobre estas conexiones entre cuerpo, mente, consciencia e inconsciente.<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">*No hay razón para dudar. Cada persona, tal como es, es un individuo perfecto.*<\/p>
-<h5 style="font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--ink);margin:20px 0 8px;">VI. Resumen<\/h5>
-<div style="display:flex;gap:10px;margin-bottom:8px;"><div style="color:var(--gold);font-weight:600;flex-shrink:0;">→<\/div><div style="font-size:13px;line-height:1.7;color:var(--ink);">La resiliencia significa resistencia psíquica y la capacidad de superar crisis y reveses saliendo de ellos fortalecido.<\/div><\/div>
-<div style="display:flex;gap:10px;margin-bottom:8px;"><div style="color:var(--gold);font-weight:600;flex-shrink:0;">→<\/div><div style="font-size:13px;line-height:1.7;color:var(--ink);">Los factores más importantes son la resistencia, la adaptabilidad y la autorregulación.<\/div><\/div>
-<div style="display:flex;gap:10px;margin-bottom:8px;"><div style="color:var(--gold);font-weight:600;flex-shrink:0;">→<\/div><div style="font-size:13px;line-height:1.7;color:var(--ink);">El inconsciente almacena todas las experiencias e influye en nuestro comportamiento a menudo de forma inconsciente.<\/div><\/div>
-<div style="display:flex;gap:10px;margin-bottom:8px;"><div style="color:var(--gold);font-weight:600;flex-shrink:0;">→<\/div><div style="font-size:13px;line-height:1.7;color:var(--ink);">La prevención se logra mediante la reflexión activa, el análisis y el cierre consciente de las experiencias — no mediante la represión.<\/div><\/div>
-<div style="display:flex;gap:10px;margin-bottom:8px;"><div style="color:var(--gold);font-weight:600;flex-shrink:0;">→<\/div><div style="font-size:13px;line-height:1.7;color:var(--ink);">Técnicas como la visualización y el reencuadre ayudan a comunicarse con el inconsciente y a enviar señales de control y calma.<\/div><\/div>
-<div style="display:flex;gap:10px;margin-bottom:8px;"><div style="color:var(--gold);font-weight:600;flex-shrink:0;">→<\/div><div style="font-size:13px;line-height:1.7;color:var(--ink);">Ignorar las señales de advertencia puede llevar a graves problemas psíquicos y físicos.<\/div><\/div>
-<div style="display:flex;gap:10px;margin-bottom:8px;"><div style="color:var(--gold);font-weight:600;flex-shrink:0;">→<\/div><div style="font-size:13px;line-height:1.7;color:var(--ink);">Las respuestas tempranas y respetuosas a las advertencias llevan a más inspiración, fuerza y energía positiva.<\/div><\/div>
-<div style="display:flex;gap:10px;margin-bottom:8px;"><div style="color:var(--gold);font-weight:600;flex-shrink:0;">→<\/div><div style="font-size:13px;line-height:1.7;color:var(--ink);">Cada ser humano es un individuo perfecto.<\/div><\/div>
-<h5 style="font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--ink);margin:20px 0 8px;">VII. Referencias bibliográficas<\/h5>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Heller, J. — Resiliencia: Das Geheimnis der psychischen Widerstandskraft. Junfermann. ISBN 978-3873878132<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Gruhl, M. — Die Kunst der Resilienz. Beltz. ISBN 978-3407859732<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Reichhart, T. & Pusch, C. — Resilienz-Coaching. Kösel. ISBN 978-3466346877<\/p>
-<p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Brown, B. — Laufen lernt man nur durch Hinfallen. Kailash. ISBN 978-3424631076<\/p>
-
-      <\/div>
-    `
-  },
-  anexoD: {
-    render: () => `
-      <div style="background:linear-gradient(135deg,var(--ink) 0%,#2d1f0a 100%);padding:28px 20px 20px;text-align:center;position:relative;">
-        <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:6px;">Anexo D</div>
-        <h2 style="font-family:'Playfair Display',serif;color:white;font-size:18px;margin-bottom:4px;">Comunicación y Liderazgo</h2>
-        <p style="color:rgba(255,255,255,0.55);font-size:12px;">En la vida, en lo privado organizado, en el trabajo</p>
-      <\/div>
-      <div style="padding:16px 16px 100px;">
-        <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">ANEXO D<\/p>
-        <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Comunicación y liderazgo consciente — en la vida, en lo privado, en el trabajo<\/p>
-        <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Índice<\/p>
-        <h4 style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--ink);margin:24px 0 10px;padding-top:8px;border-top:1px solid var(--border);">I. Introducción<\/h4>
-        <h4 style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--ink);margin:24px 0 10px;padding-top:8px;border-top:1px solid var(--border);">II. Principios de comunicación y liderazgo consciente<\/h4>
-        <h4 style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--ink);margin:24px 0 10px;padding-top:8px;border-top:1px solid var(--border);">III. La paradoja del liderazgo<\/h4>
-        <h4 style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--ink);margin:24px 0 10px;padding-top:8px;border-top:1px solid var(--border);">IV. Inteligencia artificial y liderazgo<\/h4>
-        <h4 style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--ink);margin:24px 0 10px;padding-top:8px;border-top:1px solid var(--border);">V. Resumen<\/h4>
-        <h4 style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--ink);margin:24px 0 10px;padding-top:8px;border-top:1px solid var(--border);">VI. ¿Quién o qué es el gato de Schrödinger?<\/h4>
-        <h4 style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--ink);margin:24px 0 10px;padding-top:8px;border-top:1px solid var(--border);">VII. Bibliografía<\/h4>
-        <h4 style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--ink);margin:24px 0 10px;padding-top:8px;border-top:1px solid var(--border);">I. Introducción<\/h4>
-        <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Una base para el liderazgo efectivo — entendido no solo como dirección de equipos o proyectos, sino como la capacidad de conducir conscientemente cualquier estructura en la que participamos: una familia, una pareja, un grupo de trabajo, un proyecto propio, una comunidad.<\/p>
-        <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Las reglas son importantes, pero no lo son todo. Son guías imprescindibles y necesarias.<\/p>
-        <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Un intento de cuadrar el círculo, porque el liderazgo en general es contradictorio en muchos temas, y no hay regla sin excepción — precisamente humano. Toda estructura organizada necesita claridad, reglas y objetivos. Es decir, está dirigida racionalmente, aunque no siempre lo parezca.<\/p>
-        <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Una distinción necesaria antes de continuar: este anexo no habla de la comunicación en el contexto libre y privado — amigos, pareja, momentos de ocio — que tiene sus propias reglas, su propia lógica y su propio valor. Ahí rigen la espontaneidad, la emoción y la libertad de forma. Lo que aquí se describe es diferente: la comunicación en contextos con estructura, responsabilidad compartida y objetivos comunes — ya sea en el trabajo, en la familia organizada, en un proyecto colectivo o en la propia vida gestionada con consciencia. En esos contextos, la claridad y las reglas no son frías: son un acto de respeto hacia todos los involucrados.<\/p>
-        <h4 style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--ink);margin:24px 0 10px;padding-top:8px;border-top:1px solid var(--border);">II. Principios de comunicación y liderazgo consciente<\/h4>
-        <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Transparencia y honestidad completas, respetando la privacidad y los límites de cada persona. Pero separar la información que es opcional de las reglas, acuerdos o contenidos necesarios y obligatorios para la convivencia o el trabajo en común. Un exceso puede ser confuso si no están claros la estructura, la forma y la priorización.<\/p>
-        <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Formular con respeto, pero de forma clara y precisa. Establecer referencias inequívocas siempre que sea posible. Evitar palabras asesinas como: siempre, nunca, peor, mejor, bueno y malo, rápido, inmediatamente, etc. Estas palabras no tienen una definición inequívoca y sofocan la comunicación constructiva, ya que cada uno las interpreta desde sus experiencias y conocimientos individuales.<\/p>
-        <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Estar abierto a las respuestas y explicaciones de los demás, sin prejuzgar, es un requisito indispensable para la comunicación.<\/p>
-        <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Todo lo demás es una instrucción unidireccional o una declaración. A veces hay que hacerlo. Mejor llamarlo así que generar la ilusión del diálogo.<\/p>
-        <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Cuando existe apertura, tras una discusión detallada y considerando todos los argumentos, quien tiene la responsabilidad toma una decisión que se explica de forma transparente y que todos deben aceptar. Esta decisión constituye la tercera realidad (Realidad 1 = quien lidera, Realidad 2 = quien participa).<\/p>
-        <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Atención: cuantos más participantes, más realidades. La gestión del diálogo se vuelve cada vez más compleja. Entonces hay que nombrar la decisión de forma respetuosa, explicar los motivos, aclarar las dudas y así crear claridad. El liderazgo consciente no siempre es democrático — pero siempre es transparente.<\/p>
-        <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Algunas técnicas son útiles; hay infinitas de ellas. Cuáles pueden ser las correctas debe explorarlas cada uno por sí mismo.<\/p>
-        <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Todo sobre el tema de la resiliencia está descrito en el Anexo C.<\/p>
-        <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Ser creíble. Eso implica no negar el propio carácter y la personalidad individual mediante un tipo de espectáculo teatral. Pero requiere técnicas para fortalecer la resiliencia, la autoconfianza, la presencia y la apariencia. La confianza y el respeto deben ganarse — no se imponen.<\/p>
-        <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Atención: muchos asesores dicen que quien lidera debe ser <em>"auténtico"<\/em>. Por amor de Dios: no. El término <em>"auténtico"<\/em> significa: original, genuino, sin falsificar, puro, creíble en todo. ¿Liderazgo sin filtros, puro como soy? No es una forma sensata, salvo que uno haya nacido como un líder perfecto — muy improbable.<\/p>
-        <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Aquí interviene la conocida filósofa y directiva Inge Hammerich: <em>"Si todos hicieran lo que yo considero correcto, ya no habría problemas."<\/em> Posible en el contexto privado — y aun así, limitado. En el contexto del liderazgo consciente, definitivamente no.<\/p>
-        <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Sin suavizadores innecesarios en el lenguaje. Respetuoso: sí, pero breve, preciso y fácil de entender. Los resultados de una discusión generan de otro modo solo la ilusión de un acuerdo. Un consenso estable siempre incluye datos claros y referencias a puntos de referencia y plazos inequívocos.<\/p>
-        <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Escucha activa: confirmación de las declaraciones de los demás mediante el lenguaje corporal o las palabras. Ante dudas, preguntas o contradicciones, articularlo de inmediato sin interrumpir al otro en su flujo de pensamiento.<\/p>
-        <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">La escucha activa también significa tomar en serio los pensamientos del otro en las propias opiniones y reacciones — y no centrarse exclusivamente en los propios puntos de vista.<\/p>
-        <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Aceptar que desde la perspectiva individual de cada persona, en su mundo mental, todo lo que dice es correcto. La crítica irreflexiva produce resistencia destructiva. La comunicación consciente significa reconocer primero la realidad del otro, descubrir a través de preguntas y respuestas en qué contexto hay que entender algo, comprender y contrastar las distintas realidades. En el mejor caso, en este diálogo las realidades individuales se armonizan y se encuentra un consenso estable. (La teoría de las tres realidades.)<\/p>
-        <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Si uno de los participantes ya ha cerrado al inicio de la conversación con su valoración basada en su realidad, el diálogo no es posible. Se habla contra una pared. Aquí de nuevo una cita de Inge Hammerich, filósofa de Berlín: <em>"Tengo 83 años, si pienso algo así, es así."<\/em> Claro, abierto y honesto — pero no es una base para la comunicación constructiva.<\/p>
-        <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Para ilustrar la necesidad de la comunicación como diálogo, pero con el objetivo de acuerdos claros: incluso el tiempo medido por un Rolex es solo relativo y medido desde el punto de vista del individuo. El tiempo de cada otro individuo es su propia realidad y desde su perspectiva una verdad absoluta e inatacable. (Véase también: la teoría de la relatividad de Einstein.)<\/p>
-        <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Para evitar que esto cause problemas en nuestro mundo conectado basado en milisegundos, se definió el tiempo central por el que todos se orientan. Un gran ejemplo. Pero en lo pequeño es exactamente igual. A veces necesitamos las regulaciones y normas compartidas.<\/p>
-        <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Un ejemplo sobre <em>"realidades"<\/em>: quienes trabajan con inteligencia humana y social saben que cuando uno se <em>"pone en la piel de alguien"<\/em> — es decir, puede adoptar completamente su realidad — es posible establecer una comunicación llena de confianza. Esto sirve como ejemplo de lo enormemente poderoso que es este conocimiento.<\/p>
-        <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Si este proceso no funciona, ocurre lo contrario: conversaciones sin fin donde al final cada uno hace lo que quiere. De la motivación de resolver todo en armonía surge caos, insatisfacción e ineficiencia.<\/p>
-        <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Ninguna estructura humana — familiar, social o profesional — es un paraíso sin tensiones. La tarea del liderazgo consciente es dirigir y mejorar la convivencia. Siempre que sea posible: diálogo. A partir de un punto a definir situacionalmente, es tarea de quien lidera crear claridad, declarar la tercera realidad como decisiva y explicarla.<\/p>
-        <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Los acuerdos y protocolos, formulados de forma breve y concisa con los datos, hechos y razones más importantes, generan obligatoriedad y transparencia — en una familia, en un equipo, en cualquier proyecto compartido.<\/p>
-        <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">La comunicación consciente debe estar, en su mayor parte, libre de las emociones del momento. Sí, todas las personas tienen emociones y estados de ánimo — que se entusiasman, se enojan, son felices — y eso no debe esconderse artificialmente. Pero el contexto es gestionar y desarrollar una estructura común. Por eso se necesitan reglas: cuando todos respetan ciertas reglas básicas, tanto con buen como con mal humor rige lo mismo: con el semáforo en rojo no cruzamos.<\/p>
-        <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Por experiencia propia: estas reglas hacen la vida mucho más fácil, porque esas barreras, precisamente cuando uno no está lleno de energía y positividad, permiten sujetarse a ellas y trabajar de forma constructiva. Encontrar reacciones apropiadas ante las quejas cargadas de emociones, por ejemplo respondiendo brevemente y con respeto mediante referencias a decisiones o acuerdos tomados. Los nuevos temas pueden aplazarse con referencia a los momentos de diálogo establecidos.<\/p>
-        <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">No tenemos la función de resolver los problemas personales, familiares o emocionales de todos los que tienen acceso comunicativo a nosotros. Tampoco debemos exigirlo de los demás.<\/p>
-        <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">No aceptar la redelegación. Las personas a nuestro alrededor tienen una inteligencia intuitiva. Las tareas no se realizan o se realizan mal deliberadamente con la esperanza de que quien lidera las resuelva rápidamente.<\/p>
-        <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">No dejarse llevar. Desde la realidad de los demás cada tema puede parecer increíblemente urgente y casi vital. Raramente es realmente así. Crear calma escuchando con respeto. Pero no reaccionar de inmediato. Reflexión propia, en calma, a solas. Luego asignar la prioridad correcta y comunicarla.<\/p>
-        <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Saludar con consciencia a quienes forman parte de nuestra vida cotidiana — también de mal humor. No como un espectáculo, no con euforia forzada. Pero con una señal clara: estoy aquí y disponible de forma fiable.<\/p>
-        <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">No olvidar las propias exigencias. Pero no proyectarlas en otros. No <em>"si no lo hace uno mismo, aquí no funciona nada."<\/em> Consecuencia: redelegación permanente. Aceptar que todos los caminos llevan de alguna manera a Roma, pero decir claramente que Roma es el objetivo.<\/p>
-        <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Cuando alguien viene con desafíos o descripción de problemas, confirmar con todo respeto que es un tema valioso, junto con la pregunta: <em>"¿Cuál es tu propuesta de solución?"<\/em><\/p>
-        <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">La experiencia dice: en la mayoría de los casos esa persona sabe exactamente cómo es la solución.<\/p>
-        <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Si la solución ofrecida es egoísta y unidimensional, es una señal valiosa para reflexionar sobre el desarrollo de esa relación o de esa persona.<\/p>
-        <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Si no se ofrece ninguna solución, el análisis de la complejidad es decisivo para el siguiente paso.<\/p>
-        <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">La queja destructiva pura, sin motivación para la solución, es negativa para cualquier estructura.<\/p>
-        <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">El reconocimiento y la denominación de un problema complejo sin la capacidad de ofrecer soluciones es positivo — y debería ser motivo para acompañar el crecimiento de esa persona.<\/p>
-        <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Hay infinitos ejemplos más. Tiene mucho sentido explorar la literatura disponible sobre comunicación y liderazgo.<\/p>
-        <h4 style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--ink);margin:24px 0 10px;padding-top:8px;border-top:1px solid var(--border);">III. La paradoja del liderazgo<\/h4>
-        <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">La contradicción entre la necesidad de una buena relación con quienes nos rodean y la necesidad de una distancia funcional respecto a las responsabilidades individuales es uno de los grandes temas del liderazgo — en cualquier contexto.<\/p>
-        <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Más complejo aún cuando se aspira a una convivencia o un trabajo de alta calidad. El fundamento de las relaciones: amabilidad, comunicación libre, empatía, buen humor, energía positiva. Los límites son fluidos, la claridad no siempre es determinable.<\/p>
-        <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Sin que esto también valga internamente, no es posible. En una analogía de la ciencia se podrían establecer referencias a la mecánica cuántica. Y al gato de Schrödinger, que de alguna manera está vivo y muerto al mismo tiempo — ¿qué es entonces?<\/p>
-        <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Casi como en la mecánica cuántica rige la paradoja: todo es posible hasta el momento en que se observa. Traducido: es simultáneamente enormemente importante desarrollar una cultura de comunicación y diálogo consistente, unificada y precisa — y en ese mismo momento mantener una distancia funcional para evitar que las emociones u otros factores incontrolables pongan de repente en peligro el resultado y la convivencia. Eso es cuadrar el círculo. Es contradictorio. Paradójico. Pero el universo en el que vivimos.<\/p>
-        <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Y ese equilibrio situacional es el verdadero arte del liderazgo consciente — tanto en lo personal como en lo colectivo.<\/p>
-        <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Aceptar esta paradoja como parte inherente de cualquier responsabilidad compartida es uno de los requisitos más importantes para no sufrir uno mismo psíquica o físicamente.<\/p>
-        <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Observar e intervenir situacionalmente en el momento decisivo con medios que sean apropiados, que valoren al ser humano, que protejan la estructura común, que idealmente aprendan de los errores y optimicen los procesos o el desarrollo de los involucrados.<\/p>
-        <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Para ello no hay reglas reales. Algunos líderes experimentados han escrito libros interesantes que pueden dar inspiración. Incluso existe una norma ISO sobre el tema que crea la ilusión de que todo está bajo control. Hay guías para líderes que dan consejos valiosos…<\/p>
-        <p style="font-size:14px;line-height:1.8;color:var(--rust);font-weight:600;margin-bottom:12px;">PERO… todos los que son honestos admiten: solo en el momento de la observación sabemos si el gato de Schrödinger vive o no.<\/p>
-        <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Eso significa: en el momento de observar un tema relevante, ya sea en el contexto personal, familiar o profesional, solo ayudan nuestras cualidades como persona — con la posibilidad única de considerar los factores racionales y emocionales por separado y generar a través de decisiones la solución más sensata para esa situación. Para ello ayudan:<\/p>
-        <div style="display:flex;gap:10px;margin-bottom:10px;"><div style="color:var(--gold);font-weight:700;flex-shrink:0;margin-top:2px;">→<\/div><div style="font-size:13px;line-height:1.75;color:var(--ink);">la conversación personal<\/div><\/div>
-        <div style="display:flex;gap:10px;margin-bottom:10px;"><div style="color:var(--gold);font-weight:700;flex-shrink:0;margin-top:2px;">→<\/div><div style="font-size:13px;line-height:1.75;color:var(--ink);">un análisis honesto relacionado con las causas, que genera soluciones y no solo busca culpables<\/div><\/div>
-        <div style="display:flex;gap:10px;margin-bottom:10px;"><div style="color:var(--gold);font-weight:700;flex-shrink:0;margin-top:2px;">→<\/div><div style="font-size:13px;line-height:1.75;color:var(--ink);">una comunicación transparente, en la medida en que no sea personal, completamente abierta<\/div><\/div>
-        <div style="display:flex;gap:10px;margin-bottom:10px;"><div style="color:var(--gold);font-weight:700;flex-shrink:0;margin-top:2px;">→<\/div><div style="font-size:13px;line-height:1.75;color:var(--ink);">consecuencias apropiadas que idealmente generen una mejora.<\/div><\/div>
-        <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">La analogía con la mecánica cuántica no viene sin razón. Muchos científicos no solo han fracasado ante las paradojas de esta ciencia, sino que se han roto. Su mente no podía permitir la paradoja y se retiraron de la ciencia.<\/p>
-        <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Muchos líderes — en proyectos, familias o comunidades — han fracasado ante las contradicciones del liderazgo. No han podido soportar la carga constante, el fracaso constante. Con eso comienza un círculo vicioso de fracasos, autodudas, estrés y todas las consecuencias correspondientes para la salud psíquica y física.<\/p>
-        <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Ejemplos de personas que lo han logrado:<\/p>
-        <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Uno de los mejores investigadores del mundo en este campo saluda a sus estudiantes así: <em>"Me alegra darles la bienvenida hoy, pero tengo una mala noticia para ustedes. Al final del curso no serán más listos que hoy, no entendemos lo que ocurre."<\/em><\/p>
-        <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Un director de hotel en el segmento de lujo con décadas de experiencia — íntegro, serio, culto y empático — me dijo una vez en un momento en que yo estaba frustrado porque nada de lo que había desarrollado generaba un efecto duradero: <em>"Christian, no te hagas ilusiones, no hay soluciones. Paso toda mi vida profesional diciendo cada día lo mismo con otras palabras."<\/em><\/p>
-        <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Y esto, increíble pero también verdad: el consejo de un alto directivo muy reconocido de Volkswagen con responsabilidad sobre más presupuesto que algunas economías nacionales: <em>"Christian, sinceramente: a menudo no tengo la menor idea de lo que dicen mis expertos, pero tengo que decidir. La generación de la ilusión de competencia en momentos de completa ignorancia es para mí la característica más importante de un directivo. Por la noche siempre hay tiempo para informarse realmente sobre los detalles necesarios y luego tomar una buena decisión."<\/em> En un primer momento quizás se piensa: ¡charlatán! Pero hay una infinita sabiduría en estas palabras.<\/p>
-        <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Por eso, algunas ideas posiblemente útiles:<\/p>
-        <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Reconocer la realidad de la paradoja permite ser un líder lleno de energía y motivado, sin desesperarse de uno mismo. No solo estar abierto a encontrar soluciones en el momento decisivo. Contemplar la situación como fuente de entusiasmo en la búsqueda del camino correcto. No desesperación ante la imposibilidad de alcanzar nunca el objetivo perfecto.<\/p>
-        <p style="font-size:14px;line-height:1.8;color:var(--sage);font-style:italic;font-weight:500;margin-bottom:12px;">¡Fracasar con gran motivación y alegría para después continuar con aún más energía e ideas innovadoras — y mantener vivo al gato de Schrödinger!<\/p>
-        <h4 style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--ink);margin:24px 0 10px;padding-top:8px;border-top:1px solid var(--border);">IV. Inteligencia artificial y liderazgo<\/h4>
-        <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">No usar herramientas como la IA sin haber elaborado antes uno mismo un análisis propio, intenso y detallado.<\/p>
-        <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Al menos a día de hoy los sistemas no son capaces de analizar correctamente. Repiten errores que ellos mismos han reconocido antes y están programados con parámetros y limitaciones desconocidas. Usarlos exclusivamente para controlar los propios trabajos, en su caso para resúmenes — revisarlos detalladamente, ya que pueden desaparecer afirmaciones centrales — o en la creación de presentaciones o integración de datos, diagramas y hechos concretos. La forma en que estos sistemas encuentran respuestas probablemente correctas es muy peligrosa. Solo probablemente correcto. Pero presentado como factualmente correcto.<\/p>
-        <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;">Una herramienta que hay que usar con cautela. Pero no para sustituir la propia inseguridad o la falta de inspiración o ideas.<\/p>
-        <h4 style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--ink);margin:24px 0 10px;padding-top:8px;border-top:1px solid var(--border);">V. Resumen<\/h4>
-        <div style="display:flex;gap:10px;margin-bottom:10px;"><div style="color:var(--gold);font-weight:700;flex-shrink:0;margin-top:2px;">→<\/div><div style="font-size:13px;line-height:1.75;color:var(--ink);">La comunicación es el fundamento del liderazgo consciente — en la vida organizada, en lo privado con estructura, en el trabajo. Las reglas claras y la comunicación transparente son esenciales, aunque no siempre suficientes.<\/div><\/div>
-        <div style="display:flex;gap:10px;margin-bottom:10px;"><div style="color:var(--gold);font-weight:700;flex-shrink:0;margin-top:2px;">→<\/div><div style="font-size:13px;line-height:1.75;color:var(--ink);">Las realidades individuales influyen en la interpretación de las declaraciones y las decisiones. La escucha activa y el respeto fomentan el consenso y la confianza.<\/div><\/div>
-        <div style="display:flex;gap:10px;margin-bottom:10px;"><div style="color:var(--gold);font-weight:700;flex-shrink:0;margin-top:2px;">→<\/div><div style="font-size:13px;line-height:1.75;color:var(--ink);">Quien lidera debe crear claridad de forma situacional y establecer la "tercera realidad" como decisiva — en cualquier contexto con estructura y responsabilidad compartida.<\/div><\/div>
-        <div style="display:flex;gap:10px;margin-bottom:10px;"><div style="color:var(--gold);font-weight:700;flex-shrink:0;margin-top:2px;">→<\/div><div style="font-size:13px;line-height:1.75;color:var(--ink);">Las emociones deben gestionarse conscientemente; la distancia funcional y la empatía son igualmente importantes.<\/div><\/div>
-        <div style="display:flex;gap:10px;margin-bottom:10px;"><div style="color:var(--gold);font-weight:700;flex-shrink:0;margin-top:2px;">→<\/div><div style="font-size:13px;line-height:1.75;color:var(--ink);">Técnicas como la resiliencia, el lenguaje claro y la toma de decisiones transparente ayudan a superar estos desafíos. La autenticidad sin filtros se cuestiona críticamente.<\/div><\/div>
-        <div style="display:flex;gap:10px;margin-bottom:10px;"><div style="color:var(--gold);font-weight:700;flex-shrink:0;margin-top:2px;">→<\/div><div style="font-size:13px;line-height:1.75;color:var(--ink);">La inteligencia artificial se recomienda como herramienta con cautela, sobre todo para controlar y resumir los propios trabajos.<\/div><\/div>
-        <h4 style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--ink);margin:24px 0 10px;padding-top:8px;border-top:1px solid var(--border);">VI. ¿Quién o qué es el gato de Schrödinger?<\/h4>
-        <p style="font-size:13px;line-height:1.8;color:var(--ink);margin-bottom:12px;"><em>"El gato de Schrödinger"<\/em> es un famoso experimento mental de la mecánica cuántica. Describe a un gato que se encuentra en un estado que es simultáneamente vivo y muerto, mientras nadie observa el detonador aleatorio que puede liberar un veneno que puede matar al gato pero no tiene por qué hacerlo. No está visible, está en una caja y solo en el momento de abrir la caja observamos el estado del gato. Esta paradoja ilustra que la realidad solo se vuelve inequívoca a través de la observación.<\/p>
-        <h4 style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--ink);margin:24px 0 10px;padding-top:8px;border-top:1px solid var(--border);">VII. Bibliografía<\/h4>
-        <p style="font-size:12px;line-height:1.6;color:var(--fog);margin-bottom:6px;">Bass & Riggio (2006). Transformational Leadership. Psychology Press. ISBN 978-0805847628<\/p>
-        <p style="font-size:12px;line-height:1.6;color:var(--fog);margin-bottom:6px;">Kotter (1996). Leading Change. Harvard Business Press. ISBN 978-1422186435<\/p>
-        <p style="font-size:12px;line-height:1.6;color:var(--fog);margin-bottom:6px;">Rosenberg (2001). Gewaltfreie Kommunikation. Junfermann Verlag. ISBN 978-3955711107<\/p>
-        <p style="font-size:12px;line-height:1.6;color:var(--fog);margin-bottom:6px;">Schulz von Thun (1981). Miteinander Reden 1. Rowohlt Verlag. ISBN 978-3499205916<\/p>
-        <p style="font-size:12px;line-height:1.6;color:var(--fog);margin-bottom:6px;">Goleman (1995). Emotional Intelligence. Bantam Books. ISBN 978-0553095036<\/p>
-        <p style="font-size:12px;line-height:1.6;color:var(--fog);margin-bottom:6px;">Schein (2010). Organizational Culture and Leadership. Jossey-Bass. ISBN 978-0470190609<\/p>
-      <\/div>
-    `
-  },
 
 };
 
 // showHome() defined earlier in routing block
-
-function closeInicio() {
-  // Legacy — inicio-overlay replaced by home screen
-  const el = document.getElementById('inicio-overlay');
-  if (el) el.classList.remove('open');
-  document.body.style.overflow = '';
-}
-
-function switchInicioTab(key, btn) {
-  document.querySelectorAll('.inicio-tab').forEach(t => t.classList.remove('active'));
-  btn.classList.add('active');
-  renderInicioContent(key);
-}
-
-function renderInicioContent(key) {
-  currentInicioTab = key;
-  const el = document.getElementById('inicio-content');
-  el.innerHTML = (currentLang === 'en' && INICIO_SECTIONS[key].renderEN) ? INICIO_SECTIONS[key].renderEN() : INICIO_SECTIONS[key].render();
-  el.scrollTop = 0;
-}
-
-
-
 // ─── I18N ────────────────────────────────────────────────────
 // currentLang already declared above — sync with state once state is loaded
 if (state.lang) currentLang = state.lang;
@@ -6790,14 +6508,6 @@ const UI = {
     welcomeNote: 'La migración puede entenderse aquí como un símbolo. Los mecanismos son similares, independientemente de si se quiere emigrar a un nuevo país o simplemente construir una nueva vida.',
     welcomeBtn: 'Comenzar mi camino →',
     readerPrintBtn: '🖨️ Imprimir',
-    emergEmergencyTitle: '⚠️ Si estás en peligro o en crisis — llama ahora',
-    emerg112Label: 'Emergencias (multiidioma)',
-    emerg024Label: 'Crisis emocional · 24h gratuito',
-    emerg016Label: 'Violencia de género · 24h',
-    emergEsperanzaLabel: 'Teléfono de la Esperanza · 24h',
-    emergCruzRojaLabel: 'Cruz Roja · atención migrantes',
-    emergANARLabel: 'ANAR · niños y adolescentes',
-    emergEmergencyNote: 'Todas estas líneas son confidenciales y gratuitas. El 024 incluye interpretación en otros idiomas.',
     emergBreatheTitle: 'Primero: respira.',
     emergPatternCalma: 'Calma 4·4·4',
     emergPatternRelax: 'Relax 4·7·8',
@@ -6950,12 +6660,6 @@ const UI = {
     emergClose: 'Cerrar ✕',
     emergTitle: 'Estoy mal ahora.',
     emergSub: 'Estás aquí. Vamos paso a paso. Toma lo que necesites.',
-    breatheTitle: 'Primero: respira.',
-    breatheText: '4 segundos inhala · 4 pausa · 4 exhala',
-    breatheBtn: 'Iniciar respiración guiada',
-    inicioClose: 'Entrar a la App →',
-    inicioEnter: 'Entrar a la App — Comenzar mi viaje',
-    inicioEnter2: 'Comenzar →',
     inicioTabIntro: 'Introducción', inicioTabPrologo: 'Prólogo',
     inicioTabEpilogo: 'Epílogo', inicioTabA: 'Anexo A',
     inicioTabB: 'Anexo B', inicioTabC: 'Anexo C', inicioTabD: 'Anexo D',
@@ -7041,14 +6745,6 @@ const UI = {
     welcomeNote: 'Migration kann hier als Symbol verstanden werden. Die Mechanismen sind ähnlich, unabhängig davon, ob man in ein neues Land auswandern oder einfach ein neues Leben aufbauen will.',
     welcomeBtn: 'Meinen Weg beginnen →',
     readerPrintBtn: '🖨️ Drucken',
-    emergEmergencyTitle: '⚠️ Wenn du in Gefahr bist oder in einer Krise — ruf jetzt an',
-    emerg112Label: 'Notruf (mehrsprachig)',
-    emerg024Label: 'Emotionale Krise · 24h gratis',
-    emerg016Label: 'Geschlechterbezogene Gewalt · 24h',
-    emergEsperanzaLabel: 'Telefon der Hoffnung · 24h',
-    emergCruzRojaLabel: 'Rotes Kreuz · Migrantenhilfe',
-    emergANARLabel: 'ANAR · Kinder und Jugendliche',
-    emergEmergencyNote: 'Alle Nummern sind vertraulich und kostenlos. Die 024 bietet Übersetzung in andere Sprachen.',
     emergBreatheTitle: 'Zuerst: atme.',
     emergPatternCalma: 'Ruhe 4·4·4',
     emergPatternRelax: 'Entspannung 4·7·8',
@@ -7201,12 +6897,6 @@ const UI = {
     emergClose: 'Schließen ✕',
     emergTitle: 'Mir geht es jetzt schlecht.',
     emergSub: 'Du bist hier. Geh Schritt für Schritt. Nimm, was du brauchst.',
-    breatheTitle: 'Zuerst: atme.',
-    breatheText: '4 Sekunden einatmen · 4 Pause · 4 ausatmen',
-    breatheBtn: 'Geführte Atmung starten',
-    inicioClose: 'In die App →',
-    inicioEnter: 'In die App — Meine Reise beginnen',
-    inicioEnter2: 'Beginnen →',
     inicioTabIntro: 'Einleitung', inicioTabPrologo: 'Prolog',
     inicioTabEpilogo: 'Epilog', inicioTabA: 'Anhang A',
     inicioTabB: 'Anhang B', inicioTabC: 'Anhang C', inicioTabD: 'Anhang D',
@@ -7292,14 +6982,6 @@ const UI = {
     welcomeNote: 'Migration can be understood here as a symbol. The mechanisms are similar, regardless of whether one wants to emigrate to a new country or simply build a new life.',
     welcomeBtn: 'Begin my journey →',
     readerPrintBtn: '🖨️ Print',
-    emergEmergencyTitle: '⚠️ If you are in danger or in crisis — call now',
-    emerg112Label: 'Emergency (multilingual)',
-    emerg024Label: 'Emotional crisis · 24h free',
-    emerg016Label: 'Gender violence · 24h',
-    emergEsperanzaLabel: 'Hope Helpline · 24h',
-    emergCruzRojaLabel: 'Red Cross · migrant support',
-    emergANARLabel: 'ANAR · children & teens',
-    emergEmergencyNote: 'All these lines are confidential and free. 024 includes interpretation in other languages.',
     emergBreatheTitle: 'First: breathe.',
     emergPatternCalma: 'Calm 4·4·4',
     emergPatternRelax: 'Relax 4·7·8',
@@ -7456,12 +7138,6 @@ const UI = {
     emergClose: 'Close ✕',
     emergTitle: 'I\'m not okay right now.',
     emergSub: 'You are here. Step by step. Take what you need.',
-    breatheTitle: 'First: breathe.',
-    breatheText: '4 seconds inhale · 4 hold · 4 exhale',
-    breatheBtn: 'Start guided breathing',
-    inicioClose: 'Enter the App →',
-    inicioEnter: 'Enter the App — Start my journey',
-    inicioEnter2: 'Start →',
     inicioTabIntro: 'Introduction', inicioTabPrologo: 'Prologue',
     inicioTabEpilogo: 'Epilogue', inicioTabA: 'Annex A',
     inicioTabB: 'Annex B', inicioTabC: 'Annex C', inicioTabD: 'Annex D',
