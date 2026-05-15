@@ -1374,6 +1374,323 @@
   }
   /* Zitat-Block (border-left gold) bleibt im Design */
 
+  /* ============================================
+     HOME — Cream-Buchcover, Tiles in Sektionsfarben
+     Buchklammer Prólogo + Epílogo mit dünnem Goldrand
+     ============================================ */
+  body.is-home { background: var(--cream); }
+  body.is-home .home-screen {
+    padding: 12px 14px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background: var(--cream);
+  }
+
+  /* "No me siento bien" — einzeilig schmal, mittig */
+  .home-emerg-row {
+    display: flex;
+    justify-content: center;
+    padding: 6px 0 2px;
+  }
+  .home-emerg-pill {
+    background: rgba(74,103,65,0.18);
+    color: #2d4029;
+    border: none;
+    border-radius: 8px;
+    padding: 7px 26px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+    line-height: 1;
+    transition: background 0.2s;
+  }
+  .home-emerg-pill:hover { background: rgba(74,103,65,0.26); }
+
+  /* Trennlinie ⚖︎ zwischen Pill und Tiles */
+  .home-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 2px 20px 8px;
+  }
+  .home-divider > div {
+    flex: 1;
+    height: 1px;
+    max-width: 60px;
+    background: linear-gradient(90deg, transparent, rgba(200,146,42,0.5), transparent);
+  }
+  .home-divider > span {
+    color: var(--gold);
+    font-size: 11px;
+    opacity: 0.7;
+  }
+
+  /* Tile-Reset — überschreibt globale dunkle Welt */
+  body.is-home .home-tile {
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    padding: 11px 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    font-family: 'DM Sans', sans-serif;
+    transition: opacity 0.18s;
+    position: relative;
+  }
+  body.is-home .home-tile:hover { opacity: 0.85; }
+  body.is-home .home-tile-icon {
+    font-size: 18px;
+    flex-shrink: 0;
+    width: 24px;
+    text-align: center;
+  }
+  body.is-home .home-tile-body { flex: 1; min-width: 0; }
+  body.is-home .home-tile .home-tile-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    line-height: 1.3;
+    margin-bottom: 2px;
+    color: inherit;
+  }
+  body.is-home .home-tile .home-tile-sub {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 1.3;
+    color: inherit;
+    opacity: 0.75;
+  }
+  body.is-home .home-tile-arrow {
+    font-size: 13px;
+    color: inherit;
+    opacity: 0.6;
+    flex-shrink: 0;
+  }
+
+  /* Sektion-Pastellfarben + Akzent-Textfarbe per .t-{key} */
+  body.is-home .home-tile.t-prologo,
+  body.is-home .home-tile.t-epilogo {
+    background: #f5f0e8;
+    border: 1px solid rgba(200,146,42,0.45);
+    color: #8a6420;
+  }
+  body.is-home .home-tile.t-midia { background: #f0dcd3; color: #8B3A1E; }
+  body.is-home .home-tile.t-manifiesto { background: #ebe8e3; color: #4d4a45; }
+  body.is-home .home-tile.t-guia { background: #dde3d6; color: #2d4029; }
+  body.is-home .home-tile.t-expertos { background: #f2dfc9; color: #6a3e1c; }
+  body.is-home .home-tile.t-finanzas { background: #ede2c8; color: #4d3e1a; }
+  body.is-home .home-tile.t-tramites { background: #dde3ed; color: #1a2a4a; }
+
+  /* Doc-Divider innerhalb Buchklammer */
+  body.is-home .home-doc-divider {
+    height: 1px;
+    background: rgba(0,0,0,0.06);
+    margin: 4px 12px;
+  }
+
+  /* Manifest-Tile: Gold-⚖︎ Icon-Override aus altem HTML aufheben — Grafit-konsistent */
+  body.is-home .home-tile.t-manifiesto .home-tile-icon { color: #4d4a45 !important; }
+
+  /* Contacto am Boden — gold-pastell wie Prólogo */
+  body.is-home .home-contact-tile {
+    background: rgba(200,146,42,0.12);
+    border: none;
+    border-radius: 10px;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 6px 0 0;
+    cursor: pointer;
+    width: 100%;
+    font-family: 'DM Sans', sans-serif;
+    text-align: left;
+    color: #8a6420;
+  }
+  body.is-home .home-contact-tile .hc-icon { font-size: 14px; opacity: 0.85; }
+  body.is-home .home-contact-tile .hc-text {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    flex: 1;
+  }
+  body.is-home .home-contact-tile .hc-arrow { opacity: 0.5; font-size: 13px; }
+
+  /* ============================================
+     SIDEBAR (Burger) — Cream-getönt, Texte in Sektionsfarben
+     Trennlinie ⚖︎ vor Kontakt
+     ============================================ */
+  .sidebar { background: #efe8da !important; border-left: 1px solid rgba(200,146,42,0.25) !important; }
+  .sidebar-head {
+    padding: 56px 22px 18px !important;
+    border-bottom: 1px solid rgba(200,146,42,0.2) !important;
+    background: #efe8da !important;
+  }
+  .sidebar-head h3 {
+    font-family: 'Playfair Display', serif !important;
+    font-style: italic !important;
+    font-size: 16px !important;
+    color: #8a6420 !important;
+    font-weight: 500 !important;
+    margin-bottom: 3px !important;
+  }
+  .sidebar-head p {
+    color: rgba(74,52,16,0.6) !important;
+    font-size: 10px !important;
+    letter-spacing: 0.5px !important;
+  }
+  #sidebar-version-badge {
+    background: rgba(200,146,42,0.18) !important;
+    color: #8a6420 !important;
+  }
+
+  /* "Menú principal" — Pill */
+  .sidebar-home-btn {
+    background: rgba(200,146,42,0.18) !important;
+    color: #8a6420 !important;
+    border: none !important;
+    border-radius: 6px !important;
+    padding: 8px 12px !important;
+    font-family: 'DM Sans', sans-serif !important;
+    font-weight: 500 !important;
+    font-size: 10px !important;
+    letter-spacing: 2px !important;
+    text-transform: uppercase !important;
+    margin: 14px 22px 0 !important;
+    width: calc(100% - 44px) !important;
+    text-align: center !important;
+    cursor: pointer !important;
+  }
+  .sidebar-home-btn:hover { background: rgba(200,146,42,0.28) !important; }
+
+  /* Divider */
+  .sidebar-divider {
+    height: 1px !important;
+    background: rgba(200,146,42,0.2) !important;
+    margin: 10px 22px !important;
+  }
+
+  /* Items — Text-Look, kein Button */
+  .sidebar-item {
+    display: flex !important;
+    align-items: center !important;
+    gap: 11px !important;
+    padding: 9px 22px !important;
+    background: transparent !important;
+    border: none !important;
+    width: 100% !important;
+    text-align: left !important;
+    font-family: 'DM Sans', sans-serif !important;
+    cursor: pointer !important;
+    transition: opacity 0.15s !important;
+  }
+  .sidebar-item:hover { opacity: 0.7 !important; background: transparent !important; }
+  .sidebar-item .sidebar-item-icon {
+    font-size: 15px !important;
+    width: 18px !important;
+    text-align: center !important;
+    flex-shrink: 0 !important;
+    color: inherit !important;
+  }
+  .sidebar-item .sidebar-item-label {
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    color: inherit !important;
+  }
+
+  /* Sektion-Akzentfarben per data-section */
+  .sidebar-item[data-section="midia"]     { color: #8B3A1E !important; }
+  .sidebar-item[data-section="guia"]      { color: #2d4029 !important; }
+  .sidebar-item[data-section="expertos"]  { color: #6a3e1c !important; }
+  .sidebar-item[data-section="manifiesto"]{ color: #4d4a45 !important; }
+  .sidebar-item[data-section="finanzas"]  { color: #4d3e1a !important; }
+  .sidebar-item[data-section="tramites"]  { color: #1a2a4a !important; }
+  .sidebar-item[data-section="contacto"]  { color: #8a6420 !important; }
+
+  /* Trennlinie ⚖︎ vor Kontakt */
+  .sidebar-divider-orn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 6px 22px 4px;
+  }
+  .sidebar-divider-orn > div {
+    flex: 1;
+    height: 1px;
+    max-width: 50px;
+    background: linear-gradient(90deg, transparent, rgba(200,146,42,0.5), transparent);
+  }
+  .sidebar-divider-orn > span {
+    color: var(--gold);
+    font-size: 11px;
+    opacity: 0.7;
+  }
+
+  /* Install + Reset als kompakte Text-Links */
+  .sidebar-text-link {
+    display: flex !important;
+    align-items: center !important;
+    gap: 11px !important;
+    padding: 7px 22px !important;
+    background: transparent !important;
+    border: none !important;
+    width: 100% !important;
+    text-align: left !important;
+    font-family: 'DM Sans', sans-serif !important;
+    cursor: pointer !important;
+    transition: opacity 0.15s !important;
+  }
+  .sidebar-text-link:hover { opacity: 0.7 !important; }
+  .sidebar-text-link .sli-icon { font-size: 14px; width: 18px; text-align: center; flex-shrink: 0; opacity: 0.7; }
+  .sidebar-text-link .sli-label { font-size: 12px; color: rgba(74,52,16,0.65); font-weight: 400; }
+  .sidebar-text-link.is-reset .sli-icon { opacity: 0.55; }
+  .sidebar-text-link.is-reset .sli-label { font-size: 11px; color: rgba(74,52,16,0.5); }
+
+  /* Privacy + Copyright */
+  .sidebar-privacy-block {
+    padding: 14px 22px 18px;
+    border-top: 1px solid rgba(200,146,42,0.18);
+    margin-top: 6px;
+  }
+  .sidebar-privacy-label {
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(200,146,42,0.7);
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+  .sidebar-privacy-block p {
+    font-size: 10px;
+    color: rgba(74,52,16,0.65);
+    line-height: 1.55;
+    margin-bottom: 6px;
+  }
+  .sidebar-privacy-block p strong { color: rgba(74,52,16,0.85); font-weight: 500; }
+  .sidebar-privacy-copy {
+    text-align: center;
+    font-size: 10px;
+    color: rgba(74,52,16,0.5);
+    margin-top: 10px;
+  }
+
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
@@ -1388,7 +1705,9 @@
     padding-top: 52px;
     transition: padding-top 0.2s ease;
   }
-  body.is-home { padding-top: 88px; }
+  body.is-home { padding-top: 52px; }
+  /* alter Emerg-Banner global verstecken — Home nutzt jetzt eigene Pill */
+  .emerg-banner { display: none !important; }
 
   /* ── SPLASH ── */
   #splash {
@@ -3801,31 +4120,22 @@
     <p data-i18n="sidebarSub">Tu guía · Tu contrato · Tu diario</p>
   </div>
   <button class="sidebar-home-btn" onclick="showHome();closeSidebar()" data-i18n="sidebarHome">🏠 Menú principal</button>
-  <div style="height:8px;"></div>
-  <div class="sidebar-divider"></div>
-  <button class="sidebar-item" onclick="navTo('midia');closeSidebar()"><span class="notif-dot" id="dot-sidebar-midia"></span><span class="sidebar-item-icon">☀️</span><span class="sidebar-item-label">Mi Día</span></button>
-  <button class="sidebar-item" onclick="navTo('guia');closeSidebar()"><span class="notif-dot" id="dot-sidebar-guia"></span><span class="sidebar-item-icon">📖</span><span class="sidebar-item-label">La Guía</span></button>
-  <button class="sidebar-item" onclick="navTo('expertos');closeSidebar()"><span class="notif-dot" id="dot-sidebar-expertos"></span><span class="sidebar-item-icon">🔬</span><span class="sidebar-item-label" id="sidebar-expertos-label">Tu mejor Versión</span></button>
-  <button class="sidebar-item" onclick="navTo('manifiesto');closeSidebar()"><span class="notif-dot" id="dot-sidebar-manifiesto"></span><span class="sidebar-item-icon">📜</span><span class="sidebar-item-label">Manifiesto</span></button>
-  <button class="sidebar-item" onclick="navTo('finanzas');closeSidebar()"><span class="sidebar-item-icon">💰</span><span class="sidebar-item-label">Mis Finanzas</span></button>
-  <button class="sidebar-item" onclick="navTo('tramites');closeSidebar()"><span class="notif-dot" id="dot-sidebar-tramites"></span><span class="sidebar-item-icon">🗂️</span><span class="sidebar-item-label" id="sidebar-tramites-label">Migración & Trámites</span></button>
-  <div class="sidebar-divider"></div>
-  <div style="padding:14px 16px;border-top:1px solid rgba(255,255,255,0.08);">
-    <button onclick="navTo('contacto');closeSidebar()" style="display:flex;align-items:center;justify-content:center;gap:6px;width:100%;color:var(--gold);background:transparent;font-size:12px;font-family:'DM Sans',sans-serif;border:1px solid rgba(200,146,42,0.35);border-radius:20px;padding:8px 16px;cursor:pointer;" data-i18n="sidebarContactBtn">
-      ✉️ Contactar al autor
-    </button>
-    <button id="install-app-btn" onclick="installApp()" style="display:flex;align-items:center;justify-content:center;gap:6px;width:100%;margin-top:8px;background:transparent;color:var(--gold);font-size:12px;font-family:'DM Sans',sans-serif;border:1px solid rgba(200,146,42,0.35);border-radius:20px;padding:8px 16px;cursor:pointer;" data-i18n="sidebarInstall">
-      📲 Instalar como app
-    </button>
-    <button onclick="resetApp()" style="display:flex;align-items:center;justify-content:center;gap:6px;width:100%;margin-top:8px;background:transparent;color:rgba(255,255,255,0.5);font-size:11px;font-family:'DM Sans',sans-serif;border:1px solid rgba(255,255,255,0.12);border-radius:20px;padding:7px 16px;cursor:pointer;" data-i18n="sidebarReset">
-      🔄 Reiniciar app (borrar todo)
-    </button>
-  </div>
-  <div style="padding:14px 16px 18px;border-top:1px solid rgba(200,146,42,0.15);">
-    <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(200,146,42,0.6);margin-bottom:8px;" data-i18n="sidebarPrivacyLabel">🔒 Privacidad</div>
-    <p style="font-size:11px;color:rgba(255,255,255,0.45);line-height:1.6;margin-bottom:6px;" data-i18n-html="sidebarPrivacy1">Todos tus datos — finanzas, diario, reflexiones, compromisos — se guardan <strong style="color:rgba(255,255,255,0.65);">exclusivamente en este dispositivo</strong>. Nada se envía a ningún servidor.</p>
-    <p style="font-size:11px;color:rgba(255,255,255,0.35);line-height:1.6;margin-bottom:10px;" data-i18n="sidebarPrivacy2">El Migrante Consciente no recopila, no vende y no tiene acceso a tu información personal.</p>
-    <div style="text-align:center;font-size:11px;color:var(--fog);">© Christian Hammerich · Barcelona 2026</div>
+  <div style="height:6px;"></div>
+  <button class="sidebar-item" data-section="midia" onclick="navTo('midia');closeSidebar()"><span class="notif-dot" id="dot-sidebar-midia"></span><span class="sidebar-item-icon">☀️</span><span class="sidebar-item-label">Mi Día</span></button>
+  <button class="sidebar-item" data-section="guia" onclick="navTo('guia');closeSidebar()"><span class="notif-dot" id="dot-sidebar-guia"></span><span class="sidebar-item-icon">📖</span><span class="sidebar-item-label">La Guía</span></button>
+  <button class="sidebar-item" data-section="expertos" onclick="navTo('expertos');closeSidebar()"><span class="notif-dot" id="dot-sidebar-expertos"></span><span class="sidebar-item-icon">🔬</span><span class="sidebar-item-label" id="sidebar-expertos-label">Tu mejor Versión</span></button>
+  <button class="sidebar-item" data-section="manifiesto" onclick="navTo('manifiesto');closeSidebar()"><span class="notif-dot" id="dot-sidebar-manifiesto"></span><span class="sidebar-item-icon">⚖︎</span><span class="sidebar-item-label">Manifiesto</span></button>
+  <button class="sidebar-item" data-section="finanzas" onclick="navTo('finanzas');closeSidebar()"><span class="sidebar-item-icon">💰</span><span class="sidebar-item-label">Mis Finanzas</span></button>
+  <button class="sidebar-item" data-section="tramites" onclick="navTo('tramites');closeSidebar()"><span class="notif-dot" id="dot-sidebar-tramites"></span><span class="sidebar-item-icon">🗂️</span><span class="sidebar-item-label" id="sidebar-tramites-label">Migración & Trámites</span></button>
+  <div class="sidebar-divider-orn"><div></div><span>⚖︎</span><div></div></div>
+  <button class="sidebar-item" data-section="contacto" onclick="navTo('contacto');closeSidebar()"><span class="sidebar-item-icon">✉️</span><span class="sidebar-item-label" data-i18n="sidebarContactBtn">Contactar al autor</span></button>
+  <button class="sidebar-text-link" id="install-app-btn" onclick="installApp()"><span class="sli-icon">📲</span><span class="sli-label" data-i18n="sidebarInstall">Instalar como app</span></button>
+  <button class="sidebar-text-link is-reset" onclick="resetApp()"><span class="sli-icon">🔄</span><span class="sli-label" data-i18n="sidebarReset">Reiniciar app (borrar todo)</span></button>
+  <div class="sidebar-privacy-block">
+    <div class="sidebar-privacy-label" data-i18n="sidebarPrivacyLabel">🔒 Privacidad</div>
+    <p data-i18n-html="sidebarPrivacy1">Todos tus datos — finanzas, diario, reflexiones, compromisos — se guardan <strong>exclusivamente en este dispositivo</strong>. Nada se envía a ningún servidor.</p>
+    <p data-i18n="sidebarPrivacy2">El Migrante Consciente no recopila, no vende y no tiene acceso a tu información personal.</p>
+    <div class="sidebar-privacy-copy">© Christian Hammerich · Barcelona 2026</div>
   </div>
 </div>
 
@@ -3846,26 +4156,25 @@
 
 <!-- HOME SCREEN -->
 <div class="screen active" id="screen-home">
-  <div class="home-screen">
-    <button class="home-tile" onclick="navTo('prologo')"><div class="home-tile-icon">📜</div><div class="home-tile-body"><div class="home-tile-title" id="tile-title-prologo">Prólogo</div><div class="home-tile-sub" id="tile-sub-prologo">El inicio del viaje. Por dónde empieza todo.</div></div><div class="home-tile-arrow">›</div></button>
-    <div class="home-doc-divider"></div>
-    <button class="home-tile" onclick="navTo('midia')" style="position:relative;"><span class="notif-dot" id="dot-home-midia"></span><span id="tarea-badge-home" onclick="event.stopPropagation();toggleTareaOverlay();" style="display:none;position:absolute;top:10px;right:38px;width:22px;height:22px;border-radius:50%;color:#fff;font-size:11px;font-weight:700;align-items:center;justify-content:center;cursor:pointer;z-index:2;box-shadow:0 2px 6px rgba(0,0,0,0.2);">!</span><div class="home-tile-icon">☀️</div><div class="home-tile-body"><div class="home-tile-title" id="tile-title-midia">Mi Día</div><div class="home-tile-sub" id="tile-sub-midia">Impulso diario · Reflexión · Diario privado</div></div><div class="home-tile-arrow">›</div></button>
-    <button class="home-tile" onclick="navTo('manifiesto')"><span class="notif-dot" id="dot-home-manifiesto"></span><div class="home-tile-icon" style="color:var(--gold);">⚖︎</div><div class="home-tile-body"><div class="home-tile-title" id="tile-title-manifiesto">Mi Manifiesto</div><div class="home-tile-sub" id="tile-sub-manifiesto">Mi nueva realidad · 10 compromisos · Tu firma</div></div><div class="home-tile-arrow">›</div></button>
-    <button class="home-tile" onclick="navTo('guia')"><span class="notif-dot" id="dot-home-guia"></span><div class="home-tile-icon">📖</div><div class="home-tile-body"><div class="home-tile-title" id="tile-title-guia">La Guía</div><div class="home-tile-sub" id="tile-sub-guia">15 capítulos del manual de migración consciente</div></div><div class="home-tile-arrow">›</div></button>
-    <button class="home-tile" onclick="navTo('expertos')"><span class="notif-dot" id="dot-home-expertos"></span><div class="home-tile-icon">🔬</div><div class="home-tile-body"><div class="home-tile-title" id="tile-title-expertos">Tu mejor Versión</div><div class="home-tile-sub" id="tile-sub-expertos">Sobre el autor · Inconsciente y Trauma · Autoanálisis · Liderazgo</div></div><div class="home-tile-arrow">›</div></button>
-    <button class="home-tile" onclick="navTo('finanzas')"><span class="notif-dot" id="dot-home-finanzas"></span><div class="home-tile-icon">💰</div><div class="home-tile-body"><div class="home-tile-title" id="tile-title-finanzas">Mis Finanzas</div><div class="home-tile-sub" id="tile-sub-finanzas">Activos · Compromisos · Ampel · El Freno</div></div><div class="home-tile-arrow">›</div></button>
-    <button class="home-tile" onclick="navTo('tramites')"><span class="notif-dot" id="dot-home-tramites"></span><div class="home-tile-icon">🗂️</div><div class="home-tile-body"><div class="home-tile-title" id="tile-title-tramites">Migración & Trámites</div><div class="home-tile-sub" id="tile-sub-tramites">Guía legal 2026 · Visados · Arraigo · LGBTIQ+</div></div><div class="home-tile-arrow">›</div></button>
-    <div class="home-doc-divider"></div>
-    <button class="home-tile" onclick="navTo('epilogo')"><div class="home-tile-icon">🌅</div><div class="home-tile-body"><div class="home-tile-title" id="tile-title-epilogo">Epílogo</div><div class="home-tile-sub" id="tile-sub-epilogo">Cuando todo se calma. La llegada consciente.</div></div><div class="home-tile-arrow">›</div></button>
+  <div class="home-emerg-row">
+    <button class="home-emerg-pill" onclick="openEmergencia()"><span>🌿</span><span data-i18n="emergBannerText">No me siento bien — Ayuda inmediata</span></button>
   </div>
-  <div style="padding:0 16px 16px;">
-    <button onclick="navTo('contacto')" style="width:100%;background:white;border:1px solid var(--border);border-radius:12px;padding:10px 14px;display:flex;align-items:center;gap:12px;cursor:pointer;text-align:left;">
-      <span style="font-size:20px;line-height:1;flex-shrink:0;">✉️</span>
-      <div style="flex:1;line-height:1.3;min-width:0;">
-        <div style="font-size:13px;font-weight:600;color:var(--ink);" data-i18n="homeContactTitle">Contactar al autor</div>
-        <div style="font-size:11px;color:var(--fog);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">chammerich@outlook.es</div>
-      </div>
-      <span style="color:rgba(0,0,0,0.25);font-size:18px;line-height:1;">›</span>
+  <div class="home-divider"><div></div><span>⚖︎</span><div></div></div>
+  <div class="home-screen">
+    <button class="home-tile t-prologo" onclick="navTo('prologo')"><div class="home-tile-icon">📜</div><div class="home-tile-body"><div class="home-tile-title" id="tile-title-prologo">Prólogo</div><div class="home-tile-sub" id="tile-sub-prologo">El inicio del viaje. Por dónde empieza todo.</div></div><div class="home-tile-arrow">›</div></button>
+    <div class="home-doc-divider"></div>
+    <button class="home-tile t-midia" onclick="navTo('midia')" style="position:relative;"><span class="notif-dot" id="dot-home-midia"></span><span id="tarea-badge-home" onclick="event.stopPropagation();toggleTareaOverlay();" style="display:none;position:absolute;top:10px;right:38px;width:22px;height:22px;border-radius:50%;color:#fff;font-size:11px;font-weight:700;align-items:center;justify-content:center;cursor:pointer;z-index:2;box-shadow:0 2px 6px rgba(0,0,0,0.2);">!</span><div class="home-tile-icon">☀️</div><div class="home-tile-body"><div class="home-tile-title" id="tile-title-midia">Mi Día</div><div class="home-tile-sub" id="tile-sub-midia">Impulso diario · Reflexión · Diario privado</div></div><div class="home-tile-arrow">›</div></button>
+    <button class="home-tile t-manifiesto" onclick="navTo('manifiesto')"><span class="notif-dot" id="dot-home-manifiesto"></span><div class="home-tile-icon">⚖︎</div><div class="home-tile-body"><div class="home-tile-title" id="tile-title-manifiesto">Mi Manifiesto</div><div class="home-tile-sub" id="tile-sub-manifiesto">Mi nueva realidad · 10 compromisos · Tu firma</div></div><div class="home-tile-arrow">›</div></button>
+    <button class="home-tile t-guia" onclick="navTo('guia')"><span class="notif-dot" id="dot-home-guia"></span><div class="home-tile-icon">📖</div><div class="home-tile-body"><div class="home-tile-title" id="tile-title-guia">La Guía</div><div class="home-tile-sub" id="tile-sub-guia">15 capítulos del manual de migración consciente</div></div><div class="home-tile-arrow">›</div></button>
+    <button class="home-tile t-expertos" onclick="navTo('expertos')"><span class="notif-dot" id="dot-home-expertos"></span><div class="home-tile-icon">🔬</div><div class="home-tile-body"><div class="home-tile-title" id="tile-title-expertos">Tu mejor Versión</div><div class="home-tile-sub" id="tile-sub-expertos">Sobre el autor · Inconsciente y Trauma · Autoanálisis · Liderazgo</div></div><div class="home-tile-arrow">›</div></button>
+    <button class="home-tile t-finanzas" onclick="navTo('finanzas')"><span class="notif-dot" id="dot-home-finanzas"></span><div class="home-tile-icon">💰</div><div class="home-tile-body"><div class="home-tile-title" id="tile-title-finanzas">Mis Finanzas</div><div class="home-tile-sub" id="tile-sub-finanzas">Activos · Compromisos · Ampel · El Freno</div></div><div class="home-tile-arrow">›</div></button>
+    <button class="home-tile t-tramites" onclick="navTo('tramites')"><span class="notif-dot" id="dot-home-tramites"></span><div class="home-tile-icon">🗂️</div><div class="home-tile-body"><div class="home-tile-title" id="tile-title-tramites">Migración & Trámites</div><div class="home-tile-sub" id="tile-sub-tramites">Guía legal 2026 · Visados · Arraigo · LGBTIQ+</div></div><div class="home-tile-arrow">›</div></button>
+    <div class="home-doc-divider"></div>
+    <button class="home-tile t-epilogo" onclick="navTo('epilogo')"><div class="home-tile-icon">🌅</div><div class="home-tile-body"><div class="home-tile-title" id="tile-title-epilogo">Epílogo</div><div class="home-tile-sub" id="tile-sub-epilogo">Cuando todo se calma. La llegada consciente.</div></div><div class="home-tile-arrow">›</div></button>
+    <button class="home-contact-tile" onclick="navTo('contacto')">
+      <span class="hc-icon">✉️</span>
+      <span class="hc-text" data-i18n="homeContactTitle">Contactar al autor</span>
+      <span class="hc-arrow">›</span>
     </button>
   </div>
 </div>
@@ -4843,7 +5152,7 @@ function getActivePuntosDoneCount() {
 }
 
 // ─── STATE ──────────────────────────────────────────────────
-const APP_VERSION = 162;
+const APP_VERSION = 163;
 // Auto-sync visible version badge from APP_VERSION constant (no manual update needed)
 document.addEventListener('DOMContentLoaded', () => {
   const badge = document.getElementById('sidebar-version-badge');
