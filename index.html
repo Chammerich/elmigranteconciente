@@ -4103,17 +4103,22 @@
   <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin:2px 20px 6px;"><div style="flex:1;height:1px;max-width:60px;background:linear-gradient(90deg,transparent,rgba(200,146,42,0.5),transparent);"></div><span style="color:var(--gold);font-size:11px;opacity:0.7;">⚖︎</span><div style="flex:1;height:1px;max-width:60px;background:linear-gradient(90deg,transparent,rgba(200,146,42,0.5),transparent);"></div></div>
 
   <div style="padding:14px 20px 100px;">
-    <!-- INTRO + EMAIL CARD -->
+    <!-- INTRO + DIRECT MESSAGE FORM -->
     <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:14px;">
       <p style="font-family:'DM Sans',sans-serif;font-size:13px;line-height:1.7;color:var(--ink);margin-bottom:14px;" data-i18n="contactoIntro">Esta app nació de una experiencia personal — cuatro años viviendo la migración desde dentro, en Barcelona. Si tienes preguntas, quieres compartir tu historia o simplemente conectar, escríbeme.</p>
-      <a href="mailto:chammerich@outlook.es" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:#6a3e1c;background:rgba(176,112,64,0.10);border:none;border-radius:6px;padding:11px 14px;font-family:'DM Sans',sans-serif;">
-        <span style="font-size:14px;opacity:0.85;">✉️</span>
-        <div style="flex:1;">
-          <div style="font-size:11px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:#6a3e1c;margin-bottom:2px;">chammerich@outlook.es</div>
-          <div style="font-size:10px;color:#8a5530;opacity:0.75;" data-i18n="contactoEmailLabel">Email directo</div>
-        </div>
-        <span style="font-size:14px;color:#6a3e1c;opacity:0.55;">›</span>
-      </a>
+
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <label style="font-family:'DM Sans',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#8a5530;font-weight:500;" data-i18n="contactoMensajeLabel">Tu mensaje</label>
+        <textarea id="c-mensaje" rows="4" placeholder="Escribe lo que quieras compartir…" style="width:100%;box-sizing:border-box;background:#fffdf8;border:1px solid rgba(176,112,64,0.25);border-radius:8px;padding:10px 12px;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--ink);line-height:1.6;resize:vertical;outline:none;"></textarea>
+
+        <label style="font-family:'DM Sans',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#8a5530;font-weight:500;margin-top:4px;" data-i18n="contactoEmailOptLabel">Tu email (opcional)</label>
+        <input type="email" id="c-email" placeholder="solo si quieres respuesta" style="width:100%;box-sizing:border-box;background:#fffdf8;border:1px solid rgba(176,112,64,0.25);border-radius:8px;padding:10px 12px;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--ink);outline:none;">
+
+        <button onclick="enviarMensaje()" style="margin-top:6px;background:#6a3e1c;color:#ffffff;border:none;border-radius:6px;padding:11px 16px;font-family:'DM Sans',sans-serif;font-weight:500;font-size:11px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;" data-i18n="contactoSend">✉️ Enviar mensaje</button>
+
+        <div id="contacto-status" style="font-family:'DM Sans',sans-serif;font-size:11px;line-height:1.5;color:#8a5530;min-height:16px;margin-top:2px;"></div>
+        <p style="font-family:'DM Sans',sans-serif;font-size:10px;line-height:1.5;color:#8a5530;opacity:0.7;margin:0;" data-i18n="contactoPrivacy">Tu mensaje llega directamente a la bandeja de entrada de Christian. Sin email no es posible respuesta — el envío es anónimo.</p>
+      </div>
     </div>
 
     <!-- MI HISTORIA — moved from finanzas -->
@@ -4152,8 +4157,12 @@
       <div class="historia-field"><label data-i18n="historiaQ6">Tu nombre (opcional — puede ser anónimo)</label>
         <input type="text" id="h-nombre" placeholder="O deja en blanco para ser anónimo">
       </div>
+      <div class="historia-field"><label data-i18n="historiaQEmail">Tu email (opcional — solo si quieres respuesta)</label>
+        <input type="email" id="h-email" placeholder="anónimo si dejas en blanco">
+      </div>
       <button class="historia-send" onclick="enviarHistoria()" data-i18n="historiaSend">✉️ Enviar mi historia a Christian</button>
-      <p class="historia-note" data-i18n="historiaNote">Tu historia va directamente a su bandeja de entrada. No se publica nada sin tu permiso.</p>
+      <div id="historia-status" style="font-family:'DM Sans',sans-serif;font-size:11px;line-height:1.5;color:#8a5530;min-height:16px;margin-top:8px;"></div>
+      <p class="historia-note" data-i18n="historiaNote">Tu historia va directamente a la bandeja de entrada de Christian. Sin email no es posible respuesta — el envío es anónimo.</p>
     </div>
 
     <p style="text-align:center;font-family:'DM Sans',sans-serif;font-size:10px;color:#8a5530;opacity:0.65;padding:14px 0 0;letter-spacing:0.3px;">© Christian Hammerich · Barcelona · El Migrante Consciente</p>
@@ -4834,7 +4843,7 @@ function getActivePuntosDoneCount() {
 }
 
 // ─── STATE ──────────────────────────────────────────────────
-const APP_VERSION = 160;
+const APP_VERSION = 162;
 // Auto-sync visible version badge from APP_VERSION constant (no manual update needed)
 document.addEventListener('DOMContentLoaded', () => {
   const badge = document.getElementById('sidebar-version-badge');
@@ -11813,6 +11822,75 @@ function setColchonMeta() {
 // ============================================================
 // HISTORIA
 // ============================================================
+// ============================================================
+// WEB3FORMS — Direkter Mail-Versand aus der App
+// ============================================================
+// Access-Key von https://web3forms.com (eingeben sobald erhalten)
+const WEB3FORMS_ACCESS_KEY = 'c52bfaf8-a18e-45b4-814b-b254eff91db9';
+
+async function sendToWeb3Forms(payload, onStatus) {
+  if (!WEB3FORMS_ACCESS_KEY || WEB3FORMS_ACCESS_KEY === 'REPLACE_WITH_YOUR_ACCESS_KEY') {
+    onStatus('error', 'Configuración pendiente — falta access key de Web3Forms.');
+    return false;
+  }
+  onStatus('sending', 'Enviando…');
+  try {
+    const body = Object.assign({ access_key: WEB3FORMS_ACCESS_KEY }, payload);
+    const res = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(body)
+    });
+    const data = await res.json();
+    if (data && data.success) {
+      onStatus('success', '✓ Mensaje enviado — gracias.');
+      return true;
+    } else {
+      onStatus('error', 'Error: ' + ((data && data.message) || 'no se pudo enviar'));
+      return false;
+    }
+  } catch (e) {
+    onStatus('error', 'Error de red — prueba más tarde.');
+    return false;
+  }
+}
+
+function enviarMensaje() {
+  const msgEl = document.getElementById('c-mensaje');
+  const emailEl = document.getElementById('c-email');
+  const statusEl = document.getElementById('contacto-status');
+  const mensaje = msgEl ? msgEl.value.trim() : '';
+  const email = emailEl ? emailEl.value.trim() : '';
+
+  if (!mensaje) {
+    if (statusEl) { statusEl.textContent = 'Escribe un mensaje primero.'; statusEl.dataset.kind = 'error'; }
+    return;
+  }
+
+  const setStatus = (kind, m) => {
+    if (!statusEl) return;
+    statusEl.textContent = m;
+    statusEl.dataset.kind = kind;
+  };
+
+  const payload = {
+    subject: 'Mensaje desde El Migrante Consciente',
+    from_name: 'El Migrante Consciente — Contacto',
+    message: mensaje +
+      '\n\n---\nEmail para respuesta: ' + (email || '(sin email — anónimo)') +
+      '\nEnviado desde: El Migrante Consciente (v1.0.' + APP_VERSION + ')' +
+      '\nFecha: ' + new Date().toLocaleString('es-ES')
+  };
+  if (email) payload.replyto = email;
+
+  sendToWeb3Forms(payload, setStatus).then(ok => {
+    if (ok) {
+      if (msgEl) msgEl.value = '';
+      if (emailEl) emailEl.value = '';
+    }
+  });
+}
+
 function enviarHistoria() {
   const origen = document.getElementById('h-origen').value;
   const tiempo = document.getElementById('h-tiempo').value;
@@ -11820,17 +11898,48 @@ function enviarHistoria() {
   const cambio = document.getElementById('h-cambio').value;
   const consejo = document.getElementById('h-consejo').value;
   const nombre = document.getElementById('h-nombre').value || 'Anónimo';
+  const emailEl = document.getElementById('h-email');
+  const email = emailEl ? emailEl.value.trim() : '';
 
   if(!dificil && !cambio && !consejo) {
     alert('Por favor, escribe al menos una parte de tu historia.');
     return;
   }
 
-  const body = `HISTORIA MIGRANTE CONSCIENTE\n\nNombre: ${nombre}\nOrigen: ${origen}\nTiempo en España: ${tiempo}\n\nMomento más difícil:\n${dificil}\n\n¿Qué cambió?\n${cambio}\n\n¿Qué le dirías a quien llega hoy?\n${consejo}\n\n---\nEnviado desde: El Migrante Consciente App\nFecha: ${new Date().toLocaleDateString('es-ES')}`;
+  const message =
+    'Nombre: ' + nombre + '\n' +
+    'Email para respuesta: ' + (email || '(sin email — anónimo, sin respuesta posible)') + '\n' +
+    'Origen: ' + origen + '\n' +
+    'Tiempo en España: ' + tiempo + '\n\n' +
+    '— Momento más difícil —\n' + (dificil || '(sin respuesta)') + '\n\n' +
+    '— Qué cambió —\n' + (cambio || '(sin respuesta)') + '\n\n' +
+    '— Qué le diría a quien llega hoy —\n' + (consejo || '(sin respuesta)') + '\n\n' +
+    '---\nEnviado desde: El Migrante Consciente (v1.0.' + APP_VERSION + ')\n' +
+    'Fecha: ' + new Date().toLocaleString('es-ES');
 
-  const subject = `Historia Migrante: ${nombre} (${origen})`;
-  const mailto = `mailto:christian@migranteconsciente.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  window.location.href = mailto;
+  const statusEl = document.getElementById('historia-status');
+  const setStatus = (kind, msg) => {
+    if (!statusEl) return;
+    statusEl.textContent = msg;
+    statusEl.dataset.kind = kind;
+  };
+
+  const payload = {
+    subject: 'Historia Migrante: ' + nombre + ' (' + (origen || 'sin origen') + ')',
+    from_name: 'El Migrante Consciente — Historia',
+    message: message
+  };
+  if (email) payload.replyto = email;
+
+  sendToWeb3Forms(payload, setStatus).then(ok => {
+    if (ok) {
+      // Felder leeren bei Erfolg
+      ['h-origen','h-tiempo','h-dificil','h-cambio','h-consejo','h-nombre','h-email'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.value = '';
+      });
+    }
+  });
 }
 
 // ============================================================
