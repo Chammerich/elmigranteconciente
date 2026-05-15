@@ -219,6 +219,223 @@
     justify-content: flex-start;
   }
 
+  /* ═══════════════ v129 · SECTION TINTING (Mi Manifiesto) ═══════════════ */
+  .tint-manifiesto { background: #ebe8e3; }
+  .tint-manifiesto .screen-actionbar {
+    background: #ebe8e3;
+    border-bottom: none;
+    padding: 10px 20px;
+    gap: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .tint-manifiesto .action-back {
+    flex: 0 0 auto;
+    margin-left: -10px;
+    padding: 5px 10px;
+    background: rgba(107,103,96,0.18);
+    border: none;
+    border-radius: 6px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #4d4a45;
+    gap: 4px;
+    min-width: 0;
+    width: auto;
+    justify-content: flex-start;
+  }
+  .tint-manifiesto .action-emerg {
+    flex: 0 0 auto;
+    padding: 5px 10px;
+    background: rgba(74,103,65,0.16);
+    border: none;
+    border-radius: 6px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #4a6741;
+    gap: 4px;
+    min-width: 0;
+    width: auto;
+    justify-content: flex-start;
+  }
+
+  /* Manifiesto hero — pastel + DM Sans grafit (replaces ink+gold gradient) */
+  .tint-manifiesto .manifiesto-hero {
+    background: #ebe8e3;
+    padding: 2px 20px 4px;
+    position: relative;
+    overflow: visible;
+  }
+  .tint-manifiesto .manifiesto-hero::before { display: none; }
+  .tint-manifiesto .manifiesto-hero-seal { display: none; }
+  .tint-manifiesto .manifiesto-hero h2 {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-size: 22px;
+    color: #3a3833;
+    line-height: 1.25;
+    letter-spacing: 0.3px;
+    margin: 0;
+  }
+  .tint-manifiesto .manifiesto-hero p {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #6b6760;
+    margin: 6px 0 0;
+    line-height: 1.4;
+  }
+
+  /* Gold divider holder (rendered via JS / inline below hero) */
+
+  /* Manifiesto intro card */
+  .tint-manifiesto .manifiesto-intro {
+    margin: 14px 20px 0;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 14px 16px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--ink);
+  }
+
+  /* Manifiesto punto cards — interactive → border-left accent in grafit */
+  .tint-manifiesto .manifiesto-punto {
+    margin: 10px 20px 0;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-left: 3px solid #6b6760;
+    border-radius: 14px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .tint-manifiesto .manifiesto-punto.all-confirmed { border-left-color: var(--sage); }
+  .tint-manifiesto .manifiesto-punto.has-dudas { border-left-color: var(--gold); }
+
+  .tint-manifiesto .manifiesto-punto-head {
+    display: flex; align-items: center; gap: 12px;
+    padding: 12px 14px; cursor: pointer;
+  }
+  .tint-manifiesto .manifiesto-punto-num {
+    width: 24px; height: 24px; border-radius: 50%;
+    background: rgba(107,103,96,0.18);
+    color: #4d4a45;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px; font-weight: 500;
+    letter-spacing: 0;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .tint-manifiesto .manifiesto-punto-title {
+    flex: 1;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--ink);
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.4;
+  }
+  .tint-manifiesto .manifiesto-punto-status { font-size: 14px; flex-shrink: 0; opacity: 0.7; }
+  .tint-manifiesto .manifiesto-punto-body { display: none; border-top: 1px solid var(--border); }
+  .tint-manifiesto .manifiesto-punto.open .manifiesto-punto-body { display: block; }
+
+  .tint-manifiesto .manifiesto-frase {
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .tint-manifiesto .manifiesto-frase:last-of-type { border-bottom: none; }
+  .tint-manifiesto .manifiesto-frase-text {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--ink);
+    margin-bottom: 10px;
+    font-style: italic;
+  }
+  .tint-manifiesto .manifiesto-btns { display: flex; gap: 6px; }
+
+  /* Frase status buttons — atras pill style with semantic colors */
+  .tint-manifiesto .m-btn {
+    flex: 1;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.15s;
+    background: rgba(107,103,96,0.08);
+    color: rgba(107,103,96,0.6);
+  }
+  .tint-manifiesto .m-btn.active-confirm  { background: rgba(74,103,65,0.20);  color: #4a6741; }
+  .tint-manifiesto .m-btn.active-denegado { background: rgba(139,58,30,0.20);  color: #8B3A1E; }
+  .tint-manifiesto .m-btn.active-dudas    { background: rgba(200,146,42,0.22); color: #8a6520; }
+
+  .tint-manifiesto .manifiesto-dudas-field { display: none; margin-top: 10px; }
+  .tint-manifiesto .manifiesto-dudas-field.visible { display: block; }
+  .tint-manifiesto .manifiesto-dudas-field textarea {
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    background: var(--cream);
+    color: var(--ink);
+    resize: none;
+    min-height: 70px;
+    line-height: 1.5;
+    box-sizing: border-box;
+  }
+  .tint-manifiesto .manifiesto-dudas-field textarea:focus {
+    outline: none;
+    border-color: #6b6760;
+  }
+  .tint-manifiesto .manifiesto-dudas-save {
+    margin-top: 8px;
+    background: rgba(107,103,96,0.18);
+    color: #4d4a45;
+    border: none;
+    border-radius: 6px;
+    padding: 7px 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  /* Big Contract action button at bottom */
+  .tint-manifiesto .manifiesto-contrato-btn {
+    margin: 20px 20px 100px;
+    width: calc(100% - 40px);
+    background: rgba(107,103,96,0.18);
+    color: #4d4a45;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+  }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -2491,7 +2708,7 @@
   <div class="welcome-item"><div class="welcome-item-icon">📜</div><div class="welcome-item-text"><strong data-i18n="welcomeItem1Title">Prólogo</strong><span data-i18n="welcomeItem1Sub">Dónde empieza el viaje. La invitación a reflexionar.</span></div></div>
   <div class="welcome-item"><div class="welcome-item-icon">☀️</div><div class="welcome-item-text"><strong data-i18n="welcomeItem2Title">Mi Día</strong><span data-i18n="welcomeItem2Sub">Un compromiso diario, una pregunta de reflexión y tu diario privado.</span></div></div>
   <div class="welcome-item"><div class="welcome-item-icon">📖</div><div class="welcome-item-text"><strong data-i18n="welcomeItem3Title">La Guía</strong><span data-i18n="welcomeItem3Sub">15 capítulos del manual de migración consciente.</span></div></div>
-  <div class="welcome-item"><div class="welcome-item-icon">⚖︎</div><div class="welcome-item-text"><strong data-i18n="welcomeItem4Title">Mi Contrato</strong><span data-i18n="welcomeItem4Sub">14 compromisos concretos para pasar de reflexionar a actuar.</span></div></div>
+  <div class="welcome-item"><div class="welcome-item-icon">⚖︎</div><div class="welcome-item-text"><strong data-i18n="welcomeItem4Title">Mi Contrato</strong><span data-i18n="welcomeItem4Sub">10 compromisos concretos para pasar de reflexionar a actuar.</span></div></div>
   <div class="welcome-item"><div class="welcome-item-icon">🗂️</div><div class="welcome-item-text"><strong data-i18n="welcomeItem5Title">Migración & Trámites</strong><span data-i18n="welcomeItem5Sub">Guía legal 2026: visados, arraigo, asilo, empadronamiento, LGBTIQ+.</span></div></div>
   <div class="welcome-item"><div class="welcome-item-icon">🌿</div><div class="welcome-item-text"><strong data-i18n="welcomeItem6Title">Ayuda inmediata</strong><span data-i18n="welcomeItem6Sub">El banner verde en la parte superior siempre está visible. Úsalo cuando lo necesites.</span></div></div>
   <div class="welcome-note">"<span data-i18n="welcomeNote">La migración puede entenderse aquí como un símbolo. Los mecanismos son similares, independientemente de si se quiere emigrar a un nuevo país o simplemente construir una nueva vida.</span>"<br>— Christian Hammerich</div>
@@ -2504,7 +2721,7 @@
     <button class="home-tile" onclick="navTo('prologo')"><div class="home-tile-icon">📜</div><div class="home-tile-body"><div class="home-tile-title" id="tile-title-prologo">Prólogo</div><div class="home-tile-sub" id="tile-sub-prologo">El inicio del viaje. Por dónde empieza todo.</div></div><div class="home-tile-arrow">›</div></button>
     <div class="home-doc-divider"></div>
     <button class="home-tile" onclick="navTo('midia')" style="position:relative;"><span class="notif-dot" id="dot-home-midia"></span><span id="tarea-badge-home" onclick="event.stopPropagation();toggleTareaOverlay();" style="display:none;position:absolute;top:10px;right:38px;width:22px;height:22px;border-radius:50%;color:#fff;font-size:11px;font-weight:700;align-items:center;justify-content:center;cursor:pointer;z-index:2;box-shadow:0 2px 6px rgba(0,0,0,0.2);">!</span><div class="home-tile-icon">☀️</div><div class="home-tile-body"><div class="home-tile-title" id="tile-title-midia">Mi Día</div><div class="home-tile-sub" id="tile-sub-midia">Impulso diario · Reflexión · Diario privado</div></div><div class="home-tile-arrow">›</div></button>
-    <button class="home-tile" onclick="navTo('manifiesto')"><span class="notif-dot" id="dot-home-manifiesto"></span><div class="home-tile-icon" style="color:var(--gold);">⚖︎</div><div class="home-tile-body"><div class="home-tile-title" id="tile-title-manifiesto">Mi Manifiesto</div><div class="home-tile-sub" id="tile-sub-manifiesto">Mi nueva realidad · 14 compromisos · Tu firma</div></div><div class="home-tile-arrow">›</div></button>
+    <button class="home-tile" onclick="navTo('manifiesto')"><span class="notif-dot" id="dot-home-manifiesto"></span><div class="home-tile-icon" style="color:var(--gold);">⚖︎</div><div class="home-tile-body"><div class="home-tile-title" id="tile-title-manifiesto">Mi Manifiesto</div><div class="home-tile-sub" id="tile-sub-manifiesto">Mi nueva realidad · 10 compromisos · Tu firma</div></div><div class="home-tile-arrow">›</div></button>
     <button class="home-tile" onclick="navTo('guia')"><span class="notif-dot" id="dot-home-guia"></span><div class="home-tile-icon">📖</div><div class="home-tile-body"><div class="home-tile-title" id="tile-title-guia">La Guía</div><div class="home-tile-sub" id="tile-sub-guia">15 capítulos del manual de migración consciente</div></div><div class="home-tile-arrow">›</div></button>
     <button class="home-tile" onclick="navTo('expertos')"><span class="notif-dot" id="dot-home-expertos"></span><div class="home-tile-icon">🔬</div><div class="home-tile-body"><div class="home-tile-title" id="tile-title-expertos">Tu mejor Versión</div><div class="home-tile-sub" id="tile-sub-expertos">Sobre el autor · Inconsciente y Trauma · Autoanálisis · Liderazgo</div></div><div class="home-tile-arrow">›</div></button>
     <button class="home-tile" onclick="navTo('finanzas')"><span class="notif-dot" id="dot-home-finanzas"></span><div class="home-tile-icon">💰</div><div class="home-tile-body"><div class="home-tile-title" id="tile-title-finanzas">Mis Finanzas</div><div class="home-tile-sub" id="tile-sub-finanzas">Activos · Compromisos · Ampel · El Freno</div></div><div class="home-tile-arrow">›</div></button>
@@ -2589,7 +2806,7 @@
     </svg>
     <div class="ring-info">
       <h3 id="ring-title">Progreso del Contrato</h3>
-      <p id="ring-sub">Completa los 14 puntos</p>
+      <p id="ring-sub">Completa los 10 puntos</p>
     </div>
   </div>
 
@@ -2630,36 +2847,41 @@
 </div>
 
 <!-- SCREEN: MANIFIESTO -->
-<div class="screen" id="screen-manifiesto">
+<div class="screen tint-manifiesto" id="screen-manifiesto">
   <div class="screen-actionbar"><button class="action-back" onclick="goBack()">← <span class="back-label" data-i18n="backLabel">Atrás</span></button><button class="action-emerg" onclick="openEmergencia()" data-i18n="emergBtn">🌿 No me siento bien</button></div>
   <div id="mani-section-manifiesto">
     <div class="manifiesto-hero">
       <div class="manifiesto-hero-seal">📜</div>
       <h2>Mi Manifiesto</h2>
-      <p>15 principios · Tu voz · Tu identidad</p>
+      <p>10 principios · Tu voz · Tu identidad</p>
+    </div>
+    <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin:2px 20px 6px;">
+      <div style="flex:1;height:1px;max-width:60px;background:linear-gradient(90deg,transparent,rgba(200,146,42,0.5),transparent);"></div>
+      <span style="color:var(--gold);font-size:11px;opacity:0.7;">⚖︎</span>
+      <div style="flex:1;height:1px;max-width:60px;background:linear-gradient(90deg,transparent,rgba(200,146,42,0.5),transparent);"></div>
     </div>
     <div class="manifiesto-intro" data-i18n-html="manifestoIntro">Este es tu manifiesto. No es poesía. No es motivación vacía. Es estrategia. Es claridad. Es poder.<br><br>Confirma cada afirmación, recházala, o marca tus dudas — las dudas quedan abiertas en tu diario hasta que decides.</div>
     <div id="manifiesto-container"></div>
-    <div style="margin:8px 16px 0;padding:16px;background:var(--card-bg);border:1px solid var(--border);border-radius:14px;">
-      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:4px;">✍️ Mis compromisos personales</div>
-      <div style="font-size:12px;color:var(--fog);margin-bottom:12px;line-height:1.5;">Añade hasta 3 compromisos propios.</div>
+    <div style="margin:14px 20px 0;padding:14px 16px;background:var(--card-bg);border:1px solid var(--border);border-radius:14px;">
+      <div style="font-family:'DM Sans',sans-serif;font-weight:500;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#6b6760;margin-bottom:8px;">✍️ Mis compromisos personales</div>
+      <div style="font-family:'DM Sans',sans-serif;font-size:12px;color:#6b6760;margin-bottom:12px;line-height:1.55;">Añade hasta 3 compromisos propios.</div>
       <div id="custom-puntos-list"></div>
       <div id="custom-puntos-add"></div>
     </div>
-    <div style="margin:12px 16px 24px;padding:18px;background:rgba(200,146,42,0.06);border:1px solid rgba(200,146,42,0.25);border-radius:14px;">
-      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;">⚖︎ Generar mi Contrato Oficial</div>
+    <div style="margin:12px 20px 24px;padding:16px;background:var(--card-bg);border:1px solid var(--border);border-radius:14px;">
+      <div style="font-family:'DM Sans',sans-serif;font-weight:500;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#6b6760;margin-bottom:12px;">⚖︎ Generar mi Contrato Oficial</div>
       <div style="display:flex;gap:8px;margin-bottom:8px;">
-        <select id="contrato-titulo" onchange="saveContratoProfile()" style="width:90px;border:1px solid var(--border);border-radius:8px;padding:8px 10px;font-size:13px;background:var(--cream);color:var(--ink);outline:none;">
+        <select id="contrato-titulo" onchange="saveContratoProfile()" style="width:90px;border:1px solid var(--border);border-radius:8px;padding:8px 10px;font-family:'DM Sans',sans-serif;font-size:12px;background:var(--cream);color:var(--ink);outline:none;">
           <option value="Don">Don</option>
           <option value="Doña">Doña</option>
         </select>
-        <input id="contrato-nombre" type="text" placeholder="Tu nombre completo" style="flex:1;border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:13px;background:var(--cream);color:var(--ink);outline:none;" oninput="saveContratoProfile()">
+        <input id="contrato-nombre" type="text" placeholder="Tu nombre completo" style="flex:1;border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-family:'DM Sans',sans-serif;font-size:12px;background:var(--cream);color:var(--ink);outline:none;" oninput="saveContratoProfile()">
       </div>
       <div style="display:flex;gap:8px;margin-bottom:14px;">
-        <input id="contrato-origen" type="text" placeholder="País de origen" style="flex:1;border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:13px;background:var(--cream);color:var(--ink);outline:none;" oninput="saveContratoProfile()">
-        <input id="contrato-ciudad" type="text" placeholder="Ciudad actual" style="flex:1;border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:13px;background:var(--cream);color:var(--ink);outline:none;" oninput="saveContratoProfile()">
+        <input id="contrato-origen" type="text" placeholder="País de origen" style="flex:1;border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-family:'DM Sans',sans-serif;font-size:12px;background:var(--cream);color:var(--ink);outline:none;" oninput="saveContratoProfile()">
+        <input id="contrato-ciudad" type="text" placeholder="Ciudad actual" style="flex:1;border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-family:'DM Sans',sans-serif;font-size:12px;background:var(--cream);color:var(--ink);outline:none;" oninput="saveContratoProfile()">
       </div>
-      <button onclick="generarContratoPDF()" style="width:100%;background:var(--gold);color:var(--ink);border:none;border-radius:10px;padding:13px;font-size:14px;font-weight:700;cursor:pointer;letter-spacing:0.5px;">⚖︎ Generar mi Contrato Oficial</button>
+      <button onclick="generarContratoPDF()" style="width:100%;background:rgba(107,103,96,0.20);color:#4d4a45;border:none;border-radius:8px;padding:11px 16px;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:500;letter-spacing:2px;text-transform:uppercase;cursor:pointer;">⚖︎ Generar mi Contrato Oficial</button>
     </div>
   </div>
 </div>
@@ -3407,7 +3629,7 @@ function getActivePuntosDoneCount() {
 }
 
 // ─── STATE ──────────────────────────────────────────────────
-const APP_VERSION = 127;
+const APP_VERSION = 129;
 // Auto-sync visible version badge from APP_VERSION constant (no manual update needed)
 document.addEventListener('DOMContentLoaded', () => {
   const badge = document.getElementById('sidebar-version-badge');
@@ -6514,7 +6736,7 @@ const UI = {
     vozPlaceholder: 'Comparte algo que aprendiste en tu proceso…',
     vozSubmit: 'Compartir anónimamente',
     ringTitle: 'Progreso del Contrato',
-    ringSub: 'Completa los 14 puntos',
+    ringSub: 'Completa los 10 puntos',
     welcomeSub: 'Una guía práctica para tomar el control de tu proceso migratorio',
     welcomeItem1Title: 'Prólogo',
     welcomeItem1Sub: 'Dónde empieza el viaje. La invitación a reflexionar.',
@@ -6523,7 +6745,7 @@ const UI = {
     welcomeItem3Title: 'La Guía',
     welcomeItem3Sub: '15 capítulos del manual de migración consciente.',
     welcomeItem4Title: 'Mi Contrato',
-    welcomeItem4Sub: '14 compromisos concretos para pasar de reflexionar a actuar.',
+    welcomeItem4Sub: '10 compromisos concretos para pasar de reflexionar a actuar.',
     welcomeItem5Title: 'Migración & Trámites',
     welcomeItem5Sub: 'Guía legal 2026: visados, arraigo, asilo, empadronamiento, LGBTIQ+.',
     welcomeItem6Title: 'Ayuda inmediata',
@@ -6638,7 +6860,7 @@ const UI = {
     tileManifiesto: 'Mi Manifiesto',
     tileSubManifiesto: '10 principios · Define quién eres · Tu voz',
     tileContrato: 'Mi Contrato',
-    tileSubContrato: '14 compromisos · Acciones concretas · Tu firma',
+    tileSubContrato: '10 compromisos · Acciones concretas · Tu firma',
     tileEpilogo: 'Epílogo',
     tileSubEpilogo: 'Cuando todo se calma. La llegada consciente.',
     tileExpertos: 'Tu mejor Versión',
@@ -6657,7 +6879,7 @@ const UI = {
     tileSubTramites: 'Guía legal 2026 · Visados · Arraigo · LGBTIQ+',
     tramitesTileTitle: 'Migración & Trámites',
     tramitesTileSub: 'Guía legal 2026 · Visados · Arraigo · LGBTIQ+',
-    contratoHeroSub: '14 compromisos · Tu firma más importante',
+    contratoHeroSub: '10 compromisos · Tu firma más importante',
     guiaHeroTitle: 'Manual del Migrante Consciente',
     guiaHeroSub: '15 capítulos · De la experiencia y la ciencia',
     diarioHeroTitle: 'Mi Diario',
@@ -6751,7 +6973,7 @@ const UI = {
     vozPlaceholder: 'Teile etwas, das du in deinem Prozess gelernt hast…',
     vozSubmit: 'Anonym teilen',
     ringTitle: 'Fortschritt deines Vertrags',
-    ringSub: 'Schließe die 14 Punkte ab',
+    ringSub: 'Schließe die 10 Punkte ab',
     welcomeSub: 'Ein praktischer Leitfaden, um die Kontrolle über deinen Migrationsprozess zu übernehmen',
     welcomeItem1Title: 'Prolog',
     welcomeItem1Sub: 'Wo die Reise beginnt. Die Einladung zum Nachdenken.',
@@ -6760,7 +6982,7 @@ const UI = {
     welcomeItem3Title: 'Der Leitfaden',
     welcomeItem3Sub: '15 Kapitel des Handbuchs der bewussten Migration.',
     welcomeItem4Title: 'Mein Vertrag',
-    welcomeItem4Sub: '14 konkrete Verpflichtungen, um vom Reflektieren zum Handeln zu gelangen.',
+    welcomeItem4Sub: '10 konkrete Verpflichtungen, um vom Reflektieren zum Handeln zu gelangen.',
     welcomeItem5Title: 'Migration & Behördengänge',
     welcomeItem5Sub: 'Rechtsleitfaden 2026: Visa, Arraigo, Asyl, Empadronamiento, LGBTIQ+.',
     welcomeItem6Title: 'Soforthilfe',
@@ -6875,7 +7097,7 @@ const UI = {
     tileManifiesto: 'Mein Manifest',
     tileSubManifiesto: '10 Grundsätze · Wer du bist · Deine Stimme',
     tileContrato: 'Mein Vertrag',
-    tileSubContrato: '14 Selbstverpflichtungen · Konkrete Aktionen · Deine Unterschrift',
+    tileSubContrato: '10 Selbstverpflichtungen · Konkrete Aktionen · Deine Unterschrift',
     tileEpilogo: 'Epilog',
     tileSubEpilogo: 'Wenn alles ruhig wird. Die bewusste Ankunft.',
     tileExpertos: 'Deine beste Version',
@@ -6894,7 +7116,7 @@ const UI = {
     tileSubTramites: 'Rechts-Guide 2026 · Visa · Arraigo · LGBTIQ+',
     tramitesTileTitle: 'Migration & Formalitäten',
     tramitesTileSub: 'Rechts-Guide 2026 · Visa · Arraigo · LGBTIQ+',
-    contratoHeroSub: '14 Selbstverpflichtungen · Deine wichtigste Unterschrift',
+    contratoHeroSub: '10 Selbstverpflichtungen · Deine wichtigste Unterschrift',
     guiaHeroTitle: 'Handbuch des bewussten Migranten',
     guiaHeroSub: '15 Kapitel · Aus Erfahrung und Wissenschaft',
     diarioHeroTitle: 'Mein Tagebuch',
@@ -6988,7 +7210,7 @@ const UI = {
     vozPlaceholder: 'Share something you learned in your process…',
     vozSubmit: 'Share anonymously',
     ringTitle: 'Contract Progress',
-    ringSub: 'Complete the 14 points',
+    ringSub: 'Complete the 10 points',
     welcomeSub: 'A practical guide to taking control of your migration process',
     welcomeItem1Title: 'Prologue',
     welcomeItem1Sub: 'Where the journey begins. The invitation to reflect.',
@@ -6997,7 +7219,7 @@ const UI = {
     welcomeItem3Title: 'The Guide',
     welcomeItem3Sub: '15 chapters of the conscious migration manual.',
     welcomeItem4Title: 'My Contract',
-    welcomeItem4Sub: '14 concrete commitments to move from reflection to action.',
+    welcomeItem4Sub: '10 concrete commitments to move from reflection to action.',
     welcomeItem5Title: 'Migration & Procedures',
     welcomeItem5Sub: 'Legal guide 2026: visas, arraigo, asylum, empadronamiento, LGBTIQ+.',
     welcomeItem6Title: 'Immediate help',
@@ -7112,7 +7334,7 @@ const UI = {
     tileManifiesto: 'My Manifesto',
     tileSubManifiesto: '10 principles · Define who you are · Your voice',
     tileContrato: 'My Contract',
-    tileSubContrato: '14 commitments · Concrete actions · Your signature',
+    tileSubContrato: '10 commitments · Concrete actions · Your signature',
     tileEpilogo: 'Epilogue',
     tileSubEpilogo: 'When everything settles. The conscious arrival.',
     tileExpertos: 'Your Best Version',
@@ -7129,13 +7351,13 @@ const UI = {
     tileSubFinanzas: 'Assets · Commitments · Traffic light · The Brake',
     tileTramites: 'Migration & Procedures',
     tileSubTramites: 'Legal guide 2026 · Visas · Arraigo · LGBTIQ+',
-    tileSubManifiesto: 'My new reality · 14 commitments · My signature',
+    tileSubManifiesto: 'My new reality · 10 commitments · My signature',
     tileSubGuia: '15 chapters of the conscious migrant manual',
     tileSubExpertos: 'About the author · Unconscious · Leadership',
     tileSubEpilogo: 'When everything settles. The conscious arrival.',
     tramitesTileTitle: 'Migration & Procedures',
     tramitesTileSub: 'Legal guide 2026 · Visas · Residency · LGBTIQ+',
-    contratoHeroSub: '14 commitments · Your most important signature',
+    contratoHeroSub: '10 commitments · Your most important signature',
     guiaHeroTitle: 'The Conscious Migrant Guide',
     guiaHeroSub: '15 chapters · From experience and science',
     diarioHeroTitle: 'My Journal',
@@ -7325,7 +7547,7 @@ function applyUI() {
     'tile-title-midia':      u('tileMidia')       || 'Mi Día',
     'tile-sub-midia':        u('tileSubMidia')    || 'Impulso diario · Reflexión · Diario privado',
     'tile-title-manifiesto': u('tileManifiesto')  || 'Mi Manifiesto',
-    'tile-sub-manifiesto':   u('tileSubManifiesto') || 'Mi nueva realidad · 14 compromisos · Tu firma',
+    'tile-sub-manifiesto':   u('tileSubManifiesto') || 'Mi nueva realidad · 10 compromisos · Tu firma',
     'tile-title-guia':       u('tileGuia')        || 'La Guía',
     'tile-sub-guia':         u('tileSubGuia')     || '15 capítulos del manual de migración consciente',
     'tile-title-finanzas':   u('tileFinanzas')    || 'Mis Finanzas',
@@ -8934,7 +9156,7 @@ function renderCustomPuntos() {
       <button onclick="removeCustomPunto(${i})" style="border:none;background:none;color:var(--fog);font-size:18px;cursor:pointer;padding:4px;">×</button>
     </div>`).join('');
   if (customs.length < 3) {
-    add.innerHTML = `<button onclick="addCustomPunto()" style="width:100%;border:1px dashed rgba(200,146,42,0.4);background:none;border-radius:8px;padding:10px;font-size:13px;color:var(--gold);cursor:pointer;">+ Añadir compromiso</button>`;
+    add.innerHTML = `<button onclick="addCustomPunto()" style="width:100%;border:1px dashed rgba(107,103,96,0.4);background:none;border-radius:8px;padding:10px;font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:500;color:#6b6760;cursor:pointer;">+ Añadir compromiso</button>`;
   } else {
     add.innerHTML = '';
   }
