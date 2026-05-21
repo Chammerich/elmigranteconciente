@@ -5225,7 +5225,7 @@ function getActivePuntosDoneCount() {
 }
 
 // ─── STATE ──────────────────────────────────────────────────
-const APP_VERSION = 208;
+const APP_VERSION = 210;
 // Auto-sync visible version badge from APP_VERSION constant (no manual update needed)
 document.addEventListener('DOMContentLoaded', () => {
   const badge = document.getElementById('sidebar-version-badge');
@@ -5533,8 +5533,9 @@ function updateHomeTilesVisibility() {
   // v205: Prólogo-Gruppe (Tile + ⚖︎-Trennlinie zusammen) verstecken
   const prologoGroup = document.getElementById('home-prologo-group');
   if (prologoGroup) prologoGroup.style.display = state.prologoRead ? 'none' : '';
-  // Epílogo: nur die einzelne Tile verstecken
-  const epilogoTile = document.querySelector('#screen-home button[onclick*=\'epilogo\']');
+  // Epílogo: nur die Tile verstecken — die ⚖︎-Trennlinie trennt weiterhin
+  // den Trámites-Block vom Kontakt-Button und bleibt sinnvoll stehen.
+  const epilogoTile = document.querySelector('#screen-home button.t-epilogo');
   if (epilogoTile) epilogoTile.style.display = state.epilogoRead ? 'none' : '';
 }
 
