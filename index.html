@@ -5205,7 +5205,7 @@ function getActivePuntosDoneCount() {
 }
 
 // ─── STATE ──────────────────────────────────────────────────
-const APP_VERSION = 204;
+const APP_VERSION = 206;
 // Auto-sync visible version badge from APP_VERSION constant (no manual update needed)
 document.addEventListener('DOMContentLoaded', () => {
   const badge = document.getElementById('sidebar-version-badge');
@@ -5267,6 +5267,16 @@ function showScreen(id) {
 }
 
 function goBack() {
+  // v206: Atrás-Button -> history.back() löst popstate aus, der ruft
+  // _internalGoBack auf. So bleiben screenHistory und Browser-History synchron,
+  // egal ob der Nutzer Atrás klickt oder vom Bildschirmrand wischt.
+  try { history.back(); } catch(e) { _internalGoBack(); }
+}
+
+function _internalGoBack() {
+  // Eigentliche interne Navigation, aufgerufen von popstate-Handler.
+  // showHome() ruft kein pushState, navTo() schon — also Flag nur setzen
+  // wenn wir tatsächlich navTo() aufrufen werden.
   if (screenHistory.length < 2) {
     showHome();
     return;
@@ -5276,9 +5286,24 @@ function goBack() {
   if (target === 'home') {
     showHome();
   } else {
+    window._skipNextPush = true;
     navTo(target);
   }
 }
+
+// v206: Browser-Back-Geste (Android-Wisch, iOS-Safari-Wisch, Desktop-Back).
+// Logik: jeder navTo() pusht einen History-Eintrag. Wenn der Browser einen
+// popstate auslöst (Wisch oder Back-Button), navigieren wir intern eine Stufe
+// zurück. Auf Home ist nichts mehr zum Pop'pen — wir lassen das System einfach
+// machen (App schließen oder zurück zur vorigen Webseite).
+window.addEventListener('popstate', function(ev) {
+  const currentScreen = screenHistory.length > 0 ? screenHistory[screenHistory.length - 1] : 'home';
+  if (currentScreen === 'home') {
+    // Auf Home: nichts tun, Standard-Browser-Verhalten (App schließen).
+    return;
+  }
+  _internalGoBack();
+});
 
 function showHome() {
   showScreen('home');
@@ -5306,6 +5331,15 @@ function navTo(key) {
   if (map[key]) map[key]();
   else showScreen(key);
   window.scrollTo(0,0);
+  // v206: Browser-History-Eintrag pushen, damit Android-Back-Wisch
+  // intern navigiert statt die App zu beenden.
+  // Wenn _skipNextPush gesetzt ist (vom popstate-Handler), überspringen —
+  // sonst würde Zurück-Navigation einen neuen Forward-Eintrag erzeugen.
+  if (window._skipNextPush) {
+    window._skipNextPush = false;
+  } else {
+    try { history.pushState({ screen: key }, '', ''); } catch(e) {}
+  }
 }
 
 function renderInicioSection(key, targetId) {
@@ -5429,8 +5463,10 @@ function switchMiDia(tab) { /* tabs merged in v9 — no-op */ }
 
 
 function updateHomeTilesVisibility() {
-  const prologoTile = document.querySelector('#screen-home button[onclick*=\'prologo\']');
-  if (prologoTile) prologoTile.style.display = state.prologoRead ? 'none' : '';
+  // v205: Prólogo-Gruppe (Tile + ⚖︎-Trennlinie zusammen) verstecken
+  const prologoGroup = document.getElementById('home-prologo-group');
+  if (prologoGroup) prologoGroup.style.display = state.prologoRead ? 'none' : '';
+  // Epílogo: nur die einzelne Tile verstecken
   const epilogoTile = document.querySelector('#screen-home button[onclick*=\'epilogo\']');
   if (epilogoTile) epilogoTile.style.display = state.epilogoRead ? 'none' : '';
 }
@@ -7294,6 +7330,8 @@ updateNotifDots();
     btn.classList.toggle('active', btn.textContent === currentLang.toUpperCase());
   });
   if (currentLang !== 'es') applyUI();
+  // v205: Home-Tiles-Visibility beim Start anwenden
+  updateHomeTilesVisibility();
   setTimeout(() => {
     if (!state.welcomeSeen) {
       // First ever launch: show welcome
