@@ -5225,7 +5225,7 @@ function getActivePuntosDoneCount() {
 }
 
 // ─── STATE ──────────────────────────────────────────────────
-const APP_VERSION = 210;
+const APP_VERSION = 211;
 // Auto-sync visible version badge from APP_VERSION constant (no manual update needed)
 document.addEventListener('DOMContentLoaded', () => {
   const badge = document.getElementById('sidebar-version-badge');
@@ -5314,20 +5314,55 @@ function _internalGoBack() {
   }
 }
 
-// v206-208: Browser-Back-Geste (Android-Wisch, iOS-Safari-Wisch, Desktop-Back).
-// Logik: jeder navTo() pusht einen History-Eintrag. Sidebar-Open ebenfalls.
-// Wenn der Browser einen popstate auslöst (Wisch oder Back-Button), schließen
-// wir die oberste Ebene: zuerst Sidebar, dann Sektion. Auf Home: kein Eingriff
-// (Standard-Browser-Verhalten = App schließen).
+// v206-211: Browser-Back-Geste (Android-Wisch, iOS-Safari-Wisch, Desktop-Back).
+// Stack-Hierarchie der Ebenen, die geschlossen werden:
+// 1) Vollbild-Overlay (Reader, Emergencia, …)
+// 2) Sidebar
+// 3) Sektion -> Home
+// 4) Home -> Standard-Browser-Verhalten (App schließen)
+
+// v211: Generischer Overlay-Stack für Vollbild-Overlays
+window._overlayStack = window._overlayStack || [];
+
+function _pushOverlay(id, closeFn) {
+  window._overlayStack.push({ id: id, closeFn: closeFn });
+  try { history.pushState({ overlay: id }, '', ''); } catch(e) {}
+}
+
+function _userCloseOverlay(id) {
+  // Vom X-Button etc. aufgerufen: geht via history.back, popstate-Handler
+  // ruft die closeFn() für DOM-Aufräumarbeit auf.
+  const top = window._overlayStack.length > 0
+              ? window._overlayStack[window._overlayStack.length - 1]
+              : null;
+  if (!top || top.id !== id) {
+    // Inkonsistenter Stack (sollte selten passieren) — direkt schließen
+    // ohne History-Eingriff, sonst riskieren wir Race-Conditions.
+    return false;
+  }
+  try { history.back(); } catch(e) {
+    // Fallback: Stack manuell aufräumen
+    window._overlayStack.pop();
+    if (top.closeFn) try { top.closeFn(); } catch(e) {}
+  }
+  return true;
+}
+
 window.addEventListener('popstate', function(ev) {
-  // 1) Sidebar offen? -> nur sie schließen (v208)
+  // 1) Vollbild-Overlay offen? -> obersten schließen
+  if (window._overlayStack.length > 0) {
+    const top = window._overlayStack.pop();
+    if (top.closeFn) try { top.closeFn(); } catch(e) {}
+    return;
+  }
+  // 2) Sidebar offen? (v208)
   const sidebarOpen = document.getElementById('sidebar') &&
                       document.getElementById('sidebar').classList.contains('open');
   if (sidebarOpen) {
     closeSidebar();
     return;
   }
-  // 2) Auf einer Sektion? -> intern zurück
+  // 3) Auf einer Sektion? -> intern zurück
   const currentScreen = screenHistory.length > 0 ? screenHistory[screenHistory.length - 1] : 'home';
   if (currentScreen === 'home') {
     return; // Standard-Verhalten
@@ -7686,11 +7721,20 @@ function openEmergencia() {
   stopBreathe(); // always reset on open
   document.getElementById('emerg-overlay').classList.add('open');
   document.body.style.overflow = 'hidden';
+  // v211: in History-Stack registrieren
+  _pushOverlay('emergencia', _closeEmergenciaInternal);
 }
-function closeEmergencia() {
+function _closeEmergenciaInternal() {
+  // DOM-only schließen — wird vom popstate-Handler aufgerufen.
   document.getElementById('emerg-overlay').classList.remove('open');
   document.body.style.overflow = '';
   stopBreathe();
+}
+function closeEmergencia() {
+  // User-initiiert (X-Button). Via History zurück; sonst direkt schließen.
+  if (!_userCloseOverlay('emergencia')) {
+    _closeEmergenciaInternal();
+  }
 }
 
 let breatheInterval = null;
@@ -10869,6 +10913,8 @@ function openTramitesReader(key) {
   document.getElementById('reader-mark-btn').style.display = 'none';
   overlay.classList.add('open');
   document.body.style.overflow = 'hidden';
+  // v211: in History-Stack registrieren (gleicher closeFn wie Reader)
+  _pushOverlay('reader', _closeReaderInternal);
 }
 
 function openReader(num) {
@@ -10889,14 +10935,26 @@ function openReader(num) {
   document.getElementById('reader-progress').style.width = '0%';
   document.getElementById('reader-overlay').classList.add('open');
   document.body.style.overflow = 'hidden';
+  // v211: in History-Stack registrieren für Back-Wisch
+  _pushOverlay('reader', _closeReaderInternal);
 }
 
-function closeReader() {
+function _closeReaderInternal() {
+  // DOM-only schließen, ohne History-Eingriff. Wird vom popstate-Handler
+  // gerufen (entweder via Wisch oder via X-Button -> history.back -> popstate).
   const ov = document.getElementById('reader-overlay');
   ov.classList.remove('open');
   ov.classList.remove('reader-tramites');
   document.body.style.overflow = '';
   currentReaderChap = null;
+}
+
+function closeReader() {
+  // User-initiiert (X-Button). Falls registriert im Overlay-Stack, via
+  // History zurück; sonst direkt schließen (für Robustheit).
+  if (!_userCloseOverlay('reader')) {
+    _closeReaderInternal();
+  }
 }
 
 function updateReadProgress() {
