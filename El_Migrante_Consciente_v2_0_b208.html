@@ -1734,6 +1734,23 @@
   /* alter Emerg-Banner global verstecken — Home nutzt jetzt eigene Pill */
   .emerg-banner { display: none !important; }
 
+  /* ── BUILD-BADGE (provisorisch, v207) ── */
+  .build-badge {
+    position: fixed;
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 8px);
+    right: calc(env(safe-area-inset-right, 0px) + 8px);
+    z-index: 9000;
+    padding: 3px 7px;
+    background: rgba(200, 146, 42, 0.18);
+    color: #8a6420;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 9px;
+    letter-spacing: 1px;
+    border-radius: 4px;
+    pointer-events: none;
+    opacity: 0.7;
+  }
+
   /* ── SPLASH ── (v203: cream + goldener Rahmen, safe-area-aware) */
   #splash {
     position: fixed; inset: 0; z-index: 999;
@@ -4202,6 +4219,9 @@
   <div class="splash-sub">Tu guía · Tu contrato · Tu diario</div>
 </div>
 
+<!-- BUILD-BADGE (provisorisch v207) -->
+<div class="build-badge" id="build-badge">v2.0.207</div>
+
 <!-- NAV -->
 <!-- TOP BAR -->
 <div class="top-bar" id="top-bar">
@@ -4226,7 +4246,7 @@
 <div class="translating-badge" id="translating-badge">Traduciendo…</div>
 
 <!-- SIDEBAR OVERLAY + SIDEBAR -->
-<div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
+<div class="sidebar-overlay" id="sidebar-overlay" onclick="userCloseSidebar()"></div>
 <div class="sidebar" id="sidebar" style="z-index:9999 !important;">
   <!-- Schwarzes Banner oben (Mockup-Layout) — eigenständig, unabhängig von Top-Bar -->
   <div style="height:52px;background:#1a1208;display:flex;align-items:center;justify-content:space-between;padding:0 18px;border-bottom:1px solid rgba(200,146,42,0.3);box-sizing:border-box;flex-shrink:0;">
@@ -4234,14 +4254,14 @@
       <span style="color:#c8922a;font-size:14px;">⚖︎</span>
       <span style="font-family:'Playfair Display', Georgia, serif;font-style:italic;font-size:15px;color:#c8922a;letter-spacing:0.3px;">El Migrante Consciente</span>
     </div>
-    <button onclick="closeSidebar()" style="background:transparent;border:none;color:#c8922a;font-size:22px;cursor:pointer;padding:4px 8px;line-height:1;font-family:Georgia,serif;" aria-label="Cerrar">✕</button>
+    <button onclick="userCloseSidebar()" style="background:transparent;border:none;color:#c8922a;font-size:22px;cursor:pointer;padding:4px 8px;line-height:1;font-family:Georgia,serif;" aria-label="Cerrar">✕</button>
   </div>
   <div class="sidebar-head" style="padding:20px 22px 8px !important; background:#efe8da !important; display:block !important;">
     <h3 style="font-family:'Playfair Display', Georgia, serif !important; font-style:italic !important; font-size:18px !important; color:#8a6420 !important; font-weight:500 !important; line-height:1.3 !important; margin:0 0 4px 0 !important; padding:0 !important; display:block !important; visibility:visible !important;">El Migrante Consciente <span id="sidebar-version-badge" style="font-size:9px;background:rgba(200,146,42,0.2);color:#8a6420;font-family:'DM Sans',sans-serif;font-weight:600;letter-spacing:0.5px;padding:2px 6px;border-radius:4px;margin-left:6px;vertical-align:middle;">v2.0</span></h3>
     <p data-i18n="sidebarSub" style="font-family:'DM Sans',sans-serif !important; font-size:10px !important; color:rgba(74,52,16,0.65) !important; letter-spacing:0.5px !important; margin:0 !important; padding:0 !important; display:block !important; visibility:visible !important;">Tu guía · Tu contrato · Tu diario</p>
   </div>
   <div class="sidebar-divider-orn"><div></div><span>⚖︎</span><div></div></div>
-  <button class="sidebar-home-btn" onclick="showHome();closeSidebar()" data-i18n="sidebarHome">🏠 Menú principal</button>
+  <button class="sidebar-home-btn" onclick="userCloseSidebar();showHome()" data-i18n="sidebarHome">🏠 Menú principal</button>
   <div class="sidebar-divider-orn"><div></div><span>⚖︎</span><div></div></div>
   <button class="sidebar-item" data-section="midia" onclick="navTo('midia');closeSidebar()"><span class="notif-dot" id="dot-sidebar-midia"></span><span class="sidebar-item-icon">☀️</span><span class="sidebar-item-label">Mi Día</span></button>
   <button class="sidebar-item" data-section="guia" onclick="navTo('guia');closeSidebar()"><span class="notif-dot" id="dot-sidebar-guia"></span><span class="sidebar-item-icon">📖</span><span class="sidebar-item-label">La Guía</span></button>
@@ -5205,11 +5225,14 @@ function getActivePuntosDoneCount() {
 }
 
 // ─── STATE ──────────────────────────────────────────────────
-const APP_VERSION = 206;
+const APP_VERSION = 208;
 // Auto-sync visible version badge from APP_VERSION constant (no manual update needed)
 document.addEventListener('DOMContentLoaded', () => {
   const badge = document.getElementById('sidebar-version-badge');
   if (badge) badge.textContent = 'v2.0';
+  // v207: Provisorischer Build-Badge unten rechts
+  const buildBadge = document.getElementById('build-badge');
+  if (buildBadge) buildBadge.textContent = 'v2.0.' + APP_VERSION;
 });
 let state = JSON.parse(localStorage.getItem('mc_state') || '{}');
 // v203: Unterscheide Erstnutzer (komplett leerer state) von bestehenden
@@ -5291,26 +5314,44 @@ function _internalGoBack() {
   }
 }
 
-// v206: Browser-Back-Geste (Android-Wisch, iOS-Safari-Wisch, Desktop-Back).
-// Logik: jeder navTo() pusht einen History-Eintrag. Wenn der Browser einen
-// popstate auslöst (Wisch oder Back-Button), navigieren wir intern eine Stufe
-// zurück. Auf Home ist nichts mehr zum Pop'pen — wir lassen das System einfach
-// machen (App schließen oder zurück zur vorigen Webseite).
+// v206-208: Browser-Back-Geste (Android-Wisch, iOS-Safari-Wisch, Desktop-Back).
+// Logik: jeder navTo() pusht einen History-Eintrag. Sidebar-Open ebenfalls.
+// Wenn der Browser einen popstate auslöst (Wisch oder Back-Button), schließen
+// wir die oberste Ebene: zuerst Sidebar, dann Sektion. Auf Home: kein Eingriff
+// (Standard-Browser-Verhalten = App schließen).
 window.addEventListener('popstate', function(ev) {
+  // 1) Sidebar offen? -> nur sie schließen (v208)
+  const sidebarOpen = document.getElementById('sidebar') &&
+                      document.getElementById('sidebar').classList.contains('open');
+  if (sidebarOpen) {
+    closeSidebar();
+    return;
+  }
+  // 2) Auf einer Sektion? -> intern zurück
   const currentScreen = screenHistory.length > 0 ? screenHistory[screenHistory.length - 1] : 'home';
   if (currentScreen === 'home') {
-    // Auf Home: nichts tun, Standard-Browser-Verhalten (App schließen).
-    return;
+    return; // Standard-Verhalten
   }
   _internalGoBack();
 });
 
 function showHome() {
+  const wasSidebar = document.getElementById('sidebar') &&
+                     document.getElementById('sidebar').classList.contains('open');
   showScreen('home');
   try { closeSidebar(); } catch(e) {}
+  // v208: Falls aus Sidebar zur Home (z.B. via "Menú principal"-Button),
+  // den Sidebar-History-Eintrag durch Home ersetzen
+  if (wasSidebar) {
+    try { history.replaceState({ screen: 'home' }, '', ''); } catch(e) {}
+  }
 }
 
 function navTo(key) {
+  // v208: Wenn Sidebar offen war, Flag setzen — der spätere replaceState
+  // ersetzt den Sidebar-Eintrag durch den Sektion-Eintrag.
+  window._wasSidebarOpen = document.getElementById('sidebar') &&
+                          document.getElementById('sidebar').classList.contains('open');
   try { closeSidebar(); } catch(e) {}
   const map = {
     'midia':            () => { showScreen('midia'); initMiDia(); markVisited('midia'); },
@@ -5331,12 +5372,16 @@ function navTo(key) {
   if (map[key]) map[key]();
   else showScreen(key);
   window.scrollTo(0,0);
-  // v206: Browser-History-Eintrag pushen, damit Android-Back-Wisch
-  // intern navigiert statt die App zu beenden.
-  // Wenn _skipNextPush gesetzt ist (vom popstate-Handler), überspringen —
-  // sonst würde Zurück-Navigation einen neuen Forward-Eintrag erzeugen.
+  // v206-208: Browser-History pflegen.
+  // Wenn _skipNextPush gesetzt (vom popstate-Handler), überspringen.
+  // Wenn _wasSidebarOpen gesetzt (Navigation aus Sidebar heraus), ersetzen
+  // wir den Sidebar-History-Eintrag durch den Sektion-Eintrag (replaceState),
+  // damit kein toter "Geist-Eintrag" entsteht.
   if (window._skipNextPush) {
     window._skipNextPush = false;
+  } else if (window._wasSidebarOpen) {
+    window._wasSidebarOpen = false;
+    try { history.replaceState({ screen: key }, '', ''); } catch(e) {}
   } else {
     try { history.pushState({ screen: key }, '', ''); } catch(e) {}
   }
@@ -5354,20 +5399,42 @@ function renderInicioSection(key, targetId) {
 }
 
 function toggleSidebar() {
-  document.getElementById('sidebar').classList.toggle('open');
-  document.getElementById('sidebar-overlay').classList.toggle('open');
-  document.getElementById('burger-btn').classList.toggle('open');
-  const isOpen = document.getElementById('sidebar').classList.contains('open');
+  const wasOpen = document.getElementById('sidebar').classList.contains('open');
+  if (wasOpen) {
+    // User-initiated close (Burger-Tap) -> via History für saubere Back-Synchro
+    userCloseSidebar();
+  } else {
+    _openSidebarVisual();
+    // v208: History-Eintrag pushen, damit Back-Wisch die Sidebar schließt
+    try { history.pushState({ sidebar: true }, '', ''); } catch(e) {}
+  }
+}
+
+function _openSidebarVisual() {
+  document.getElementById('sidebar').classList.add('open');
+  document.getElementById('sidebar-overlay').classList.add('open');
+  document.getElementById('burger-btn').classList.add('open');
   const tb = document.querySelector('.top-bar');
-  if (tb) tb.style.display = isOpen ? 'none' : '';
+  if (tb) tb.style.display = 'none';
 }
 
 function closeSidebar() {
+  // Reine Visual-Schließung (DOM-only). Wird intern von navTo, showHome,
+  // popstate aufgerufen — pusht/popped KEINE History.
   document.getElementById('sidebar').classList.remove('open');
   document.getElementById('sidebar-overlay').classList.remove('open');
   document.getElementById('burger-btn').classList.remove('open');
   const tb = document.querySelector('.top-bar');
   if (tb) tb.style.display = '';
+}
+
+function userCloseSidebar() {
+  // Vom X-Button / Burger-Tap-zum-Schließen / Overlay-Click aufgerufen.
+  // Geht via history.back, damit der pushState-Eintrag entfernt wird;
+  // popstate-Handler ruft dann closeSidebar() für die DOM-Aktualisierung.
+  const isOpen = document.getElementById('sidebar').classList.contains('open');
+  if (!isOpen) return;
+  try { history.back(); } catch(e) { closeSidebar(); }
 }
 
 function resetApp() {
