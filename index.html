@@ -1734,19 +1734,31 @@
   /* alter Emerg-Banner global verstecken — Home nutzt jetzt eigene Pill */
   .emerg-banner { display: none !important; }
 
-  /* ── SPLASH ── */
+  /* ── SPLASH ── (v203: cream + goldener Rahmen, safe-area-aware) */
   #splash {
     position: fixed; inset: 0; z-index: 999;
-    background: var(--ink);
+    background: #f5f0e8;
     display: flex; flex-direction: column;
     align-items: center; justify-content: center;
     gap: 16px;
     animation: splashOut 0.5s ease 2.5s forwards;
   }
+  #splash::before {
+    content: '';
+    position: absolute;
+    top: calc(env(safe-area-inset-top, 0px) + 4px);
+    right: calc(env(safe-area-inset-right, 0px) + 4px);
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 4px);
+    left: calc(env(safe-area-inset-left, 0px) + 4px);
+    border: 1px solid rgba(200, 146, 42, 0.35);
+    border-radius: 6px;
+    pointer-events: none;
+  }
   @keyframes splashOut { to { opacity: 0; pointer-events: none; visibility: hidden; } }
 
   .splash-seal {
     font-size: 56px;
+    color: #8a6420;
     animation: sealIn 0.8s cubic-bezier(.34,1.56,.64,1) forwards;
     opacity: 0;
   }
@@ -1754,7 +1766,7 @@
 
   .splash-title {
     font-family: 'Playfair Display', serif;
-    color: var(--gold);
+    color: #8a6420;
     font-size: 22px;
     letter-spacing: 2px;
     text-align: center;
@@ -1762,7 +1774,7 @@
     animation: fadeUp 0.6s ease 0.6s forwards;
   }
   .splash-sub {
-    color: var(--fog);
+    color: #6a5840;
     font-size: 12px;
     letter-spacing: 3px;
     text-transform: uppercase;
@@ -2262,75 +2274,68 @@
   .toast.show { opacity: 1; }
 
 
-  /* ── ONBOARDING ── */
-  .onboard-overlay {
-    display: none; position: fixed; inset: 0; z-index: 800;
-    background: var(--ink); flex-direction: column; overflow: hidden;
-  }
-  .onboard-overlay.open { display: flex; }
-  .onboard-step { display: none; flex: 1; flex-direction: column; padding: 0 0 40px; }
-  .onboard-step.active { display: flex; }
-  .onboard-top {
-    background: var(--ink); padding: 40px 28px 28px;
-    flex-shrink: 0;
-  }
-  .onboard-step-dot {
-    display: flex; gap: 6px; margin-bottom: 24px;
-  }
-  .step-dot {
-    width: 24px; height: 3px; border-radius: 2px;
-    background: rgba(255,255,255,0.15); transition: background 0.3s;
-  }
-  .step-dot.active { background: var(--gold); }
-  .onboard-q-num { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--fog); margin-bottom: 10px; }
-  .onboard-q { font-family: 'Playfair Display', serif; color: white; font-size: 24px; line-height: 1.3; }
-  .onboard-body { flex: 1; overflow-y: auto; padding: 24px 28px 20px; }
-  .onboard-options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
-  .onboard-option {
-    background: rgba(255,255,255,0.06); border: 1.5px solid rgba(255,255,255,0.12);
-    border-radius: 12px; padding: 14px 18px; cursor: pointer;
-    font-family: 'DM Sans', sans-serif; font-size: 14px; color: rgba(255,255,255,0.85);
-    text-align: left; transition: all 0.2s; line-height: 1.4;
-  }
-  .onboard-option.selected { background: rgba(200,146,42,0.2); border-color: var(--gold); color: var(--gold-light); }
-  .onboard-next-btn {
-    width: 100%; background: var(--gold); color: var(--ink);
-    border: none; border-radius: 12px; padding: 15px;
-    font-family: 'Playfair Display', serif; font-size: 17px; cursor: pointer;
-    font-weight: 700; transition: opacity 0.2s; margin-top: 8px;
-    opacity: 0.4; pointer-events: none;
-  }
-  .onboard-next-btn.ready { opacity: 1; pointer-events: all; }
-  .onboard-skip { background: none; border: none; color: var(--fog); font-family: 'DM Sans', sans-serif;
-    font-size: 12px; cursor: pointer; width: 100%; padding: 12px; text-align: center; margin-top: 4px; }
+  /* ── ONBOARDING entfernt v203 ── */
 
-  /* ── COACH (7-day check-in) ── */
+  /* ── COACH (v203: cream + goldener Rahmen) ── */
   .coach-overlay {
     display: none; position: fixed; inset: 0; z-index: 700;
-    background: rgba(0,0,0,0.7); align-items: flex-end;
+    background: rgba(26, 18, 8, 0.45); align-items: flex-end;
   }
   .coach-overlay.open { display: flex; }
   .coach-box {
-    background: var(--ink); width: 100%; max-width: 430px; margin: 0 auto;
-    border-radius: 20px 20px 0 0; padding: 28px 24px 44px;
+    position: relative;
+    background: #f5f0e8;
+    width: 100%; max-width: 430px; margin: 0 auto;
+    border-radius: 20px 20px 0 0;
+    padding: 28px 24px calc(env(safe-area-inset-bottom, 0px) + 32px);
     animation: slideUp 0.35s ease;
   }
-  .coach-seal { font-size: 32px; text-align: center; margin-bottom: 12px; }
-  .coach-title { font-family: 'Playfair Display', serif; color: var(--gold); font-size: 22px; text-align: center; margin-bottom: 6px; }
-  .coach-sub { color: var(--fog); font-size: 13px; text-align: center; margin-bottom: 24px; }
-  .coach-stat-row { display: flex; gap: 10px; margin-bottom: 20px; }
+  .coach-box::before {
+    content: '';
+    position: absolute;
+    top: 4px; right: 4px;
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 4px);
+    left: 4px;
+    border: 1px solid rgba(200, 146, 42, 0.35);
+    border-radius: 16px 16px 0 0;
+    pointer-events: none;
+  }
+  .coach-seal { font-size: 32px; text-align: center; margin-bottom: 10px; color: #8a6420; position: relative; z-index: 1; }
+  .coach-title { font-family: 'Playfair Display', serif; color: #8a6420; font-size: 22px; text-align: center; margin-bottom: 4px; position: relative; z-index: 1; }
+  .coach-sub { color: #6a5840; font-size: 13px; text-align: center; margin-bottom: 22px; position: relative; z-index: 1; }
+  .coach-stat-row { display: flex; gap: 10px; margin-bottom: 20px; position: relative; z-index: 1; }
   .coach-stat {
-    flex: 1; background: rgba(255,255,255,0.06); border-radius: 12px;
+    flex: 1; background: rgba(200, 146, 42, 0.08);
+    border: 1px solid rgba(200, 146, 42, 0.2);
+    border-radius: 10px;
     padding: 14px 10px; text-align: center;
   }
-  .coach-stat-num { font-family: 'Playfair Display', serif; font-size: 28px; color: var(--gold-light); }
-  .coach-stat-label { font-size: 10px; color: var(--fog); margin-top: 3px; letter-spacing: 1px; text-transform: uppercase; }
-  .coach-message { font-size: 14px; color: rgba(255,255,255,0.8); line-height: 1.7; margin-bottom: 20px; font-style: italic; }
-  .coach-next { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; padding: 14px 16px; margin-bottom: 20px; }
-  .coach-next-label { font-size: 10px; letter-spacing: 2px; color: var(--gold); text-transform: uppercase; margin-bottom: 6px; }
-  .coach-next-text { font-size: 13px; color: rgba(255,255,255,0.75); line-height: 1.5; }
-  .coach-close-btn { width: 100%; background: var(--gold); color: var(--ink); border: none; border-radius: 12px;
-    padding: 14px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; }
+  .coach-stat-num { font-family: 'Playfair Display', serif; font-size: 28px; color: #8a6420; }
+  .coach-stat-label { font-size: 10px; color: #6a5840; margin-top: 3px; letter-spacing: 1px; text-transform: uppercase; }
+  .coach-message { font-size: 14px; color: var(--ink); line-height: 1.7; margin-bottom: 20px; font-style: italic; position: relative; z-index: 1; }
+  .coach-next {
+    background: rgba(200, 146, 42, 0.06);
+    border: 1px solid rgba(200, 146, 42, 0.2);
+    border-radius: 10px;
+    padding: 14px 16px; margin-bottom: 20px;
+    position: relative; z-index: 1;
+  }
+  .coach-next-label { font-size: 10px; letter-spacing: 2px; color: #8a6420; text-transform: uppercase; margin-bottom: 6px; }
+  .coach-next-text { font-size: 13px; color: var(--ink); line-height: 1.5; }
+  .coach-close-btn {
+    width: 100%;
+    background: rgba(200, 146, 42, 0.18);
+    color: #8a6420;
+    border: none; border-radius: 6px;
+    padding: 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 2px; text-transform: uppercase;
+    cursor: pointer;
+    position: relative; z-index: 1;
+    transition: background 0.2s;
+  }
+  .coach-close-btn:hover { background: rgba(200, 146, 42, 0.28); }
 
   /* ── EMERGENCIA ── */
   .emerg-overlay {
@@ -2724,7 +2729,14 @@
     display: flex; gap: 8px; padding: 8px 12px;
     border-bottom: 1px solid var(--border);
     background: var(--cream);
+    /* v203: Sticky-Top damit Atrás immer erreichbar bleibt.
+       top:52px = unter Top-Bar (fixed, 52px hoch). */
+    position: sticky;
+    top: 52px;
+    z-index: 50;
   }
+  /* Reader-Overlay ist eigener fixed-Container ab top:52px, dort sticky an top:0 */
+  .reader-overlay .screen-actionbar { top: 0; }
   .action-back {
     flex: 1 1 25%; min-width: 0;
     padding: 10px 12px;
@@ -2812,18 +2824,97 @@
   .home-tile.gold-tile .home-tile-title { color:var(--gold-light); }
   .midia-tab { flex:1; padding:10px; border:none; background:none; font-family:'DM Sans',sans-serif; font-size:13px; color:var(--fog); cursor:pointer; border-bottom:2px solid transparent; transition:all 0.2s; }
   .midia-tab.active { color:var(--gold); border-bottom-color:var(--gold); }
-  .welcome-overlay { position:fixed; inset:0; background:linear-gradient(160deg,#1a1208 0%,#0d0a05 100%); z-index:250; display:none; flex-direction:column; overflow-y:auto; padding:64px 28px 60px; }
-  .welcome-overlay.open { display:flex; }
-  .welcome-seal { font-size:48px; text-align:center; margin-bottom:16px; }
-  .welcome-title { font-family:'Playfair Display',serif; font-size:26px; color:white; text-align:center; margin-bottom:8px; }
-  .welcome-sub { font-size:13px; color:var(--fog); text-align:center; line-height:1.6; margin-bottom:28px; }
-  .welcome-item { display:flex; gap:14px; margin-bottom:18px; }
-  .welcome-item-icon { font-size:22px; flex-shrink:0; width:32px; text-align:center; margin-top:1px; }
-  .welcome-item-text strong { color:white; font-size:14px; display:block; margin-bottom:2px; }
-  .welcome-item-text span { font-size:12px; color:var(--fog); line-height:1.5; }
-  .welcome-note { background:rgba(200,146,42,0.08); border:1px solid rgba(200,146,42,0.25); border-radius:12px; padding:16px; margin:20px 0; font-size:12px; color:rgba(255,255,255,0.7); line-height:1.7; font-style:italic; }
-  .welcome-btn { display:block; width:100%; padding:16px; background:var(--gold); border:none; border-radius:12px; color:var(--ink); font-weight:700; font-size:16px; font-family:'DM Sans',sans-serif; cursor:pointer; margin-top:8px; transition:background 0.2s; }
-  .welcome-btn:hover { background:var(--gold-light); }
+  /* ── WELCOME OVERLAY (v203: cream + goldener Rahmen) ── */
+  .welcome-overlay {
+    position: fixed; inset: 0; z-index: 250;
+    background: #f5f0e8;
+    display: none; flex-direction: column;
+    overflow-y: auto;
+    padding: calc(env(safe-area-inset-top, 0px) + 56px) 28px calc(env(safe-area-inset-bottom, 0px) + 40px);
+  }
+  .welcome-overlay.open { display: flex; }
+  .welcome-overlay::before {
+    content: '';
+    position: fixed;
+    top: calc(env(safe-area-inset-top, 0px) + 4px);
+    right: calc(env(safe-area-inset-right, 0px) + 4px);
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 4px);
+    left: calc(env(safe-area-inset-left, 0px) + 4px);
+    border: 1px solid rgba(200, 146, 42, 0.35);
+    border-radius: 6px;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .welcome-seal {
+    font-size: 44px; text-align: center;
+    color: #8a6420;
+    margin-bottom: 12px;
+  }
+  .welcome-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    color: #8a6420;
+    text-align: center;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+  .welcome-divider {
+    display: flex; align-items: center; justify-content: center;
+    gap: 10px; margin: 4px auto 22px;
+  }
+  .welcome-divider-line {
+    flex: 1; height: 1px; max-width: 60px;
+    background: linear-gradient(90deg, transparent, rgba(200,146,42,0.5), transparent);
+  }
+  .welcome-divider-seal {
+    color: #c8922a; font-size: 11px; opacity: 0.7;
+  }
+  .welcome-block {
+    margin-bottom: 22px;
+  }
+  .welcome-block-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    color: #8a6420;
+    margin-bottom: 8px;
+  }
+  .welcome-block-text {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px; line-height: 1.65;
+    color: var(--ink);
+  }
+  .welcome-quote {
+    background: rgba(200,146,42,0.06);
+    border-left: 2px solid #c8922a;
+    border-radius: 0 6px 6px 0;
+    padding: 14px 16px;
+    margin: 4px 0 6px;
+    font-size: 13.5px; line-height: 1.7;
+    color: var(--ink);
+    font-style: italic;
+  }
+  .welcome-quote-source {
+    display: block;
+    margin-top: 8px;
+    font-size: 11px;
+    font-style: normal;
+    color: #8a6420;
+    letter-spacing: 0.5px;
+  }
+  .welcome-btn {
+    display: block; width: 100%;
+    padding: 14px 16px;
+    background: rgba(200, 146, 42, 0.18);
+    border: none; border-radius: 6px;
+    color: #8a6420;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 2px; text-transform: uppercase;
+    cursor: pointer;
+    margin-top: 12px;
+    transition: background 0.2s;
+  }
+  .welcome-btn:hover { background: rgba(200, 146, 42, 0.28); }
   .back-btn { display:flex; align-items:center; gap:8px; padding:14px 16px 14px; border:none; background:none; color:var(--fog); font-size:13px; font-family:'DM Sans',sans-serif; cursor:pointer; border-bottom:1px solid var(--border); margin-bottom:4px; }
   .back-btn:hover { color:var(--gold); }
   .screen { display:none; padding:0 0 60px; animation:screenIn 0.3s ease; }
@@ -4171,19 +4262,34 @@
   </div>
 </div>
 
-<!-- WELCOME OVERLAY (solo primer lanzamiento) -->
+<!-- WELCOME OVERLAY (v203: solo primer lanzamiento) -->
 <div class="welcome-overlay" id="welcome-overlay">
   <div class="welcome-seal">⚖︎</div>
-  <div class="welcome-title">El Migrante Consciente</div>
-  <div class="welcome-sub" data-i18n="welcomeSub">Una guía práctica para tomar el control de tu proceso migratorio</div>
-  <div class="welcome-item"><div class="welcome-item-icon">📜</div><div class="welcome-item-text"><strong data-i18n="welcomeItem1Title">Prólogo</strong><span data-i18n="welcomeItem1Sub">Dónde empieza el viaje. La invitación a reflexionar.</span></div></div>
-  <div class="welcome-item"><div class="welcome-item-icon">☀️</div><div class="welcome-item-text"><strong data-i18n="welcomeItem2Title">Mi Día</strong><span data-i18n="welcomeItem2Sub">Un compromiso diario, una pregunta de reflexión y tu diario privado.</span></div></div>
-  <div class="welcome-item"><div class="welcome-item-icon">📖</div><div class="welcome-item-text"><strong data-i18n="welcomeItem3Title">La Guía</strong><span data-i18n="welcomeItem3Sub">15 capítulos del manual de migración consciente.</span></div></div>
-  <div class="welcome-item"><div class="welcome-item-icon">⚖︎</div><div class="welcome-item-text"><strong data-i18n="welcomeItem4Title">Mi Contrato</strong><span data-i18n="welcomeItem4Sub">10 compromisos concretos para pasar de reflexionar a actuar.</span></div></div>
-  <div class="welcome-item"><div class="welcome-item-icon">🗂️</div><div class="welcome-item-text"><strong data-i18n="welcomeItem5Title">Migración & Trámites</strong><span data-i18n="welcomeItem5Sub">Guía legal 2026: visados, arraigo, asilo, empadronamiento, LGBTIQ+.</span></div></div>
-  <div class="welcome-item"><div class="welcome-item-icon">🌿</div><div class="welcome-item-text"><strong data-i18n="welcomeItem6Title">Ayuda inmediata</strong><span data-i18n="welcomeItem6Sub">El banner verde en la parte superior siempre está visible. Úsalo cuando lo necesites.</span></div></div>
-  <div class="welcome-note">"<span data-i18n="welcomeNote">La migración puede entenderse aquí como un símbolo. Los mecanismos son similares, independientemente de si se quiere emigrar a un nuevo país o simplemente construir una nueva vida.</span>"<br>— Christian Hammerich</div>
-  <button class="welcome-btn" onclick="closeWelcome()" data-i18n="welcomeBtn">Comenzar mi camino →</button>
+  <div class="welcome-title">Bienvenido</div>
+  <div class="welcome-divider">
+    <div class="welcome-divider-line"></div>
+    <span class="welcome-divider-seal">⚖︎</span>
+    <div class="welcome-divider-line"></div>
+  </div>
+
+  <div class="welcome-block">
+    <div class="welcome-block-text">Esta app te acompaña en tu camino migratorio.</div>
+  </div>
+
+  <div class="welcome-block">
+    <div class="welcome-block-label">Migración, en sentido amplio</div>
+    <div class="welcome-quote">
+      La migración puede entenderse aquí como un símbolo. Los mecanismos son similares, independientemente de si se quiere emigrar a un nuevo país o simplemente construir una nueva vida.
+      <span class="welcome-quote-source">— del Prólogo</span>
+    </div>
+  </div>
+
+  <div class="welcome-block">
+    <div class="welcome-block-label">Empieza por el Prólogo</div>
+    <div class="welcome-block-text">Aunque puedes recorrer la app en el orden que quieras, te recomendamos leer primero el Prólogo. Marca <em>Leído</em> allí y esa tarjeta no volverá a aparecer.</div>
+  </div>
+
+  <button class="welcome-btn" onclick="closeWelcome()">Entendido →</button>
 </div>
 
 <!-- HOME SCREEN -->
@@ -4593,94 +4699,7 @@
   </div>
 </div>
 
-<!-- ONBOARDING -->
-<div class="onboard-overlay" id="onboard-overlay">
-  <!-- Step 1: Origin -->
-  <div class="onboard-step active" id="ob-step-1">
-    <div class="onboard-top">
-      <div class="onboard-step-dot">
-        <div class="step-dot active"></div><div class="step-dot"></div><div class="step-dot"></div><div class="step-dot"></div>
-      </div>
-      <div class="onboard-q-num">Pregunta 1 de 4</div>
-      <div class="onboard-q">¿De dónde vienes?</div>
-    </div>
-    <div class="onboard-body">
-      <div class="onboard-options" id="ob-opts-1">
-        <button class="onboard-option" onclick="selectOnboardOpt(this,'origin','México / Centroamérica')">🇲🇽 México / Centroamérica</button>
-        <button class="onboard-option" onclick="selectOnboardOpt(this,'origin','Colombia / Venezuela / Ecuador')">🇨🇴 Colombia / Venezuela / Ecuador</button>
-        <button class="onboard-option" onclick="selectOnboardOpt(this,'origin','Argentina / Chile / Uruguay')">🇦🇷 Argentina / Chile / Uruguay</button>
-        <button class="onboard-option" onclick="selectOnboardOpt(this,'origin','Perú / Bolivia / Paraguay')">🇵🇪 Perú / Bolivia / Paraguay</button>
-        <button class="onboard-option" onclick="selectOnboardOpt(this,'origin','Brasil')">🇧🇷 Brasil</button>
-        <button class="onboard-option" onclick="selectOnboardOpt(this,'origin','Otro país')">🌍 Otro país</button>
-      </div>
-      <button class="onboard-next-btn" id="ob-next-1" onclick="nextOnboardStep(2)">Siguiente →</button>
-      <button class="onboard-skip" onclick="finishOnboarding()">Saltar</button>
-    </div>
-  </div>
-  <!-- Step 2: Time here -->
-  <div class="onboard-step" id="ob-step-2">
-    <div class="onboard-top">
-      <div class="onboard-step-dot">
-        <div class="step-dot active"></div><div class="step-dot active"></div><div class="step-dot"></div><div class="step-dot"></div>
-      </div>
-      <div class="onboard-q-num">Pregunta 2 de 4</div>
-      <div class="onboard-q">¿Cuánto tiempo llevas aquí?</div>
-    </div>
-    <div class="onboard-body">
-      <div class="onboard-options">
-        <button class="onboard-option" onclick="selectOnboardOpt(this,'time','Menos de 3 meses')">Menos de 3 meses — Todo es nuevo</button>
-        <button class="onboard-option" onclick="selectOnboardOpt(this,'time','3–12 meses')">3–12 meses — Aprendiendo a sobrevivir</button>
-        <button class="onboard-option" onclick="selectOnboardOpt(this,'time','1–3 años')">1–3 años — Construyendo mi vida</button>
-        <button class="onboard-option" onclick="selectOnboardOpt(this,'time','Más de 3 años')">Más de 3 años — Buscando más profundidad</button>
-        <button class="onboard-option" onclick="selectOnboardOpt(this,'time','Aún no he migrado')">Aún no he migrado — Me estoy preparando</button>
-      </div>
-      <button class="onboard-next-btn" id="ob-next-2" onclick="nextOnboardStep(3)">Siguiente →</button>
-      <button class="onboard-skip" onclick="finishOnboarding()">Saltar</button>
-    </div>
-  </div>
-  <!-- Step 3: Challenge -->
-  <div class="onboard-step" id="ob-step-3">
-    <div class="onboard-top">
-      <div class="onboard-step-dot">
-        <div class="step-dot active"></div><div class="step-dot active"></div><div class="step-dot active"></div><div class="step-dot"></div>
-      </div>
-      <div class="onboard-q-num">Pregunta 3 de 4</div>
-      <div class="onboard-q">¿Cuál es tu mayor desafío ahora mismo?</div>
-    </div>
-    <div class="onboard-body">
-      <div class="onboard-options">
-        <button class="onboard-option" onclick="selectOnboardOpt(this,'challenge','soledad')">😔 La soledad y el aislamiento</button>
-        <button class="onboard-option" onclick="selectOnboardOpt(this,'challenge','familia')">👨‍👩‍👧 La presión de la familia</button>
-        <button class="onboard-option" onclick="selectOnboardOpt(this,'challenge','trabajo')">💼 El trabajo y la economía</button>
-        <button class="onboard-option" onclick="selectOnboardOpt(this,'challenge','cultura')">🌍 Entender la cultura local</button>
-        <button class="onboard-option" onclick="selectOnboardOpt(this,'challenge','identidad')">🪞 Quién soy en este nuevo lugar</button>
-        <button class="onboard-option" onclick="selectOnboardOpt(this,'challenge','papeles')">📋 Los trámites y el sistema</button>
-      </div>
-      <button class="onboard-next-btn" id="ob-next-3" onclick="nextOnboardStep(4)">Siguiente →</button>
-      <button class="onboard-skip" onclick="finishOnboarding()">Saltar</button>
-    </div>
-  </div>
-  <!-- Step 4: Goal -->
-  <div class="onboard-step" id="ob-step-4">
-    <div class="onboard-top">
-      <div class="onboard-step-dot">
-        <div class="step-dot active"></div><div class="step-dot active"></div><div class="step-dot active"></div><div class="step-dot active"></div>
-      </div>
-      <div class="onboard-q-num">Pregunta 4 de 4</div>
-      <div class="onboard-q">¿Qué buscas con esta app?</div>
-    </div>
-    <div class="onboard-body">
-      <div class="onboard-options">
-        <button class="onboard-option" onclick="selectOnboardOpt(this,'goal','reflexionar')">Reflexionar sobre mi proceso</button>
-        <button class="onboard-option" onclick="selectOnboardOpt(this,'goal','actuar')">Pasar a la acción concreta</button>
-        <button class="onboard-option" onclick="selectOnboardOpt(this,'goal','entender')">Entender mejor la cultura local</button>
-        <button class="onboard-option" onclick="selectOnboardOpt(this,'goal','sostenerme')">Sostenerme en los momentos difíciles</button>
-      </div>
-      <button class="onboard-next-btn" id="ob-next-4" onclick="finishOnboarding()">Comenzar mi camino →</button>
-      <button class="onboard-skip" onclick="finishOnboarding()">Saltar</button>
-    </div>
-  </div>
-</div>
+<!-- ONBOARDING entfernt v203 -->
 
 <!-- COACH CHECK-IN -->
 <div class="coach-overlay" id="coach-overlay" onclick="if(event.target===this)closeCoach()">
@@ -5186,7 +5205,7 @@ function getActivePuntosDoneCount() {
 }
 
 // ─── STATE ──────────────────────────────────────────────────
-const APP_VERSION = 202;
+const APP_VERSION = 203;
 // Auto-sync visible version badge from APP_VERSION constant (no manual update needed)
 document.addEventListener('DOMContentLoaded', () => {
   const badge = document.getElementById('sidebar-version-badge');
@@ -5325,10 +5344,11 @@ function resetApp() {
 
 function closeWelcome() {
   document.getElementById('welcome-overlay').classList.remove('open');
-  state.welcomeSeen = true; saveState();
-  if (!state.onboardingDone) {
-    setTimeout(() => document.getElementById('onboard-overlay').classList.add('open'), 300);
-  }
+  state.welcomeSeen = true;
+  // v203: Onboarding-Fragen entfernt — Welcome reicht aus
+  state.onboardingDone = true;
+  saveState();
+  setTimeout(checkCoach, 400);
 }
 
 function initMiDia() {
@@ -7272,8 +7292,6 @@ updateNotifDots();
     if (!state.welcomeSeen) {
       // First ever launch: show welcome
       document.getElementById('welcome-overlay').classList.add('open');
-    } else if (!state.onboardingDone) {
-      document.getElementById('onboard-overlay').classList.add('open');
     } else {
       // Normal launch: home screen is already shown, check coach
       setTimeout(checkCoach, 400);
@@ -7498,57 +7516,7 @@ function trackActiveDay() {
   }
 }
 
-// ─── ONBOARDING ──────────────────────────────────────────────
-const CHALLENGE_CHAPTER_MAP = {
-  soledad: 13, familia: 12, trabajo: 9, cultura: 3, identidad: 1, papeles: 4
-};
-const CHALLENGE_PUNTO_MAP = {
-  soledad: 8, familia: 6, trabajo: 14, cultura: 2, identidad: 1, papeles: 12
-};
-const TIME_GREETINGS = {
-  'Menos de 3 meses': { tag: 'Recién llegado/a', greeting: 'El primer paso ya lo diste.', sub: 'Lo más difícil ya ocurrió — la decisión de migrar.' },
-  '3–12 meses':       { tag: 'En plena adaptación', greeting: 'Estás en el corazón del proceso.', sub: 'Este es el momento más importante. Y el más duro.' },
-  '1–3 años':         { tag: 'Construyendo roots', greeting: 'Ya tienes base. Ahora viene la profundidad.', sub: 'El tercer año es cuando la integración real comienza.' },
-  'Más de 3 años':    { tag: 'Migrante experimentado/a', greeting: 'Tu experiencia es un mapa para otros.', sub: 'Profundiza. Comparte. Crece.' },
-  'Aún no he migrado':{ tag: 'Preparándose', greeting: 'La mejor migración es la consciente.', sub: 'Estás leyendo esto antes de que muchos lo lean después.' }
-};
-
-function selectOnboardOpt(btn, key, value) {
-  btn.closest('.onboard-options').querySelectorAll('.onboard-option')
-    .forEach(b => b.classList.remove('selected'));
-  btn.classList.add('selected');
-  state.profile[key] = value;
-  const stepNum = {origin:1,time:2,challenge:3,goal:4}[key];
-  const nextBtn = document.getElementById('ob-next-' + stepNum);
-  if (nextBtn) { nextBtn.classList.add('ready'); }
-}
-
-function nextOnboardStep(step) {
-  document.querySelectorAll('.onboard-step').forEach(s => s.classList.remove('active'));
-  const el = document.getElementById('ob-step-' + step);
-  if (el) el.classList.add('active');
-}
-
-function finishOnboarding() {
-  state.onboardingDone = true;
-  saveState();
-  document.getElementById('onboard-overlay').classList.remove('open');
-  applyPersonalization();
-  setTimeout(checkCoach, 400);
-}
-
-function applyPersonalization() {
-  const p = state.profile;
-  if (!p || !p.time) return;
-  const g = TIME_GREETINGS[p.time];
-  if (!g) return;
-  const tagEl = document.getElementById('hoy-personalized-tag');
-  if (tagEl) tagEl.innerHTML = '<div class="personalized-tag">' + g.tag + '<\/div>';
-  const greetEl = document.getElementById('hoy-greeting');
-  if (greetEl) greetEl.innerHTML = g.greeting.replace(/([^.!?]+[.!?])/, '<em>$1<\/em>');
-  const subEl = document.getElementById('hoy-sub');
-  if (subEl) subEl.textContent = g.sub;
-}
+// ─── ONBOARDING entfernt v203 ───────────────────────────────
 
 // ─── COACH ───────────────────────────────────────────────────
 function checkCoach() {
