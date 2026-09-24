@@ -756,7 +756,8 @@ Nach dem Buch spricht Norne in jeder Sprache *„so, als wäre sie dort zu Hause
 - **Beträge:** in Pfund, *£1,234.56*. Die Mustersuche für Beträge und Daten (Abschnitt 6) braucht dafür eigene Muster.
 - **Recht und Verwaltung:** Die Bereichstexte beschreiben britische Verhältnisse, zum Beispiel NHS, HMRC, Council Tax und den Pass statt eines Personalausweises.
   - England, Schottland, Wales und Nordirland unterscheiden sich in manchem, etwa im Recht und im Gesundheitswesen.
-  - *Annahme:* Wo das der Fall ist, nennt der Text den Unterschied, statt einen Landesteil zu wählen.
+  - **Entschieden:** Wo das der Fall ist, nennt der Text den Unterschied, statt einen Landesteil zu wählen.
+  - Hat der Mensch Norne gesagt, wo er lebt, nennt sie zuerst, was dort gilt. Norne ortet nie selbst (Kap. 10).
 - **Feiertage:** Bank Holidays, die sich je Landesteil unterscheiden.
 - **Hilfe-Nummern:** beim Bau zu recherchieren und zu belegen. *Nicht geprüfter Hinweis:* 999 oder 112, Samaritans 116 123.
 - **Anrede:** Englisch kennt kein *Sie* und *du*. Die einmalige Frage nach dem *du* aus Kap. 3 entfällt auf Englisch. Die Frage nach dem Namen bleibt.
@@ -884,7 +885,7 @@ Ein Urtext wird auf dem Handy herausgearbeitet und mit dem heutigen Stand in Erd
 | Sicherung | verschlüsselte Sicherungsdatei wird in diese Fassung vorgezogen |
 | Bauen | weiter in der Werkstatt, mit Claude |
 | Sprachen | Schwerpunkt Deutsch, Spanisch, Englisch; Reihenfolge Deutsch → Spanisch → Englisch |
-| Englisch | für das Vereinigte Königreich |
+| Englisch | für das Vereinigte Königreich; Unterschiede zwischen den Landesteilen werden genannt, kein Landesteil wird gewählt |
 | Nächster Schritt | nur dieses Konzept als Datei; kein Machbarkeitstest gebaut |
 
 ---
@@ -923,7 +924,6 @@ Ein Urtext wird auf dem Handy herausgearbeitet und mit dem heutigen Stand in Erd
 4. **Zeichen *Allgemeinwissen*:** Form nach den Regeln aus *Der Mythos* ist zu entwerfen.
 5. **Suche Variante B:** Entscheidung nach dem Test.
 6. **iPhone:** spätere Fassung.
-7. **Englisch, Landesteile:** Wie mit Unterschieden zwischen England, Schottland, Wales und Nordirland umgegangen wird — Vorschlag: den Unterschied nennen, keinen Landesteil wählen.
 
 ---
 
