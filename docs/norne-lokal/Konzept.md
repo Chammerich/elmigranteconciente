@@ -844,7 +844,7 @@ Ein Urtext wird auf dem Handy herausgearbeitet und mit dem heutigen Stand in Erd
 - 5 Schreiben oder Fotos, anonymisiert: 2 PDFs mit Text, 2 Fotos von Schreiben, 1 Foto ohne Schrift.
 - Gemessen wird, ob Daten und Beträge richtig gelesen sind.
 
-#### Maßstäbe (Vorschlag; Christian legt sie fest)
+#### Maßstäbe (entschieden)
 
 | Messung | Grenze für „trägt" |
 | :-- | :-- |
@@ -884,6 +884,7 @@ Ein Urtext wird auf dem Handy herausgearbeitet und mit dem heutigen Stand in Erd
 | Zurücksetzen | das Modell bleibt im Ordner |
 | Sicherung | verschlüsselte Sicherungsdatei wird in diese Fassung vorgezogen |
 | Bauen | weiter in der Werkstatt, mit Claude |
+| Maßstäbe des Machbarkeitstests | wie vorgeschlagen (Abschnitt 9) |
 | Sprachen | Schwerpunkt Deutsch, Spanisch, Englisch; Reihenfolge Deutsch → Spanisch → Englisch |
 | Englisch | für das Vereinigte Königreich; Unterschiede zwischen den Landesteilen werden genannt, kein Landesteil wird gewählt |
 | Nächster Schritt | nur dieses Konzept als Datei; kein Machbarkeitstest gebaut |
@@ -919,11 +920,10 @@ Ein Urtext wird auf dem Handy herausgearbeitet und mit dem heutigen Stand in Erd
 ## 12 · Offene Punkte
 
 1. **Gemma 4 statt Gemma 3n prüfen.** Google hat inzwischen Gemma 4 veröffentlicht, mit den Handy-Größen E2B und E4B; Fassungen im Format LiteRT-LM liegen bei Hugging Face (Quelle 8). Ob die MediaPipe-Laufzeit für Web sie schon lädt, ist offen (Annahme, im Test zu prüfen). Wenn ja, ist Gemma 4 der erste Kandidat.
-2. **Maßstäbe des Machbarkeitstests:** Vorschlag, nicht entschieden.
-3. **Technik bei MediaPipe Web:** Laden aus dem Ordner, erzwungenes Format, Aufheben des Systemtexts — im Test zu prüfen.
-4. **Zeichen *Allgemeinwissen*:** Form nach den Regeln aus *Der Mythos* ist zu entwerfen.
-5. **Suche Variante B:** Entscheidung nach dem Test.
-6. **iPhone:** spätere Fassung.
+2. **Technik bei MediaPipe Web:** Laden aus dem Ordner, erzwungenes Format, Aufheben des Systemtexts — im Test zu prüfen.
+3. **Zeichen *Allgemeinwissen*:** Form nach den Regeln aus *Der Mythos* ist zu entwerfen.
+4. **Suche Variante B:** Entscheidung nach dem Test.
+5. **iPhone:** spätere Fassung.
 
 ---
 
