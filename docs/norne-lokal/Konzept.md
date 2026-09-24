@@ -215,7 +215,7 @@ Dasselbe Modell erledigt nacheinander, nie gleichzeitig:
 | Ballvorrat wachsen lassen (Kap. 7) | beim Packen in der Werkstatt, nicht auf dem Handy |
 | Haltung aus neuen Texten herausarbeiten (neu) | lokales Modell (Abschnitt 5) |
 
-**Annahme:** Die KI-Arbeit beim Bauen — Erda herausarbeiten, Packer, Bauanweisungen — geschieht weiter in der Werkstatt, auch mit Claude. „Offline" gilt für den Betrieb auf dem Handy. Siehe *Offene Punkte*.
+**Entschieden:** Die KI-Arbeit beim Bauen — Erda herausarbeiten, Packer, Bauanweisungen, Übersetzungen — geschieht weiter in der Werkstatt, mit Claude. „Offline" gilt für den Betrieb auf dem Handy.
 
 ### Was das Modell kann und was nicht
 
@@ -776,6 +776,7 @@ Ein Urtext wird auf dem Handy herausgearbeitet und mit dem heutigen Stand in Erd
 | Modell | Gemma 3n, per Download und per Kopieren |
 | Zurücksetzen | das Modell bleibt im Ordner |
 | Sicherung | verschlüsselte Sicherungsdatei wird in diese Fassung vorgezogen |
+| Bauen | weiter in der Werkstatt, mit Claude |
 | Nächster Schritt | nur dieses Konzept als Datei; kein Machbarkeitstest gebaut |
 
 ---
@@ -806,7 +807,7 @@ Ein Urtext wird auf dem Handy herausgearbeitet und mit dem heutigen Stand in Erd
 
 ## 12 · Offene Punkte
 
-1. **Betrifft „offline" auch das Bauen?** Bisher gilt die Annahme: nein. Die Werkstatt arbeitet weiter mit Claude.
+1. **Gemma 4 statt Gemma 3n prüfen.** Google hat inzwischen Gemma 4 veröffentlicht, mit den Handy-Größen E2B und E4B; Fassungen im Format LiteRT-LM liegen bei Hugging Face (Quelle 8). Ob die MediaPipe-Laufzeit für Web sie schon lädt, ist offen (Annahme, im Test zu prüfen). Wenn ja, ist Gemma 4 der erste Kandidat.
 2. **Maßstäbe des Machbarkeitstests:** Vorschlag, nicht entschieden.
 3. **Technik bei MediaPipe Web:** Laden aus dem Ordner, erzwungenes Format, Aufheben des Systemtexts — im Test zu prüfen.
 4. **Zeichen *Allgemeinwissen*:** Form nach den Regeln aus *Der Mythos* ist zu entwerfen.
@@ -824,3 +825,4 @@ Ein Urtext wird auf dem Handy herausgearbeitet und mit dem heutigen Stand in Erd
 5. Google for Developers — Custom Search JSON API: https://developers.google.com/custom-search/v1/overview
 6. heise online — Google is discontinuing its free web search index for developers: https://www.heise.de/en/news/Google-is-discontinuing-its-free-web-search-index-for-developers-11152411.html
 7. Norne: Ich — Das Projektbuch, Fassung V1.0, geändert 2026-09-23 (nicht im Repository)
+8. Hugging Face — litert-community/gemma-4-E4B-it-litert-lm: https://huggingface.co/litert-community/gemma-4-E4B-it-litert-lm
