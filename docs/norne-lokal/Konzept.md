@@ -724,13 +724,13 @@ Es bleibt: *„Unsichtbar macht sie niemanden."*
 | :-- | :-- | :-- | :-- |
 | **Sprachdatei (Oberfläche)** | vollständig, Maßstab | vollständig seit 23.9.2026 | fehlt |
 | **Bereichstexte, Ballvorrat, Sammlung** | vorhanden | zu übersetzen und an das Land anzupassen | zu übersetzen und an das Land anzupassen |
-| **Land, für das die Sache stimmt** | Deutschland | Spanien — noch nicht angepasst (Ausnahme im Buch) | **offen** |
+| **Land, für das die Sache stimmt** | Deutschland | Spanien — noch nicht angepasst (Ausnahme im Buch) | Vereinigtes Königreich (**entschieden**) |
 | **Erda: Urschriften** | vorhanden | vorhanden (Texte zum Teil auf Spanisch geschrieben) | vorhanden (Texte zum Teil auf Englisch geschrieben) |
 | **Erda: Übersetzungen neben dem Original** | Maßstab | zu ergänzen, wo fehlend | zu ergänzen, wo fehlend |
 | **Stups-Listen** | beim Packen | beim Packen, nach der Übersetzung | beim Packen, nach der Übersetzung |
 | **Daten für die Texterkennung** | `deu` | `spa` | `eng` |
-| **Feiertage und Tage des …** | vorhanden | für Spanien zu erstellen | für das gewählte Land zu erstellen |
-| **Ausgang (Hilfe)** | 112 und Telefonseelsorge 116 123 | im Buch schon angepasst („außer den Nummern des Ausgangs") | für das gewählte Land zu erstellen |
+| **Feiertage und Tage des …** | vorhanden | für Spanien zu erstellen | für das Vereinigte Königreich zu erstellen |
+| **Ausgang (Hilfe)** | 112 und Telefonseelsorge 116 123 | im Buch schon angepasst („außer den Nummern des Ausgangs") | für das Vereinigte Königreich zu erstellen |
 
 *Laut Buch stammt der Bestand von Erda aus siebzehn Texten „auf Deutsch, Spanisch und Englisch". Welcher Text in welcher Sprache vorliegt, steht im Verzeichnis von `Erda\Texte\` und ist hier nicht geprüft.*
 
@@ -744,16 +744,22 @@ Jede Nummer im Ausgang wird beim Bau recherchiert und mit Quelle und Datum beleg
 
 - Spanien: 112, dazu die Linie 024.
 - Vereinigtes Königreich: 999 oder 112, Samaritans 116 123.
-- USA: 911, Lebenslinie 988.
 
-### Englisch braucht ein Land
+### Englisch für das Vereinigte Königreich (entschieden)
 
-Nach dem Buch spricht Norne in jeder Sprache *„so, als wäre sie dort zu Hause"*. Englisch ist aber in vielen Ländern zu Hause. Zu entscheiden:
+Nach dem Buch spricht Norne in jeder Sprache *„so, als wäre sie dort zu Hause"*. **Entschieden:** Englisch gilt für das **Vereinigte Königreich**. Damit ist das Buch erfüllt, und eine Ausnahme ist nicht nötig.
 
-| Möglichkeit | Folge |
-| :-- | :-- |
-| **Englisch für ein Land**, zum Beispiel Vereinigtes Königreich oder Irland | erfüllt das Buch; ein Land wird vollständig angepasst |
-| **Englisch ohne Land**, als Verkehrssprache | braucht eine Ausnahme nach Kap. 1, wie heute bei Spanisch |
+**Was daraus für die Inhalte folgt:**
+
+- **Schreibweise:** britisches Englisch — *colour*, *organise*, *programme*.
+- **Datum:** Tag vor Monat, *15 November 2026*.
+- **Beträge:** in Pfund, *£1,234.56*. Die Mustersuche für Beträge und Daten (Abschnitt 6) braucht dafür eigene Muster.
+- **Recht und Verwaltung:** Die Bereichstexte beschreiben britische Verhältnisse, zum Beispiel NHS, HMRC, Council Tax und den Pass statt eines Personalausweises.
+  - England, Schottland, Wales und Nordirland unterscheiden sich in manchem, etwa im Recht und im Gesundheitswesen.
+  - *Annahme:* Wo das der Fall ist, nennt der Text den Unterschied, statt einen Landesteil zu wählen.
+- **Feiertage:** Bank Holidays, die sich je Landesteil unterscheiden.
+- **Hilfe-Nummern:** beim Bau zu recherchieren und zu belegen. *Nicht geprüfter Hinweis:* 999 oder 112, Samaritans 116 123.
+- **Anrede:** Englisch kennt kein *Sie* und *du*. Die einmalige Frage nach dem *du* aus Kap. 3 entfällt auf Englisch. Die Frage nach dem Namen bleibt.
 
 ### Wenn der Mensch Sprachen mischt
 
@@ -785,7 +791,7 @@ Das Buch zeigt nur Artikel in Nornes Sprache (Kap. 7). Für den Leseplatz aus de
 | :-- | :-- | :-- |
 | 1 | Deutsch | vorhanden; Grundlage des Machbarkeitstests |
 | 2 | Spanisch | Inhalte übersetzen und an Spanien anpassen (Thema 28 der Liste zukünftiger Themen) |
-| 3 | Englisch | Land entscheiden, dann Sprachdatei und Inhalte |
+| 3 | Englisch (Vereinigtes Königreich) | Sprachdatei und Inhalte, angepasst an das Vereinigte Königreich |
 
 **Paketgröße:** Jede Sprache bringt Inhalte und Daten für die Texterkennung mit. Schätzung: 10–30 MB je Sprache, Validität 4/10. Neben dem Modell fällt das kaum ins Gewicht.
 
@@ -878,6 +884,7 @@ Ein Urtext wird auf dem Handy herausgearbeitet und mit dem heutigen Stand in Erd
 | Sicherung | verschlüsselte Sicherungsdatei wird in diese Fassung vorgezogen |
 | Bauen | weiter in der Werkstatt, mit Claude |
 | Sprachen | Schwerpunkt Deutsch, Spanisch, Englisch; Reihenfolge Deutsch → Spanisch → Englisch |
+| Englisch | für das Vereinigte Königreich |
 | Nächster Schritt | nur dieses Konzept als Datei; kein Machbarkeitstest gebaut |
 
 ---
@@ -902,7 +909,8 @@ Ein Urtext wird auf dem Handy herausgearbeitet und mit dem heutigen Stand in Erd
 | Kap. 10 · *Die Erlaubnisse* | Recherche und Zufluss entfallen |
 | Kap. 10 · *Das Paket* | Urschriften im Paket; Update per Datei oder bei Netz |
 | Kap. 12 · *Die Grenzen* | Herkunftszeichen: *Recherche* und *was ihr zufällt* entfallen, *Allgemeinwissen* kommt dazu; Belegprüfung über Stück-Kennungen im Code |
-| Kap. 6 · *Die zweite Sprache* | Englisch als dritte Sprache; Übertragung der Haltungssätze des Nutzers beim Sprachwechsel |
+| Kap. 6 · *Die zweite Sprache* | Englisch für das Vereinigte Königreich als dritte Sprache; Übertragung der Haltungssätze des Nutzers beim Sprachwechsel |
+| Kap. 3 · *Für einen Menschen* | auf Englisch entfällt die Frage nach dem *du* |
 | *Die Ausnahmen* | Weltvorrat-Ausnahme gegenstandslos; Sicherung vorgezogen |
 
 ---
@@ -915,7 +923,7 @@ Ein Urtext wird auf dem Handy herausgearbeitet und mit dem heutigen Stand in Erd
 4. **Zeichen *Allgemeinwissen*:** Form nach den Regeln aus *Der Mythos* ist zu entwerfen.
 5. **Suche Variante B:** Entscheidung nach dem Test.
 6. **iPhone:** spätere Fassung.
-7. **Englisch: für welches Land?** Ein Land (etwa Vereinigtes Königreich oder Irland) oder Verkehrssprache mit Ausnahme.
+7. **Englisch, Landesteile:** Wie mit Unterschieden zwischen England, Schottland, Wales und Nordirland umgegangen wird — Vorschlag: den Unterschied nennen, keinen Landesteil wählen.
 
 ---
 
