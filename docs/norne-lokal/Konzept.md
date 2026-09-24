@@ -31,6 +31,7 @@ status: Konzept, entschieden im Gespräch mit Christian; kein Teil des Projektbu
 6. Dateien, Fotos und Schreiben lesen
 7. Die Browser-App: Installation, Ordner, Updates
 8. Was entfällt, und was das für den Nutzer heißt
+8a. Sprachen: Deutsch, Spanisch, Englisch
 9. Risiken und der Machbarkeitstest
 10. Alle Entscheidungen
 11. Was sich im Projektbuch ändern müsste
@@ -691,6 +692,105 @@ Es bleibt: *„Unsichtbar macht sie niemanden."*
 
 ---
 
+## 8a · Sprachen: Deutsch, Spanisch, Englisch
+
+*Schwerpunkt dieser Variante sind drei Sprachen: Deutsch, Spanisch, Englisch.*
+
+### Grundsatz: Die Technik ist nicht der Engpass
+
+**Die Technik kann alle drei Sprachen:**
+
+- **Gemma 3n** verarbeitet Text in 140 Sprachen und versteht Bild und Audio in 35 (Fakt laut Google, Quelle 9).
+- **Gemma 4** nennt 140+ Sprachen (Drittquelle, Validität 6/10).
+- **Tesseract** liest über 100 Sprachen, je Sprache mit einer eigenen Datei (Fakt, Dokumentation von Tesseract).
+- **pdf.js und mammoth.js** holen Text unabhängig von der Sprache heraus.
+- **Stups und Wortliste** führen je Sprache eine eigene Liste (Kap. 9).
+
+**Die Grenze setzt das Buch (Kap. 6, *Die zweite Sprache*):** Eine Sprache erscheint erst, wenn alles übersetzt ist, was Norne sagt und zeigt, **und** wenn die Sache dahinter für ein Land stimmt. Diese Variante ändert daran nichts. **Der Engpass ist der Aufwand für die Inhalte in der Werkstatt.**
+
+### Qualität des Modells in den drei Sprachen
+
+| Sprache | Qualität (Schätzung) | Begründung |
+| :-- | :-- | :-- |
+| Englisch | am besten | größter Anteil in den Trainingsdaten fast aller Modelle (Annahme, allgemein belegt, Anteile für Gemma nicht veröffentlicht) |
+| Spanisch | gut | große Sprache, reichlich Trainingsdaten |
+| Deutsch | gut, Ton und Grammatik etwas schwächer als Englisch | Validität 6/10 für alle drei Zeilen |
+
+**Folge für den Test:** Stufe 1 des Machbarkeitstests wird in allen drei Sprachen gemessen. Mindestens 10 der 30 Züge sollten auf Spanisch geführt werden, weil die Aufzeichnung wohl überwiegend deutsch ist (Annahme).
+
+### Stand und Bedarf je Sprache
+
+| | Deutsch | Spanisch | Englisch |
+| :-- | :-- | :-- | :-- |
+| **Sprachdatei (Oberfläche)** | vollständig, Maßstab | vollständig seit 23.9.2026 | fehlt |
+| **Bereichstexte, Ballvorrat, Sammlung** | vorhanden | zu übersetzen und an das Land anzupassen | zu übersetzen und an das Land anzupassen |
+| **Land, für das die Sache stimmt** | Deutschland | Spanien — noch nicht angepasst (Ausnahme im Buch) | **offen** |
+| **Erda: Urschriften** | vorhanden | vorhanden (Texte zum Teil auf Spanisch geschrieben) | vorhanden (Texte zum Teil auf Englisch geschrieben) |
+| **Erda: Übersetzungen neben dem Original** | Maßstab | zu ergänzen, wo fehlend | zu ergänzen, wo fehlend |
+| **Stups-Listen** | beim Packen | beim Packen, nach der Übersetzung | beim Packen, nach der Übersetzung |
+| **Daten für die Texterkennung** | `deu` | `spa` | `eng` |
+| **Feiertage und Tage des …** | vorhanden | für Spanien zu erstellen | für das gewählte Land zu erstellen |
+| **Ausgang (Hilfe)** | 112 und Telefonseelsorge 116 123 | im Buch schon angepasst („außer den Nummern des Ausgangs") | für das gewählte Land zu erstellen |
+
+*Laut Buch stammt der Bestand von Erda aus siebzehn Texten „auf Deutsch, Spanisch und Englisch". Welcher Text in welcher Sprache vorliegt, steht im Verzeichnis von `Erda\Texte\` und ist hier nicht geprüft.*
+
+**Unverändert:** *„Somos polvo de estrellas …"* steht in allen drei Sprachen wörtlich auf Spanisch und wird nicht übersetzt (Kap. 8).
+
+### Die Nummern des Ausgangs sind Sache des Baus
+
+Jede Nummer im Ausgang wird beim Bau recherchiert und mit Quelle und Datum belegt. Eine tote Nummer ist nach Kap. 4 schlimmer als keine.
+
+*Nicht geprüfte Hinweise für diese Recherche:*
+
+- Spanien: 112, dazu die Linie 024.
+- Vereinigtes Königreich: 999 oder 112, Samaritans 116 123.
+- USA: 911, Lebenslinie 988.
+
+### Englisch braucht ein Land
+
+Nach dem Buch spricht Norne in jeder Sprache *„so, als wäre sie dort zu Hause"*. Englisch ist aber in vielen Ländern zu Hause. Zu entscheiden:
+
+| Möglichkeit | Folge |
+| :-- | :-- |
+| **Englisch für ein Land**, zum Beispiel Vereinigtes Königreich oder Irland | erfüllt das Buch; ein Land wird vollständig angepasst |
+| **Englisch ohne Land**, als Verkehrssprache | braucht eine Ausnahme nach Kap. 1, wie heute bei Spanisch |
+
+### Wenn der Mensch Sprachen mischt
+
+Christian lebt teils in Deutschland, teils in Barcelona. Gemischte Sprache ist deshalb der Normalfall, keine Ausnahme.
+
+- **Das Modell versteht** einen spanischen Satz auch dann, wenn Norne Deutsch spricht. Es antwortet in Nornes Sprache.
+- **Der Stups findet nichts:** Die deutsche Wortliste kennt keine spanischen Wörter, also geht kein Stoff mit. Der Zug ist ungebunden — kein Fehler, nur ohne Stoff (Kap. 9).
+- **Die Liste lernt mit:** Gibt Norne zu einem spanischen Satz ein Thema zurück, lernt die Liste der eingestellten Sprache diese Wörter. Das hält die Regel „je Sprache eine Liste" ein, denn die Liste gehört zur Sprache, in der Norne spricht.
+- **Wechselt der Mensch die Sprache von Norne,** gilt die Liste der neuen Sprache. Die alte bleibt unberührt, wie im Buch (Kap. 9).
+
+### Haltung in drei Sprachen
+
+- **Das Zitat** bleibt immer in der Sprache des Originaltexts. Die Zitatprüfung vergleicht mit dem Original.
+- **Der Haltungssatz** entsteht in der Sprache, in der Norne gerade spricht.
+- **Beim Wechsel der Sprache:** Die bestehenden Haltungssätze des Nutzers werden einmal im Hintergrund in die neue Sprache übertragen, das Zitat bleibt unverändert. Danach berechnet der Code die Wortgewichte der neuen Sprache neu. Sonst fände der Stups die Haltung in der neuen Sprache nicht.
+- **Christians Haltung** kommt in allen fertigen Sprachen mit dem Paket, übertragen in der Werkstatt.
+
+### Die Umschau als Leseplatz
+
+Das Buch zeigt nur Artikel in Nornes Sprache (Kap. 7). Für den Leseplatz aus den Texten heißt das:
+
+- Er zeigt Abschnitte aus der Übersetzung in Nornes Sprache.
+- Gibt es keine Übersetzung, zeigt er keinen Abschnitt aus diesem Text.
+- Das Original ist mit einem Klick erreichbar.
+
+### Reihenfolge
+
+| Schritt | Sprache | Voraussetzung |
+| :-- | :-- | :-- |
+| 1 | Deutsch | vorhanden; Grundlage des Machbarkeitstests |
+| 2 | Spanisch | Inhalte übersetzen und an Spanien anpassen (Thema 28 der Liste zukünftiger Themen) |
+| 3 | Englisch | Land entscheiden, dann Sprachdatei und Inhalte |
+
+**Paketgröße:** Jede Sprache bringt Inhalte und Daten für die Texterkennung mit. Schätzung: 10–30 MB je Sprache, Validität 4/10. Neben dem Modell fällt das kaum ins Gewicht.
+
+---
+
 ## 9 · Risiken und der Machbarkeitstest
 
 ### Risiken
@@ -777,6 +877,7 @@ Ein Urtext wird auf dem Handy herausgearbeitet und mit dem heutigen Stand in Erd
 | Zurücksetzen | das Modell bleibt im Ordner |
 | Sicherung | verschlüsselte Sicherungsdatei wird in diese Fassung vorgezogen |
 | Bauen | weiter in der Werkstatt, mit Claude |
+| Sprachen | Schwerpunkt Deutsch, Spanisch, Englisch; Reihenfolge Deutsch → Spanisch → Englisch |
 | Nächster Schritt | nur dieses Konzept als Datei; kein Machbarkeitstest gebaut |
 
 ---
@@ -801,6 +902,7 @@ Ein Urtext wird auf dem Handy herausgearbeitet und mit dem heutigen Stand in Erd
 | Kap. 10 · *Die Erlaubnisse* | Recherche und Zufluss entfallen |
 | Kap. 10 · *Das Paket* | Urschriften im Paket; Update per Datei oder bei Netz |
 | Kap. 12 · *Die Grenzen* | Herkunftszeichen: *Recherche* und *was ihr zufällt* entfallen, *Allgemeinwissen* kommt dazu; Belegprüfung über Stück-Kennungen im Code |
+| Kap. 6 · *Die zweite Sprache* | Englisch als dritte Sprache; Übertragung der Haltungssätze des Nutzers beim Sprachwechsel |
 | *Die Ausnahmen* | Weltvorrat-Ausnahme gegenstandslos; Sicherung vorgezogen |
 
 ---
@@ -813,6 +915,7 @@ Ein Urtext wird auf dem Handy herausgearbeitet und mit dem heutigen Stand in Erd
 4. **Zeichen *Allgemeinwissen*:** Form nach den Regeln aus *Der Mythos* ist zu entwerfen.
 5. **Suche Variante B:** Entscheidung nach dem Test.
 6. **iPhone:** spätere Fassung.
+7. **Englisch: für welches Land?** Ein Land (etwa Vereinigtes Königreich oder Irland) oder Verkehrssprache mit Ausnahme.
 
 ---
 
@@ -826,3 +929,4 @@ Ein Urtext wird auf dem Handy herausgearbeitet und mit dem heutigen Stand in Erd
 6. heise online — Google is discontinuing its free web search index for developers: https://www.heise.de/en/news/Google-is-discontinuing-its-free-web-search-index-for-developers-11152411.html
 7. Norne: Ich — Das Projektbuch, Fassung V1.0, geändert 2026-09-23 (nicht im Repository)
 8. Hugging Face — litert-community/gemma-4-E4B-it-litert-lm: https://huggingface.co/litert-community/gemma-4-E4B-it-litert-lm
+9. Google Developers Blog — Introducing Gemma 3n: The developer guide: https://developers.googleblog.com/en/introducing-gemma-3n-developer-guide/
