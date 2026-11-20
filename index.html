@@ -5249,7 +5249,7 @@ function getActivePuntosDoneCount() {
 }
 
 // ─── STATE ──────────────────────────────────────────────────
-const APP_VERSION = 226;
+const APP_VERSION = 227;
 // Auto-sync visible version badge from APP_VERSION constant (no manual update needed)
 document.addEventListener('DOMContentLoaded', () => {
   const badge = document.getElementById('sidebar-version-badge');
@@ -7604,11 +7604,38 @@ function initContrato() {
   }).join('');
 }
 
+// v227: Beim Öffnen einer Karte schließt sich die vorher offene. Dadurch rutscht die Seite, und
+// die neue Karte erschien mitten im Text. Jetzt wird ihr Kopf direkt unter die festen Leisten geholt.
+function alturaBarrasFijas() {
+  const x = Math.floor(window.innerWidth / 2), max = Math.min(320, window.innerHeight / 2);
+  let y = 0;
+  for (; y < max; y += 6) {
+    let el = document.elementFromPoint(x, y), fijo = false;
+    while (el && el !== document.body && el !== document.documentElement) {
+      const p = getComputedStyle(el).position;
+      if (p === 'fixed' || p === 'sticky') { fijo = true; break; }
+      el = el.parentElement;
+    }
+    if (!fijo) break;
+  }
+  return y;
+}
+function alAbrirTarjeta(card) {
+  requestAnimationFrame(() => {
+    const fijo = alturaBarrasFijas(), top = card.getBoundingClientRect().top;
+    if (top >= fijo) return; // la cabecera de la tarjeta ya se ve
+    let sc = card.parentElement;
+    while (sc && sc !== document.body && sc !== document.documentElement && !(/(auto|scroll)/.test(getComputedStyle(sc).overflowY) && sc.scrollHeight > sc.clientHeight + 1)) sc = sc.parentElement;
+    const donde = (sc && sc !== document.body && sc !== document.documentElement) ? sc : window;
+    donde.scrollBy({ top: top - fijo - 8, behavior: 'auto' });
+  });
+}
+
 function togglePunto(num) {
   const card = document.getElementById('punto-'+num);
   const isOpen = card.classList.contains('open');
   document.querySelectorAll('.punto-card').forEach(c => c.classList.remove('open'));
-  if (!isOpen) card.classList.add('open');
+  if (!isOpen) { card.classList.add('open'); alAbrirTarjeta(card); }
 }
 
 function toggleAccion(puntoNum, idx, el) {
@@ -7671,7 +7698,7 @@ function toggleChap(num) {
   const card = document.getElementById('chap-'+num);
   const isOpen = card.classList.contains('open');
   document.querySelectorAll('.chapter-card').forEach(c => c.classList.remove('open'));
-  if (!isOpen) card.classList.add('open');
+  if (!isOpen) { card.classList.add('open'); alAbrirTarjeta(card); }
 }
 
 function toggleChapDone(num) {
@@ -11168,7 +11195,7 @@ function toggleTramiteCard(id) {
   const card = document.getElementById(id);
   const wasOpen = card.classList.contains('open');
   document.querySelectorAll('.tramites-card').forEach(c => c.classList.remove('open'));
-  if (!wasOpen) card.classList.add('open');
+  if (!wasOpen) { card.classList.add('open'); alAbrirTarjeta(card); }
 }
 
 function initTramites() {

@@ -3,7 +3,7 @@
 // Solo sin conexión, o si la red tarda demasiado, se sirve la copia guardada.
 // Iconos y demás archivos propios: copia guardada primero.
 // Sube el número de CACHE con cada versión publicada.
-const CACHE = 'mc-v2-226';
+const CACHE = 'mc-v2-227';
 const PRECACHE = [
   './',
   './icon-192.png',
